@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>读取服务器文件json</title>
+<script src="ajax.js"></script>
+<script>
+
+window.onload=function(){
+ 
+ var oBtn=document.getElementById('btn1');
+ var oUl=document.getElementById('ul1');
+
+ oBtn.onclick=function(){
+	  var arr='';
+	 
+	 
+	ajax('data2.txt?t='+new Date().getTime(), function(str){
+		
+		//alert(str);
+		arr=eval(str);
+		for(var i=0; i<arr.length; i++)
+		{
+			var oLi=document.createElement('li');
+			
+			oLi.innerHTML='<strong>用户名：</strong>'+arr[i].user+'<strong>密码：</strong>'+arr[i].pass
+			
+			oUl.appendChild(oLi)
+		}
+		
+		}, function(){
+		
+		alert('读取失败！')
+		
+		}) 
+	
+ }
+	
+	
+}
+
+
+</script>
+
+</head>
+
+<body>
+<input type="button" id="btn1" value="读取">
+<ul id="ul1"></ul>
+</body>
+</html>

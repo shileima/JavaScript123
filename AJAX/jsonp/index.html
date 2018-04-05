@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+    <title>jsonp 跨域请求数据</title>
+</head>
+<body>
+<h1>jsonp 跨域请求 json 数据</h1>
+<script>
+    $.getJSON('http://s.chinahadoop.cn/j/AJAX/jsonp/jsonp.php?callback=?',function(data){
+        console.log(data)
+    })
+</script>
+</body>
+</html>

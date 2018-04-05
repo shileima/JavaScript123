@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>读取服务器文件json</title>
+<script src="../jquery.min.js" ></script>
+<script>
+
+$(document).ready(function(e) {
+    $('#btn1').click(function(e) {
+        $('#ul1').load('data3.txt');
+    });
+});
+
+
+</script>
+
+</head>
+
+<body>
+<input type="button" id="btn1" value="读取">
+<ul id="ul1"></ul>
+</body>
+</html>

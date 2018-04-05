@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax</title>
+<script>
+window.onload = function(){
+
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		var xhr = new XMLHttpRequest();
+		xhr.open('post','post.php',true);
+		
+		xhr.setRequestHeader('content-type','application/x-www-form-urlencoded')
+		
+		xhr.send('username=蚂蚁&age=23');
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4){
+				alert(xhr.responseText)
+			}
+		}
+	};
+
+}
+	
+</script>
+</head>
+
+<body>
+<label>用户名：</label><input type="text" name="username">
+<label>年龄：</label><input type="text" name="age">
+<input id="btn" type="button" name="" value="ajax获取数据">
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script>
+
+window.onload = function(){
+
+ var Btn = document.getElementsByTagName('input')
+ var oDiv = document.getElementById('c');
+ Btn[0].onclick = function()
+ {
+	 
+   var xhr = new XMLHttpRequest();
+   
+   xhr.open('get','data3.txt',true);
+   
+   xhr.send();
+   
+   xhr.onreadystatechange = function(){
+	   
+	   if(xhr.readyState == 4)
+		{ 
+		  oDiv.innerHTML=xhr.responseText;
+		}
+	}
+ }
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+<input type="button" value="读取数据">
+
+<div id="c"></div>
+
+</body>
+</html>

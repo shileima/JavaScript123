@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Ajax</title>
+<script src="http://apps.bdimg.com/libs/jquery/1.9.1/jquery.min.js"></script>
+<!--<script src="ajax2.js"></script>-->
+<script>
+$(function(){
+ $('#btn').click(function(){
+	 
+	 $.ajax({	
+		url: 'getNews.php',
+		type: 'GET',
+		success: function(data){
+			
+			var data =$.parseJSON(data);
+			console.log(typeof data)  // json 字符串 不是对象，所以要转换成 object 对象
+			 var html = '';
+			 for(var i =0; i<data.length; i++)
+			 {
+
+				html +="<li><a href=''>"+data[i].title+"</a><span>"+data[i].date+"</span></li>";
+
+			 }
+			$('#ul').html(html);
+			}	
+		}) 
+	 })
+ })
+ 
+ <!--原生ajax实现-->
+ 
+/*window.onload = function(){
+	
+
+	var oBtn = document.getElementById('btn');
+	oBtn.onclick = function(){
+		
+		ajax('get','getNews.php','',function(data){
+			
+			var data = JSON.parse(data)
+
+		    var oUl = document.getElementById('ul')
+
+		    var html = '';
+
+			 for(var i =0; i<data.length; i++)
+
+			 {
+
+				html +="<li><a href=''>"+data[i].title+"</a><span>"+data[i].date+"</span></li>";
+
+			 }
+			 oUl.innerHTML = html;
+			});
+		
+		setInterval(function(){
+			
+			ajax('get','getNews.php','',function(data){
+			
+			var data = JSON.parse(data)
+
+		    var oUl = document.getElementById('ul')
+
+		    var html = '';
+
+			 for(var i =0; i<data.length; i++)
+
+			 {
+
+				html +="<li><a href=''>"+data[i].title+"</a><span>"+data[i].date+"</span></li>";
+
+			 }
+			 oUl.innerHTML = html;	
+			});
+			
+			},100)
+	};
+}*/
+	
+</script>
+</head>
+
+<body>
+<label>用户名：</label><input type="text" name="username">
+<label>年龄：</label><input type="text" name="age">
+<input id="btn" type="button" name="" value="ajax获取数据">
+<ul id="ul"></ul>
+</body>
+</html>

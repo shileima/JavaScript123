@@ -1,0 +1,72 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<script type="text/javascript" src='../../jquery.min.js'></script>
+<script type="text/javascript">
+
+ $(function(){
+  $("#send").click(function(){
+   var cont = {username:$("input")[0].value,age:$("input")[1].value,job:$("input")[2].value};
+   var url = 'ab1.php';
+   $.post(url,cont,function(data){
+	   alert(data); //假如input 依次输入1,2,3 ，则data弹出json字符串 {"username":"1","age":"2","job":"3"}
+	   alert(data.age); //undefine
+    var res = eval("(" + data + ")");//将json字符串转为Object对象,加上圆括号的目的是迫使eval函数在处理JavaScript代码的时候强制将括号内的表达式（expression）转化为对象，而不是作为语句（statement）来执行
+	alert(res); //输出 [object,object]
+	alert(res.age); //输出 2
+    var str = res.username+',' +'\r\n'+ res.age+',' +'\r\n'+ res.job;
+    $("#result").html(str);
+   });
+  });
+ });
+
+ /*$(function(){
+  $("#send").click(function(){
+   var cont = $("input").serialize();
+   $.ajax({
+    url:'ab.php',
+    type:'post',
+    dataType:'json',
+    data:cont,
+    success:function(data){
+     var str = data.username + data.age + data.job;
+     $("#result").html(str);
+    }
+   });
+  });  
+ });*/
+ 
+ 
+/* $(function(){
+    $("#send").click(function(){
+        $.ajax({
+            type:"get",
+            async:true, //默认设置为true，所有请求均为异步请求。
+			url: "http://www.idaima.com/xxxxx.php",
+			data: {
+				username: $("#username").val(),
+				content: $("#content").val()
+			},
+			dataType: "json", //xml、html、script、jsonp、text
+			beforeSend:function(){},
+			complete:function(){},
+			success: function(data) {
+				alert(data)
+			}
+			error:function(){},
+        })
+    })
+})*/
+
+</script>
+</head>
+<body>
+ <div id="result">一会看显示结果</div>
+ <form id="my" action="" method="post">
+  <p><span>姓名：</span><input type="text" name="username" /></p>
+  <p><span>年龄：</span><input type="text" name="age" /></p>
+  <p><span>工作：</span><input type="text" name="job" /></p>
+ </form>
+ <button id="send">提交</button>
+</body>
+</html>

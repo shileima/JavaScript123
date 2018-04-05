@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="Author" content="海牙">
+    <link rel="stylesheet" href="css/AjaxPaging.css">
+</head>
+<script>
+
+window.onload = function(){
+    var url = 'https://route.showapi.com/181-1';
+    var oUl = document.querySelector('.flex_row')
+    var pageNum = 0;
+    var cache = {};
+
+    getData()
+    pageList()
+
+    function pageList(){
+        /*for(var i=0,len=aLi.length;i<len;i++){
+
+            aLi[i].index = i+1;
+            aLi[i].onclick = function(){
+                console.log(this.index)
+            }
+        }*/
+
+        oUl.addEventListener('click', function(e){
+            if(e.target.tagName.toLocaleLowerCase() === 'li'){
+                pageNum = e.target.innerText;
+
+                if(pageNum in cache){
+                    console.log('数据已缓存')
+                    render(cache[pageNum])
+                }else{
+                    getData()
+                }
+
+            }
+        })
+    }
+
+    function getData(){
+        console.time('获取数据~~')
+
+        var sendData = {
+            showapi_appid: '30603',
+            showapi_sign: '98960666afeb4992ae91971d13494090',
+            page:pageNum,
+            num:8
+        }
+
+        var params = []
+
+        for(var item in sendData){
+            params.push(item +'=' + sendData[item])
+        }
+        var postData = params.join('&');
+
+
+        var xhr = new XMLHttpRequest();
+
+        xhr.open('GET',url+'?'+postData,true);
+
+        xhr.send(null);
+
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState===4&&xhr.status===200){
+                var dataPost = JSON.parse(xhr.response).showapi_res_body.newslist;
+
+                cache[pageNum] = dataPost;
+                render(dataPost)
+            }
+        }
+        console.timeEnd('获取数据~~')
+    };
+
+    function render(dataList){
+
+        var html ='';
+
+        for(var i=0,len=dataList.length;i<len;i++){
+
+            str=
+                `
+                    <a href="${dataList[i].url}" class="items flex_row">
+                        <div class="img"><img src="${dataList[i].picUrl}" alt=""></div>
+                        <div class="bd">
+                            <p class="label">${dataList[i].title}</p>
+                        </div>
+                        <div class="ft">&GT;</div>
+                    </a>
+                `
+
+            html = html + str;
+        }
+
+        var oContent = document.getElementsByClassName('content')[0];
+        oContent.innerHTML = html;
+    }
+}
+
+</script>
+<body>
+<div class="wrap flex_column">
+    <div class="content flex_column">
+    </div>
+    <div class="page">
+        <ul class="flex_row">
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+            <li>4</li>
+            <li>5</li>
+            <li>6</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
