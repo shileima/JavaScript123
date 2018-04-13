@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ECMAscript 6 语法</title>
+</head>
+<script>
+
+window.onload = function() {
+	 var Btn = document.querySelectorAll('input')
+	  
+	 /*for(var i=0; i<Btn.length; i++){
+		 Btn[i].index = i;
+		  Btn[i].onclick=function(){	
+			console.log(this.index)
+		  }   
+	  }*/
+
+	  // 闭包写法
+	  /*for(var i=0; i<Btn.length; i++){
+		(function(i){			
+			Btn[i].onclick = function(){	
+			console.log(i)  				
+			}
+		
+		})(i)  
+		  
+	  }*/
+	  
+	  
+class Miaov {
+	constructor(a,b){
+	  this.a = a;
+	  this.b = b;	
+	  return this;
+	}
+	
+	print() {
+	  console.log( this.a + ' ' + this.b )	
+		
+	}
+	
+};
+
+	const miaov = new Miaov('hello','world').print();
+
+	const set = new Set([2,2,5])
+
+    console.log(set) // {2,5} 不记录重复的值
+}
+
+</script>
+<body>
+<div>
+ <input type="button" value="1">
+ <input type="button" value="2">
+ <input type="button" value="3">
+ <input type="button" value="4">
+</div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var a = 10;
+        {
+           let  a = 20;
+            console.log('a: '+a)
+        }
+        console.log('b: ' + a)
+        for(var i=0;i<5;i++){
+            var m = 9;
+            setTimeout(()=>{
+                console.log(i) //5,5,5,5,5
+            },2000)
+        }
+        console.log('m: ' + m) //9
+        for(let i=0;i<5;i++){
+            setTimeout(()=>{
+                console.log(i) //0,1,2,3,4
+            },2000)
+        }
+        // var a=[];  
+        // for(var i = 0;i<10;i++){  
+        // var q = i;  
+        // a[i]=function(){console.log(q)}  
+        // }  
+        // a[0]()  
+            
+        // 其中，由于for循环并不是一个函数体，所以for循环中定义的变量q和i是作用域for循环所在的函数体，和a同级，  
+        // i++ 和  q=i 并不是重新定义变量，只是重复赋值，最终循环结束，i = 10,q=9;    
+        // 由于function(){console.log(q)} 并不是立即执行，所以这里的q一直是存储的内存引用，最终所有的a[i]()都是输出 9  
+        // 不过，在es6中新增了let命令声明变量，用法和var类似，不过let所声明的变量，只在let命令所在的代码块有效果，for循环的计数器中就很适合let命令  
+        // var a=[];  
+        // for(let i = 0;i<10;i++){  
+        // ley q = i;  
+        // a[i]=function(){console.log(q)}  
+        // }  
+        // a[6]()    //这里会输出   6  let声明的变量仅在块级作用域有效，所以这里的i只在本轮循环有效果，每次循环的i其实都是一个新的变量
+    </script>
+    <div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<script>
+    var fn = function f(x) {
+        // try if you write "var f = 0；" here
+        if (x === 1) {
+            return 1;
+        } else {
+            return x * f(x - 1);
+        }
+    };
+    var fn2 = fn;
+    fn = null;
+    alert(fn2(5)); // OK
+</script>
+
+<script>
+    var fn = function f(x) {
+        // try if you write "var f = 0；" here
+        if (x === 1) {
+            return 1;
+        } else {
+            x--;
+            return x * f(x);
+        }
+    };
+    var fn2 = fn;
+    fn = null;
+    alert(fn2(5)); // OK
+</script>
+
+<script> // 不定参数的乘法,加法
+
+    var arrList = [2,4,5,1,18]
+    alert(arrList.reduce(function(a,b){return a*b}))
+//    alert(arrList.reduce(function(a,b){return a+b}))
+
+</script>
+
+<script> //阶乘chengfa(5) => 5*4*3*2*1
+    function chengfa(n){
+        if(n<=1){return n=1}
+        return n*arguments.callee(n-1)
+    }
+    alert (chengfa(5))
+</script>
+
+<script>
+    var arr = [];
+    function show(n){
+
+        return (function(){
+
+//            arr.unshift(n); //顺序打印
+            arr.push(n); //倒叙打印
+            n--;
+            if(n!=0)
+            {
+                arguments.callee();
+            }
+            return arr;
+        })()
+    }
+    alert(show(100)) // 5,4,3,2,1
+
+</script>

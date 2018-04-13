@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Promise 用法</title>
+</head>
+
+<body>
+
+<script>
+
+var imgs = [
+ 'http://www.sinaimg.cn/dy/slidenews/1_img/2017_23/63957_1114366_835513.jpg',
+ 'http://www.sinaimg.cn/dy/slidenews/1_img/2017_23/63957_1114369_591373.jpg',
+ 'http://www.sinaimg.cn/dy/slidenews/1_img/2017_23/63957_1114453_527652.jpg'
+]
+
+/*const p = new Promise(function(resolve,reject){
+	
+	const img = new Image();
+	img.src = imgs[2]
+	img.onload = function(){    // 异步成功后，执行 resolve ，将 img 也就是 this 返回出去
+			
+	  resolve(img)	
+	  console.log('加载成功！')		
+	}
+	
+	img.onerror = function(err){     // 异步失败返回 错误，后续用 catch() 来获取错误
+		
+	  reject(new Error('加载失败！'))	
+	}
+	
+});*/
+const allDoen = Promise.all([imgLoad(imgs[0]),imgLoad(imgs[1]),imgLoad(imgs[2])]);
+
+    allDoen.then(function(data){
+	// 传统函数遍历
+/*	    console.log(data)
+		for(var i=0;i<data.length;i++){
+		   document.body.appendChild(data[i]) 	 
+		}*/
+     // forEach()  
+		//console.log(data)
+		/*data.forEach(function(item , i){
+			
+			document.body.appendChild(item) 
+			
+		})*/
+		
+		
+				   	 
+	}).catch(function(err){
+		
+		console.log(err)
+	})
+	
+function imgLoad(url){
+	
+    const p = new Promise(function(resolve,reject){
+	
+		const img = new Image();
+		img.src = url
+		img.onload = function(){    // 异步成功后，执行 resolve ，将 img 也就是 this 返回出去
+				
+		  resolve(img)	
+		  console.log('加载成功！')		
+		}
+		
+		img.onerror = function(err){     // 异步失败返回 错误，后续用 catch() 来获取错误
+			
+		  reject(new Error('加载失败！'))	
+		}
+	
+    });	
+	return p;	
+}
+// Promise.sesolve() 可以接收本身的promise 实例
+
+Promise.resolve(imgLoad(imgs[0])).then(function(img){
+	  
+	  console.log(img)
+	  document.body.appendChild(img)
+	  
+	
+	})
+
+// promise.resolve() 对象 可以接收本身promise 实例，也可以接收 thenable 对象
+
+/*Promise.resolve({
+	then(resolve , reject){
+		
+	  const img = new Image();
+	  img.src = imgs[1];	  
+	  img.onload = function(img){		  
+		 resolve(this)  
+	  }
+	  img.onerror = function(err){
+		reject(err)  
+	  }
+		
+	}
+}).then( function(img){
+	document.body.appendChild(img) 
+	
+	} )*/
+	
+	
+// Promise.resolve() 也可以传输一个基本类型的数据，例如字符串 
+
+
+/*Promise.resolve('Miaov').then(function(str){
+	
+	console.log(str)  // Miaov
+	
+	})*/
+</script>
+
+
+</body>
+</html>

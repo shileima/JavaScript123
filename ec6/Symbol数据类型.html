@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+<script>
+
+/*let s1 = Symbol(); // 不能加 new Symbol 不是构造函数，是第七种数据类型
+
+let s2 = Symbol();
+
+console.log(s1)
+
+console.log(s1===s2) // false
+console.log(Symbol('momo')===Symbol('momo')) // momo 知识一个描述，返回 false */
+
+let ss = Symbol("ss");
+
+const data = {
+  
+[ss]: 'miaov'	
+		
+};
+console.log(data)
+
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<meta charset="utf-8">
+<style>
+    .red {color:red;}
+    .blue {color:blue;}
+</style>
+<script>
+    window.onload = function(){
+        var red = false;
+        var blue = false;
+        /*var html = document.createElement('div')
+        html.innerHTML =
+        `
+        <div class="${red ? 'red' : 'blue'}">这里是红色</div>
+        `;*/
+        var html =
+        `
+        <div class="${red ? 'red' : 'blue'}">这里是红色</div>
+        `;
+
+        document.querySelector('#div1').innerHTML = html;
+
+        //repeat
+        let str = 'a'
+        console.log(str.repeat(5))
+
+        //includes,startsWith,endsWith
+
+        let str3 = 'xiaoxiang'
+    //    console.log(str3.includes('ao'))
+        console.log(str3.startsWith('X')) // false 区分代大小写
+        console.log(str3.endsWith('ang')) //true
+    }
+
+</script>
+<body>
+<h1>ES6中字符串的扩展</h1>
+<div id="div1" style="height: 100px; background: #eeeff1"></div>
+<ul id="ul1">
+    <li>反引号``拼接 html , ${} 可以判断变量</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+</ul>
+</body>
+
+</html>
