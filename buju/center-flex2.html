@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script type="text/javascript" src="../jquery.min.js"></script>
+<title>块级元素居中flex</title>
+
+<style>
+.container {
+ 
+ background:#CCC;
+   display:flex;	   /*使用flex实现多个块状元素的水平居中,如果是行内元素，则使用 display: inline-flex;*/
+ justify-content:center;
+ align-items: center;
+	
+}
+
+.c {
+  width:100px;
+  height:100px;
+  background: green;
+  margin:10px 20px;	
+  display:inline-block;
+}
+</style>
+<script type="text/javascript">
+
+var explore=window.navigator.userAgent;
+
+if(explore.indexOf("MSIE")>=0) 
+  {
+    $('.c').css('display','inline-table');
+  }
+</script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+ <div class='c'></div>
+  <div class='c'></div>
+   <div class='c'></div>
+    <div class='c'></div>
+     <div class='c'></div>
+      <div class='c'></div>
+       <div class='c'></div>
+        <div class='c'></div>
+                <div class='c'></div>
+                        <div class='c'></div>
+       <div class='c'></div>
+</div>
+<!--<div class="container">
+
+ <div class='c'></div>
+  <div class='c'></div>
+   <div class='c'></div>
+    <div class='c'></div>
+     <div class='c'></div>
+      <div class='c'></div>
+       <div class='c'></div>
+        <div class='c'></div>
+</div>
+<div class="container">
+
+ <div class='c'></div>
+  <div class='c'></div>
+   <div class='c'></div>
+    <div class='c'></div>
+     <div class='c'></div>
+      <div class='c'></div>
+       <div class='c'></div>
+        <div class='c'></div>
+</div>-->
+
+</body>
+</html>

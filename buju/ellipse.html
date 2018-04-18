@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#div1 { width:300px; text-overflow:ellipsis;overflow:hidden; white-space:nowrap}
+
+#div2 { width:300px; display: -webkit-box; -webkit-box-orient: vertical;
+-webkit-line-clamp:3; overflow:hidden; margin-top: 100px; text-overflow:ellipsis;}
+span{
+margin:0 19px 4px 17px;
+width:112px;
+max-height:57px;
+position: relative;
+ line-height: 20px;
+overflow: hidden;
+display:block;
+}
+ 
+span:after{
+content: "...";
+position: absolute;
+bottom: 0;
+right: 0;
+padding:0 17px 1px 0px;
+width:27px;
+height:20px;
+color:#fff;
+background-color:#333;
+}
+</style>
+</head>
+
+<body>
+
+<div id="div1">
+如果实现单行文本的溢出显示省略号同学们应该都知道用text-overflow:ellipsis属性来，当然还需要加宽度width属来兼容部分浏览。
+
+</div>
+
+<div id="div2">
+-webkit-line-clamp用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。常见结合属性：
+display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+-webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。浏览。
+
+</div>
+<!--<span>
+-webkit-line-clamp用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。常见结合属性：
+display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+-webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式
+-webkit-line-clamp用来限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他的WebKit属性。常见结合属性：
+display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+-webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式
+</span>-->
+</body>
+</html>

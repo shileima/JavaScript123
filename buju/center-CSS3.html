@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>水平垂直居中</title>
+<style>
+ .container {/* 利用CSS3的 transform 来轻松搞定*/
+ position:relative;
+  height: 500px;
+ background:#CCC;
+
+	 }
+ .c {
+	 position:absolute;
+	 top:50%;
+	 left:50%;
+	 transform: translate(-50%,-50%);  /*也可以直接 margin:0;*/
+	
+	 background:red;
+ }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<span class="c">#container</span><span class="c">#container</span><span class="c">#container</span>
+<span class="c">#container</span><span class="c">#container</span><span class="c">#container</span>
+
+
+</div>
+
+
+</body>
+</html>

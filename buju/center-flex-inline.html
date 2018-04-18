@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>水平垂直居中table-cell</title>
+<style>
+ .container {/*
+	 display: table-cell;      当要被居中的元素是inline或者inline-block的时候，可以巧妙的将父级容器设置为display:table-cell，配合text-align:center和vertical-align:middle即可以实现水平垂直居中。*/
+	 display: table-cell; 
+	 vertical-align:middle;
+	 text-align:center;
+	 height:300px;
+	 width:500px;
+	 background:#CCC;
+	 }
+ .c {
+	 background-color:red;
+	 font-weight:bold;
+	 font-size:18px;
+ }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+<span class="c">#container</span>
+<span class="c">#container</span>
+<span class="c">#container</span>
+
+</div>
+
+
+</body>
+</html>

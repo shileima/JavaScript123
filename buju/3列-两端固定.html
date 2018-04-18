@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>3列布局，中间自适应，两侧固定宽度</title>
+</head>
+
+<body>
+<div>#left</div>
+<div>#center</div>
+<div>#right</div>
+<style>
+div:nth-child(1),
+div:nth-child(3){
+	background:gray;
+	width:300px;
+}
+div:nth-child(2){
+	background:silver;
+	flex:1;
+}
+body{
+	display:flex;
+}
+</style>
+</body>
+</html>
