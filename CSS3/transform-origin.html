@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>transform-origin</title>
+</head>
+<style>
+#div1 {margin:10px; width:200px; height:200px; border:#666 solid 1px; position:relative; margin:50px auto;}
+
+#div2 {position:absolute; width:50px; height:50px; padding:50px; background:yellow; transform:rotate(30deg);}
+
+#div3 {margin:10px; width:200px; height:200px; border:#666 solid 1px; position:relative; margin:50px auto;}
+
+#div4 {position:absolute; width:50px; height:50px; padding:50px; background:yellow; transform:rotate(30deg); transform-origin:100% 100%;}
+
+#div5 {margin:10px; width:200px; height:200px; border:#666 solid 1px; position:relative; margin:50px auto;}
+
+#div6 {position:absolute; width:50px; height:50px; padding:50px; background:yellow; transform:rotate(30deg); transform-origin:200% 200%;}
+
+</style>
+<body>
+<div id="div1"><div id="div2">CSS3 transform:rotate(30deg)</div></div>
+<div id="div3"><div id="div4">CSS3 transform-origin:100% 100%</div></div>
+<div id="div5"><div id="div6">CSS3 transform-origin:200% 200%</div></div>
+<script src="http://caccn.cn/template/damei_tan29/js/jquery.js"></script>
+<script>
+$(document).ready(function(e) {
+    $('#div1').hover(function(){
+		
+		$('#div2').css('transform','rotate(0deg)')
+		
+		}, function(){
+			
+			$('#div2').css('transform','rotate(30deg)')
+			});
+});
+
+</script>
+</body>
+</html>

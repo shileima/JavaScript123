@@ -1,0 +1,80 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>transition</title>
+	<style>
+		
+html {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background-image: -webkit-linear-gradient(90deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+    background-image: -moz-linear-gradient(90deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+    background-image: -ms-linear-gradient(90deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+    background-image: linear-gradient(0deg, #395ecb 0%, #3657be 35%, #242161 75%, #1a0531 100%);
+}
+
+
+
+@keyframes xz {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+.bg1 {
+
+  	margin-top: 15px;
+
+    height: 300px;
+	margin-left:100px;
+
+    background: url(http://59.110.30.59/j/images/earth.jpg) no-repeat center center;
+
+    animation: xz 30s linear infinite;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+
+<div id="div1"></div>
+
+
+
+
+<h1 style="display:block; color:#fff">下面地球使用纯CSS3制作旋转</h1>
+
+
+  <div class="bg0 pa">
+	        <div class="bg1"></div>
+	    </div>
+
+
+
+</body>
+
+
+
+</html>
+
+
+

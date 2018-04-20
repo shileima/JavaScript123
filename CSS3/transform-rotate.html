@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+
+div {float:left;}
+#div1 { transform:rotate(30deg); width:100px; height:100px; background: red; margin:50px; padding:5px;}
+
+#div2 { border-radius: 25px; border: solid 2px red; width:100px; height:100px; background: #333; margin:50px; padding:15px; color: white;}
+
+#div3 { width:100px; height:100px; background:#006; border:#C00 2px solid; color:#FFF; padding:10px; margin:50px; box-shadow: 10px 10px 5px #666;}
+
+#div4{ width:120px; height:100px; background:#fff;
+  border:15px solid transparent;
+ border-image: url(../images/border.png) 30 30 round;
+ -webkit-border-image: url(../images/border.png) 30 30 round;
+ -o-border-image: url(../images/border.png) 30 30 round;
+ padding:10px; margin:40px;}
+ 
+ #div5{ width:150px; height:100px; background:#fff;
+  border:15px solid transparent;
+ border-image: url(../images/border.png) 30 30 stretch;
+ -webkit-border-image: url(../images/border.png) 30 30 tretch;
+ -o-border-image: url(../images/border.png) 30 30 stretch;
+ padding:10px; margin:40px;}
+ 
+ #div6{font-size:18px; color:#000; text-shadow:3px 3px 2px #333; width:150px; height:100px; padding:10px; }
+ 
+ #div7 { 
+ background:-webkit-linear-gradient(left top,red,blue,yellow); /* Safari 5.1 - 6.0 */
+ background:-o-linear-gradient(right bottom,red,blue,yellow);  /* Opera 11.1 - 12.0 */
+ background:-moz-linear-gradient(right bottom,red,blue,yellow);  /* Firefox 3.6 - 15 */
+ background:linear-gradient(to right bottom,red,blue,yellow); /*标准的语法必须放到最后*/
+ color:#fff;
+ width:400px; height:200px; 
+ border:#000 1px solid}
+ 
+</style>
+<title>无标题文档</title>
+</head>
+
+<body>
+
+ <div id="div1">体验CSS3中 transform 的rotate 属性</div>
+ 
+ <div id="div2">CSS3中border-radius属性</div>
+ 
+ <div id="div3">CSS3中box-shadow的属性</div>
+ 
+ <div id="div4">CSS3中border-image: url 30 30 round; 的属性,IE11开始支持</div>
+
+ <div id="div5">CSS3中border-image: url 30 30 stretch; 的属性,IE11开始支持</div>
+ 
+ <div id="div6">CSS3中text-shadow:5px 5px 3px #CCC 的属性,IE10开始支持</div>
+ 
+ <div id="div7">CSS3 linear-gradient:to right red blue</div>
+</body>
+</html>

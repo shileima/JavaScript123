@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CSS3动画 @keyframes</title>
+<style>
+#div1 {
+	border:1px solid #999;
+	background-color:red;
+	width:100px;
+	height:100px;
+	position:relative;
+	
+	animation-name:myMove;
+	animation-delay:2s;
+	animation-direction: linear;
+	animation-duration:5s;
+	animation-iteration-count:infinite;
+	animation-timing-function:ease-in-out;
+	animation-direction:alternate;
+	animation-play-state:running;
+	
+    -webkit-animation-name:myMove;
+	-webkit-animation-delay:2s;
+	-webkit-animation-direction: linear;
+	-webkit-animation-duration:5s;
+	-webkit-animation-iteration-count:infinite;
+	-webkit-animation-timing-function:ease-in-out;
+	-webkit-animation-direction:alternate;
+	-webkit-animation-play-state:running;
+}
+
+@keyframes myMove {
+	
+0% {background:red;
+    
+    left:0px;
+	top:0px;
+	
+    }
+	
+25% {background:red;
+     
+    left:500px;
+	top:0px;
+	
+    }
+	
+50% {background:red;
+     
+    left:500px;
+	top:500px;
+	
+    }
+	
+75% {background:red;
+     
+    left:0px;
+	top:500px;
+	
+    }
+		
+100% {background:red;
+     
+    left:0px;
+	top:0px;
+	
+    }
+	
+}
+
+@-webkit-keyframes myMove {
+	
+0% {background:red;
+    
+    left:0px;
+	top:0px;
+	
+    }
+	
+25% {background:red;
+     
+    left:500px;
+	top:0px;
+	
+    }
+	
+50% {background:red;
+     
+    left:500px;
+	top:500px;
+	
+    }
+	
+75% {background:red;
+     
+    left:0px;
+	top:500px;
+	
+    }
+		
+100% {background:red;
+     
+    left:0px;
+	top:0px;
+	
+    }
+	
+}
+
+
+</style>
+</head>
+
+<body>
+<div id="div1"></div>
+</body>
+</html>
