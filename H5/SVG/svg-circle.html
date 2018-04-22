@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<svg class="move_line1" xmlns="http://www.w3.org/2000/svg" width="600px" height="300px">
+        
+		
+		<circle class="a" cx="150" cy="160" r="100" style="fill:transparent;stroke:green;stroke-width:3px;" />
+    </svg>
+
+
+
+
+<script>
+
+
+var circle1=document.querySelector('.move_line1 circle');
+
+var length2= 628.3185;
+
+
+//清除动作
+circle1.style.transition=circle1.style.WebkitTransition="none";
+
+//设置起点
+
+
+circle1.style.strokeDasharray = length2 + ' ' + length2;
+circle1.style.strokeDashoffset = length2;
+
+
+circle1.getBoundingClientRect();
+
+//定义动作
+
+
+circle1.style.transition = circle1.style.WebkitTransition='stroke-dashoffset 3s ease-in-out';
+circle1.style.strokeDashoffset='0';
+
+</script>
+
+<ul>
+  <li>M = moveto</li>
+  <li>L = lineto</li>
+  <li>H = horizontal lineto</li>
+  <li>V = vertical lineto</li>
+  <li>C = curveto</li>
+  <li>S = smooth curveto</li>
+  <li>Q = quadratic Bézier curve</li>
+  <li>T = smooth quadratic Bézier curveto</li>
+  <li>A = elliptical Arc</li>
+  <li>Z = closepath</li>
+</ul>
+</body>
+</html>

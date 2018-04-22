@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+
+
+<html>
+
+	<head>
+		<title>小象学院抽奖</title>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="keywords" content="">
+		<meta name="description" content="">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="renderer" content="webkit">
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+        <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="css/common.css"/>
+		<style>
+			.g-content {
+				width: 100%;
+				
+				height: auto;
+				font-family: "微软雅黑", "microsoft yahei";
+			}
+			.g-content .g-lottery-case {
+				width: 100%;
+				height: auto;
+				margin: 0 auto;
+				overflow: hidden;
+			}
+			
+			.g-content .g-lottery-case .g-left h2 {
+				font-size: 16px;
+				line-height: 32px;
+				font-weight: normal;
+				text-align:center;
+			}
+			
+			.g-content .g-lottery-case .g-left {
+				width: 100%;
+				float: left;
+			}
+			
+			.g-lottery-box {
+				width: 100%;
+				height: auto;
+				
+				position: relative;
+/*				background: url(img/lottery/ly-plate-c.gif) no-repeat;
+*/			}
+			
+			.g-lottery-box .g-lottery-img {
+				width: 340px;
+				height: 370px;
+				position: relative;
+				background: url(img/lottery/bg-lottery.png) no-repeat;
+				margin:0 auto;
+				top: 30px;
+			}
+			
+			.g-lottery-box .playbtn {
+				width: 186px;
+				height: 186px;
+				position: absolute;
+				top: 77px;
+				left: 77px;
+				background: url(img/lottery/playbtn.png) no-repeat;
+			}
+			
+			
+			
+			.record_Top{width:100%; height:50px; background:url(images/record_Bg.png) center center no-repeat; background-size:contain; text-align:center; line-height:50px; margin:30px auto 0px; color:#fff;}
+
+
+.topRec_List dl,.maquee{ width:100%; overflow:hidden; margin:0 auto; color:#7C7C7C}
+.topRec_List dd{ float:left; text-align:center; border-bottom:1px solid #1B96EE; color:#1B96EE;}
+.topRec_List dl dd:nth-child(1){ width:100%; height:40px; line-height:40px; }
+
+.maquee{ height:195px;}
+.topRec_List ul{ width:100%; height:195px;}
+.topRec_List li{ width:100%; line-height:48px; padding-bottom::5px; text-align:center; font-size:13px; border-bottom: 1px dashed #aaa; list-style:none;display:inline; height:auto; word-break:break-all; word-wrap : break-word;}
+/*.topRec_List li:nth-child(2n){ background:#077cd0}*/
+.topRec_List li div{ float:left; border-bottom:1px dashed #999;}
+.topRec_List li div:nth-child(1){ width:100%; height:40px;}
+			
+		</style>
+	</head>
+
+<body>
+  <div class="container-fluid">
+        <div class="row bg-info" style="padding:10px 0;">
+              <div class="col-xs-4 col-lg-push-1 text-left" style="font-size:16px;"><a href="#">返回上级</a></div>
+              <div class="col-xs-4 text-center" style="font-size:20px;"><a href="#">抽奖</a></div>
+              <div class="col-xs-4 col-lg-pull-1 text-right" style="font-size:16px;"><a href="#">地址信息</a></div>
+         </div>
+     
+ </div>   
+     <!--抽奖开始  -->
+    <div id="header" style="width:100%; padding:20px 50px;">
+        <span style=""></span>
+
+        <span class="active "></span>
+
+        <span></span>
+
+    </div>
+		<div class="g-content">
+			<div class="g-lottery-case">
+				<div class="g-left">
+					<h2>您已拥有<span class="playnum"></span>次抽奖机会，点击立刻抽奖！~</h2>
+					<div class="g-lottery-box">
+						<div class="g-lottery-img">
+							<a class="playbtn" href="javascript:;" title="开始抽奖"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+  
+  
+ <!-- 弹框定义-->
+ 
+ <div id="wrapper">
+	
+	<div class="box">
+<!--		<div class="demo">
+			<a href="javascript:;" class="bounceIn">DEMO1</a>
+			<a href="javascript:;" class="rollIn">DEMO2</a>
+			<a href="javascript:;" class="bounceInDown">DEMO3</a>
+			<a href="javascript:;" class="flipInX">DEMO4</a>
+		</div>-->
+		
+		<div id="dialogBg"></div>
+		<div id="dialog" class="animated" style="height:280px;">
+			<img class="dialogIco" width="50" height="50" src="images/ico.png" alt="" />
+			<div class="dialogTop">
+				<a href="javascript:;" class="claseDialogBtn">关闭</a>
+			</div>
+			<form action="" method="post" id="editForm" style="padding-top:30px;">
+				<ul class="editInfos">
+					<li><label style="font-size:14px;"><font color="#ff0000">* </font>昵称：<input type="text" name="" required value="" class="ipt" /></label></li>
+					<li><label style="font-size:14px;"><font color="#ff0000">* </font>手机：<input type="text" name="" required value="" class="ipt" /></label></li>
+					<li><label style="font-size:14px;"><font color="#ff0000">* </font>地址：<input type="text" name="" required value="" class="ipt" /></label></li>
+					<li><input type="submit" value="确认提交" class="submitBtn" /></li>
+				</ul>
+			</form>
+		</div>
+	</div>
+	
+    
+    
+    
+    
+    <div id="dialogBg2"></div>
+ <div class="animated modal-dialog  login-modal" id="dialog2">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">登录小象学院</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="login-ajax-form" class="form-vertical form-vertical-small" method="post" action="/login_check"
+                    >
+
+                        <div class="alert alert-danger" style="display:none;"></div>
+
+                        <div class="form-group mbl">
+                            <label class="control-label hidden" for="ajax-username">邮箱/手机/用户名</label>
+                            <div class="controls">
+                                <input class="form-control input-lg" type="text" id="ajax-username" name="_username" placeholder
+                                ="邮箱/手机/用户名" />
+                            </div>
+                        </div>
+
+                        <div class="form-group mbl">
+                            <label class="control-label hidden" for="ajax-password">密码</label>
+                            <div class="controls">
+                                <input class="form-control input-lg" type="password" id="ajax-password" name="_password" placeholder
+                                ="密码" />
+                            </div>
+                        </div>
+
+                        <div class="form-group mbl text-muted">
+                            <input type="checkbox" name="_remember_me" checked="checked"> 记住密码
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">登录</button>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="JcBu-AbOXaQ8nUcsSF-W2gMoloqFGBO5lgeEWazU8XE">
+                    </form>
+                    <script>
+                        app.load('auth/login-ajax');
+                    </script>
+
+                </div>
+                <div class="modal-footer"><div class="text-left text-sm">
+                        <a href="/password/reset">找回密码</a>
+                        <span class="text-muted mhs">|</span>
+                        <span class="text-muted">还没有注册帐号？</span>
+                        <a href="/register?goto=http%3A//120.27.34.79/luckydraw">立即注册</a>
+                    </div>
+
+                    <div class="social-login">
+    <span>
+
+      <a href="/login/bind/weibo?_target_path=http%3A//120.27.34.79/luckydraw&amp;inviteCode=" class
+      ="social-icon social-weibo">
+          <i class="es-icon es-icon-weibo"></i>
+      </a>
+
+      <a href="/login/bind/qq?_target_path=http%3A//120.27.34.79/luckydraw&amp;inviteCode=" class="social-icon
+ social-qq">
+          <i class="es-icon es-icon-qq"></i>
+      </a>
+
+      <a href="/login/bind/weixinweb?_target_path=http%3A//120.27.34.79/luckydraw&amp;inviteCode=" class
+      ="social-icon social-weixin">
+          <i class="es-icon es-icon-weixin"></i>
+      </a>
+
+
+
+    </span>
+                        <div class="line"></div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        
+        
+        
+        
+    
+    
+    
+</div>
+<div style="text-align:center;margin:50px 0; font:normal 14px/24px 'MicroSoft YaHei';">
+</div>
+  
+  
+        
+     <!-- 中奖名单开始-->
+     
+     
+     <div class="center-block">
+        <div class="Top_Record" style="margin-bottom:50px;">
+            <div class="topRec_List">
+            <h2 class="text-center">中奖用户列表</h2>
+                <div class="maquee">
+                    <ul>
+                    
+                        <li>     
+                            <div><span class="col-xs-2 text-left" style="padding:0;">用户昵称1</span> <span style="height:50px; padding:0;" class="col-xs-10 text-right">小象学院定制鼠标垫 x 1,课程优惠券50元 x1</span></div> 
+                        </li> 
+                        <li>     
+                            <div><span class="col-xs-2 text-left" style="padding:0;">用户昵称1</span> <span style="height:50px; padding:0;" class="col-xs-10 text-right">小象学院定制鼠标垫 x 1,课程优惠券50元 x1</span></div> 
+                        </li> 
+                        <li>     
+                            <div><span class="col-xs-2 text-left" style="padding:0;">用户昵称1</span> <span style="height:50px; padding:0;" class="col-xs-10 text-right">小象学院定制鼠标垫 x 1,课程优惠券50元 x1</span></div> 
+                        </li> 
+                        <li>     
+                            <div><span class="col-xs-2 text-left" style="padding:0;">用户昵称1</span> <span style="height:50px; padding:0;" class="col-xs-10 text-right">小象学院定制鼠标垫 x 1,课程优惠券50元 x1</span></div> 
+                        </li> 
+                      
+                      
+                      
+                        
+                      
+                      
+                      
+                    </ul>
+                </div>
+            </div>
+        </div>
+     </div>
+     
+
+     
+      
+<!--<table class="table table-bordered">
+  <tr class="active">
+  	<td class="active">用户昵称</td>
+  	<td class="success">中奖奖品</td>
+  </tr>
+  <tr class="active">
+  	<td class="active">用户昵称</td>
+  	<td class="success">中奖奖品</td>
+  </tr>
+  <tr class="active">
+  	<td class="active">用户昵称</td>
+  	<td class="success">中奖奖品</td>
+  </tr>
+  <tr class="active">
+  	<td class="active">用户昵称</td>
+  	<td class="success">中奖奖品</td>
+  </tr>
+</table>-->
+		<script src="js/jquery-1.8.3.min.js" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript" src="js/jquery.rotate.min.js"></script>
+		<script>
+			$(function() {
+				var $btn = $('.playbtn');
+				var playnum = 1000; //初始次数，由后台传入
+				$('.playnum').html(playnum);
+				//var isture = 0;
+				/*var clickfunc = function() {
+					var data = [1, 2, 2, 5, 5, 5, 5, 5, 4, 5, 5, 5, 4, 5, 3, 4, 5, 6, 2, 5, 2];
+					//data为随机出来的结果，根据概率后的结果
+					data = data[Math.floor(Math.random() * data.length)];
+					switch(data) {
+						case 0.1:
+							rotateFunc(1, 0, '苹果笔记本一台!');
+							break;
+						case 2:
+							rotateFunc(2, 60, '谢谢参与');
+							break;
+						case 3:
+							rotateFunc(3, 120, '恭喜您获得5200元理财金!');
+							break;
+						case 4:
+							rotateFunc(4, 180, '鼠标垫一个!');
+							break;
+						case 5:
+							rotateFunc(5, 240, '谢谢参与');
+							break;
+						case 6:
+							rotateFunc(6, 300, '键盘一个');
+							break;
+							
+						default:
+						    rotateFunc(7, 60, '谢谢参与');
+							break;	
+							
+					}
+				}*/
+				var clickfunc = function() {
+					var data = [1, 2, 3, 4, 5];
+					//data为随机出来的结果，根据概率后的结果
+					data = data[Math.floor(Math.random() * data.length)];
+					switch(data) {
+						/*case 1:
+							rotateFunc(1, 0, 'Mac-Pro苹果笔记本 x1, 小象学院课程优惠券50元 x1');
+							break;
+						case 2:
+							rotateFunc(2, 60, '小象学院课程优惠券50元 x1');
+							break;
+						case 3:
+							rotateFunc(3, 120, '樱桃机械键盘 x1, 小象学院课程优惠券50元 x1');
+							break;
+						case 4:
+							rotateFunc(4, 180, '<机器学习>-周志华实体书 x1, 小象学院课程优惠券50元 x1');
+							break;
+						case 5:
+							rotateFunc(5, 240, '小象学院课程优惠券50元 x1');
+							break;
+						case 6:
+							rotateFunc(6, 300, '键盘一个');
+							break;*/
+						case 1:
+							rotateFunc(1, 0, 'Mac-Pro苹果笔记本 x1, 小象学院课程优惠券50元 x1');
+							break;
+						case 2:
+							rotateFunc(2, 72, '小象学院课程优惠券50元 x1');
+							break;
+						case 3:
+							rotateFunc(3, 144, '樱桃机械键盘 x1, 小象学院课程优惠券50元 x1');
+							break;
+						case 4:
+							rotateFunc(4, 216, '<机器学习>-周志华实体书 x1, 小象学院课程优惠券50元 x1');
+							break;
+						case 5:
+							rotateFunc(5, 288, '小象学院定制鼠标垫 x 1，小象学院课程优惠券50元 x1');
+							break;
+							
+					}
+				}
+				$btn.click(function() {
+					//if(isture) return; // 如果在执行就退出
+					//isture = true; // 标志为 在执行
+					//先判断是否登录,未登录则执行下面的函数
+					if(1 == 1) {
+						//$('.playnum').html('0');
+						//alert("请先登录");
+							className = $(this).attr('class');
+							$('#dialogBg2').fadeIn(300);
+							$('#dialog2').removeAttr('class').addClass('animated '+className+'').fadeIn();
+							$('#dialog2').prepend("<b style='position: absolute; margin-top:10px; color:red; top:15%; left:5%;'>恭喜！您获得 "+text+"。请填写快递地址</b>")
+						//isture = false;
+					} else { //登录了就执行下面
+						if(playnum <= 0) { //当抽奖次数为0的时候执行
+							alert("没有次数了");
+							$('.playnum').html(0);
+							//isture = false;
+						} else { //还有次数就执行
+							playnum = playnum - 1; //执行转盘了则次数减1
+							if(playnum <= 0) {
+								playnum = 0;
+							}
+							$('.playnum').html(playnum);
+							clickfunc();
+						}
+					}
+				});
+				var rotateFunc = function(awards, angle, text) {
+					//isture = true;
+					$btn.stopRotate();
+					$btn.rotate({
+						angle: 0,
+						duration: 4000, //旋转时间
+						animateTo: angle + 1800, //让它根据得出来的结果加上1440度旋转
+						callback: function() {
+							//isture = false; // 标志为 执行完毕
+							
+							if(text=='小象学院课程优惠券50元 x1'){
+								
+								alert(text);
+								
+								} else {
+									
+							className = $(this).attr('class');
+							$('#dialogBg').fadeIn(300);
+							$('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
+							$('#dialog').prepend("<b style='position: absolute; margin-top:10px; color:red; top:15%; left:5%;'>恭喜！您获得 "+text+"。请填写快递地址</b>")
+							
+							 }
+						}
+					});
+				};
+			});
+		</script>
+        
+        <script type="text/javascript"> 
+
+      function autoScroll2(obj){  
+            $(obj).find("ul").animate({  
+                marginTop : "-39px"  
+            },500,function(){  
+                $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);  
+            })  
+        }  
+        $(function(){  
+            setInterval('autoScroll(".maquee")',3000);
+            setInterval('autoScroll(".apple")',2000);
+              
+        }) 
+        
+</script>  
+<!--   弹框  -->   
+
+
+<script type="text/javascript">
+var w,h,className;
+function getSrceenWH(){
+	w = $(window).width();
+	h = $(window).height();
+	$('#dialogBg').width(w).height(h);
+}
+
+window.onresize = function(){  
+	getSrceenWH();
+}  
+$(window).resize();  
+
+$(function(){
+	getSrceenWH();
+	
+	//显示弹框
+	$('.box a').click(function(){
+		className = $(this).attr('class');
+		$('#dialogBg').fadeIn(300);
+		$('#dialog').removeAttr('class').addClass('animated '+className+'').fadeIn();
+	});
+	
+	//关闭弹窗
+	$('.claseDialogBtn').click(function(){
+		$('#dialogBg').fadeOut(300,function(){
+			$('#dialog').addClass('bounceOutUp').fadeOut();
+		});
+	});
+	$('.close').click(function(){
+		$('#dialogBg2').fadeOut(300,function(){
+			$('#dialog2').addClass('bounceOutUp').fadeOut();
+		});
+	});
+});
+</script>
+        
+        <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</body>
+
+</html>

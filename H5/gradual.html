@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Gradual</title>
+<style>
+#myCans1 {margin:10px; width:300px; height:160px; border:#000 solid 1px;}
+
+</style>
+<script>
+window.onload=function(){
+	
+	var c=document.getElementById('myCans1');
+var ctx=c.getContext('2d');
+
+//创建渐变
+var grd=ctx.createLinearGradient(0,0,280,0);	
+grd.addColorStop(0,"white");
+grd.addColorStop(0.25,"green");
+grd.addColorStop(0.5,"#F09");
+grd.addColorStop(0.75,"green");
+grd.addColorStop(1,"white");
+
+//填充渐变
+ctx.fillStyle=grd;
+ctx.fillRect(10,10,280,100);
+	
+	
+	};
+
+</script>
+
+</head>
+
+<body>
+<canvas id="myCans1"></canvas>
+
+</body>
+</html>

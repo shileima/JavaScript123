@@ -1,0 +1,78 @@
+<!DOCTYPE html> 
+<head> 
+<meta charset=utf-8> 
+<title>PHP100 HTML5视频教程-canvas</title>
+<style>
+#demo p{position:relative;margin:10px 0}
+#demo p label{position:absolute;left:0;display:block;width:160px;font-weight:bolder}
+#demo p input{width:200px;margin:0 8px 0 160px }
+#demo p span{color:#555}
+#demo p input[type=search]{-webkit-appearance:textfield}
+</style>
+</head>
+<body>
+<!--DEMO start-->
+<div id="demo">
+<form id="iform">
+	<p><label for="email">email类型：</label><input type="email" name="email" id="email" placeholder="请输入正确mail地址" /><span>请在Opera10.5+中查看效果</span></p>
+	<p><label for="url">url类型：</label><input type="url" id="url" /><span>请在新版Opera中查看效果</span></p>
+	<p><label for="date">date类型：</label><input type="date" id="date" /><span>请在新版Opera或Chrome中查看</span></p>
+	<p><label for="time">time类型：</label><input type="time" id="time" /><span>请在新版Opera或Chrome中查看</span></p>
+	<p><label for="month">month类型：</label><input type="month" id="month" /><span>请在新版Opera或Chrome中查看</span></p>
+	<p><label for="week">week类型：</label><input type="week" id="week" /><span>请在新版Opera或Chrome中查看</span></p>
+	<p><label for="number">number类型：</label><input type="number" name="number" id="number" /><span>请在新版Opera或Chrome中查看</span></p>
+	<p><label for="range">range类型：</label><input type="range" id="range" /><span>请在新版Opera或Chrome或Safari中查看</span></p>
+	<p><label for="search">search类型：</label><input type="search" results="n"  id="search" value="11"/>请在新版Chrome或Safari中查看</p>
+	<p><label for="color">color类型：</label><input type="color" id="color" /><span>请在新版Opera或Chrome中查看</span></p>
+	<p><label for="placeholder">placeholder属性：</label><input type="text" id="placeholder" placeholder="点击我会以清除" /><span>请在新版Opera或Chrome或Safari中查看</span></p>
+	<p><label for="autofocus">autofocus属性：</label><input type="text" id="autofocus" autofocus="true"/><span>请在新版Chrome或Safari中查看</span></p>
+	<p><label for="list">list属性：</label><input type="text" id="list" list="ilist"/><span>请在新版Opera中查看</span>
+	<datalist id="ilist">
+		<option label="a" value="a">
+		<option label="b" value="b">
+		<option label="c" value="c">
+	</datalist>
+</p>
+	<p><label for="pattern">pattern属性：</label><input type="text" name="require2" id="pattern" placeholder="输入邮政编码" required pattern="^[1-9]\d{5}$" /><span>请在Opera10.5+中查看效果</span></p>							
+	<p><label for="require">require属性：</label><input type="text" name="require" id="require" placeholder="必填项" required /><span>请在Opera10.5+中查看效果</span></p>							
+	<p><label for="range2">pattern属性：</label><input type="range" id="range2" max="100" min="1" step="20" /><span>请在新版Opera或Chrome或Safari中查看</span></p>
+	<p><label for="sub"></label><input type="submit" id="sub" value="提交" /></p>
+</form>
+
+
+
+
+
+
+</div>
+<!--DEMO end-->
+<form action="" method="get" id=foo>
+邮件<input type=email><br>
+网址<input type=url><br>
+日期<input type=date><br>
+时间<input type=time><br>
+月份<input type=month><br>
+ 周 <input type=week><br>
+数字<input type=number><br>
+滑动<INPUT type=range  min="0" max="100" step="1"><br>
+搜索<INPUT type=search value="搜索"><br>
+搜索<INPUT type=color><br>
+
+<input type="text" list="mydata" placeholder="热门电影排行" />
+    <datalist id="mydata">
+        <option label="Top1" value="让子弹飞">
+        <option label="Top2" value="非诚勿扰2">
+        <option label="Top3" value="大笑江湖">
+        <option label="Top4" value="赵氏孤儿">
+        <option label="Top5" value="初恋这件小事">
+</datalist>
+<br>
+	
+<input type="submit" value="提交">
+</form>
+<INPUT  name="aa" value=我在id为iform的表单外 form="foo">
+</body> 
+</html> 
+
+
+

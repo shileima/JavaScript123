@@ -1,0 +1,396 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>帝王杯</title>
+
+<style>
+
+body{-webkit-overflow-scrolling:touch; margin: 0 auto; }
+a,button,input,optgroup,select,textarea {-webkit-tap-highlight-color:rgba(0,0,0,0);}
+
+a, img { -webkit-touch-callout: none; width: 100%}
+
+* {margin:0; padding:0 }
+p, img {margin:0; padding:0 }
+article {margin: 10px 0; }
+article h2 {background: #EEE9E6; color: #6C594D; font-size: 18px; line-height: 30px; margin: 0; width: 100%; clear: both; text-align: left; } article h2:before {content: "▼"; color: #948157; }
+.clear {clear: both;}
+#cont img {margin-top: -5px}
+
+p {display: block; -webkit-margin-before: 0em; -webkit-margin-after: 0em; -webkit-margin-start: 0px; -webkit-margin-end: 0px; } 
+i {color: red;}
+#LayoutDiv1{ max-width:640px; min-width:320px; margin: 0 auto;}
+#LayoutDiv1 span {font-size:16px; font-family:Microsoft YaHei; font-weight:600; padding-bottom:12px; padding-left:5px;
+}
+#LayoutDiv1 input {width:100%; font-size:14px; height:20px; padding:5px 0px; line-height:20px; margin: 10px 0;}
+
+/*#btn1 { background:url(images/tijiao_03.png) no-repeat center center; height:auto}*/
+
+select {width:32%; padding: 5px 0; font-size:14px; margin: 10px 0;}
+#form1 p span {margin-top: 10px;}
+.piece.fbottom {top: auto !important; bottom: 0 !important; position:fixed; width:100%; }
+.fbottom .tel-btn {width: 33.33% !important; border-radius: 0; float: left; background-color: rgba(213, 64, 64, 0.93); }
+
+.phone-icon {width: 16px; height: 16px; background: url(http://znresource.closerhearts.com/web/common/phone-icon.png) no-repeat; background-size: 12px; display: inline-block; background-position: 2px 1px; }
+
+.phone-icon2 {width: 16px; height: 16px; background: url(http://znresource.closerhearts.com/web/common/gwc.png) no-repeat; background-size: 16px; display: inline-block; background-position: 0px 0px; }
+
+.tel-btn {display: block; margin: 16px auto; cursor: pointer; color: #fff; height: 42px; line-height: 42px; background-color: #f85959; text-align: center; border-radius: 4px; box-sizing: border-box; text-decoration: none; font-size: 16px; } .tel-btn {
+    background-color: #980000 !important;
+}
+form {padding:10px 6px;}
+
+.record_Top{width:100%; height:50px; background:url(images/record_Bg.png) center center no-repeat; background-size:contain; text-align:center; line-height:50px; margin:30px auto 0px; color:#fff;}
+
+.topRec_List dl,.maquee{ width:100%; overflow:hidden; margin:0 auto; color:#7C7C7C}
+.topRec_List dd{ float:left; text-align:center; border-bottom:1px solid #1B96EE; color:#1B96EE;}
+.topRec_List dl dd:nth-child(1){ width:90%; height:40px; line-height:40px; }
+
+.maquee{ height:195px;}
+.topRec_List ul{ width:100%; height:195px;}
+.topRec_List li{ width:100%; height:38px; line-height:38px; text-align:center; font-size:12px; border-bottom: 1px dashed #aaa; list-style:none;}
+/*.topRec_List li:nth-child(2n){ background:#077cd0}*/
+.topRec_List li div{ float:left;}
+.topRec_List li div:nth-child(1){ width:90%;}
+
+
+.apple a{display:block; text-decoration:none;}
+.apple,.aa{ width:100%; height:50px; overflow:hidden; margin:30px auto; border:1px solid #1B96EE;}
+.apple a,.aa a{ width:100%; height:50px; line-height:50px; text-indent:20px; color:#1B96EE;}
+.aa {word-wrap:break-word;line-height:50px;  color:#1B96EE;}
+
+.btndiv a[href^="sms:"], .btndiv a[href^="tel:"], .btndiv a[href^="tencent:"] {background-position: 10% 50%; background-size: 32px 32px; background-repeat: no-repeat; background-color: #ff5600; display: block; margin: 5px 0; text-align: center; color: #fff; text-shadow: 1px 1px 1px #333; border-radius: 6px; }
+
+.btn {height: auto; clear: both; padding: 10px 0; overflow: hidden; text-decoration: none; background-position: 10% 50%; background-size: 32px 32px; background-repeat: no-repeat; background-color: #ff5600; display: block; text-align: center; color: #fff; text-shadow: 1px 1px 1px #333; border-radius: 6px; } 
+
+.btndiv a[href^="tel:"] {background-image: url(images/call.png); } 
+.btndiv a[href^="sms:"] {background-image: url(images/sms.png); } 
+
+.btndiv .weixin {background-image: url(images/weixin.png); background-size: 24px 24px; background-position: 10% 50%; background-repeat: no-repeat; background-color: #ff5600; display: block; margin: 5px 0; text-align: center; color: #fff; text-shadow: 1px 1px 1px #333; border-radius: 6px; } #jian {background: #ebe9e9; margin-left: 10px; padding: 5px 12px; cursor: pointer;}
+
+#jia {background: #ebe9e9; padding: 5px 10px; cursor: pointer;}
+#jian:hover {background: #ccc;}
+#jia:hover {background: #ccc;}
+.dxbox {width: 40%; float: left;}
+.dxbox label {line-height: 190%; font-size: 15px; display: block; }
+</style>
+
+</head>
+<body>
+<div id="LayoutDiv1">
+<article id="cont">
+	<p><img src="images/1_01.jpg"></p>
+	<p><img src="images/1_02.jpg"></p>
+	<p><img src="images/1_03.jpg"></p>
+	<p><img src="images/1_04.jpg"></p>
+	<p><img src="images/1_05.jpg"></p>
+	<p><img src="images/1_06.jpg"></p>
+	<p><img src="images/1_07.jpg"></p>
+	<p><img src="images/1_08.jpg"></p>
+	<p><img src="images/1_09.jpg"></p>
+	<p><img src="images/1_10.jpg"></p>
+	<p><img src="images/1_11.jpg"></p>
+	<p><img src="images/1_12.jpg"></p>
+	<p><img src="images/1_13.png"></p>
+	<p><img src="images/1_14.png"></p>
+
+</article>
+
+<div class="Top_Record">
+    <div class="topRec_List">
+        <div class="maquee">
+            <ul>
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 张**（139****2232）在5分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 邓**（138****9987）在8分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 武**（130****5665）在10分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 马**（130****8687）在11分钟前订购成功</div> 
+                </li> 
+                 <li>     
+                     <div><b style="color:green;">[最新购买]</b> 胡**（137****6008）在18分钟前订购成功</div> 
+                </li> 
+                 <li>     
+                     <div><b style="color:green;">[最新购买]</b> 陈**（131****8161）在29分钟前订购成功</div> 
+                </li> 
+                 <li>     
+                    <div><b style="color:green;">[最新购买]</b> 李**（136****5540）在39分钟前订购成功</div> 
+                </li> 
+                 <li>     
+                    <div><b style="color:green;">[最新购买]</b> 陶**（185****3676）在42分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 林**（189****8767）在45分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 顾**（187****3111）在49分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 赵**（150****3550）在2分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 郑**（139****5673）在10分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 陈**（137****8759）在12分钟前订购成功</div> 
+                </li> 
+                <li>     
+                    <div><b style="color:green;">[最新购买]</b> 马**（133****1154））在8分钟前订购成功</div> 
+                </li> 
+              
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="Top_Record">
+    <div style="background: #bd2f2f; padding: 8px;text-align: center;font-size: 24px; font-weight: 900;color: #fff;">客户评价</div>
+    <div style="border-bottom: 1px dashed #aaa; font-size: 20px; padding: 20px; color: #656262;">星***啊：收到实物，非常漂亮，相信老公定会很喜欢。服务也不错，给满分！</div>
+     <div style="border-bottom: 1px dashed #aaa; font-size: 20px; padding: 20px;color: #656262;">晴***8：买来送客户的，外观精美，包装大气，而且物流很快!</div>
+      <div style=" font-size: 20px; padding: 20px; color: #656262;">大***达：收到宝贝很不错，包装的挺精美的，送人很有面子，做工很不错!</div>
+</div> -->
+
+<article> 
+	<h2>联系我们</h2>
+		<div class="btndiv">
+		<a class="btn" href="tel:4008916518">热线咨询：400-891-6518</a> <a class="btn" href="sms:13911199351">短信订购：13911199351</a><!-- <a class="btn weixin" href="wechat:13331102133">微信咨询：13331102133</a> -->
+		 </div>
+</article>
+
+<article>
+	<form id="form1" name="form1" method="post" action="add.php" onsubmit="return yanzheng()">
+       <p style="display:none;">
+        <span>url <i>*</i> ：</span>
+          <input type="text" name="url" id="url">
+          <input type="text" name="addr" id="addr">
+          <input type="text" name="tc" id="tc">
+      </p>
+      <p>
+          <input type="text" name="xm" id="xm" placeholder="请输入姓名">
+      </p>
+    <p>
+          <input type="text" name="tel" id="tel" placeholder="请输入手机号码">
+    </p>
+    <!-- <p style="font-size: 14px;">请选套餐：
+         <select id="tc" name="tc" style="width: 75%;">
+           <option value="丝绢版+银卷版组合套餐价格6800元">丝绢版+银卷版组合套餐价格6800元</option>
+           <option value="荷风盛世  丝绢版  1980元 ">荷风盛世 丝绢版 1980元 </option>
+           <option value="荷风盛世 银卷版  4980元">荷风盛世 银卷版 4980元</option>
+           
+         </select>
+    </p> -->
+    <!-- <p>
+      <label style="float: left; padding-top: 6px;">选择产品套餐：</label>
+    	<div class="dxbox">
+                <label> <input style="width: 10%; vertical-align: middle;" type="checkbox" name="chebox" id="cat0" value="《军玺》白玉版 98000元" alt="98000" onclick="pricea()" checked="">《军玺》白玉版 98000元</label>
+
+                <label> <input style="width: 10%; vertical-align: middle;" type="checkbox" name="chebox" id="cat1" value="《军玺》青白玉版 19800元" alt="19800" onclick="pricea()">《军玺》青白玉版 19800元</label>
+
+                <label> <input style="width: 10%; vertical-align: middle;" type="checkbox" name="chebox" id="cat2" value="《军玺》碧玉版 9800元" alt="9800" onclick="pricea()">《军玺》碧玉版 9800元</label>
+
+                <label> <input style="width: 10%; vertical-align: middle;" type="checkbox" name="chebox" id="cat3" value="《军玺》青玉版 3980元" alt="3980" onclick="pricea()">《军玺》青玉版 3980元</label>
+       
+        </div>
+    </p> -->
+
+    <p class="clear">
+          <span  style="width: 20%;">数量 :</span><a id="jian" onclick="minnumber()">-</a><input style="width: 20%; text-align: center; margin: 0 10px;" type="text" name="sl" id="sl" value="1"><a id="jia" onclick="addnumber()">+</a>
+    </p>
+    <p>
+		<select id="seachprov" class="df" name="seachprov" onChange="changeComplexProvince(this.value, sub_array, 'seachcity', 'seachdistrict');"></select>
+		<select id="seachcity" class="df" name="homecity" onChange="changeCity(this.value,'seachdistrict','seachdistrict');"></select>
+		<select id="seachdistrict" class="df" onChange="" name="seachdistrict"></select>
+    </p>
+    <p>
+         <input id="dz" type="text" name="dz" placeholder="请输入详细地址">
+    </p>
+    <p style="padding: 0 0 50px; text-align: center;">
+        <input style="height: 30px; width: 80%; box-shadow: 5px 5px 5px #666; color:#fff;background-color: #ff5600;border-radius: 6px;  text-align: center; cursor: pointer; border: 0 " type="submit" name="button" id="subbox" value="提交">
+        <br>
+    </p>
+      <p style="margin-bottom: 50px;"><img src="images/bj.png"></p>
+    </form>
+</article>
+</div>
+
+<section class="piece fbottom" data-idx="8"> <a class="tel-btn" onclick="onTelClicked();" href="javascript:void();" style="margin-top: 0; margin-bottom: 0;"> <i class="phone-icon"></i> <span class="tel-label"> 电话咨询</span> </a><a class="tel-btn" onclick="onOrderClicked();" href="sms:13911199351" style="margin-top: 0; margin-bottom: 0;"> <i class="phone-icon phone-icon2"></i> <span class="tel-label">短信订购</span> </a>  <a class="tel-btn" onclick="onOrderClicked();" href="#form1" style="margin-top: 0; margin-bottom: 0;"> <i class="phone-icon phone-icon2"></i> <span class="tel-label"> 立即下单</span> </a> </section> 
+
+<script src="js/jquery-1.7.min.js"></script>
+<script src="js/Area.js" type="text/javascript"></script>
+<script src="js/AreaData_min.js" type="text/javascript"></script>
+<script>
+$(document).ready(function() {
+    // var h = $(window).width();
+    // $("img").css("width", h);
+
+	  var url = document.location;
+    $('input').eq(0).attr('value',url);
+});
+
+window.onresize = function()
+{
+     // var h = $(window).width();
+     // $("img").css("width", h);	
+}
+
+</script>
+<script type="text/javascript">
+
+//多项选择套餐
+function pricea(){
+	var product = ""; 
+	 // document.form1.tc[0].value
+	for(var i=0;i<document.form1.chebox.length;i++){
+		if(document.form1.chebox[i].checked==true){
+			 product += document.form1.chebox[i].value + "；  ";
+			// document.form1.danjia.value=product;
+			// break;
+		}
+	}
+	document.form1.tc.value=product;
+}
+
+//选择地址
+$(function (){
+  initComplexArea('seachprov', 'seachcity', 'seachdistrict', area_array, sub_array, '999', '0', '0');
+});
+
+//得到地区码
+function getAreaID(){
+  var area = 0;          
+  if($("#seachdistrict").val() != "0"){
+    area = $("#seachdistrict").val();                
+  }else if ($("#seachcity").val() != "0"){
+    area = $("#seachcity").val();
+  }else{
+    area = $("#seachprov").val();
+  }
+  return area;
+}
+
+function showAreaID() {
+  //地区码
+  var areaID = getAreaID();
+  //地区名
+  var areaName = getAreaNamebyID(areaID) ;
+  // alert("您选择的地区码：" + areaID + "      地区名：" + areaName);  
+ 
+}
+
+//根据地区码查询地区名
+function getAreaNamebyID(areaID){
+  var areaName = "";
+  if(areaID.length == 2){
+    areaName = area_array[areaID];
+  }else if(areaID.length == 4){
+    var index1 = areaID.substring(0, 2);
+    areaName = area_array[index1] + " " + sub_array[index1][areaID];
+  }else if(areaID.length == 6){
+    var index1 = areaID.substring(0, 2);
+    var index2 = areaID.substring(0, 4);
+    areaName = area_array[index1] + " " + sub_array[index1][index2] + " " + sub_arr[index2][areaID];
+  }
+  return areaName;
+}
+
+function yanzheng()
+{
+
+  var areaID = getAreaID();
+  var areaName = getAreaNamebyID(areaID) ;
+  // alert("您选择的地区码：" + areaID + "      地区名：" + areaName);  
+
+   $('input').eq(1).attr('value',areaName)
+ 
+   if($('#xm').val() =='')
+    {
+       alert('请输入姓名');
+       $('#xm').focus();
+       $('#xm').css('background','#fab9b9');
+       return false;
+       
+
+       
+    }
+
+    if($('#tel').val() ==''||isNaN($('#tel').val())||$('#tel').val().length!=11)
+    {
+       alert('请输入11位手机号码');
+       $('#tel').focus();
+       $('#tel').css('background','#fab9b9');
+       return false;
+       
+
+       
+    }
+
+
+
+}
+
+//拨打电话       
+var tel = "4008916518";
+function onTelClicked() 
+    {   
+      window.location.href="tel:"+tel;
+      telStat=1;
+      doReport();
+      doTrace(1);
+     }
+
+// function onOrderClicked() {
+//     jump=1;
+//     scrolled=1;
+//     doReport();
+//     doTrace(2);
+// }
+
+//订单滚动
+function autoScroll(obj){  
+    $(obj).find("ul").animate({  
+        marginTop : "-39px"  
+    },500,function(){  
+        $(this).css({marginTop : "0px"}).find("li:first").appendTo(this);  
+    })  
+}  
+$(function(){  
+    setInterval('autoScroll(".maquee")',3000);
+    setInterval('autoScroll(".apple")',2000);
+      
+}) 
+
+// 数量增减
+function addnumber(){
+   $('#sl').val(parseInt($('#sl').val())+1);
+   // changeprice();
+}
+function minnumber(){
+    if($('#sl').val()>1){
+    $('#sl').val(parseInt($('#sl').val())-1);
+   // changeprice();
+}
+}   
+
+window.onload=window.onresize=function(){
+             // document.documentElement.style.fontSize = document.documentElement.clientWidth*40/640+'px';
+      };
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

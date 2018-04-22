@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<svg class="move_line1" xmlns="http://www.w3.org/2000/svg" width="600px" height="300px">
+        <path d="M62.9 14.9c-25-7.74-56.6 4.8-60.4 24.3-3.73 19.6 21.6 35 39.6 37.6 42.8 6.2 72.9-53.4 116-58.9 65-18.2 191
+            101 215 28.8 5-16.7-7-49.1-34-44-34 11.5-31 46.5-14 69.3 9.38 12.6 24.2 20.6 39.8 22.9 91.4 9.05 102-98.9 176-86.7
+            18.8 3.81 33 17.3 36.7 34.6 2.01 10.2.124 21.1-5.18 30.1" stroke="pink" stroke-width="4" fill="none">
+        </path>
+		
+		<circle class="a" cx="150" cy="160" r="100" style="fill:transparent;stroke:green;stroke-width:3px;" />
+    </svg>
+
+
+
+
+<script>
+
+var path1=document.querySelector('.move_line1 path');
+var circle1=document.querySelector('.move_line1 circle');
+
+var length1=path1.getTotalLength();
+//var length2=circle1.getTotalLength();
+var length2=628.3185;
+
+
+//清除动作
+path1.style.transition=path1.style.WebkitTransition='none';
+circle1.style.transition=circle1.style.WebkitTransition='none';
+
+//设置起点
+path1.style.strokeDasharray = length1 + ' ' + length1;
+path1.style.strokeDashoffset = length1;
+
+circle1.style.strokeDasharray = length2 + ' ' + length2;
+circle1.style.strokeDashoffset = length2;
+
+path1.getBoundingClientRect();
+
+//circle1.getBoundingClientRect();
+
+//定义动作
+path1.style.transition = path1.style.WebkitTransition='stroke-dashoffset 2s ease-in-out';
+
+path1.style.strokeDashoffset='0';
+
+
+circle1.style.transition = circle1.style.WebkitTransition='stroke-dashoffset 3s ease-in-out';
+
+circle1.style.strokeDashoffset='0';
+
+</script>
+
+<ul>
+  <li>M = moveto</li>
+  <li>L = lineto</li>
+  <li>H = horizontal lineto</li>
+  <li>V = vertical lineto</li>
+  <li>C = curveto</li>
+  <li>S = smooth curveto</li>
+  <li>Q = quadratic Bézier curve</li>
+  <li>T = smooth quadratic Bézier curveto</li>
+  <li>A = elliptical Arc</li>
+  <li>Z = closepath</li>
+</ul>
+</body>
+</html>

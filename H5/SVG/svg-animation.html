@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>圆描边动画</title>
+</head>
+
+<body>
+<style>
+svg{ transform:rotate(0deg); } 
+@keyframes rt{
+     to{
+        stroke-dashoffset:0;
+    } 
+}
+</style>
+
+<svg class="move_line1" xmlns="http://www.w3.org/2000/svg" width="600px" height="850px">
+<circle class="a" cx="150" cy="160" r="150" style="fill:transparent;stroke:#ccc;stroke-width:3px;" />
+<circle class="a" cx="150" cy="160" r="150" style="fill:transparent;stroke:red;stroke-width:4px;stroke-dasharray:942.4777px; stroke-dashoffset:942.4777px; animation:rt 2s ease-in-out both infinite " />
+</svg>
+
+</body>
+</html>

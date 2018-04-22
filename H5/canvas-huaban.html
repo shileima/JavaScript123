@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>PHP100 HTML5视频教程-canvas</title>
+<script src="http://www.atyanjiao.com/wp-content/themes/Ality/js/jquery.min.js"></script>
+<style type="text/css">
+#php100{ border:1px solid #ccc;}
+</style>
+</head>
+<body>
+<canvas id="php100" width="500" height="400"></canvas>
+
+<script type="text/javascript">
+ var canvas = document.getElementById('php100');
+ var p100=canvas.getContext("2d");
+	 p100.lineWidth=5
+	 p100.strokeStyle="red";
+	 
+ var paint=0;
+ 
+$("#php100").mousedown(function(e){
+
+  var mouseX = e.pageX - this.offsetLeft;
+  var mouseY = e.pageY - this.offsetTop; 
+  
+  paint=1;
+  p100.moveTo(mouseX,mouseY); //起始位置
+  
+});
+
+$("#php100").mouseup(function(e){
+   paint=0;
+});
+
+$("#php100").mousemove(function(e){
+  var mouseX = e.pageX - this.offsetLeft;
+  var mouseY = e.pageY - this.offsetTop; 
+
+	if(paint){
+		p100.lineTo(mouseX,mouseY); //终止位置
+		p100.stroke();				//结束图形
+	  }
+  
+});
+
+</script>
+</body>
+
+</html>
+

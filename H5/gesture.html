@@ -1,0 +1,36 @@
+<!doctype html> 
+    <html> 
+    <head> 
+    <meta charset="utf-8"> 
+    <title>gesture</title> 
+    <style> 
+    body{ font-size:60px; color:red;} 
+    </style> 
+    <script> 
+    window.onload=function(){ 
+        function gesture(ev){ 
+            var div=document.getElementById('div1'); 
+            switch(ev.type){ 
+                case 'gesturestart': 
+                    div.innerHTML='Gesture start (rotation='+ev.rotation+', scale='+ev.scale+')';
+                    ev.preventDefault(); 
+                    break; 
+                case 'gestureend': 
+                    div.innerHTML='Gesture End (rotation='+ev.rotation+', scale='+ev.scale+')'; 
+                    break; 
+                case 'gesturechange': 
+                    div.innerHTML='Gesture Change (rotation='+ev.rotation+', scale='+ev.scale+')'; 
+                    break; 
+            } 
+        } 
+        document.addEventListener('gesturestart',gesture,false); 
+        document.addEventListener('gestureend',gesture,false); 
+        document.addEventListener('gesturechange',gesture,false);    
+    } 
+    </script> 
+    </head> 
+     
+    <body> 
+    <div id="div1"></div> 
+    </body> 
+    </html>

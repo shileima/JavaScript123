@@ -1,0 +1,46 @@
+<!doctype html> 
+    <html> 
+    <head> 
+    <meta charset="utf-8"> 
+    <title>touches</title> 
+    <style> 
+    body{ font-size:60px; color:red;} 
+    </style> 
+    <script> 
+    function touches(ev){ 
+        if(ev.touches.length==1){ 
+            var oDiv=document.getElementById('div1'); 
+            switch(ev.type){ 
+                case 'touchstart': 
+                    oDiv.innerHTML='Touch start('+ev.touches[0].clientX+', '+ev.touches[0].clientY+')'; 
+                    ev.preventDefault();  //阻止出现滚动条 
+                    break; 
+                case 'touchend': 
+                    oDiv.innerHTML='Touch end('+ev.changedTouches[0].clientX+', '+ev.changedTouches[0].clientY+')'; 
+                    break; 
+                case 'touchmove': 
+                    oDiv.innerHTML='Touch move('+ev.changedTouches[0].clientX+', '+ev.changedTouches[0].clientY+')'; 
+                    break; 
+                 
+            } 
+        } 
+    } 
+    document.addEventListener('touchstart',touches,false); 
+    document.addEventListener('touchend',touches,false); 
+    document.addEventListener('touchmove',touches,false); 
+    </script> 
+    </head> 
+     
+    <body> 
+    <div id="div1"></div> 
+    <br>
+    <div>
+    <h2>JQUERY TOUCH 事件</h2>
+    $(document).bind(touchEvents.touchstart, function (event) {
+    event.preventDefault();
+     
+});
+    
+    </div>
+    </body> 
+    </html>

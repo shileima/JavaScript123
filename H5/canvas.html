@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+
+#myCanvas { border:#009 1px solid; }
+
+</style>
+<script>
+window.onload=function()
+{
+ var c=document.getElementById('myCanvas');
+ var ctx=c.getContext("2d")
+ 
+ ctx.fillStyle="red";
+ ctx.fillRect(0,0,200,200);
+
+ ctx.fillStyle="rgba(0,250,0,0.5)";
+ ctx.fillRect(170,170,200,200);
+ 
+ ctx.moveTo(260,30);
+ ctx.lineTo(350,70);
+ ctx.lineTo(250,100);
+ 
+ ctx.stroke();
+ 
+ ctx.fillStyle='blue';
+ 
+ ctx.beginPath();
+ 
+ ctx.arc(210,200,50,Math.PI*0.5,Math.PI*1.5,true);
+ 
+ ctx.closePath();
+ ctx.fill();
+ 
+ c.onmousemove=function(ev)
+ {
+	var x=ev.clientX;
+	var y=ev.clientY;
+	
+	var result=document.getElementById('result')
+	
+	result.innerHTML="横坐标偏移值："+(x-8)+"； 竖坐标偏移值："+(y-8);
+ 
+	 
+ }
+
+}
+</script>
+</head>
+
+<body>
+
+<canvas id="myCanvas" width="500" height="500"></canvas>
+<div id="result"></div>
+
+
+</body>
+</html>
