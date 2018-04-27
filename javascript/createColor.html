@@ -1,0 +1,36 @@
+<html>
+<meta charset="UTF-8">
+
+<script>
+    window.onload = function(){
+        document.querySelector('div').style.background = randColor();
+        document.querySelector('div').innerHTML = randColor();
+
+        document.querySelector('span').style.background = randColor2();
+        document.querySelector('span').innerHTML = randColor2();
+
+    }
+    function randColor(){
+        var r = Math.floor(Math.random()*256);
+        var g = Math.floor(Math.random()*256);
+        var b = Math.floor(Math.random()*256);
+
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+
+    function randColor2(){
+
+        return '#'+ function(color){
+            return color;
+        }((Math.random()*0x1000000 << 0).toString(16))
+    }
+
+</script>
+<body>
+<h1 align="center">颜色是随机生成的</h1>
+<div style="width: 200px; height: 200px; margin: 0 auto; color: #fff"></div>
+
+<span style="display:block;width: 200px; height: 200px; margin: 0 auto; color: #fff; margin-top: 50px"></span>
+
+</body>
+</html>

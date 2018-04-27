@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function() {
+	
+	var oTab=document.getElementById('tab1');
+	
+	var aRow=oTab.tBodies[0].rows;
+	var oldColor='';
+	for(var i=0;i<aRow.length;i++)
+
+	  {  
+	        if (i%2)
+			  { 
+			
+			     aRow[i].style.background=""; 
+			   }
+			   
+			 else  
+			   {
+		  
+		         aRow[i].style.background="#CCC";
+		  
+	           }
+	   
+	  
+		 aRow[i].onmouseover=function() {
+			 
+             oldColor = this.style.background;
+			 
+			 this.style.background="green";
+			 
+			 
+		 }
+		 
+		  aRow[i].onmouseout=function() {
+			  
+			 //  alert(oldColor);
+			   
+			   this.style.background=oldColor;
+	  }
+
+	  }
+	
+	
+}
+</script>
+</head>
+
+<body style="padding:100px;">
+<table id="tab1" border="1" width="500" >
+	<thead>
+    	<td>ID</td>
+    	<td>姓名</td>
+    	<td>年龄</td>
+    </thead>
+    <tbody>
+    	<tr>
+        	<td>1</td>
+        	<td>Blue</td>
+        	<td>27</td>
+        </tr>
+    	<tr>
+        	<td>2</td>
+        	<td>张三</td>
+        	<td>23</td>
+        </tr>
+    	<tr>
+        	<td>3</td>
+        	<td>李四</td>
+        	<td>28</td>
+        </tr>
+    	<tr>
+        	<td>4</td>
+        	<td>王五</td>
+        	<td>25</td>
+        </tr>
+    	<tr>
+        	<td>5</td>
+        	<td>张伟</td>
+        	<td>24</td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

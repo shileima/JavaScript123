@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<style type="text/css">
+*{ 
+	margin:0; 
+	padding: 0; 
+	list-style: none;
+}
+img{
+	vertical-align: top;
+}
+body{
+	font-family: "微软雅黑";
+	font-size: 14px;
+}
+.banner_wrap{
+	width: 800px;
+	height: 450px;
+	position: relative;
+	margin: 10px auto;
+	overflow: hidden; 
+}
+.banner_ul{
+	width: 99999px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* transition: left 0.5s;  */
+}
+.banner_ul li{
+	float: left;
+	width: 800px;
+	height: 450px;
+}
+.banner_ul li img{
+	width: 100%;
+	height: 100%;
+}
+.banner_btn{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    bottom: 10px;
+}
+.banner_btn span{
+	display: inline-block;
+	width: 24px;
+	height: 24px;
+	line-height: 24px;
+	background: #000;
+	color: #fff;
+	border-radius: 50%;
+	cursor: pointer;
+}
+.banner_btn span.current{
+	background: #fff;
+	color: #000;
+}
+.icont{
+	background:url(http://cdn.attach.qdfuns.com/notes/pics/201701/23/160344egf569dmd9rp1d15.png) no-repeat;
+	display: inline-block;
+	width: 70px;
+	height: 72px;
+	position: absolute;
+	top:50%;
+	margin-top: -36px;
+	cursor: pointer;
+}
+.Left_btn{
+    left: 20px;
+    background-position: -8px -22px;
+}
+.Right_btn{
+    right: 20px;
+    background-position: -72px -22px;
+}  
+
+</style>
+<body>
+	<div class="banner_wrap">
+		<ul class="banner_ul" style="left:0;">
+			<li><img src="http://cdn.attach.qdfuns.com/notes/pics/201701/23/160340z9hzhdsdjurubazu.jpg"/></li>
+			<li><img src="http://cdn.attach.qdfuns.com/notes/pics/201701/23/160336xpc5c24cmljinn9c.jpg"/></li>
+			<li><img src="http://cdn.attach.qdfuns.com/notes/pics/201701/23/160332hrqb1qqrrrxrj0mq.jpg"/></li>
+			<li><img src="http://cdn.attach.qdfuns.com/notes/pics/201701/23/160328i2279mzjw36bm729.jpg"/></li>
+			<li><img src="http://cdn.attach.qdfuns.com/notes/pics/201701/23/160323nmo6fd2l293g9987.jpg"/></li>
+		</ul>
+		<div class="banner_btn">
+			<span class="current">1</span>
+			<span>2</span>
+			<span>3</span>
+			<span>4</span>
+			<span>5</span>
+		</div>
+		<div class="Left_btn icont"></div>
+        <div class="Right_btn icont"></div>
+	</div>
+
+	<script type="text/javascript">
+	  window.onload=function(){
+	  	  var timer=null;
+	  	  var bannerUl=document.querySelector(".banner_ul");
+	  	  var bannerLi=bannerUl.getElementsByTagName("li");
+	  	  var bannerBtn=document.querySelector(".banner_btn");
+	  	  var bannerSpan=bannerBtn.getElementsByTagName("span");
+	  	  var leftBtn=document.querySelector(".Left_btn");
+          var rightBtn=document.querySelector(".Right_btn");
+          var len=bannerLi.length;
+          var liWidth=bannerLi[0].offsetWidth;
+          var ulWidth=liWidth*len;
+          var index=0;
+          
+
+          function swaper(x){
+          	    var _left = parseInt(bannerUl.style.left)+x;  //获取当前left值并增加/减少偏移量        
+				
+                if(x<0){
+                	bannerUl.style.left= _left+'px';          //增加单位
+				    bannerUl.style.transition='left 0.5s';
+                    var firstimg=bannerLi[0].innerHTML;
+				    var firstli=document.createElement("li");
+				    firstli.innerHTML=firstimg;
+	                bannerUl.appendChild(firstli);
+
+	                setTimeout(function(){
+	                	 bannerUl.removeChild(bannerLi[0]);
+	                     bannerUl.style.left=0;
+	                     bannerUl.style.transition='0s';
+	                },500)
+                }
+
+                if(x>0){
+                	bannerUl.style.left= -_left+'px'; 
+                	bannerUl.style.transition='0s';
+
+                    var lastimg=bannerLi[len-1].innerHTML;
+				    var lastli=document.createElement("li");
+				    lastli.innerHTML=lastimg;
+	                bannerUl.insertBefore(lastli,bannerLi[0]);
+	                
+	                setTimeout(function(){
+	                	 bannerUl.removeChild(bannerLi[len]);
+	                     bannerUl.style.left= 0;          
+				         bannerUl.style.transition='left 0.5s';
+	                },100)
+                }				
+          
+          } 
+
+          //上一张点击事件 
+          leftBtn.onclick=function(){
+          	    index -= 1;
+                if (index < 0) {
+                    index = len-1;
+                }
+                console.log(index);
+                swaper(liWidth);
+                showButton();
+          }
+          //下一张点击事件
+          rightBtn.onclick=function(){
+          	    index += 1;
+                if (index > len-1){
+                    index = 0
+                }
+                console.log(index);
+                swaper(-liWidth); 
+                showButton();
+          }
+          
+          //圆点随图片变化
+          function showButton(){
+                for(var i=0; i<len; i++){
+                    bannerSpan[i].className="";
+                }
+                bannerSpan[index].className="current";    
+          } 
+
+          /*自动轮播*/
+          timer=setInterval(function(){
+          	    rightBtn.onclick();
+          },2000);
+          
+          /*鼠标移入轮播停止*/
+          document.querySelector(".banner_wrap").onmouseover=function(){
+          	    clearInterval(timer);
+          }
+          /*鼠标移出轮播开始*/
+          document.querySelector(".banner_wrap").onmouseout=function(){
+          	    timer=setInterval(function(){
+		          	  rightBtn.onclick();
+		        },2000); 
+          }    
+          
+	  }
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script src="../jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+ 
+ window.onload=function(){
+    
+	var alpha=30;
+	var timer;
+	var oDiv=document.getElementById('div1')
+	
+	oDiv.onmouseover=function(){
+		
+		Move(100);
+	}
+	
+	oDiv.onmouseout=function(){
+		
+		Move(30);
+	}
+	
+	function Move(iTarget) 
+	 {
+		 clearInterval(timer);
+		 
+		var speed=0;
+		
+		if(alpha<iTarget)
+		 {
+			 speed=10;
+		 }
+		 if(alpha>iTarget)
+		 {
+			 speed=-10;
+		 }
+		 
+		 timer=setInterval(function(){              
+		 
+		   if(alpha==iTarget)
+		   {
+			  clearInterval(timer);         // 停止timer 的事件 必须包含在 setInterval() 函数内，否则停止运动不成功！ 
+		   }
+		   else
+		   {
+			  alpha+=speed; 
+			  oDiv.style.opacity=alpha/100;
+			  oDiv.style.filter='alpha(opacity:'+alpha+')';
+			   
+		   }
+		 },20); 
+	 }
+ };
+
+
+</script>
+
+
+
+</head>
+
+<body>
+<div id='div1' style="padding:100px; width:200px; height:200px; background:red; opacity:0.3; filter: alpha(opacity:30)"></div>
+</body>
+</html>

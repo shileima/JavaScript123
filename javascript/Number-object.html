@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script type="text/javascript">
+ 
+ var oNumberObject= new Number(68);
+ 
+ //var iNumber=oNumberObject.valueOf();
+ //alert(iNumber);  //68
+ 
+ //var iNumber=oNumberObject.toFixed(3);
+ //alert(iNumber) //68.000
+ 
+ var iNumber=oNumberObject.toExponential(2); //表示用两位小数结尾，如下：
+ alert(iNumber); // 6.80e+1
+
+</script>
+</head>
+
+<body>
+<p>1，Number 对象是 Number 原始类型的引用类型。要创建 Number 对象，采用下列代码：</p>
+<pre>var oNumberObject = new Number(68);</pre>
+<p>要得到数字对象的 Number 原始值，只需要使用 <strong>valueOf() </strong>方法：</p>
+<pre>var iNumber = oNumberObject.valueOf(); 
+alert(iNumber); // 68</pre>
+<p><br>
+  2, toFixed() 方法返回的是具有指定位数小数的数字的字符串表示。例如：<br>
+</p>
+<pre>
+ var iNumber=oNumberObject.toFixed(3);<br> alert(iNumber) //68.000
+ </pre>
+<p>3, 与格式化数字相关的另一个方法是 toExponential()，它返回的是用科学计数法表示的数字的字符串形式。</p>
+<p>与 toFixed() 方法相似，toExponential() 方法也有一个参数，指定要输出的小数的位数。例如：</p>
+<p>var iNumber=oNumberObject.toExponential(2); //表示用两位小数结尾，如下：<br>
+alert(iNumber); // 6.80e+1 前面解释过，它表示 6.80x10的1次方</p>
+<p>&nbsp;</p>
+<p>4，toPrecision() 方法可在对象的值超出指定位数时将其转换为指数计数法。小数点前有一位数字，小数点后有 num-1 位数字。必要时，该数字会被舍入或用 0 补足。</p>
+<p>var num = new Number(1180);</p>
+<p>alert(num.toPrecision(1))  //1e+3</p>
+<p>alert(num.toPrecision(2))  //1.2e+3</p>
+<p>alert(num.toPrecision(3))  //1.18e+3</p>
+<p>alert(num.toPrecision(4))  //1180</p>
+<p>alert(num.toPrecision(5))  //1180.0</p>
+<p>&nbsp;</p>
+</body>
+</html>

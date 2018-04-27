@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>面向对象原型继承</title>
+</head>
+
+<script>
+
+var a = {
+	name : '小明' 
+}
+
+var b = cloneObj(a)
+
+//b.name = '小强'
+
+alert(a.name) //小明
+alert(b.name) //小明
+
+b.name = '小强'
+
+alert(a.name) //小明
+alert(b.name) //小强
+
+//function F(){};
+function cloneObj(obj)
+ {
+    var F=function(){};
+	 F.prototype = obj;
+	 return new F();
+ }
+
+</script>
+<body>
+</body>
+</html>

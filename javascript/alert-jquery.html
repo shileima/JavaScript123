@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<script type="text/javascript" src="../jquery.min.js"></script>
+<style>
+body {
+	padding:100px;
+}
+</style>
+<head>
+
+<script type="text/javascript">
+ $(document).ready(function(e) {
+	 
+    $('#div1').mouseenter(function() {
+		$('#div2').stop();
+		$('#div2').show('fast');
+	})
+	$('#div1').mouseleave(function() {
+		
+		$('#div2').stop(false, true);
+		$('#div2').hide('slow');
+	})
+	
+	$('#div2').hover(function() {
+		
+		$('#div2').stop();
+		$('#div2').show('fast');
+	})
+	
+	$('#div2').mouseleave(function() {
+		
+		$('#div2').hide('slow');
+		
+		})
+});
+</script>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+
+<body>
+
+ <div id="div1" style="width:40px; height:40px; background:#999; float:left; margin:10px;"></div>
+ <div id="div2" style="width:120px; height: 200px; background:green; float:left; margin: 10px; display:none;"></div>
+
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="../jquery.min.js"></script>
+
+<script>
+
+//json字符串转化成json对象 js方法 
+var str = '{"name":"刘涛","age":"34"}' //必须是外面单引号，里面key值双引号，严格的 JSON格式
+
+console.log(str);
+
+var jsonObj = JSON.parse(str);
+
+alert(jsonObj.name)
+
+
+//json字符串转化成json对象  jQuery方法
+/*var str = '{"name":"刘涛","age":"34"}'
+
+console.log(str);
+
+var jsonObj = $.parseJSON(str);
+
+alert(jsonObj.name)*/
+
+
+//json对象转化成json字符串 js 方法
+
+/*var jsonObj = {"name":"刘涛","age":"34","sex":"男"};
+
+console.log(JSON.stringify(jsonObj));*/
+
+
+//如何将数组转化为字符串
+
+/*var arr1=[1,2,'张思','123'];
+console.log(arr1)
+console.log(arr1.join(','))*/
+
+
+//字符串转数组
+
+/*var str='{1},2,3,"alice","color"';
+
+var arr1 = str.split(',')
+
+console.log(arr1);*/
+
+</script>
+
+</head>
+
+<body>
+
+<p><strong>一、json字符串转化成json对象 js 方法</strong></p>
+<p><br>
+var str = '[{&quot;name&quot;:&quot;刘涛&quot;,&quot;age&quot;:&quot;34&quot;},{&quot;name&quot;:&quot;张良&quot;,&quot;age&quot;:&quot;55&quot;},{&quot;name&quot;:&quot;晨晨&quot;,&quot;age&quot;:&quot;12&quot;}]'</p>
+<p>console.log(str);</p>
+<p>var jsonObj = JSON.parse(str);</p>
+<p>console.log(jsonObj);</p>
+<p></p>
+<p><strong>二、json字符串转化成json对象  jQuery方法</strong></p>
+<p><br>
+var str = '[{&quot;name&quot;:&quot;刘涛&quot;,&quot;age&quot;:&quot;34&quot;},{&quot;name&quot;:&quot;张良&quot;,&quot;age&quot;:&quot;55&quot;},{&quot;name&quot;:&quot;晨晨&quot;,&quot;age&quot;:&quot;12&quot;}]'</p>
+<p>console.log(str);</p>
+<p>var jsonObj = $.parseJSON(str);</p>
+<p>console.log(jsonObj);</p>
+<p>&nbsp;</p>
+<p><strong>三、json对象转化成json字符串</strong> js 方法</p>
+<p>var jsonObj = [{&quot;name&quot;:&quot;刘涛&quot;,&quot;age&quot;:&quot;34&quot;},{&quot;name&quot;:&quot;张良&quot;,&quot;age&quot;:&quot;55&quot;},{&quot;name&quot;:&quot;晨晨&quot;,&quot;age&quot;:&quot;12&quot;}];</p>
+<p>console.log(JSON.stringify(jsonObj));</p>
+<p>&nbsp;</p>
+<p><strong>四，jquery 中如何将数组转化为json字符串，然后再转化回来？</strong><br>
+</p>
+<p>&nbsp;</p>
+<p><br>
+</p>
+<p> </p>
+
+</body>
+</html>

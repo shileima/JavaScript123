@@ -1,0 +1,50 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>使用clone来复制元素（包含事件）</title>
+<style>
+span {display:block;}
+#c1 { margin:20px; padding:20px;}
+#c2 { margin:20px; padding:20px;}
+#c3 { margin:20px; padding:20px;}
+</style>
+<script src="../jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#c1 span').click(function() {
+       var obj= $('#c1 span').clone(true);
+		obj.appendTo('#c1');
+    });
+	
+	 $('#c2 span').click(function() {
+		
+		$('#c2 span').clone().appendTo('#c2');
+    });
+	$('#c3').on('click','span',function(){
+		$(this).after('<span>Loading</span>');
+		})
+});
+
+</script>
+</head>
+
+<body>
+<h1 align="center">.clone() 默认不克隆事件，如果.clone(true)则连事件一起克隆</h1>
+<div id="c1" style="border:#000 solid 1px; width:300px; float:left;">
+  <span>使用clone来复制元素（包含事件）</span>
+  <span>var obj= $('#c1 span').clone(true);
+		obj.appendTo('#c1');</span>
+
+</div>
+
+<div id="c2" style="border:#000 solid 1px; width:300px; float:left; ">
+  <span>使用普通点击appendTo</span>
+  <span>$('#c2 span').clone().appendTo('#c2');</span>
+</div>
+<div id="c3" style="border:#000 solid 1px; width:300px; float:left; ">
+  <span>使用.on()绑定事件</span><br><br>
+  <span>$('#c3 span').on('click','span',function(){})
+</div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>数组去重、排序</title>
+
+<script>
+
+var arr1 = [2,3,33,45,3,6,12,2];
+
+function oSort(arr)
+ {
+	var rst = [];
+	 
+	for(var i = 0; i<arr.length; i++)
+	 {
+		if(rst.indexOf(arr[i]) === -1)
+		 {
+			rst.push(arr[i]); 
+		 }
+	 }
+	 return rst;
+ }
+ 
+ alert(arr1);
+ var arr2 = oSort(arr1);
+ alert(arr2);
+ arr2.sort(compare)
+ 
+ alert(arr2);
+ 
+ function compare(a,b)
+  {
+	 return a-b; 
+	  
+  }
+ 
+ 
+ 
+</script>
+
+
+</head>
+
+<body>
+</body>
+</html>

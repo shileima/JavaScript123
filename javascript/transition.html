@@ -1,0 +1,65 @@
+<!doctype html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8">
+
+<title>transition</title>
+
+</head>
+
+
+
+<body>
+
+
+
+<style>
+
+div {float:left;  padding:20px;}
+
+#div1 {width:100px; height:100px; background:red; transition:width 500ms; -webkit-transition:width 500ms; -moz-transition:width 500ms; }
+
+
+
+#div1:hover{ width:300px;}
+
+
+
+#div {margin-left:20px;width:100px; height:100px;background-color:green; transition:all 2s; -webkit-transition:all 2s; -moz-transition:width 2s; }
+
+#div2 img {margin-left:20px;width:100px; height:100px; transition:all 2s; -webkit-transition:all 2s; -moz-transition:width 2s; }
+
+#div2:hover{ transform:rotate(360deg)};
+
+
+
+</style>
+<script src="http://59.110.30.59/j/jquery.min.js"></script>
+
+<script>
+
+$(document).ready(function() {
+    var timer;
+	var index=5;
+	timer=setInterval(function(){
+		
+		$('#div2 img').css({transform:'rotate('+5*index+'deg)'});
+		index++
+		},50)
+});
+
+
+</script>
+
+
+<div id="div1"></div>
+
+<div id="div2"><img src="/j/images/earth.jpg"/></div>
+
+</body>
+
+</html>
+

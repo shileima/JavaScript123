@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>改变颜色</title>
+<script type="text/javascript">
+
+/*  function setStyle(name,value) {
+	  
+	  var oDiv = document.getElementById('c');
+	  
+	  oDiv.style[name]=value;
+  
+  }*/
+
+
+</script>
+</head>
+
+<body>
+
+<input id="btn" type="button"  value="提交" >
+
+<script type="text/javascript">
+
+var oBtn=document.getElementById('btn');
+
+function abc() {
+	
+ alert('a');
+	
+}
+
+oBtn.onclick=abc;
+
+</script>
+
+<input type="button" value="变高""  /> 
+
+<input type="button" value="变宽" onclick="setStyle('width','400px')"/>
+
+<input type="button" value="变黄" onclick="setStyle('background','yellow')"/>
+
+<div id="c" style=" background:#999; border: #666 solid 1px; width:300px;height:200px;"></div>
+
+
+</body>
+</html>

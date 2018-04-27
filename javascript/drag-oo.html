@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>面向对象拖拽</title>
+</head>
+
+<body>
+
+<script>
+
+window.onload=function()
+ {
+	new Drag('div1'); 
+ }
+ function Drag(id)
+ {
+    var _this=this;
+    this.disX=0;
+	this.disY=0;
+    this.oDiv=document.getElementById(id); 
+	this.oDiv.onmousedown=function(ev)
+	  {
+		 _this.MouseDown(ev);  
+	  }
+ }
+
+ Drag.prototype.MouseDown=function(ev)
+	 {
+		var _this=this; 
+	var oEvent = ev || event;
+	
+    this.disX=oEvent.clientX-this.oDiv.offsetLeft;
+	this.disY=oEvent.clientY-this.oDiv.offsetTop;
+	  
+	  document.onmousemove=function(ev)
+	    {	 
+		    
+			_this.MouseMove(ev);	
+		}
+	
+	  document.onmouseup=function()
+	    {
+			_this.MouseUp();
+		}
+	 }
+	 
+ Drag.prototype.MouseMove=function (ev)
+	   {
+          var oEvent = ev || event;
+	     this.oDiv.style.left=oEvent.clientX-this.disX+'px';
+	     this.oDiv.style.top=oEvent.clientY-this.disY+'px';
+	   }
+	
+ Drag.prototype.MouseUp=function()
+	   {
+	
+	     document.onmousedown=null;
+	     document.onmousemove=null;
+	   }	   
+</script>
+
+<div id="div1" style="background:#FC0; width:200px; height:200px; position:absolute;"></div>
+
+</body>
+</html>

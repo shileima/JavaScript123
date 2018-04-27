@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>  
+<html>  
+<head>  
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />  
+<title>团购——限时抢</title>  
+ 
+</head>  
+  
+<body>  
+<div class="content3">  
+<div class="time">还剩 <span id="LeftTime"></span></div>  
+</div>  
+<script>  
+   //倒计时效果js代码  
+   function checktime(i){  
+    if(i<10){  
+        i="0"+i;  
+  
+    }  
+    else{i=i;}  
+    return i;  
+   }  
+   function freshTime(){  
+    var endtime=new Date('2017/06/15 00:00:00');
+	
+    var nowtime=new Date();  
+    var lefttime=parseInt(endtime.getTime()-nowtime.getTime());//这是毫秒，如果再/1000就是秒
+
+    // 获取剩下的日、小时、分钟、秒钟  
+    // 一天有多少毫秒，一小时有多少毫秒，一分钟有多少毫秒，一秒钟有多少毫秒  
+    var dm=24*60*60*1000;  
+    var d=parseInt(lefttime/dm);  
+    var hm=60*60*1000;  
+    var h=parseInt((lefttime/hm)%24);  
+    var mm=60*1000;  
+    var m=parseInt((lefttime/mm)%60);  
+    var s=parseInt((lefttime/1000)%60);  
+    m=checktime(m);  
+    s=checktime(s);  
+    document.getElementById('LeftTime').innerHTML=d+"天"+h+"小时"+m+"分钟"+s+"秒";  
+    if (lefttime<0) {  
+         document.getElementById('LeftTime').innerHTML="团购活动已经结束！";  
+		 document.getElementsByClassName('time').innerHTML="123";
+    }  
+   }   
+   freshTime();  
+   var sh;  
+   sh=setInterval('freshTime()',1000)  
+</script>  
+</body>  
+</html>  

@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<style>
+body { display:flex; justify-content:center;}
+#div1 {
+	border: black 20px solid;
+    width:100px;	
+	height:100px;
+	position: absolute;
+	top:50px;
+	background:green;
+}
+
+</style>
+
+<script type="text/javascript">
+window.onload = function(){
+
+   var oBtn=document.getElementById('btn1')
+   var oDiv=document.getElementById('div1')
+   var timer=null;
+    var speed=11;  // speed 必须能被 最终偏移量offsetLeft 整除；
+	
+   function Move() {
+	 
+   clearInterval(timer);
+	
+	timer=setInterval(function(){
+			 
+		 if(parseInt(getStyle(oDiv,'height'))>=300)
+		 {
+			clearInterval(timer); 
+		 }	else{			 
+			  oDiv.style.height= parseInt(getStyle(oDiv,'height'))+speed+'px';  
+		 }
+		 },50);   
+     }
+	 oBtn.onclick=Move;
+}
+
+function getStyle(obj,name)
+{
+   if(obj.currentStyle)
+   {
+	   return obj.currentStyle[name];
+   }
+   else
+   {
+	   return getComputedStyle(obj,false)[name];
+   }
+	
+}
+</script>
+
+
+</head>
+
+<body>
+<input type="button" id="btn1" value="变高" />
+
+<div id="div1"></div>
+
+</body>
+</html>

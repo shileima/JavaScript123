@@ -1,0 +1,43 @@
+<html>
+<meta charset="UTF-8">
+<script charset="utf-8">
+    var arr = [1,2,3,4];
+//    arr.forEach(alert); // 按顺序弹出 1,2,3,4
+
+    //等价于
+    /*
+     var arr = [1, 2, 3, 4];
+     for (var k = 0, length = arr.length; k < length; k++) {
+     alert(array[k]);
+     }
+     */
+
+    [1,2,3,4].forEach(function(value,index,array){
+ //       alert(array[index] == value); // true
+        sum += value;
+    })
+
+    alert(sum)
+</script>
+<h2>
+    定义和用法:
+    forEach() 方法用于调用数组的每个元素，并将元素传递给回调函数。
+    注意: forEach() 对于空数组是不会执行回调函数的。
+</h2>
+<p>
+<p>点击按钮计算数组所有元素相加的总和。</p>
+button onclick="numbers.forEach(myFunction)">点我</button
+
+<p>数组元素总和：<span id="demo"></span></p>
+
+
+    var sum = 0;
+    var numbers = [65, 44, 12, 4]
+
+    function myFunction(item) {
+        sum += item;
+        demo.innerHTML = sum;
+    }
+
+</p>
+</html>

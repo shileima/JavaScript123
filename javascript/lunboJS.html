@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>javascript</title>
+	<style>
+	  *{margin:0;padding:0;border:0;}
+	  a{text-decoration:none;color:#fff;font-size:40px;line-height:200px;display:none;text-align:center;}
+	  #container{width:300px;height:200px;margin:50px auto;position:relative;overflow:hidden;}
+	  #list{width:2100px;height:200px;position:absolute;top:0;}
+	  #list span{width:300px;height:200px;display:inline-block;text-align:center;font-size:22px;float:left;color:#fff;}
+	  .one{background:red;}
+	  .two{background:orange;}
+	  .three{background:blue;}
+	  .four{background:green;}
+	  .five{background:black;}
+	  #buttons{width:200px;height:30px;position:absolute;bottom:0px;left:100px;z-index:9;}
+	  #buttons span{display:inline-block;cursor:pointer;width:12px;height:12px;border-radius:6px;background: #2a2a2a}
+	  #prev{width:40px;height:200px;position:absolute;left:0px;}
+	  #next{width:40px;height:200px;position:absolute;right:0px;}
+	  #container .on{background:#fff;}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="list" style="left:-300px">
+			<span class="five">我是黑色第五张</span>
+			<span class="one">我是红色第一张</span>
+			<span class="two">我是黄色第二张</span>
+			<span class="three">我是蓝色第三张</span>
+			<span class="four">我是绿色第四张</span>
+			<span class="five">我是黑色第五张</span>
+			<span class="one">我是红色第一张</span>
+		</div>
+		<div id="buttons">
+			<span class="on" index="1"></span>
+			<span index="2"></span>
+			<span index="3"></span>
+			<span index="4"></span>
+			<span index="5"></span>
+		</div>
+		<a id="prev" href="javascript:;">&lt;</a>
+		<a id="next" href="javascript:;">&gt;</a>
+	</div>
+	<script>
+        var container = document.getElementById('container'),
+        	list = document.getElementById('list'),
+        	buttons = document.getElementById('buttons').getElementsByTagName('span'),
+        	prev = document.getElementById('prev'),
+        	next = document.getElementById('next'),
+        	index = 1,
+        	len = 5,
+        	interval = 3000,
+        	animated = false,
+        	timer;
+
+    	function animate(offset){
+    		if(offset == 0) return;
+    		animated = true;
+    		var time = 150,
+    			inter = 5,
+    			speed = offset/(time/inter),
+    			left = parseInt(list.style.left) + offset;
+			var go = function(){
+				if((speed>0 && parseInt(list.style.left)<left) || (speed<0 && parseInt(list.style.left)>left)){
+					list.style.left = parseInt(list.style.left) + speed + 'px';
+					setTimeout(go,inter);
+				}else{
+					list.style.left = left + 'px';
+					if(left > -100){
+						list.style.left = -300*len + 'px';
+					}
+					if(left < (-300*len)){
+						list.style.left = '-300px'
+					}
+					animated = false;
+				}
+			}
+			go();
+    	}
+
+    	function showButton(){
+    		for(var i=0 ; i<buttons.length ; i++){
+    			if(buttons[i].className == 'on'){
+    				buttons[i].className = '';
+    				break;
+    			}
+    		}
+    		buttons[index - 1].className = 'on';
+    	}
+
+    	function play(){
+    		timer = setTimeout(function(){
+    			next.onclick();
+    			play();
+    		},interval);
+    	}
+
+    	function stop(){
+    		clearTimeout(timer);
+    	}
+
+    	next.onclick = function(){
+    		if(animated) {
+    			return;
+    		}
+    		if(index == 5){
+    			index = 1;
+    		}else{
+    			index++;
+    		}
+    		animate(-300);
+    		showButton();
+    	}
+
+    	prev.onclick = function(){
+    		if(animated) {
+    			return;
+    		}
+    		if(index == 1){
+    			index = 5;
+    		}else{
+    			index--;
+    		}
+    		animate(300);
+    		showButton();
+    	}
+
+    	for (var i = 0; i < buttons.length; i++) {
+                buttons[i].onclick = function () {
+                    if (animated) {
+                        return;
+                    }
+                    if(this.className == 'on') {
+                        return;
+                    }
+                    var myIndex = parseInt(this.getAttribute('index'));
+                    var offset = -300 * (myIndex - index);
+
+                    animate(offset);
+                    index = myIndex;
+                    showButton();
+                }
+            }
+
+    	container.onmouseover = function(){
+    		prev.style.display = next.style.display = 'block';
+    		stop();
+    	}
+    	container.onmouseout = function(){
+    		prev.style.display = next.style.display = 'none';
+    		play();
+		}
+    	play();
+	</script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<script>
+
+/*var a=[1,2,3];
+
+var b=[1,2,3];
+
+// alert(a==b); // false  基本类型，值相同就true ； 对象类型，值和引用都相同才为 true ；
+
+var a =[1,2,3,4];
+
+var b=a; // 值和引用窦传递给b
+
+alert(b==a);*/
+
+function CreatePerson(mz){
+	
+  this.name=mz;
+  	
+}
+
+CreatePerson.prototype.ShowName=function(){
+	
+	alert(this.name);
+  	
+}
+
+var p1=new CreatePerson('小明');
+var p2=new CreatePerson('小芳');
+
+
+alert(p1.ShowName()==p2.ShowName()); //两个函数先执行，然后再比较；两函数同出一个原型，故值和引出都相同，返回 true
+
+</script>
+<body>
+</body>
+</html>

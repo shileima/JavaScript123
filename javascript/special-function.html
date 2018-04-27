@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js 中特殊的函数</title>
+</head>
+<body>
+<script>
+
+//    function a(){
+//        alert('aaa')
+//        return function () {
+//            alert('bbb')
+//        }
+//    }
+//    a() // aaa
+//    a()() // aaa  bbb
+
+
+//    function a(){
+//        console.log('aaa')
+//        a = function(){
+//            console.log("bbb")
+//        }
+//    }
+//    a() // 第一次调用 aaa 相当于初始化
+//    a() // 第二次调用 aaa bbb
+
+//    var a = function(){
+//        function setUp(){
+//            var setUp = 'doSomthing';
+//        };
+//
+//        function doWhat(){
+//            alert('要执行的操作')
+//        }
+//        setUp();
+//        return doWhat;
+//    }() // 自调用执行后，初始化函数，将 a 返回给了doWhat，但未执行，下面 a() 调用后执行 弹出
+//    a() // 要执行的操作
+
+    //通过 js 内置函数构造器来创建函数,尽量避免使用 new
+
+    var fun=new Function('a','b','return a+b')
+    alert(fun(1,3)) // 4
+
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+<html>
+  <meta charset="UTF-8">
+  <script>
+
+//      “定义式”函数定义 会先预处理 在进行自上而下执行
+    Fn2();
+    function Fn2(){
+        alert("“定义式”函数定义！"); // 正常弹出！
+    }
+
+
+
+//      赋值式”函数定义 不会预处理
+    Fn1();
+    var Fn1 = function(){
+        alert("赋值式”函数定义！"); //Fn1 is not a function
+    }
+
+  </script>
+</html>

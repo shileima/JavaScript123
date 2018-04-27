@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>作用域</title>
+</head>
+<!--<script>
+
+   alert(aSome);
+    function aSome(){
+        var aSome=3;
+        function bSome(){
+            var aSome=1;
+            alert(aSome);
+        }
+        bSome();
+    }
+	
+    alert(aSome());
+
+</script>-->
+
+<script>
+    var a = 0,
+        b = 0;
+    function A(a){
+        A = function(b){
+            alert(a + b++)
+        }
+        alert(a++)
+    }
+    A(1)  // 1
+    A(2)  // 4
+
+</script>
+<body>
+    <h1>
+        1，先弹出函数体aSome()内容；
+        2，先执行aSome函数结果 1；
+        3，再执行 alert(aSome()) aSome 不能使用函数体内的变量，在外层作用域未定义，所以弹出 undefined
+
+    </h1>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+ 
+ // 属性的继承，直接赋值即可！
+/* var a = {
+	 
+	 name : '小明', 
+	 showName : function()
+	   {
+		 alert(this.name);   
+	   }
+ }
+
+ var b = a ;
+ 
+ b.showName();*/
+ 
+ //函数的继承
+ 
+ function CreatePerson(Name,Sex)
+   {
+	 this.name = Name;
+	 this.sex = Sex;
+   }
+  CreatePerson.prototype.showName = function()
+    {
+	  alert(this.name);	
+	}
+ var p1 = new CreatePerson('小明','男');
+ 
+ //p1.showName();
+ 
+ function CreateStar(Name,Sex,Job)
+   {
+	 CreatePerson.call(this,Name,Sex); //利用call()的形式进行属性继承;
+	 
+	 this.job = Job;   
+	   
+   }
+   
+   CreateStar.prototype = CreatePerson.prototype; //这样引用的话 p2.showName() 会弹出 ‘黄晓明’
+   //extend(CreateStar.prototype , CreatePerson.prototype); //这样引用不会改变父级的构造函数；
+  
+    CreateStar.prototype.showSex = function()
+     { 
+		 alert(this.sex) 
+	 }
+	   
+ 
+   var p2 =new CreateStar('黄晓明','男','演员');
+   
+   //p2.showName();
+   //p2.showSex();
+   p1.showSex();
+   
+   function extend(obj1,obj2)
+     {
+		for(var attr in obj2)
+		  {
+			 obj1[attr]=obj2[attr];  
+		  } 
+	 }
+ 
+</script>
+
+</body>
+</html>

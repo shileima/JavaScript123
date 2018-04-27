@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script>
+
+function division (a, b) {
+    if (b === 0) {
+        return 0;
+    } else {
+        return a / b;
+    }
+}
+function matcher (name, result, expect) {
+    if (result === expect) {
+        _print(name + '- pass');
+    } else {
+        _print(name + '- fail');
+    }
+    function _print (str) {
+        var _bar = document.createElement('p');
+        _bar.innerText = str;
+        document.body.appendChild(_bar);
+    }
+}
+
+window.onload = function(){
+	
+	matcher('normal', division(4, 2), 2);
+	matcher('zero', division(5, 0), 0);
+	
+}
+
+
+</script>
+<body>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<html>
+  <meta charset="UTF-8">
+  <style>
+      #main {
+          color: #999;}
+  </style>
+      <!--
+      <script charset="UTF-8">
+
+          var  obj  =  {
+              yes:  function (){
+                  //  this == obj
+                  this .val  =   true ;
+              },
+              no:  function (){
+                  this .val  =   false ;
+              }
+          };
+          // 我们看到，obj对象没有"val"的属性
+      //    alert( obj.val  ==   null  ); // true
+          // 我们运行yes函数，它将改变附着在obj 对象的val属性
+          obj.yes();
+      //    alert( obj.val  ==   true  ); // true
+          // 然而，我们现在让window.no指向obj.no方法，并运行之
+          window.no  =  obj.no;
+          window.no();
+      //    alert( window.val) // false
+          // 这导致obj对象保持不变(上下文则切换到了window对象)，
+          alert( obj.val ); // true
+          // 而window的val属性被更新
+          alert( window.val ); // false
+      </script>
+      -->
+  <script>
+window.onload = function(){
+    // 一个简单的设置其上下文的颜色风格的函数
+    function changeColor(color) {
+        this.style.color = color;
+    }
+
+    //      changeColor(  " black "  ); // 在window对象上调用这个函数将会出错，因为window没有style对象
+
+    var main = document.getElementById('main') // 得到一个id为"main"的对象
+    // 用call方法改变它的颜色为红
+    // call方法将第一个参数设置为上下文，
+    // 并其它所有参数传递给函数
+
+
+    // 第一种方法 call(指向的新对象,参数)
+//    changeColor.call(main,'red') // 使用 apply 的话必须传入数组，call 传入单个参数
+    // 一个设置body元素的颜色的函数
+
+
+
+    // 第二种方法 apply(指向的新对象,数组[参数])
+    changeColor.apply( main, ['yellow'] ); // 使用 apply 的话必须传入数组，call 传入单个参数
+
+
+
+
+
+    // 第三种方法 apply 被包含在另一个函数内，
+/*    function  setBodyColor() {
+              // apply方法设置上下文为body元素
+              // 第一个参数为设置的上下文,
+              // 第二个参数是一个被作为参数传递给函数的数组
+              //  of arguments that gets passed to the function
+                changeColor.apply( main, arguments ); // 将 setBodyColor 的所有参数都弄过来
+        console.log(typeof arguments)
+              }
+          // 设置body元素的颜色为黑
+          setBodyColor('blue');*/
+}
+
+  </script>
+<body>
+    <div id="main">利用call apply 方法改变上下文，设置字体颜色</div>
+</body>
+</html>
+

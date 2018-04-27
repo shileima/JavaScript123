@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>阻止冒泡事件</title>
+</head>
+
+<body>
+
+<script>
+window.onload=function(){
+	var oBtn=document.getElementById('btn');
+	var oDiv=document.getElementById('div1');
+	oBtn.onclick=function(ev){
+		
+		oDiv.style.display='block';
+		var ev = ev || event;
+		ev.cancelBubble=true;
+	  	
+	}
+	
+	document.onclick=function(){
+		
+	  oDiv.style.display='none';	
+	}
+	
+	oDiv.onclick=function(ev){
+		
+	   var ev=ev || event ;
+	   ev.cancelBubble=true;	
+	}
+}
+</script>
+
+
+</body>
+
+<button id="btn">弹出下拉菜单</button>
+<div id="div1" style="width:100px; height:300px; border:red 1px solid; display:none;">
+  <ul>
+    <li><a href="http://www.baidu.com/">百度</a></li>
+    <li><a href="http://www.atyanjiao.com/">燕郊</a></li>
+  </ul>
+  
+</div>
+
+</html>

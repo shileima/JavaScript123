@@ -1,0 +1,35 @@
+<div id="div1" style="cursor:hand;position:absolute;width:500;height:190;overflow:hidden;border:1 solid red" onmouseover="clearTimeout(scrl);" onmousemove="getpos()" onmouseout="change(1);"><img src=http://img1.niutuku.com/tech/1208/2457/tech-2457-mmskdm0r11b.jpg onload="change(1);"></div> 
+<script> 
+var scrl,direction="right"; 
+var x,xold,xdiff, i=1; 
+
+function change(start){ 
+if(direction == "right"){ 
+    if(div1.scrollTop+190 < div1.scrollHeight){ 
+        div1.scrollTop += 190; 
+    } 
+    else{ 
+        div1.scrollTop = 0; 
+    } 
+} 
+else{ 
+    if(div1.scrollTop-190 > 0){ 
+        div1.scrollTop -= 190; 
+    } 
+    else{ 
+        div1.scrollTop = div1.scrollHeight; 
+    } 
+} 
+if(start) scrl = setTimeout("change(1)",100); 
+else clearTimeout(scrl); 
+} 
+
+function getpos(){ 
+x = event.clientX; 
+xdiff = x - xold; 
+xold = x; 
+if(xdiff>0) direction = "right"; 
+if(xdiff<0) direction = "left"; 
+change(0); 
+} 
+</script>

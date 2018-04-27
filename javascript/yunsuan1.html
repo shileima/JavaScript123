@@ -1,0 +1,93 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+
+/*
+var aNum=[];
+var sNumber='12';
+var sNum = "20";  
+alert(typeof sNum); //String
+var iNum=+sNum;
+alert(iNum instanceof String); // false
+alert(iNum instanceof Number); //false
+
+alert(sNum instanceof String); //false  instance 要检测的必须是一个对象Object;
+
+alert(sNumber instanceof String);
+alert(aNum instanceof Object); //true
+
+//alert(typeof(iNum)); // Number    尽管一元加法对数字无作用，但对字符串却有有趣的效果，会把字符串转换成数字。*/
+
+
+/*var sNum='0xA'; //十六进制 A等于10，B等于11
+
+//var iNum=+sNum;  //转换成 number 相当于 parseInt
+var iNum=+sNum; 
+var iNum2=-sNum;  // 转换成数值类型 并且变成 负数；
+alert(iNum); //sNum='0xA' 返回 十进制 10 ； sNum='010'; 返回 10；
+alert(iNum2); // 输出 -10  一元减法就是对数值求负（例如把 20 转换成 -20）：*/
+
+
+
+
+/*var iNum = 10;
+iNum--;
+alert(iNum);	//输出 "9"
+alert(--iNum);	//输出 "8"   先运算 再输出，影响本段代码
+alert(iNum);	//输出 "8"
+
+
+
+var iNum2 = 10;
+iNum2--;
+alert(iNum2);	//输出 "9"
+alert(iNum2--);	//输出 "9"   先输出，再减一，影响下一行代码
+alert(iNum2);	//输出 "8"*/
+
+
+
+
+</script>
+</head>
+
+<body>
+<p><strong>1，前增量和后增量</strong></p>
+<p>var iNum = 10;<br>
+  iNum--;<br>
+  alert(iNum);	//输出 &quot;9&quot;<br>
+  alert(--iNum);	//输出 &quot;8&quot;   先运算 再输出，影响本段代码<br>
+  alert(iNum);	//输出 &quot;8&quot;</p>
+<p>var iNum2 = 10;<br>
+  iNum2--;<br>
+  alert(iNum2);	//输出 &quot;9&quot;<br>
+  alert(iNum2--);	//输出 &quot;9&quot;   先输出，再减一，影响下一行代码<br>
+alert(iNum2);	//输出 &quot;8&quot;</p>
+<p>&nbsp;</p>
+<p><strong>2，一元加法本质上对数字无任何影响：</strong></p>
+<p>一元加法本质上对数字无任何影响：</p>
+<pre>var iNum = 20;  
+iNum = +iNum;  
+alert(iNum);	//输出 "20"
+
+
+尽管一元加法对数字无作用，但对字符串却有有趣的效果，会把字符串转换成数字。
+
+var sNum = "20";  
+alert(typeof sNum);	//输出 "string"  
+var iNum = +sNum;  
+alert(typeof iNum);	//输出 "number"
+
+
+<strong>3，一元减法和一元加法并不相同，看对比：</strong></pre>
+<p>var sNum='0xA'; //十六进制 A等于10，B等于11</p>
+<p>//var iNum=+sNum;  //转换成 number 相当于 parseInt<br>
+  var iNum=+sNum; <br>
+  var iNum2=-sNum;  // 转换成数值类型 并且变成 负数；<br>
+  alert(iNum); //sNum='0xA' 返回 十进制 10 ； sNum='010'; 返回 10；<br>
+  alert(iNum2); // 输出 -10  一元减法就是对数值求负（例如把 20 转换成 -20）：</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<html>
+<title>延迟对象Deferred()</title>
+<meta charset="UTF-8">
+<script src="jquery.js"></script>
+<script>
+
+    var dfd = $.Deferred();
+    setTimeout(function(){
+        alert('setTimeout 里的alert内容')
+        dfd.resolve()   // 只有触发这段代码的时候，下面的 dfd.done() 才会执行
+    },2000)
+
+    dfd.done(function(){
+        alert('外面的alert')
+    })
+
+
+</script>
+</html>

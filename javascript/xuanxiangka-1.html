@@ -1,0 +1,57 @@
+<!DOCTYPE html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>选项卡-面向过程</title>
+</head>
+
+<style>
+#div1 div {background:#ccc; width:300px; display:none; height:200px;}
+
+.active { background:red;};
+</style>
+<script>
+window.onload=function(){
+	
+  var oDiv=document.getElementById('div1');
+  var aBtn=oDiv.getElementsByTagName('input');
+  var aDiv=oDiv.getElementsByTagName('div');
+  
+  for(var i=0; i<aBtn.length;i++)
+    {
+	  aBtn[i].index=i;
+	  aBtn[i].onclick=function(){
+		 
+		for(var i=0;i<aBtn.length;i++)
+		  {
+			aBtn[i].className='';
+			aDiv[i].style.display='none'; 
+		  }
+		  
+		 this.className='active';
+		 aDiv[this.index].style.display='block';
+	  }
+		
+	}
+	
+	
+	
+	
+}
+
+
+</script>
+<body>
+
+<div id="div1">
+
+  <input class="active" type="button" value="选项卡1" />
+   <input type="button" value="选项卡2" />
+    <input type="button" value="选项卡3" />
+    
+    <div style="display:block">111</div>
+    <div>222</div>
+    <div>333</div>
+
+</div>
+
+</body>
+</html>

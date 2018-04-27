@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+body {display:flex; justify-content:center; align-items:center;}
+.div1 { border:#090 1px solid; padding:0px 10px 10px 10px; width:500px; margin-top:20px;}
+
+</style>
+
+<script type="text/javascript">
+
+var arr = new Array(6)
+arr[0] = "George"
+arr[1] = "John"
+arr[2] = "Thomas"
+arr[3] = "James"
+arr[4] = "Adrew"
+arr[5] = "Martin"
+
+document.write(arr + "<br />")
+arr.splice(2,3,"William")
+document.write(arr+"</div>")
+
+</script>
+
+<title>无标题文档</title>
+</head>
+
+<body>
+<div class="div1"><h2>JavaScript splice() 方法</h2><span>splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。<br>arrayObject.splice(index,howmany,item1,.....,itemX)<br><br>index	必需。整数，规定添加/删除项目的位置，使用负数可从数组结尾处规定位置。
+<br>howmany	必需。要删除的项目数量。如果设置为 0，则不会删除项目。
+<br>item1, ..., itemX	可选。向数组添加的新项目。</span>
+<br><br>
+splice() 方法可删除从 index 处开始的零个或多个元素，并且用参数列表中声明的一个或多个值来替换那些被删除的元素。
+如果从 arrayObject 中删除了元素，则返回的是含有被删除的元素的数组。
+</div>
+
+
+</body>
+</html>

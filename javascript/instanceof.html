@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Js中instanceof 的用法</title>
+<script>
+window.onload=function()
+{
+	
+function Foo(){}; 
+function Aoo(){}; 
+
+Foo.prototype = new Aoo();//JavaScript 原型继承 
+//Foo.prototype = Aoo.prototype;//JavaScript 原型继承 与上句同等效果
+var foo = new Foo(); 
+//alert(foo instanceof Foo) //true
+//alert(foo instanceof Aoo) //true
+alert(foo instanceof Foo);//false
+
+
+var arr1=[1,2,3];
+
+alert(arr1 instanceof Array); //true
+alert(arr1 instanceof Object); //true
+
+}
+
+</script>
+</head>
+
+<body>
+<h2 style=" text-align:center;"> instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。</h2>
+<div style="width:800px; margin:0 auto; border:#060 1px solid; padding:10px;"
+<h2> instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。</h2>
+<p>在 JavaScript 中，判断一个变量的类型尝尝会用 typeof 运算符，在使用 typeof 运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回 &ldquo;object&rdquo;。这就需要用到instanceof来检测某个对象是不是另一个对象的实例。<br>
+  <br>
+  <br>
+  另外，更重的一点是 instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。<br>
+  <br>
+  例如：<br>
+  <br>
+  function Foo(){} <br>
+  Foo.prototype = new Aoo();//JavaScript 原型继承 <br>
+  var foo = new Foo(); <br>
+  console.log(foo instanceof Foo)//true <br>
+  console.log(foo instanceof Aoo)//true<br>
+  <br>
+  上面的代码中是判断了一层继承关系中的父类，在多层继承关系中，instanceof 运算符同样适用。<br>
+  <br>
+  <br>
+  又如：<br>
+  <br>
+  console.log(Object instanceof Object);//true <br>
+  console.log(Function instanceof Function);//true console.log(Number instanceof Number);//false <br>
+  console.log(String instanceof String);//false <br>
+  console.log(Function instanceof Object);//true <br>
+  console.log(Foo instanceof Function);//true <br>
+console.log(Foo instanceof Foo);//false</p>
+</div>
+</body>
+</html>

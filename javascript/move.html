@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<script src="startMove.js"></script>
+<script type="text/javascript" src="../jquery.min.js"></script>
+<title>无标题文档</title>
+<style>
+body { display: flex; justify-content: center; align-items: center; }
+#container {height:300px; background:#CCC; display: flex; justify-content: center; position:relative; align-items: center;}
+.div1 { border: black 20px solid; width: 200px; height:200px; background: red; margin:0 20px; filter:alpha(opacity:30); opacity:0.3; display:block; float:left; }
+</style>
+<script type="text/javascript">
+$(document).ready(function(e) {
+    
+    var explore=window.navigator.userAgent;
+
+   if(explore.indexOf("MSIE")>=0) 
+  {
+    $('.div1').css('display','inline-block');
+  }
+});
+
+</script>
+<script type="text/javascript">
+
+window.onload=function()
+{
+  var aDiv=document.getElementsByTagName('div');  //document.getElementsByClassName('') 不能兼容IE9以下浏览器，使用getElementsByTagName
+  
+  for(var i=0; i<aDiv.length; i++)
+  {
+	aDiv[i].alpha=30;                      //多物体运动框架里，所有东西都不能共用，可以将变量作为属性加到物体身上，运动框架里obj.alpha 的参数不在（）里 必须在事件之前设定obj.alpha的值；
+	aDiv[i].onmouseover=function()
+	{
+	  clearInterval(this.timer);
+	  startMove(this,{'opacity':100});
+	}
+	aDiv[i].onmouseout=function()
+	{
+		clearInterval(this.timer);
+	  startMove(this,{'opacity':30});
+	}
+	  
+  }
+}
+
+
+ function move(obj,iTarget)
+ {
+	clearInterval(obj.timer);
+	obj.timer=setInterval(function(){
+		
+		var speed=(iTarget-obj.alpha)/6;
+		speed=speed>0?Math.ceil(speed):Math.floor(speed);
+		
+		if(iTarget==obj.alpha)
+		  {
+			clearInterval(obj.timer);  
+		  }else
+		  {
+			obj.alpha+=speed;
+			//obj.style.opacity=(alpha+speed)/100 ;  不能将 alpha+speed 直接放在 opacity 里面，因为这样 alpha 的值就不会变化，speed就不会变化，无法进行下一个50毫秒的增量循环；
+			obj.style.opacity=obj.alpha/100;
+			obj.style.filter='alpha(opacity:'+obj.alpha+')'; 
+		  }
+		
+		},50); 
+ }
+
+
+</script>
+</head>
+
+<body>
+
+ <div class="div1"></div>
+ <div class="div1"></div>
+ <div class="div1"></div>
+ <div class="div1"></div>
+
+
+</body>
+</html>

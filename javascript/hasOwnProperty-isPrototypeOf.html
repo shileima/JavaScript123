@@ -1,0 +1,31 @@
+<html>
+<meta charset="UTF-8">
+<script>
+    function siteAdmin(nickName,siteName){
+        this.nickName=nickName;
+        this.siteName=siteName;
+    }
+    siteAdmin.prototype.showAdmin = function() {
+        alert(this.nickName+"是"+this.siteName+"的站长!")
+        // 这里的this 是 siteAdmin
+    };
+    siteAdmin.prototype.showSite = function(siteUrl) {
+        this.siteUrl=siteUrl;
+        return this.siteName+"的地址是"+this.siteUrl;
+    };
+    var matou=new siteAdmin("脚本之家","WEB前端开发");
+    var matou2=new siteAdmin("脚本之家","WEB前端开发");
+    matou.age="30";
+
+   matou.showAdmin();
+//    alert(matou.showSite("http://www.jb51.net/"));
+//    alert(matou.hasOwnProperty("nickName"));//true
+//    alert(matou.hasOwnProperty("age"));//true
+//    alert(matou.hasOwnProperty("showAdmin"));//false
+//    alert(matou.hasOwnProperty("siteUrl"));//false
+//    alert(siteAdmin.prototype.hasOwnProperty("showAdmin"));//true
+//    alert(siteAdmin.prototype.hasOwnProperty("siteUrl"));//false
+//    alert(siteAdmin.prototype.isPrototypeOf(matou))//true
+//    alert(siteAdmin.prototype.isPrototypeOf(matou2))//true
+</script>
+</html>

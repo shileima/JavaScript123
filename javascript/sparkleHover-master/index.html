@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+<script src="http://59.110.30.59/j/jquery.min.js" type="text/javascript"></script>
+
+<script src="http://59.110.30.59/j/lianxi/baozhaJQ/sparkleHover.js"></script>
+
+
+    <style media="screen">
+
+    .outside {
+      position: relative;
+      width: 100%;
+      margin: auto 0;
+    }
+
+    .sans{
+      font-family: Helvetica, sans-serif;
+    }
+
+    .list {
+      max-width: 400px;
+      left: 20%;
+      text-align: left;
+      justify-content: center;
+      position: relative;
+    }
+    body{
+        text-align: center;
+        font-family: 'Josefin Slab', serif;
+
+    }
+      .container{
+        width: 50%;
+
+      }
+
+      .main-container{
+        position: relative;;
+        left: 25%;
+      }
+      .container > * {
+        position: relative;
+        border-radius: 5px;
+        box-shadow: 1px 1px 4px rgba(0,0,0,.3);
+        /*left:50%;*/
+        color: grey;
+        font-family: 'Comfortaa', cursive;
+      }
+      #c{
+        background-color: Aquamarine;
+        width: 70px;
+        display: inline-block;
+        margin-right: 30px;
+      }
+
+      .code{
+        font-family: monospace;
+        white-space: pre-wrap;
+    background: hsl(30,80%,90%);
+      }
+
+      pre > code {
+      white-space: pre;
+    margin-top: -1.00em;
+    display: block;
+    color: grey;
+    background-color: cornsilk;
+    text-align: left;
+    width: 65%;
+left: 17%;
+    padding: 5px;
+    border: 1px grey solid;
+    position: relative;
+}
+
+      #c2{
+        background-color: Aquamarine;
+        width: 70px;
+            display: inline-block;
+            margin-left: 30px;
+      }
+
+      #e {
+        background-color: Crimson;
+        height: 60px;
+        color: white;
+      }
+
+      #a{
+        background-color: Cornsilk ;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>SPARKLE.JS</h1>
+    <h2>A jQuery plugin made during 'Cave Day' - Jan 15th, 2017 <br> by <a href="http://itp.evejweinberg.com/a" target="_blank">Eve Weinberg</a> </h2>
+<hr>
+<br>
+
+<div class="main-container">
+
+    <div class="container">
+      <h3 class="sparkle-rollover" id="a">I have all three different sparkles on hover!!</h3>
+      <br>
+      <p class="sparkle-rollover" id="b">Rollover me to see the default options.</p>
+      <br>
+      <img id="d" src="http://59.110.30.59/j/lianxi/baozhaJQ/m.jpg" alt="">
+
+<br>
+<br>
+      <div class="sparkle-rollover" id="c">
+
+        or me! images can appear!
+
+      </div>
+
+      <div id="c2">
+
+        any image you WANT!
+
+      </div>
+
+<br>
+<br>
+      <div id="e">
+
+        I have gravity!
+
+      </div>
+      <br>
+      <p><i> 🙁 I have nothing. 🙁</i></p>
+
+    </div>
+      </div>
+
+    <hr>
+
+    <h3 class="sans">How to use it:</h3>
+    <p class="sans">download the plugin <a href="https://github.com/evejweinberg/sparkleHover/blob/master/sparkleHover.js">here</a></p>
+    <p class="sans">Add it to your html, and also add jQuery if you do not already have it</p>
+    <p class="sans">Instantiate it on any object, using jQuery:</p>
+    <pre><code>  $('element-id-or-class-goes-here').sparkleHover();</code></pre>
+
+    <p class="sans">Parametize it!</p>
+    <pre><code>$('#c').sparkleHover({
+      colors : ['#297E97', "#2EB8D5",'#36BEC1'],
+      num_sprites: 22,
+      lifespan: 3000,
+      radius: 500,
+      sprite_size: 40,
+      shape: 'circle',
+      image: 'http://loganchamber.org/files/Pumplin.jpg'
+
+    });</code></pre>
+    <div class="outside">
+
+
+    <p class="sans">Options are:</p>
+    <ul class="sans list">
+      <li>colors: array or one color</li>
+      <li>radius: interger (this is the spread radius)</li>
+      <li>sprite_size: integer</li>
+      <li>shape: string (choose 'circle, 'triangle' or 'square')</li>
+      <li>lifespan: interger, in milliseconds</li>
+      <li>num_sprites: interget, number of sprites</li>
+      <li>image: url or relative path, if you want a clear background, make colors: rgba(0,0,0,0)</li>
+    </ul>
+      </div>
+
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+    	'use strict';
+
+      //dont pass in anything and use default options
+      $('#a').sparkleHover();
+
+      $('#b').sparkleHover().css('background', 'pink');
+
+
+        $('#c').sparkleHover({
+          colors : ['#297E97', "#2EB8D5",'#36BEC1'],
+          num_sprites: 12,
+          lifespan: 1400,
+          radius: 400,
+          sprite_size: 40,
+          shape: 'circle',
+          image: 'http://loganchamber.org/files/Pumplin.jpg'
+
+        });
+
+        $('#c2').sparkleHover({
+          num_sprites: 32,
+          lifespan: 2000,
+          radius: 200,
+          sprite_size: 50,
+          shape: 'CirCle',
+          colors: 'rgba(0,0,0,0)',
+          image: 'http://itp.evejweinberg.com/img/unicorn.gif'
+
+        });
+
+    });
+
+    $('#d').sparkleHover({
+      colors : ['yellow', 'orange'],
+      num_sprites: 72,
+      lifespan: 3000,
+      radius: 800,
+      sprite_size: 14,
+      shape: "square",
+
+    });
+
+    $('#a').sparkleHover({
+      colors : ['purple', 'pink', 'teal', 'grey'],
+      num_sprites: 72,
+      lifespan: 500,
+      radius: 800,
+      sprite_size: 24,
+      shape: "triangle"
+
+    });
+
+    $('#a').sparkleHover({
+      colors : ['yellow', 'red'],
+      num_sprites: 32,
+      lifespan: 700,
+      radius: 200,
+      sprite_size: 14,
+      shape: "circle"
+
+    });
+
+    $('#a').sparkleHover({
+      colors : ['green', 'teal','maroon'],
+      num_sprites: 12,
+      lifespan: 2000,
+      radius: 300,
+      sprite_size: 4,
+      shape: "square"
+
+    });
+
+    $('#e').sparkleHover({
+      colors : ['purple', 'pink', 'teal', 'grey'],
+      num_sprites: 72,
+      lifespan: 2000,
+      radius: 200,
+      sprite_size: 14,
+      shape: "triangle",
+      gravity: "true"
+
+    });
+
+    </script>
+
+  </body>
+</html>

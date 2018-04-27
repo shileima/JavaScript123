@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+body {display:flex; justify-content:center; align-items:center;}
+.div1 { border:#090 1px solid; padding:0px 10px 10px 10px; width:500px; margin-top:20px;}
+
+</style>
+
+<script type="text/javascript">
+
+var str="Hello world!"
+document.write(str.substring(3,7))
+
+</script>
+
+<title>无标题文档</title>
+</head>
+
+<body>
+<div class="div1"><h2>JavaScript substring() 方法</h2><span>substring() 方法用于提取字符串中介于两个指定下标之间的字符。<br>stringObject.substring(start,stop)<br><br>start	必需。一个非负的整数，规定要提取的子串的第一个字符在 stringObject 中的位置。
+<br>stop	
+可选。一个非负的整数，比要提取的子串的最后一个字符在 stringObject 中的位置多 1。
+如果省略该参数，那么返回的子串会一直到字符串的结尾。</span>
+<br><br>
+一个新的字符串，该字符串值包含 stringObject 的一个子字符串，其内容是从 start 处到 stop-1 处的所有字符，其长度为 stop 减 start。<br> 
+substring() 方法返回的子串包括 start 处的字符，但不包括 stop 处的字符。<br> <br> 
+如果参数 start 与 stop 相等，那么该方法返回的就是一个空串（即长度为 0 的字符串）。如果 start 比 stop 大，那么该方法在提取子串之前会先交换这两个参数。<br> <br> 
+
+与 slice() 和 substr() 方法不同的是，substring() 不接受负的参数。<br> <br> 
+plice()。
+</div>
+
+
+</body>
+</html>

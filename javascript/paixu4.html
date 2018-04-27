@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#ul1 {background:green;}
+#ul2 {background:yellow;}
+</style>
+<script>
+window.onload=function(){
+
+ var oBtn=document.getElementById('btn1');
+ var oUl=document.getElementById('ul1')
+ 
+
+ oBtn.onclick=function()
+ {
+	var arr=[];
+	var aLi=oUl.getElementsByTagName('li')
+	for(var i=0; i<aLi.length;i++)
+	{
+		arr[i]=aLi[i];                      //.sort()事件必须是使用在数组array[]上，所以必须将aLi[i]传递给新建的arr[]数组才能使用.sort()事件
+	}
+	arr.sort(function(Li1,Li2)
+	{
+	   var n1=parseInt(Li1.innerHTML);
+	   var n2=parseInt(Li2.innerHTML);
+	   
+	   return n1-n2;	
+	});
+	//oUl.appendChild(oLi);
+	 
+	 for(var i=0;i<arr.length;i++)
+	 {
+		alert('将arr中排列第一个（最小的元素）'+arr[i].innerHTML+'添加append到UL的最后一位');
+		oUl.appendChild(arr[i]);             //apendChild 的是object 元素；
+		
+	 } 
+ } 
+}
+</script>
+</head>
+
+<body>
+<input id="btn1" type="button" value="排序" />
+<ul id="ul1">
+	<li>34</li>
+	<li>25</li>
+	<li>9</li>
+	<li>88</li>
+	<li>54</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+window.onload=function()
+{
+  var oInput = document.getElementById('input1');
+  var oUl = document.getElementById('ul1');
+  var aLi = document.getElementsByTagName('li');
+  
+  var oNum=0;
+  
+  oInput.onclick=function()
+    {
+	   oNum++;
+	   var oLi=document.createElement('li');
+	   oLi.innerHTML=oNum;
+	   oUl.insertBefore(oLi,aLi[0]);
+		
+	}
+}
+
+</script>
+
+<input id="input1" type="button" value="创建li">
+
+<ul id="ul1">
+
+</ul>
+
+
+
+</body>
+</html>

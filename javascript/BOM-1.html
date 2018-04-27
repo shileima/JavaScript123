@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>计算n天后的日期</title>
+
+<script type="text/javascript">
+
+ window.onload=function() 
+ {
+	var oTxt=document.getElementById('txt1')
+	var oBtn=document.getElementById('btn1')
+	
+	oBtn.onclick=function()
+	{
+	   var oDate = new Date();
+	   alert( typeof oTxt.value); // oTxt.value 是个字符串string ，必须利用parseInt 转为 number
+	   oDate.setDate(oDate.getDate()+parseInt(oTxt.value));
+	   
+	   alert(oDate.getFullYear()+'-'+(oDate.getMonth()+1)+'-'+oDate.getDate());
+	   
+		
+	}
+	 
+ }
+
+
+</script>
+
+
+</head>
+
+<body>
+
+<input type="text" id="txt1"> 
+<input type="button" id="btn1" value="计算">
+
+
+</body>
+</html>

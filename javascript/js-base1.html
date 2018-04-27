@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>变量不一定要声明</title>
+<script>
+// ECMAScript 的解释程序遇到未声明过的标识符时，用该变量名创建一个全局变量，并将其初始化为指定的值。
+sTest = "hello ";
+sTest2 = sTest + "world";
+alert(sTest2);
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

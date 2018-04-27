@@ -1,0 +1,90 @@
+<html>
+<meta charset="utf-8">
+<style>
+    body {height:100%;overflow: hidden}
+    .firework {
+        width: 10px;
+        height: 50px;
+        position: absolute;
+        background: red;
+        border-radius: 50%;
+    }
+    .fires {
+        width:8px;
+        height:8px;
+        position: absolute;
+        background: blue;
+        border-radius: 50%;
+    }
+</style>
+<script>
+    var timer = 0; // 默认值是 undefined
+    var x, y, h;
+    var n;
+    document.onclick = function(ev){
+        var ev = ev || event;
+         x = ev.clientX;
+         y = ev.clientY;
+         h = document.body.clientHeight;
+
+        var oDiv = document.createElement('div')
+        oDiv.className = 'firework';
+        oDiv.style.top = h + 'px';
+        oDiv.style.left = x + 'px'
+        document.body.appendChild(oDiv)
+
+        var speed = 10;
+
+        timer = setInterval(function(){
+            oDiv.style.top = oDiv.offsetTop - speed + 'px';
+            if(oDiv.offsetTop <= y){
+                oDiv.style.top = y + 'px'
+                clearInterval(timer)
+                document.body.removeChild(oDiv)
+                createFire()
+            }
+        },1000/60)
+
+    }
+
+    function createFire(){
+        n = Math.ceil(Math.random()*50) + 50; // 50 - 100 的随机数
+        var fires = [];
+        for(var i =0; i<n; i++){
+            fires[i] =  document.createElement('div');
+            fires[i].className = 'fires';
+            fires[i].style.background = randColor();
+            fires[i].style.left = x + 'px'
+            fires[i].style.top = y + 'px'
+            fires[i].speedX = Math.random()*20 - 10;
+            fires[i].speedY = Math.random()*20 - 10;
+
+            document.body.appendChild(fires[i])
+
+        }
+
+        setInterval(function(){
+            for(var i=0; i<n; i++)
+            {
+                fires[i].style.left = fires[i].offsetLeft + fires[i].speedX + 'px';
+                fires[i].style.top = fires[i].offsetTop + fires[i].speedY + 'px';
+
+                fires[i].speedY += 0.5;
+
+                if(fires[i].offsetTop > h || fires[i].offsetLeft<0 || fires[i].offsetLeft>document.body.clientWidth){
+                    document.body.removeChild(fires[i])
+                }
+            }
+        },1000/60)
+    }
+
+    function randColor(){
+        var r = Math.floor(Math.random()*256);
+        var g = Math.floor(Math.random()*256);
+        var b = Math.floor(Math.random()*256);
+
+        return "rgb(" + r + "," + g + "," + b + ")";
+    }
+
+</script>
+</html>

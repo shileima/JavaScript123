@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title> toString  </title>
+</head>
+
+<script>
+
+toString //系统对象的toString 方法是自带的，例如arr的toString 在 Array.prototype.toString下；自己写的对象的 toString 方法在 Obeject.prototype.toString 下
+
+var arr=[1,2,3];
+
+function Aoo() {  };
+
+var a1=new Aoo();
+
+alert(arr.toString==Object.prototype.toString); // false
+
+alert(arr.toString==Array.prototype.toString); // true
+
+alert(a1.toString == Object.prototype.toString); // true
+
+</script>
+<body>
+</body>
+</html>

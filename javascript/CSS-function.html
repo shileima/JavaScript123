@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>CSS函数</title>
+<script type="text/javascript">
+
+
+
+	function css(obj,name,value) {
+		if(arguments==2) {	
+			
+			return obj.style[name];
+			
+		} else {
+			
+			obj.style[name]=value;
+		}
+	   }
+	
+	window.onload = function() {
+	var oBtn=document.getElementById('btn');
+	var oDiv = document.getElementById('div1');
+	
+		oBtn.onclick = function() {
+			
+			css(oDiv,'background','red') 	
+		
+		}
+	}
+</script>
+</head>
+
+<body>
+<div id="div1" style="width:300px;height:300px; background:green"></div>
+<input id='btn' type="button" value="变红"/>
+</body>
+</html>

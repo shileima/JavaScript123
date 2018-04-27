@@ -1,0 +1,93 @@
+<html>
+<title>JS静态变量和静态函数</title>
+<meta charset="UTF-8">
+<!--<script>
+    (function(){
+        var a = b = 5 ; // var a; 提前处理是局部变量,外层alert 无法弹出；b=5 未声明，自动变成全局变量，等同于在函数外 var b;
+    })()
+    console.log(a) // 报错 a is not defined
+//    console.log(b)  // 5
+</script>-->
+
+<!--<script>
+    (function(){
+        b = 5 ; // var a; 提前处理是局部变量,外层alert 无法弹出；b=5 未声明，自动变成全局变量，等同于在函数外 var b;
+    })()
+//    console.log(a) // 报错 a is not defined
+        console.log(b)  // 5
+</script>-->
+
+<!--<script>
+    var x = 10;
+
+    function a(){
+        console.log(x)
+    }
+    function b(){
+        var x = 20;
+        a()
+    }
+
+    b() // 10
+</script>-->
+
+<script>
+/*    function A(){this.id = "我是AA"}          //   在构造函数外定义的都是所有对象共享的
+    A.id = "我是A，在构造函数对象上增加的id";
+    A.sayName = function(){alert(this.id);}
+    A.sayName();   //  我是A
+    B = new A();
+    alert(B.sayName) // undefined 因为 sayName 是A 本身的方法，不是原型上的，不能继承过来，所以B根本未定义sayName*/
+
+// 使用原型增加方法，构造函数内部没有id
+
+/*    function A(){this.id2 = "我是AA"}          //   在构造函数外定义的都是所有对象共享的
+    A.prototype.id = "我是A";  // 在原型上添加的id
+    A.prototype.sayName = function(){alert(this.id);} // 在原型上添加的方法可以被继承到B对象上
+    a = new A();
+    a.sayName(); // 我是A*/
+
+/*// 使用原型增加方法，构造函数内部有id，将构造函数外原型上添加的id 覆盖了
+    function A(){this.id = "我是AA"}          //   在构造函数外定义的都是所有对象共享的
+    A.prototype.id = "我是A";  // 在原型上添加的id
+    A.prototype.sayName = function(){alert(this.id);} // 在原型上添加的方法可以被继承到B对象上
+    a = new A();
+//    a.prototype.id = "我是A"; // Cannot set property 'id' of undefined
+    A.prototype.id = "我是A";  // 在原型上添加的id 不影响 a 对象上的属性；
+
+    a.sayName(); // 输出"我是AA"是因为"我是A"是在之后赋值的，把"我是A"覆盖了。*/
+
+</script>
+
+<!--<script>
+    function setName(obj) {
+        obj.name = "Nicholas";
+        obj = new Object(); // 这是一个局部对象，函数执行完后销毁，所以外部obj.name 还是'Nicholas',改变obj的指向，此时obj指向一个新的内存地址，不再和person指向同一个
+        obj.name = "Greg";
+        alert(obj.name) // Greg
+    }
+
+    var person = new Object();
+    setName(person);  //你看看下面，相信我也是按值传递的了吧
+    alert(person.name);  //"Nicholas"
+</script>-->
+
+<script>
+    function Module(){
+        var num = 10;
+        function a(){
+            num ++;
+            alert(num);
+        }
+        return a;
+    }
+    var x = Module();
+
+    x() // 11
+    x() // 12
+    x() // 13
+    x() // 14
+</script>
+
+
+</html>

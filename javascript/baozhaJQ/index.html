@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style>
+#c {margin:0 auto}
+</style>
+<title>爆炸效果jquery</title>
+
+<script src="http://59.110.30.59/j/jquery.min.js" type="text/javascript"></script>
+
+<script src="http://59.110.30.59/j/lianxi/baozhaJQ/sparkleHover.js"></script>
+<script>
+$(document).ready(function() {
+    $('#c').sparkleHover({
+      colors : ['yellow', 'orange'],
+      num_sprites: 72,
+      lifespan: 3000,
+      radius: 800,
+      sprite_size: 14,
+      shape: "square",
+
+    });
+});
+    
+</script>
+
+</head>
+
+<body>
+
+<div id="">
+ <img id="c" src="m.jpg" />
+
+</div>
+
+</body>
+</html>

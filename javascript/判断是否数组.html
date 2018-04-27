@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>判断是否数组三种方法</title>
+</head>
+<script>
+
+//方法一 instanceof
+ var arr1=[1,2];
+ //alert(arr1 instanceof Array); // true
+
+//方法二 constructor
+ //alert(arr1.constructor==Array); //true
+ 
+//方法三
+ alert(Array.prototype.toString.call(arr1) == '[object Array]'); 
+</script>
+<body>
+</body>
+</html>

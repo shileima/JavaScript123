@@ -1,0 +1,54 @@
+
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>jQuery event.target 属性</title>
+<script src="../jquery.min.js"></script>
+</head>
+<style>
+#cn { border:#ccc solid 1px; width:500px; height:500px; padding:50px; background:#096 }
+#bj { border:#ccc solid 1px; width:300px; height:300px;padding:50px; background:#CC3}
+#hd { border:#ccc solid 1px; width:100px; height:100px;padding:50px; background:#F39; display:block}
+</style>
+<script>
+$(document).ready(function() {
+    $('#cn').click(function(e){
+		
+		var ele=$(e.target);
+		  
+		  if(ele.is('#hd'))
+		  {
+			alert('海淀区')  
+		  } else if(ele.is('#bj'))
+		  {
+			alert('北京市')  
+		  } else
+		  {
+			alert('锦绣中国')  
+		  }
+		$('#target').html('这是通过'+e.target.nodeName + '触发的')
+	})
+});
+
+
+</script>
+<body>
+<div id="target"></div>
+
+<div>
+ <div id="cn">
+   中国
+   <article id="bj">
+   北京
+     <span id="hd">
+     海淀
+     </span>
+   </article>
+ </div>
+
+</div>
+
+
+</body>
+</html>

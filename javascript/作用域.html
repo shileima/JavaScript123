@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script>
+
+/*var a = 10;
+
+function aaa()
+ {
+	alert(a);
+ }
+a = 20;
+function bbb()
+ {
+	aaa();
+ }
+ 
+bbb();*/
+
+ // 2, 不加 var a = 10 相当于 aaa() 执行后，将 a = 10 作为全局变量
+
+/*function aaa()
+{
+  a = 10;	
+}
+aaa();
+alert(a);*/
+
+
+// 3, alert(a) 寻找最近的 var a 的定义，没有的话找外层
+
+/*var a = 10;
+
+function aaa()
+ {
+	 var a;
+	alert(a)
+	a = 20; 
+ }
+ 
+ aaa();*/  //undefined   在内部找 a 的时候 找到了 var a = 20 , 外层的 var = 10 没用，内部 在执行后才定义了 var 故 弹出 undefined
+
+
+
+
+/*var a = 10;
+
+function aaa()
+ {
+	alert(a)
+	 a = 20; 
+ }
+ 
+ aaa();  //10*/
+ 
+/*var a = 10;
+
+function aaa()
+ {
+	a = 20; 
+	alert(a)
+	 
+ }
+ 
+ aaa();  //20*/
+ 
+/*var a = 10;
+
+function aaa()
+{
+	bbb();
+	alert(a)  //此处 获取不到内部的 变量 a = 20 故 找到外部全局变量 a = 10
+	function bbb()
+	{
+	  var a = 20;	
+		
+	}
+	
+	
+}
+
+aaa();*/
+ 
+ // 参数与局部变量相同的话，优先级是等同的
+ 
+/* var a = 10;
+ 
+ function aaa(a)
+  {
+	  alert(a)
+	  var a = 20;
+  }
+  
+  
+  aaa(a);*/
+
+/*var a = 10;
+
+function aaa()
+
+{
+  a+=3;	
+}
+
+aaa()
+
+alert(a);  // a = 13*/
+
+
+// 函数传参数，相当于函数内部声明局部变量
+/*var a = 10;
+
+function aaa(a)
+    {
+      a+=3;
+      alert(a)
+    }
+
+aaa(a)
+
+alert(a); */ // a = 10  函数传参后，重新声明局部变量 var a; 生成参数 a = 13 和外层的全局变量 a = 10 没用关系
+
+
+
+/*var a = 10;
+
+function aaa()
+{
+    a+=3;
+    alert(a)
+}
+
+aaa()
+
+alert(a); */ // a = 13
+
+
+
+/*var a = [1,2,3];
+
+function aaa(a)
+
+{
+  a.push(4);	
+}
+
+aaa(a)
+
+alert(a); */// [1,2,3,4]
+
+/*
+function foo(a) {
+
+  console.log( a + b ); // 打印的时候 b 只是被声明 var b;  但还未被赋值给a；打印出来是 NaN
+  var b = a;
+
+//  return a + b ;
+}
+
+alert(foo( 2 )); // 函数里面有 return 的时候，可以弹出来该函数的输出值；否则就是 undefined
+*/
+
+
+var count = 10;
+function num(num1){
+    num1 = 1;
+    return num1;
+}
+var result = num(count);
+console.log(result); //1
+console.log(count);  //10
+
+</script>
+
+
+<body>
+</body>
+</html>

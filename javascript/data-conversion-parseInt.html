@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>转换成数字parseInt、parseFloat</title>
+<script>
+
+var iNum1 = parseInt("1123",8) //八进制计算方法1*(8*8*)+2*(8)+3*1
+
+alert(iNum1);
+
+</script>
+<style type="text/css">
+.div1 {
+	font-size: 16px;
+	text-align: center;
+}
+body p {
+	text-align: center;
+}
+.div2 {
+	text-align: center;
+}
+</style>
+</head>
+
+<body>
+<pre class="div1">var iNum1 = parseInt("12345red");	//返回 12345  
+var iNum1 = parseInt("0xA");	//返回 10  
+var iNum1 = parseInt("56.9");	//返回 56  
+var iNum1 = parseInt("red");	//返回 NaN
+var iNum1 = parseInt("AF", 16);	//返回 175</pre>
+<pre>&nbsp;</pre>
+<p>当然，对二进制、八进制甚至十进制（默认模式），都可以这样调用 parseInt() 方法：</p>
+<pre class="div2">var iNum1 = parseInt("10", 2);	//返回 2  
+var iNum2 = parseInt("10", 8);	//返回 8  
+var iNum3 = parseInt("10", 10);//返回 10
+
+
+</pre>
+<p>如果十进制数包含前导 0，那么最好采用基数 10，这样才不会意外地得到八进制的值。</p>
+<p>var iNum1 = parseInt("010");	//返回 8</p>
+<p>var iNum2 = parseInt("010", 8);	//返回 8  </p>
+<p>var iNum3 = parseInt("010", 10);	//返回 10</p>
+<pre>&nbsp;</pre>
+</body>
+</html>

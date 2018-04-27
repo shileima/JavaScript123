@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+<script>
+
+var str='hello';
+
+var str2=new String('hello');
+
+alert(str.charAt(3));
+alert(typeof(str)); // string
+
+alert(typeof(str2)); //object
+
+str.number=10; //基本类型str会找到对应的对象类型，然后包装对象所有的属性和方法都给了基本类型str，然后包装对象消失。
+str2.number=10;
+
+alert(str.number);//undefine  包装对象消失，str 是新的字符串，所以未定义其number 属性，必然 undefine
+alert(str2.number);//10
+
+alert(typeof(str));
+
+</script>
+<body>
+</body>
+</html>

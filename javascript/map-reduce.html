@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>map 和 reduce 的区别</title>
+</head>
+<body>
+<script>
+    //map 使用方法 arr.map( function(){} ) 处理后返回一个新数组
+    function fn(item){
+        return item * item ;
+    }
+
+    //console.log([1,2,3,4].map(fn))
+
+    //console.log([1,2,3,4].map(function(item){return item*item})) // [1,4,9,16]
+
+    console.log([1,2,3,4].map(function(a , b){return a * b})) // 每一项和前一项相乘,第一项和0相乘[0, 2, 6, 12]
+
+    //reduce 使用方法 经过函数处理后返回计算后的数值结果
+
+    //    console.log([1,2,3,4].reduce(function(a,b){return a*b})) // 24 阶乘
+
+
+</script>
+</body>
+</html>

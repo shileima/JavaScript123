@@ -1,0 +1,26 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>递归计算总数sum()</title>
+
+<script>
+
+var sum = function(n){
+	
+	if (n <= 1)                       
+     {return 1;} else 
+	{
+	return n + arguments.callee(n-1);
+	}
+};
+
+alert(sum(100));
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

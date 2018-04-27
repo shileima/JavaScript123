@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script>
+window.onload=function()
+{
+var str1='musle';
+var sResult=str1.localeCompare('musla');
+//alert(sResult);
+
+var oStringObject = new String("hello world");  
+//alert(oStringObject.slice(-3));		//输出 "rld" 
+//alert(oStringObject.slice('-3'));   //输出 "rld"  单个值，带字符串的话会自动转成数值执行；
+//alert(oStringObject.substring(-3));	//输出 "hello world"  
+//alert(oStringObject.slice(3, -4));		//输出 "lo w"  
+//alert(oStringObject.substring(3, -4));	//输出 "hel"
+//alert(oStringObject.slice(4,5)) //o
+
+//alert(oStringObject.slice(5,4))  // slice() 第二个数值比第一个小的话，返回空；
+//alert(oStringObject.slice('5,-1')) //  slice() 第二个数值比第一个小的话,带字符串，返回hello world；
+
+//alert(oStringObject.slice(2,3)); // l
+//alert(oStringObject.slice('3,2')); // hello world 里面是两个值的字符串的话，输出 完整hello world
+//alert(oStringObject.slice('2,3')); // hello world
+
+
+//alert(oStringObject.substring(4,1)); //ell
+//alert(oStringObject.substring('4,1')); // hello world
+
+var oStringObject = new String("hello world");  
+alert(oStringObject instanceof String);	//输出 true
+alert(typeof oStringObject);   //输出 Object
+
+
+}
+</script>
+</head>
+
+<body>
+<p>&nbsp;</p>
+<p><strong>1，String 对象的 valueOf() 方法和 toString() 方法都会返回 String 类型的原始值：</strong></p>
+<pre>alert(oStringObject.valueOf() == oStringObject.toString());	//输出 "true"
+
+</pre>
+<p><strong>2，String 对象具有属性 length，它是字符串中的字符个数： </strong></p>
+<p>&nbsp;</p>
+<p><strong>3，charAt() 和 charCodeAt() 方法。</strong></p>
+<p>两个方法 charAt() 和 charCodeAt() 访问的是字符串中的单个字符。这两个方法都有一个参数，即要操作的字符的位置。</p>
+<p>charAt() 方法返回的是包含指定位置处的字符的字符串：</p>
+<pre>var oStringObject = new String("hello world");  alert(oStringObject.charAt(1));	//输出 "e"</pre>
+<p>如果想得到的不是字符，而是字符代码，那么可以调用 charCodeAt() 方法：</p>
+<pre>var oStringObject = new String("hello world");  alert(oStringObject.charCodeAt(1));	
+// 这个例子输出 "101"，即小写字母 "e" 的字符代码。
+
+</pre>
+<p><strong>4，concat() 方法。</strong></p>
+<p>用于把一个或多个字符串连接到 String 对象的原始值上。该方法返回的是 String 原始值，保持原始的 String 对象不变： </p>
+<pre>var oStringObject = new String("hello ");  
+var sResult = oStringObject.concat("world");  
+alert(sResult);		//输出 "hello world"  
+alert(oStringObject);	//输出 "hello "
+
+在上面这段代码中，调用 concat() 方法返回的是 "hello world"，而 String 对象存放的仍然是 "hello "。
+出于这种原因，较常见的是用加号（+）连接字符串，因为这种形式从逻辑上表明了真正的行为：
+
+var oStringObject = new String("hello ");  
+var sResult = oStringObject + "world";  
+alert(sResult);		//输出 "hello world"  
+alert(oStringObject);	//输出 "hello "
+
+<strong>5，indexOf() 和 lastIndexOf() 方法</strong>
+
+indexOf() 和 lastIndexOf() 方法返回的都是指定的子串在另一个字符串中的位置，如果没有找不到子串，则返回 -1。
+这两个方法的不同之处在于，indexOf() 方法是从字符串的开头（位置 0）开始检索字符串，而 lastIndexOf() 方法则是从字符串的结尾开始检索子串。例如：
+
+var oStringObject = new String("hello world!");  
+alert(oStringObject.indexOf("o"));		输出 "4"  
+alert(oStringObject.lastIndexOf("o"));	输出 "7"
+
+<strong>6， localeCompare()</strong>
+
+对字符串进行排序。该方法有一个参数 - 要进行比较的字符串，返回的是下列三个值之一：</pre>
+<ul>
+  <li>如果 String 对象按照字母顺序排在参数中的字符串之前，返回负数。</li>
+  <li>如果 String 对象等于参数中的字符串，返回 0</li>
+  <li>如果 String 对象按照字母顺序排在参数中的字符串之后，返回正数。</li>
+</ul>
+<pre>var oStringObject = new String("yellow");  
+alert(oStringObject.localeCompare("brick"));		//输出 "1"  
+alert(oStringObject.localeCompare("yellow"));		//输出 "0"  
+alert(oStringObject.localeCompare("zoo"));		//输出 "-1"
+
+<strong>7，slice() 和 substring()</strong>
+
+第一个参数是要获取的子串的起始位置，
+第二个参数（如果使用的话）是要获取子串终止前的位置（也就是说，获取终止位置处的字符不包括在返回的值内）。
+如果省略第二个参数，终止位就默认为字符串的长度。
+
+对于负数参数，slice() 方法会用字符串的长度加上参数，substring() 方法则将其作为 0 处理（也就是说将忽略它）
+</pre>
+<pre>var oStringObject = new String("hello world");  
+alert(oStringObject.slice("-3"));		//输出 "rld"  
+alert(oStringObject.substring("-3"));	//输出 "hello world"  
+alert(oStringObject.slice("3, -4"));		//输出 "lo w"  
+alert(oStringObject.substring("3, -4"));	//输出 "hel"
+
+
+<strong>8, toLowerCase()、toLocaleLowerCase()、toUpperCase() 和 toLocaleUpperCase()</strong>
+
+从名字上可以看出它们的用途，前两种方法用于把字符串转换成全小写的，后两种方法用于把字符串转换成全大写的。
+
+var oStringObject = new String("Hello World");  
+alert(oStringObject.toLocaleUpperCase());	//输出 "HELLO WORLD"  
+alert(oStringObject.toUpperCase());		//输出 "HELLO WORLD"  
+alert(oStringObject.toLocaleLowerCase());	//输出 "hello world"  
+alert(oStringObject.toLowerCase());		//输出 "hello world"
+
+
+<strong>9, instanceof 运算符</strong>
+
+在使用 typeof 运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，它都返回 "object"。
+ECMAScript 引入了另一个 Java 运算符 instanceof 来解决这个问题。
+
+var oStringObject = new String(&quot;hello world&quot;);  <br>alert(oStringObject instanceof String);	//输出 true<br>alert(typeof oStringObject);    //输出 Object</pre>
+<p>&nbsp;</p>
+<pre>&nbsp;
+
+
+</pre>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

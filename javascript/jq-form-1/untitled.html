@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>无标题文档</title>
+<link rel="stylesheet" type="text/css" href="css/hdw.css"/>
+<script type="text/javascript" src="js/jquery-1.6.4.min.js"></script>
+<script type="text/javascript">
+		
+ $(document).ready(function() {
+    
+	$('.a1').each(function() {
+      
+	  var str = "<strong class='reda'>*</strong>";
+	
+	  $(this).parent().append(str);
+	
+    });
+	
+	//判断用户名输入
+	$('#username').blur(function() {
+        
+		$(this).parent().find('.a2').remove();
+			
+			if(this.value==""||this.value.length<6)
+		
+		 {
+			 var info = "<span class='a2 error'>用户名不能小于6</div>"
+			 $(this).parent().append(info);
+			 
+		 } else {
+			 
+			 var info2 = "<span class='a2'>正确！</span>"
+			 $(this).parent().append(info2);
+			 $(this).parent().find('strong').remove(); 
+			 
+		 }	
+    });
+	
+	//判断密码输入
+	$('#password' ).blur(function() {
+        
+		$(this).parent().find('.a2').remove();
+			
+			if(this.value==""||this.value.length<6)
+		
+		 {
+			 var info = "<span class='a2 error'>密码不能小于6位数</div>"
+			 $(this).parent().append(info);
+			 
+		 } else {
+			 
+			 var info2 = "<span class='a2'>正确！</span>"
+			 $(this).parent().append(info2);
+			 $(this).parent().find('strong').remove(); 
+			 
+		 }	
+    });
+	
+	//判断密码是否一致
+	$('#passwords').blur(function() {
+        
+		$(this).parent().find('.a2').remove();
+			
+			if(this.value==""||this.value!=$('#password').val())
+		
+		 {
+			 var info = "<span class='a2 error'>两次密码输入不一致</div>"
+			 $(this).parent().append(info);
+			 
+		 } else {
+			 
+			 var info2 = "<span class='a2'>正确！</span>"
+			 $(this).parent().append(info2);
+			 $(this).parent().find('strong').remove(); 
+			 
+		 }	
+    });
+	
+    //判断邮件格式
+	$('#email').blur(function() {
+        
+		$(this).parent().find('.a2').remove();
+			
+			if(this.value==""|| this.value!="" && !/.+@.+\.[a-zA-Z]{2,4}$/.test(this.value)  )
+		
+		 {
+			 var info = "<span class='a2 error'>邮箱格式不正确</div>"
+			 $(this).parent().append(info);
+			 
+		 } else {
+			 
+			 var info2 = "<span class='a2'>正确！</span>"
+			 $(this).parent().append(info2);
+			 $(this).parent().find('strong').remove(); 
+			 
+		 }	
+    });
+
+
+    //判断手机号格式
+	$('#tel').blur(function() {
+        
+		$(this).parent().find('.a2').remove();
+			
+			if(this.value==""|| this.value.length<11)
+		
+		 {
+			 var info = "<span class='a2 error'>手机号格式不正确</div>"
+			 $(this).parent().append(info);
+			 
+		 } else {
+			 
+			 var info2 = "<span class='a2'>正确！</span>"
+			 $(this).parent().append(info2);
+			 $(this).parent().find('strong').remove(); 
+			 
+		 }	
+    });	
+	
+	
+	
+	$('#send').click(function() {
+		
+		$(".one :input").trigger("blur");
+						
+			if($('.error').length ) {
+					
+			return false;
+		
+		} else {
+		   alert('注册成功！')
+			}
+		
+		});
+	
+	
+ });
+
+</script>
+</head>
+
+<body>
+<form method="post" action="">
+<div class="one">
+<label for="username">用户名：</label>
+<input type="text" id="username" class="a1" />
+</div>
+<div class="one">
+<label for="passwowd">密码：</label>
+<input type="password" id="password" class="a1" />
+</div>
+<div class="one">
+<label for="passwords">确认密码：</label>
+<input type="password" id="passwords" class="a1" />
+</div>
+<div class="one">
+<label for="email">邮件：</label>
+<input type="text" id="email" class="a1" />
+</div>
+<div class="one">
+<label for="tel">手机：</label>
+<input type="text" id="tel" class="a1" />
+</div>
+<div class="two">
+<input type="submit" id="send" value="提交" />
+<input type="reset" id="res" value="重置" />
+
+</div>
+
+
+
+</form>
+</body>
+</html>

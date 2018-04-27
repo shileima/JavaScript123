@@ -1,0 +1,85 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>物体的拖拽 - 面向过程</title>
+</head>
+<style>
+    #img {position: absolute;top:300px;}
+</style>
+<body>
+
+<script>
+//chrome 火狐及标准IE下，阻止了 document上其他元素的拖动，例如选中文字的默认拖动，阻止默认事件。
+
+//非标准的IE8及以下浏览器，采用事件捕获 setCapture 及 releaseCapture
+
+    window.onload=function()
+    {
+        var oDiv=document.getElementById('div1');
+        var oImg = document.getElementById('img');
+		
+		Drag(oImg)
+		Drag(oDiv)
+
+        function Drag(obj){
+		  obj.onmousedown=function(ev)
+        {
+            var ev = ev || event;
+            var disX=ev.clientX-obj.offsetLeft;
+            var disY=ev.clientY-obj.offsetTop;
+
+            if(obj.setCapture)
+            {
+                obj.setCapture();
+            }
+
+            document.onmousemove=function(ev)
+            {
+				var ev = ev || event; // 去掉后，不兼容非的 标准IE8及以下浏览器
+				
+				var L = ev.clientX-disX;
+				var T = ev.clientY-disY;
+				
+				if(L<0){
+					L=0
+					}else if(L>document.documentElement.clientWidth - obj.offsetWidth){
+						L=document.documentElement.clientWidth - obj.offsetWidth
+				}
+				
+				if(T<0){
+					T=0
+					}else if(T>document.documentElement.clientHeight - obj.offsetHeight){
+						T=document.documentElement.clientHeight - obj.offsetHeight
+				}
+
+                obj.style.left= L + 'px';
+                obj.style.top= T + 'px';
+              }
+			  
+
+            document.onmouseup=function()
+            {
+                document.onmousedown=null;
+                document.onmousemove=null;
+                if(obj.releaseCapture)
+                {
+                    obj.releaseCapture();
+                }
+            }
+
+            return false;      //chrome 火狐及标准IE下，阻止了 document上其他元素的拖动，例如选中文字的默认拖动，阻止默认事件。非标准的IE8及以下浏览器，采用事件捕获 setCapture 及 releaseCapture
+        }	
+		}
+
+
+    }
+
+
+</script>
+<p>拖拽时候选中文字看效果！阻止默认事件</p>
+<div id="div1" style="background:#FC0; width:200px; height:200px; position:absolute;"></div>
+<img id="img" src="http://123.206.6.177/j//images/logo.png"/>
+
+</body>
+</html>

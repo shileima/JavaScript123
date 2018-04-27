@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Bbb 通过类式继承 Aaa</title>
+</head>
+
+<body>
+
+<script>
+ 
+ function Aaa()
+  {
+	this.name = [1,2,3];  
+  }
+
+Aaa.prototype.showName = function()
+  {
+	alert(this.name);	 
+  }
+  
+  function Bbb()
+   {
+	 Aaa.call(this);   
+   }
+   
+   //类式继承四句话，暂时将Aaa() 中 prototype 方法存到 F() 函数中；
+   var F = function(){};
+   F.prototype = Aaa.prototype;
+   Bbb.prototype = new F(); 
+   Bbb.prototype.constructor = Bbb;
+   
+   var b1 = new Bbb();
+   
+   b1.name.push(4);
+   alert(b1.name);
+
+   //b1.showName();
+  
+   var b2 = new Bbb();
+   
+  alert(b2.name);
+   //b2.showName();
+  
+</script>
+
+</body>
+</html>

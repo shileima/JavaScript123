@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+</head>
+
+<body>
+
+<script>
+
+var str='abc12 34 43av 345 abd567 9d8 9';  //写一个程序找出其中的数字
+
+alert(str.match(/\d+/g));
+
+
+var person = (function() {
+   var name = 'name';
+   var person = {};
+   function sayName() {
+     alert(name);
+   }
+   person.sayName = sayName;
+   return person;
+})();
+
+if(window.navigator.userAgent.toLowerCase().indexOf('msie 9.0')!=-1){
+    alert('是ie9');
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<html>
+<meta charset="UTF-8">
+<script src="jquery.js"></script>
+<script>
+    $(document).ready(function(){
+        var obj = {
+            name: "我是obj的name",
+            sayName: function () {
+                alert(this.name);
+            }
+        }
+
+        $('#btn').click(obj.sayName)               // 我是button的name
+        $('#btn').click($.proxy(obj.sayName,obj)) // 我是obj的name,$.proxy() 起作用了
+        $('#btn').click($.proxy(obj,'sayName'))  // 我是obj的name,$.proxy() 起作用了
+
+    })
+
+</script>
+
+<button id="btn" name="我是button的name" value="proxy">proxy</button>
+
+
+</html>

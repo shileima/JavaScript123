@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>电子表</title>
+</head>
+<body>
+	<div id="demo">
+		<span id="hours"></span>
+		<span id="fens"></span>
+		<span id="miaos"></span>
+	</div>
+</body>
+<script type="text/javascript">
+	function $(id){
+		return document.getElementById(id);
+	};
+	var hours = $("hours"), fens = $("fens"), miaos = $("miaos");
+	setInterval(function(){
+		var date = new Date();
+		var h = date.getHours(),
+			f = date.getMinutes(),
+			m = date.getMinutes(),
+			s = date.getSeconds();
+		if( h < 10 ){
+			h = "0" + h;
+		};
+		if( f < 10 ){
+			f = "0" + f;
+		};
+		if( s < 10 ){
+			s = "0" + s;
+		};
+		hours.innerText = h + ":";
+		fens.innerText = f + ":";
+		miaos.innerText = s;
+	},1000);
+</script>
+</html>

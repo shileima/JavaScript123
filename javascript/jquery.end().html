@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="author" content="http://www.jb51.net/" />
+<title>jquery .end() 用途</title>
+<script type="text/javascript" src="http://www.caccn.cn/template/damei_tan29/js/jquery.js"></script>
+<script type="text/javascript"> 
+$(document).ready(function(){ 
+  $(".first").find(".div").css("color","green"); 
+  $(".second").find(".div").end().css("color","blue"); 
+  $(".third").find(".js").css("color","blue").end().css("color","red") 
+}) 
+</script>
+</head>
+<body>
+<div>
+  <ul class="first">
+    <li>HTML专区</li>
+    <li>Javascript专区</li>
+    <li class="div">Div+Css专区</li>
+    <li>Jquery专区</li>
+  </ul>
+  <ul class="second">
+    <li>HTML专区</li>
+    <li>Javascript专区</li>
+    <li class="div">Div+Css专区</li>
+    <li>Jquery专区</li>
+  </ul>
+  <ul class="third">
+    <li>HTML专区</li>
+    <li class="js">Javascript专区</li>
+    <li>Div+Css专区</li>
+    <li>Jquery专区</li>
+  </ul>
+</div>
+</body>
+</html>

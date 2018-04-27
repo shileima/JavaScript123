@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+</head>
+<style>
+
+#div1 {width:200px; height:300px; background:green; }
+
+</style>
+
+<body style="height:2000px;">
+
+
+
+<script>
+	window.addEventListener("load", function() {
+	
+	var oDiv=document.getElementById('div1');
+	
+/*	if(oDiv.addEventListener)
+	{
+	  oDiv.addEventListener('DOMMouseScroll',fn,false);	  // 兼容火狐
+	}*/
+	
+	oDiv.onmousewheel=fn;  // 兼容CHROME IE
+	
+	function fn(ev) {
+		
+		var ev = ev || event;
+		
+		var b=true;
+		
+		if(ev.wheelDelta) {
+		    b=ev.wheelDelta>0?true:false;
+		} else
+		{
+		    b=ev.detail < 0?true:false;
+		}
+		  
+		if(b)
+		{
+	  	        oDiv.style.height=oDiv.offsetHeight-10+'px';
+		} else 
+		{
+			    oDiv.style.height=oDiv.offsetHeight+10+'px';
+		}
+		
+		if(ev.preventDefault) // 兼容火狐
+		{
+		   ev.preventDefault();	
+		} 
+			
+		return false;
+	}
+})
+</script>
+
+
+<div id="div1"></div>
+</body>
+</html>

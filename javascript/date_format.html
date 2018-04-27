@@ -1,0 +1,45 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+
+</head>
+
+<body>
+<script>
+
+//第三种  格式为：2010-10-20 10:00:00
+/*    function getLocalTime(nS) {     
+       return new Date(parseInt(nS) * 1000).toLocaleString().replace(/年|月/g, "-").replace(/日/g, " ");      
+    }     
+    alert(getLocalTime(1503463632));*/
+
+//另一种方法
+
+	function getLocalTime(nS) {
+		
+/*	  var newDate = new Date(parseInt(nS) * 1000).toLocaleString().substr(0,10).replace(/\//g,'-');
+*/	  
+      var getYea = new Date(parseInt(nS) * 1000).getFullYear();
+	  var getMon = new Date(parseInt(nS) * 1000).getMonth() + 1;
+      var getDat = new Date(parseInt(nS) * 1000).getDate();
+	  
+	  var newDate = getYea + '-' + Appendzero(getMon) + '-' + Appendzero(getDat);
+
+			return newDate;
+	}
+		
+	alert(getLocalTime(1504164238));
+/*	var date = new Date();
+	alert('toLocaleString(): '+date.toLocaleString())
+	alert('当前时间：'+getLocalTime(date.getTime()/1000))*/
+	
+	function Appendzero(obj)  
+    {  
+        if(obj<10) return "0" +""+ obj;  
+        else return obj;  
+    }  
+</script>
+</body>
+</html>

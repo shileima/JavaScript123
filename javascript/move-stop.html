@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>运动停止（绝对值判断）</title>
+<style>
+
+#div1 { left:500px; margin-top:100px; width:300px; height:300px; background:red; position:absolute}
+
+#div2 { left:100px;  height: 500px; width:1px;   position:absolute; background:black}
+
+#div3 { left:300px; width:1px;  height: 500px;   position:absolute; background:black}
+</style>
+
+<script type="text/javascript">
+var timer=null;
+function move(iTarget)
+{
+	
+	var oDiv=document.getElementById('div1')
+	
+	timer=setInterval(function() 
+   {
+		
+		var speed=0;
+	
+		if(iTarget>oDiv.offsetLeft)
+		{
+		   speed=9;	
+		   
+		} else
+		
+		{
+		   speed=-9;	
+		}
+		
+		if( Math.abs(iTarget-oDiv.offsetLeft)<=Math.abs(speed)) // <=的值必须是个正数，就是必须是7，否则的会多走一个speed的长度再返回来等于目标值；
+		{
+		   clearInterval(timer);
+		   oDiv.style.left=iTarget+'px';
+		} 
+		else
+		{
+
+		   oDiv.style.left=oDiv.offsetLeft+speed+'px';        //使用 left等属性 之前 必须在操作的div 的css中设置left 属性以及 absolute 定位
+		}
+     },30);
+	
+}
+
+
+</script>
+</head>
+
+<body>
+
+<input id="btn1" type="button" onclick="move(100)" value="运动到100" />
+<input id="btn2" type="button" onclick="move(300)" value="运动到300" />
+
+<div id="div1"></div>
+
+<div id="div2"></div>
+
+<div id="div3"></div>
+
+
+</body>
+</html>

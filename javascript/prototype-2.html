@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>prototype 原型</title>
+</head>
+
+<script>
+
+ var arr=[1,2,3,4,5];
+ 
+ var arr2=[2,2,2,2,2];
+ 
+ Array.prototype.sum=function()
+   {
+	   var result=0;
+	  for(var i=0;i<this.length;i++)
+	    {
+		   result+=this[i];
+		  
+	    }
+	   
+	   return result;
+   }
+
+
+ alert(arr.sum());
+ alert(arr2.sum());
+</script>
+
+<body>
+</body>
+</html>

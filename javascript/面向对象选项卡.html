@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>面向对象选项卡</title>
+</head>
+<style>
+
+#div1 input {background:; }
+.active {background:red;}
+#div1 div {width:200px; height:200px; background:#CCC; display:none}
+
+</style>
+<script>
+window.onload = function()
+ {
+	new TabChange('div1'); 
+ }
+
+function TabChange(id)
+ {
+	this.oDiv = document.getElementById(id);
+	this.aInput = this.oDiv.getElementsByTagName('input');
+	this.aDiv = this.oDiv.getElementsByTagName('div');
+	var This = this;
+	
+	for(var i = 0; i<this.aInput.length; i++)
+	 {
+		this.aInput[i].index = i;
+		this.aInput[i].onclick = function()
+		 {
+			This.fnClick(this); 
+		 } 
+	 }
+ }
+
+TabChange.prototype.fnClick = function(oBtn)
+		 {
+			for(var j = 0; j<this.aInput.length; j++)
+			 {
+				this.aInput[j].className = '';
+				this.aDiv[j].style.display = 'none';
+			 }
+			 
+			 oBtn.className = 'active';
+			 this.aDiv[oBtn.index].style.display = 'block';
+		 }
+
+</script>
+
+<body>
+
+<div id="div1">
+
+<input class="active" type="button" value="选项卡一">
+<input type="button" value="选项卡二">
+<input type="button" value="选项卡三">
+
+<div style="display:block;">内容一</div>
+<div style="">内容二</div>
+<div style="">内容三</div>
+
+</div>
+
+</body>
+</html>

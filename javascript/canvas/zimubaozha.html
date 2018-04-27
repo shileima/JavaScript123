@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        var Canvas = {}
+        Canvas.anim = {
+            init(){
+                var canvas = document.querySelector('#canvas')
+                canvas.style.background = '#000'
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                this.cw = window.innerWidth;
+                this.ch = window.innerHeight;
+                this.ctx = canvas.getContext('2d')
+                this.letters = '毛亚琪我喜欢你'
+                this.particles = []
+            },
+            render(){
+                var letterLen = this.letters.length;
+                var particle = {
+                    x : this.cw/2,
+                    y : this.ch,
+                    character : this.letters[~~(Math.random()*letterLen)],
+                    speedX : ~~(Math.random()*20) - 10,
+                    speedY : ~~(Math.random()*20) - 10
+                }
+                this.particles.push(particle);
+                this.drawParticles()
+
+            },
+            drawParticles(){
+                this.fadeRect()
+                var c = this.ctx;
+
+                var particleLen = this.particles.length;
+                for(var i =0; i<particleLen; i++){
+                    var particle = this.particles[i];
+                    c.font = '25px sans-serif'
+                    c.fillStyle = 'red'
+                    particle.x += this.particles[i].speedX;
+                    particle.y *=0.98;
+                    c.fillText(particle.character,particle.x,particle.y)
+                }
+            },
+            fadeRect(){
+                this.ctx.fillStyle = '#000'
+                this.ctx.fillRect(0,0,this.cw,this.ch)
+            }
+
+        }
+        Canvas.anim.init()
+
+        setInterval(function(){
+            Canvas.anim.render()
+        },1000/60)
+
+
+    </script>
+</body>
+</html>

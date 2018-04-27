@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打气球</title>
+    <style>
+        .ballon {
+            position: absolute;
+            height: 160px;
+            width:160px;
+            background-color: #faf9f9;
+            border-radius: 160px 160px 64px 160px;
+            transform: rotate(45deg);
+            box-shadow: -8px -8px 80px -8px #873940 inset;
+        }
+        .ballon:after {
+            position: absolute;
+            bottom:0;
+            right:0;
+            background-color: #fff;
+            content: '';
+            border: 8px solid transparent;
+            border-right-color: #873940;
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+<!--<div class="ballon"></div>-->
+<script>
+
+    var Ballons = [],
+        timer;
+
+    init(10)
+
+    timer = setInterval(move,60)
+
+    document.addEventListener('click',function(ev){
+        ev = ev || event;
+        //console.log(ev.target.className)
+        if(ev.target.className === 'ballon'){
+
+            //直接删除气球元素节点
+            // ev.target.parentNode.removeChild(ev.target)
+            // 动画方式缓慢消失
+            //console.log(this) 指向 document
+            boom.call(ev.target,function(){
+                this.parentNode.removeChild(this);
+                init(1)
+            }.bind(ev.target)) // 同样需要bind（）绑定 this 指向
+        }
+    },false)
+
+    //初始化函数，生成气球节点，定义或添加气球大小，位置，速度，样式等属性
+    function init(num){
+
+        var fragment = document.createDocumentFragment();
+            sW = window.innerWidth,
+            sH = window.innerHeight
+        for(var i = 0; i < num; i++){
+            var ballon = document.createElement('div');
+            var x = ~~(Math.random()*sW)+ 1 - 160;
+                x = Math.max(0,x)
+
+            ballon.className = 'ballon';
+            ballon.style.top = sH -160 + 'px';
+
+            //console.log(ballon.offsetWidth)
+            ballon.style.left = x + 'px';
+            ballon.speed = ~~(Math.random()*10) + 1;
+            Ballons.push(ballon)
+            fragment.appendChild(ballon)
+        }
+
+        document.body.appendChild(fragment)
+    }
+
+    function move(){
+
+        for(var i=0; i<Ballons.length; i++){
+            Ballons[i].style.top = Ballons[i].offsetTop - Ballons[i].speed + 'px';
+            }
+    }
+
+    function boom(callback){
+
+        //使用 bind(this) 来改变 this 指向
+       /*//   console.log(this) // 指向 window
+        this.timer = setInterval(function(){
+        //  console.log(this) //  setinterval 永远指向 window , 不能通过上面的 call 来改变指向
+            this.speed ++ ;
+            this.style.width = this.offsetWidth -10 + 'px';
+            this.style.height = this.offsetHeight -10 + 'px';
+        }.bind(this),1000/60)*/
+        //   console.log(this) // 指向 window
+
+        //使用箭头函数改变指向
+        this.timer = setInterval(()=>{
+            //  console.log(this) //  setinterval 永远指向 window , 不能通过上面的 call 来改变指向
+            if(this.offsetWidth<10){
+
+                clearInterval(this.timer)
+                // 回调函数
+                callback && callback()
+            }
+            this.speed ++ ;
+            this.style.width = this.offsetWidth -10 + 'px';
+            this.style.height = this.offsetHeight -10 + 'px';
+        },1000/60)
+    }
+</script>
+
+</body>
+</html>

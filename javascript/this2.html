@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+/*    var length = 4;
+    var o = {
+        length:5,
+        fun: function(fn){
+            fn() // 第一次 执行主体是 window
+            arguments[0]() // 第二次打印的，这里执行主体是实参列表对象的个数
+        }
+    }
+
+    function me() {
+        console.log(this.length)
+    }
+
+    o.fun(me) // 4 , 1
+//  o.fun(me,me) // 4 , 2*/
+
+    var name = 3;
+    var obj = {
+        name : 5,
+        fun: function(fn){
+            fn()
+        }.bind(this)
+    }
+
+    function me(){
+        console.log(this.name)
+    }
+
+    obj.fun(me) // 3
+
+</script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<script type="text/javascript" src="../javaScript/startMove.js"></script>
+<style>
+
+div { width:100px; height:50px; background: purple; margin:20px 0; border: black 10px solid; filter:alpha(opacity:30); opacity:0.3;}
+</style> 
+
+<script type="text/javascript">
+window.onload=function(){
+var aDiv=document.getElementsByTagName('div');
+
+  for(var i=0; i<aDiv.length; i++)
+  {
+	aDiv[i].onmouseover=function()
+	{
+		
+		clearInterval(this.timer);
+		startMove(this,{'opacity':100,'width':110});
+		 
+	}
+	aDiv[i].onmouseout=function()
+	{
+		
+		clearInterval(this.timer);
+		startMove(this,{'opacity':30,'width':100});
+	 }
+	
+    }
+}
+
+
+</script>
+
+</head>
+
+<body>
+<input id='txt1' type="text" value="" />
+<div></div>
+<div></div>
+<div></div>
+</body>
+</html>

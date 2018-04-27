@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>不用for循环输出[1,2,3,4,5]</title>
+<script>
+
+var arr = [];
+function show(n){
+
+	return (function(){
+	 
+	 arr.unshift(n);
+	 n--;
+	 if(n!=0)
+	  {
+		arguments.callee();  
+	  }
+	 return arr;
+	})()
+}
+alert(show(5))
+</script>
+</head>
+
+<body>
+</body>
+</html>
