@@ -4,21 +4,20 @@
 <meta charset="utf-8">
 <title>函数的扩展</title>
 </head>
-
 <body>
 <!--
 <script>
 // 普通函数写法
-  function Fn(a,b){	  
-	a= a || 10; 
-	b= b || 20;    
+  function Fn(a,b){
+	a= a || 10;
+	b= b || 20;
 	console.log( a + b )
-  }  
+  }
   Fn(0,10); // 20，而不是 10，|| 符号会把 0 当成false ，自动取值 a=10
-  
+
 // ec6 写法 函数默认值写法
- function Fn2(a=10,b=20){	
-	console.log(a+b)  	  
+ function Fn2(a=10,b=20){
+	console.log(a+b)
   }
 
 Fn2(0,10) // 10 解决了传统函数的 错误
@@ -28,25 +27,25 @@ Fn2(0,10) // 10 解决了传统函数的 错误
 function Sum(){
   var args = arguments;
   var res = 0;
-  
+
   for(var i=0; i<args.length; i++)
   {
 	  res += args[i];
-  } 
+  }
   console.log(res)
-	
+
 }
   Sum(1,2,3,4,5)
-  
+
 // 新的写法，“...变量名” 作为参数,不使用 arguments 参数
 
 function Sum1(...arr){
-	
+
   	var res = 0;
-	
+
 	for(var i=0; i<arr.length; i++)
 	{
-	  res+=arr[i];	
+	  res+=arr[i];
 	}
 	console.log(res)
 }
@@ -55,17 +54,17 @@ function Sum1(...arr){
 // 可以设置一个初始值 a 不能写在 arr 后面，必须定义在 arr 前面
 
 function Sum1(a,...arr){
-	
+
   	var res = a;
-	
+
 	for(var i=0; i<arr.length; i++)
 	{
-	  res+=arr[i];	
+	  res+=arr[i];
 	}
 	console.log(res)
 }
   Sum1(100,1,2,3,4,5) //100 + 15
-  
+
 // 使用箭头函数"=>"来定义函数,更简洁！
 
 Fn3 = (a,b) => console.log(a+b)
@@ -83,7 +82,7 @@ var arr = [2,6,4,7,4,8,9,1]
 /*arr.sort(function(a,b){
 	return a-b;
 	})
-	
+
 	console.log(arr) // [1, 2, 4, 4, 6, 7, 8, 9]*/
 
 
@@ -97,14 +96,14 @@ console.log(arr)
 // 箭头函数的 this 指向的是定义所在环境的对象，而不是使用时的对象
 
 function Fn6(){
-	
+
   setTimeout(function(){
 	  console.log(this)
 	  },1000)
   setTimeout(()=>{
-	  console.log(this)  
-  },2000)	
-	
+	  console.log(this)
+  },2000)
+
 }
 
 var obj = {a:1}
@@ -119,7 +118,7 @@ const f= new Fn7(1,2) // 报错 。。。。
 
 </script>
 -->
-<script>
+<!-- <script>
     //箭头函数和 this 指向. 箭头函数可以修复 this 偏移，常规函数不可以
     function foo() {
         setTimeout( () => {
@@ -141,6 +140,56 @@ const f= new Fn7(1,2) // 报错 。。。。
 
     Foo.call( { id: 40 } );
     // id: undefined
+</script> -->
+<!-- <script>
+  {
+    const foo = ()=>{return 2}
+    console.log('foo() === 2', foo() === 2)
+
+    {
+        const foo=()=>{return 1}
+        console.log('foo() === 1', foo() === 1)
+    }
+    console.log('foo() === 2', foo() === 2)
+  }
+</script>
+<script>
+  var a=11
+function test1(){
+  this.a=22;
+  let b=function(){
+    console.log('ES5函数执行结果：',this.a);
+  };
+  b();
+}
+var x=new test1(); // 11 ES5中 this指向函数调用时的对象
+
+var a=11;
+function test2(){
+  this.a=22;
+  let b=()=>{console.log('箭头函数执行结果：',this.a)}
+  b();
+}
+var x=new test2(); // 22 ES6中 this指向函数定义时的对象
+</script> -->
+
+<script>
+  var name='window.name';
+  var outerObj = {
+    name:'outerObjName',
+    innerObj: {
+      name:'innerObj',
+      commonFun:function(){
+        var name = 'commonFun';
+        console.log(this.name)
+      },
+      arrowFun:()=>{
+        console.log(this.name)
+      }
+    }
+  }
+  outerObj.innerObj.commonFun() // 普通函数this指向调用对象的，这里是innerObj调用commonFun，所以 this 就是innerObj.name
+  outerObj.innerObj.arrowFun() // window.name 箭头函数没有 this 指针，指向最外层 window
 </script>
 </body>
 </html>
