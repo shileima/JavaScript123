@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <title>组件的使用</title>
+</head>
+<body>
+    <div id="app">
+        <div style="float: left">
+            <custom-select btn="导航" :list="list1"></custom-select>
+
+        </div>
+        <div style="float: left">
+            <custom-select btn="菜单" :list="list2"></custom-select>
+
+        </div>
+    </div>
+
+
+    <script>
+
+        Vue.component("custom-select",{
+            data: function () {
+                return {
+                    selectShow:false,
+                    val: ''
+                }
+            },
+            props: ["btn","list"],
+            template: `<section class="warp">
+					<div class="searchIpt clearFix">
+						<div class="clearFix">
+							<input type="text" class="keyWord" :value="val" @click="selectShow = !selectShow" />
+							<input type="button" :value="btn">
+							<span></span>
+						</div>
+						<custom-list
+						    v-show="selectShow"
+						    :list="list"
+						    @customeHandle="changeValueHandle"
+						    ></custom-list>
+					</div>
+				</section>`,
+            methods: {
+                changeValueHandle(value){
+                    this.val = value;
+                    this.selectShow = false
+                }
+            }
+        })
+
+        Vue.component('custom-list',{
+            props: ['list'],
+            template: `<ul class="list">
+							<li v-for="item of list" @click="selectValueHandle(item)">{{ item }}</li>
+
+						</ul>`,
+            methods: {
+                selectValueHandle(item){
+                    this.$emit('customeHandle',item)  // 触发这个组件, 监控元素的变化
+                }
+            }
+        })
+
+        new Vue({
+            el: '#app',
+            data: {
+                list1 : ["北京","广州","天津"],
+                list2: ["2017-8-10","2017-5-4","2017-5-5"]
+            }
+        })
+    </script>
+
+</body>
+</html>

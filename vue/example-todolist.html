@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> 动态添加更改任务列表 </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0
+        }
+
+        #container {
+            margin: 30px auto;
+            width: 500px;
+
+        }
+
+        .completed {
+            text-decoration: line-through;
+            color: #eeeeee;
+        }
+
+
+        #todoList li {
+            list-style: none
+        }
+
+        #todoList li input[type=text] {
+            display: none
+        }
+
+        #todoList li.editing input[type=text] {
+            display: block
+        }
+
+        #todoList li.editing .view {
+            display: none
+        }
+
+        .toggle {
+            display: inline-block;
+        }
+
+        .destroy {
+            display: inline-block
+        }
+
+        .view {
+            display: inline-block
+        }
+
+        #filter {
+            margin: 20px 0;
+            height: 20px;
+        }
+
+        #filter div a {
+            padding:3px 15px;
+            text-decoration: none;
+        }
+
+        #filter div a.active {color: red; border-radius: 15px; border:1px solid darkred}
+
+        #todo {clear: both}
+
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <script>
+        window.onload = function () {
+
+            var storage = {
+                save(key,value){
+                    localStorage.setItem(key,JSON.stringify(value))
+                },
+                fetch(key){
+                    return JSON.parse(localStorage.getItem(key)) || []
+                }
+            }
+
+            /*var list = [
+                {
+                    title: '五一长假深圳游',
+                    isChecked: true
+                },
+                {
+                    title: '中秋节北京聚会',
+                    isChecked: false
+                }
+            ]*/
+
+            var list = storage.fetch('Loading')
+
+            var filterObj = {
+                all: function(list){
+                    return list;
+                },
+                finished: function(list){
+                    return list.filter(function(item){
+                        return item.isChecked;
+                    })
+                },
+                unfinished: function(list){
+                    return list.filter(function(item){
+                        return !item.isChecked;
+                    })
+                }
+            }
+
+            var vm = new Vue({
+                el: '#container',
+                data: {
+                    list: list,
+                    value: '',  // 记录输入框的值
+                    curTodo: '', // 记录正在编辑的数据
+                    preTitle: '', // 记录编辑初始状态的值,方便撤销
+                    visibility : 'all' // 记录 hash 值得变化
+                },
+                watch: {
+                    list: {
+                        handler: function(){  // handler 是固定键值
+                            storage.save('Loading', this.list)
+                        },
+                        deep: true  // 深监控,同时监控属性
+                    }
+                },
+                computed: {
+                    noCheckedLen: function(){
+                        return this.list.filter(function(item){
+                            return !item.isChecked
+                        }).length
+                    },
+                    filteredList: function(){
+
+                        //console.log(this == vm); // 先 false 后 true
+                        //console.log(this) // Vue() 这个对象
+                        //console.log(vm) // undefined
+
+                     //   return filterObj[this.visibility](this.list); // 在这里 vm 还没有被完全赋值,等Vue() 执行完成后才把值给vm,这里的 vm 是 undefined , 所以这里不能用vm,  否则 visibility 找不到 Cannot read property 'visibility' of undefined
+
+                        // 判断 hash 值 是否设置过，默认展示全部；
+                        return filterObj[this.visibility] ? filterObj[this.visibility](this.list) : list ;
+
+                    }
+                },
+                methods: {
+                    addTodo() {
+                        if(this.value !=''){
+                            this.list.push({
+                                title: this.value,
+                                isChecked: false
+                            })
+//                            storage.save('Loading',this.list) // 这里可以使用 watch 来统一管理
+                        }
+
+                        this.value = ''
+                    },
+                    delTodo(todo) {  // 添加任务列表
+                        var index = this.list.indexOf(todo)
+                        this.list.splice(index, 1)
+                    },
+                    editTodo(todo) {  // 编辑任务
+                        this.curTodo = todo
+                        this.preTitle = this.curTodo.title
+                    },
+                    compTodo(todo) {  // 完成编辑任务
+                        //this.curTodo.title = todo.title;
+                        this.curTodo = ''
+                    },
+                    cancelTodo(todo) { // 撤销编辑任务
+                        todo.title = this.preTitle
+                        this.preTitle = ''
+                        this.curTodo = ''
+                    }
+                },
+                directives: {
+                    'focus': {
+                        update(el,binding){
+                            if(binding.value === true){
+                                el.focus();
+                            }
+                        }
+                    }
+                }
+
+            })
+
+            function watchHashChange(){
+                    var hash = window.location.hash.slice(1);
+                    vm.visibility = hash;
+            }
+            watchHashChange()
+
+            window.addEventListener("hashchange", watchHashChange)
+        }
+
+    </script>
+
+</head>
+<body>
+<div id="container">
+    <div>
+        <lable>添加任务</lable>
+        <input
+                type="text"
+                @keyup.13="addTodo"
+                v-model="value"
+        >
+    </div>
+
+    <div id="filter">
+        <div style="float: left">
+            <font color="red">{{ noCheckedLen }} 条任务未完成</font>
+        </div>
+        <div style="float: right">
+            <a href="#all" :class="{active:this.visibility === 'all'}">所有任务</a>
+            <a href="#unfinished" :class="{active:this.visibility === 'unfinished'}">未完成任务</a>
+            <a href="#finished" :class="{active:this.visibility === 'finished'}">完成任务</a>
+        </div>
+    </div>
+
+    <div id="todo">
+        <label>任务列表</label>
+        <ul id="todoList">
+            <span v-show="!list.length">还没有添加任何任务</span>
+
+            <li :class="{completed : item.isChecked, editing : item === curTodo}" v-for="item in filteredList">
+
+                <div class="view">
+                    <input class="toggle" type="checkbox" v-model="item.isChecked"/>
+                    <label @dblclick="editTodo(item)">{{ item.title }}</label>
+                    <button class="destroy" @click="delTodo(item)">删除</button>
+                </div>
+                <input
+                        v-focus="curTodo === item"
+                        class="edit"
+                        type="text"
+                        v-model="item.title"
+                        @blur="compTodo(item)"
+                        @keyup.13="compTodo(item)"
+                        @keyup.esc="cancelTodo(item)"
+                />
+
+            </li>
+
+        </ul>
+    </div>
+
+</div>
+</body>
+</html>

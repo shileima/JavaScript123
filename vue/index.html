@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初识Vue.js</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+
+<script>
+    window.onload = function(){
+        let obj = {
+            message : 'Hello Vue!',
+            showName(){
+                alert('obj > showName function()')
+            }
+        }
+        //声明式渲染
+        var vm = new Vue({
+            el : '#demo',
+            data : obj,
+            methods:{
+                showAge(){
+                    alert('Vue > methods > showAge function()')
+                }
+            }
+        })
+        console.log(vm.$data)
+
+        var arr = [2,4,6,8]
+
+        var newArr = arr.map(function(item){
+            return item * 2
+        })
+
+        console.log(newArr)
+    }
+
+</script>
+
+<div id="demo" v-on:click='showName' v-on:mouseover="showAge">
+    {{ message }}
+</div>
+
+</body>
+</html>

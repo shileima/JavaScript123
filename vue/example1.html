@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> 动态添加更改任务列表 </title>
+    <style>
+        #container {
+            margin:0 auto;
+            width:300px;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: #eeeeee;
+        }
+        #todoList li {list-style: none}
+        .toggle {display: inline-block;}
+        .destroy {display: inline-block}
+    </style>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <script>
+        window.onload = function () {
+            var list = [
+                { 
+                    title : '五一长假深圳游',
+                    isChecked : true
+                },
+                { 
+                    title : '中秋节北京聚会',
+                    isChecked : false
+                }
+            ]
+
+            var vm = new Vue({
+                el: '#container',
+                data: {
+                    list : list,
+                    value : ''
+                },
+                methods : {
+                    addTodo(){
+                            this.list.push({
+                                title : this.value,
+                                isChecked : false
+                            })
+                            this.value = ''
+                    },
+                    delTodo(todo){
+                        var index = this.list.indexOf(todo)
+                        this.list.splice(index,1)
+                    }
+                }
+            })
+        }
+
+    </script>
+
+</head>
+<body>
+    <div id="container">
+        <div>
+            <lable>添加任务</lable>
+            <input
+                    type="text"
+                    @keyup.13="addTodo"
+                    v-model="value"
+            >
+        </div>
+
+        <div>
+            <label>任务列表</label>
+            <ul id="todoList">
+                <span v-show="!list.length">还没有添加任何任务</span>
+
+                <li :class="{completed : item.isChecked}" v-for="item in list">
+                    <input class="toggle" type="checkbox" v-model="item.isChecked"/>
+                    <label>{{ item.title }}</label>
+                    <button class="destroy" @click="delTodo(item)">删除</button>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <style>
+        .modal {
+            width:400px;
+            box-shadow: 1px 2px 10px 0 #e0dede;
+            border-radius: 5px;
+            padding:10px;
+        }
+        .modal-header {
+            border-bottom: 1px solid #eee;
+            margin:0;
+        }
+        .modal-content {
+            border-bottom: 1px solid #eee;
+            padding:30px 0;
+        }
+        .modal-footer {
+            padding:20px 0;
+            margin-bottom: 20px;
+        }
+        .modal-footer input {
+            float: right;
+            margin: 2px;
+            padding: 5px 10px;
+            font-size: 16px;
+            border:0;
+        }
+        .blue {
+            color: #fff0ff;
+            background: blue;
+        }
+
+    </style>
+
+</head>
+<body>
+    <!--
+    简单的模板定制使用标签内的props传递参数,复杂一些的模板,例如内容,使用slot来定义
+    -->
+    <div id="app">
+        <custom modal-title="提醒" @on-ok="on" @on-cancel="cancel"></custom>  <!--这里必须是-连接,即烤串形式,不能是驼峰写法 modalTitle-->
+        <custom>
+            <ul slot="modal-content">
+                <li v-for="item of list" >{{item}}</li>
+            </ul>
+
+            <div slot="modal-footer">
+                <span>确定</span>
+                <span>取消</span>
+                <span>返回</span>
+            </div>
+        </custom>
+    </div>
+<script>
+    Vue.component("custom",{
+        props: {
+            modalTitle : {          // 这里必须使用驼峰写法,不能用烤串写法
+                type: String,
+                default: '这是一个模态框(默认标题)'
+            }
+        },
+        methods: {
+            okHandle(){
+                this.$emit('on-ok')
+            },
+            cancelHandle(){
+                this.$emit('on-cancel')
+            }
+        },
+        template: `
+           <div class="modal">
+        <div class="modal-header">
+            <h4>{{ modalTitle }}</h4>
+        </div>
+
+        <div class="modal-content">
+            <div>
+                <slot name="modal-content"></slot>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <slot name="modal-footer">
+                <input class="btn blue" type="button" @click="okHandle" value="确定">
+                <input class="btn" type="button" @click="cancelHandle" value="取消">
+            </slot>
+        </div>
+    </div>
+        `
+    })
+
+    var list= [...'小象学院']
+    new Vue({
+        el: '#app',
+        data : {
+            list : list
+        },
+        methods: {
+            on(){
+                alert('点击了确定按钮')
+            },
+            cancel(){
+                alert('点击了取消按钮')
+            }
+        }
+    })
+
+
+</script>
+</body>
+</html>

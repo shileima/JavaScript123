@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>顶层(Vue中data)向组件(模板)中传输数据</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <!--<script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>-->
+
+
+</head>
+<body>
+
+<div id="app">
+    <h3>父组件使用了name</h3>
+    {{name}}
+    <custom-component :name="name" @custome-click="countHandle"></custom-component>
+</div>
+
+<script>
+    Vue.component('custom-component', {
+        props: ['name'], // 这里注册的是自定义标签 : 后面的 name 自定义属性,属性值 'name' 绑定 data 里的 name 值
+        // 这里必须是函数,不能是一个data对象
+        data(){
+            return {
+                count : this.name
+            }
+        },
+        template: `<div>
+                        <h1>我是一个自定义组件</h1>
+                        <input type="button" value="改变数值" @click="changeValue"/>
+                        <p>子组件中的值 count(count : this.name) name的值没有改变</p>{{ count }}
+                        <!--<p>name:</p>{{ name }}-->
+                        <!--{{ name }}外面必须带外层标签,否则会出错--/>
+                   </div>`,
+        methods: {
+            changeValue(){
+                //this.name++ // 不建议直接更改父组件里的值
+
+                this.count ++  // 组件内的数据,这样不影响父级的数据 name 的值
+
+                this.$emit('custome-click')
+
+            }
+        }
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            name: 0
+        },
+        methods: {
+            countHandle(){
+                this.name ++
+            }
+        }
+    })
+</script>
+
+</body>
+</html>

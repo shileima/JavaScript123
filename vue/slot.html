@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+<div id="app"> <!--这里的作用域是父组件-->
+    {{message}}
+  <custom>
+      {{message}}
+      <div>这是组件标签里的元素</div>
+      <div slot="one">自定义标签name=one</div>
+      <div slot="two">
+          <b>自定义标签two</b>
+          <span>这是第1个元素</span>
+          <span>这是第2个元素</span>
+          <span>这是第3个元素</span>
+          <span>这是第4个元素</span>
+          <span>这是第5个元素</span>
+
+      </div>
+  </custom>
+</div>
+<script>
+
+    Vue.component('custom',{
+        data(){
+            return {
+                message: '我是子组件的message'
+            }
+        },
+        template: `
+            <div>
+                <div>132</div>
+                <slot>我是默认结构,无名的slot</slot>  <!--不定义name 属性时候,匹配自定义标签里的不带slot属性的元素-->
+                <slot name="one">这是带name=one 的slot标签</slot>
+                <slot name='two'></slot>
+            {{message}}
+            </div>
+
+        `
+    })
+
+    new Vue({
+        el: '#app',
+        data: {
+            message: '我是父组件的message'
+        }
+    })
+</script>
+</body>
+</html>

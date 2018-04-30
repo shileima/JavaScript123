@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>模板引擎</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <template id="tpl">
+        <div id="body"><span>这是script标签定义的模板,不一定是script, "template" 来定义也可以</span></div>
+    </template>
+    <style>
+        .red {color:red; font-size: 20px;}
+        .fontSize {font-size: 50px}
+    </style>
+    <script>
+        window.onload = function () {
+
+            // html 模板和字符串模板
+            /*let obj = {
+                name : '小明'
+            }
+
+            var str = '<div id="demo">{{ name }},这是字符串template渲染的数据</div>'
+
+            var vm = new Vue({
+                el : '#header',
+                data : obj,
+ //               template : str
+                template : "#tpl"
+            })*/
+
+
+            // render() 函数 : (createElement: () => VNode) => VNode
+            /*
+            字符串模板的代替方案，允许你发挥 JavaScript 最大的编程能力。
+            render 函数接收一个 createElement 方法作为第一个参数用来创建 VNode。
+            如果组件是一个函数组件，渲染函数还会接收一个额外的 context 参数，为没有实例的函数组件提供上下文信息。
+            * */
+
+            let obj = {
+                name : '小明',
+                addClass : true
+            }
+
+            var str = '<div id="demo">{{ name }},这是字符串template渲染的数据</div>'
+
+            var vm = new Vue({
+                el : '#header',
+                data : obj,
+                render(createElement){
+                  var res = createElement(
+                        "ul",
+                        {
+                            class : {red : true}, // 这里直接添加false或true , 行间的话添加 :class="{red:addClass}"
+                            style : {
+                                fontSize : '50px',
+                                background : 'yellow'
+                            },
+                            attrs : {
+                                abc : 'Loading'
+                            },
+                            domProps : {
+                                innerHTML : '<div>我是domProps添加的innerHTML</div>'
+                            },
+                            on : {
+                                click : "javascript:;"
+                            }
+                        },
+                        [
+                            createElement('li',1),
+                            createElement('li',2),
+                            createElement('li',3)
+                        ]
+                    )
+                    console.log(res)
+
+                    return res;
+                }
+
+
+            })
+
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div id="header" class="fontSize" :class="{red:addClass}">
+            <span >Hello</span>
+        </div>
+    </div>
+
+</body>
+</html>

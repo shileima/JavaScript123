@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <title>动态组件</title>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="按钮一" @click="tabChange(1)" />
+    <input type="button" value="按钮二" @click="tabChange(2)" />
+    <input type="button" value="按钮三" @click="tabChange(3)" />
+    <component :is="current"></component>
+</div>
+
+<script>
+
+    var custom1 = Vue.component('custom1',{
+        template : `<div>这是组件 custom1</div>`
+    })
+
+
+    var custom2 = Vue.component('custom2',{
+        template : `<div>这是组件 custom2</div>`
+    })
+
+
+    var custom3 = Vue.component('custom3',{
+        template : `<div>这是组件 custom3</div>`
+    })
+
+    new Vue({
+        el: "#app",
+        data: {
+            current: custom1
+        },
+        methods:{
+            tabChange(i){
+                this.current = 'custom' + i;
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

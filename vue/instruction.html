@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue 指令</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+    <script>
+        window.onload = function(){
+
+            // v-bind 简写 :
+            /*
+                动态地绑定一个或多个特性，或一个组件 prop 到表达式。
+
+                在绑定 class 或 style 特性时，支持其它类型的值，如数组或对象。可以通过下面的教程链接查看详情。
+
+                在绑定 prop 时，prop 必须在子组件中声明。可以用修饰符指定不同的绑定类型。
+
+                没有参数时，可以绑定到一个包含键值对的对象。注意此时 class 和 style 绑定不支持数组和对象。
+            */
+
+            // v-on  简写 @
+            /*
+            绑定事件监听器。事件类型由参数指定。表达式可以是一个方法的名字或一个内联语句，如果没有修饰符也可以省略。
+
+            从 2.4.0 开始，v-on 同样支持不带参数绑定一个事件/监听器键值对的对象。注意当使用对象语法时，是不支持任何修饰器的。
+
+            用在普通元素上时，只能监听 原生 DOM 事件。用在自定义元素组件上时，也可以监听子组件触发的自定义事件。
+
+            在监听原生 DOM 事件时，方法以事件为唯一的参数。如果使用内联语句，语句可以访问一个 $event 属性：v-on:click="handle('ok', $event)"。
+            */
+
+            // v-html
+            /*更新元素的 innerHTML 。注意：内容按普通 HTML 插入 - 不会作为 Vue 模板进行编译 。
+            如果试图使用 v-html 组合模板，可以重新考虑是否通过使用组件来替代。
+
+            在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。只在可信内容上使用 v-html，
+            永不用在用户提交的内容上。*/
+
+            let obj = {
+                id : 'show',
+                html : '<div id="dd">这是html模板</div>'
+            }
+
+            new Vue({
+                el : '#demo',
+                data : obj,
+                methods : {
+                    showName(){
+                        console.log(1)
+                    }
+                }
+            })
+        }
+
+
+
+    </script>
+</head>
+<body>
+    <div id="demo" :customClass="id" @click="showName" v-html="html">{{ id }}</div>
+</body>
+</html>
