@@ -7,7 +7,7 @@
 </style>
 <script>
     window.onload = function(){
-        var red = false;
+        var red = true;
         var blue = false;
         /*var html = document.createElement('div')
         html.innerHTML =
@@ -31,8 +31,18 @@
     //    console.log(str3.includes('ao'))
         console.log(str3.startsWith('X')) // false 区分代大小写
         console.log(str3.endsWith('ang')) //true
-    }
 
+    //模板字符串循环 li
+        let a = ['Rosen','Jimi','Loading']
+        let strLi = `
+        ${
+            a.map(name => `<li>hi,I am ${name}</li>`).join('')
+        }
+        `;
+        let oUl = document.createElement('ul');
+        oUl.innerHTML = strLi;
+        document.querySelector('#div1').appendChild(oUl); // appendChild(node)里面必须是一个节点对象，不能使字符串
+    }
 </script>
 <body>
 <h1>ES6中字符串的扩展</h1>
