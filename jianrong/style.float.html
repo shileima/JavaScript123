@@ -1,0 +1,71 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="../jquery.min.js"></script>
+<script type="text/javascript">
+
+/* 使用JQ最简单
+    $(document).ready(function(e) {
+    $('div').css('float','left');
+ });
+*/
+
+window.onload=function()
+{
+	/* if 判断浏览器后分别执行不同代码。
+	 var userAgent = navigator.userAgent;
+	 var isOpera = userAgent.indexOf("Opera") > -1;
+	 
+	 if (userAgent.indexOf("compatible") > -1 && userAgent.indexOf("MSIE") > -1 && !isOpera) {
+         document.getElementById('div1').style.styleFloat="left";
+         document.getElementById('div2').style.styleFloat="left";
+    } else
+	
+	{
+		 document.getElementById('div1').style.cssFloat="left";
+         document.getElementById('div2').style.cssFloat="left";
+	}*/
+
+    var oDiv1=document.getElementById('div1');
+	var oDiv2=document.getElementById('div2');
+	
+	oDiv1.style['cssFloat' in oDiv1.style?'cssFloat':'styleFloat']='left';
+	oDiv2.style['cssFloat' in oDiv2.style?'cssFloat':'styleFloat']='left';
+
+
+
+
+
+}
+</script>
+</head>
+
+<body>
+
+
+<div id="div1" style="border:red 1px solid; margin:10px; padding:5px; width:500px;">
+<h2>CSS "float" 值 </h2>
+<p>
+访问一个给定CSS 值的最基本句法是：object.style.property，使用驼峰写法来替换有连接符的值，例如，访问某个ID为"header"的 div 的 background-color值，我们使用如下句法：<br> 
+document.getElementById("header").style.backgroundColor= "#ccc"; 
+但由于"float"这个词是一个JavaScript保留字，因此我们不能用object.style.float来访问，
+
+</p>
+</div>
+
+<div id="div2" style="border:green 1px solid;  margin:10px; padding:5px; width:500px;">
+<h2>我们可以在两种浏览器中这么做： </h2>
+<p>
+在IE中这样写：<br>  
+document.getElementById("header").style.styleFloat = "left"; <br> 
+在Firefox中这样写： <br> 
+document.getElementById("header").style.cssFloat = "left"; <br> 
+
+</p>
+
+</div>
+
+</body>
+</html>
