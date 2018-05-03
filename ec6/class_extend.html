@@ -2,8 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>无标题文档</title>
-
+<title>弹球</title>
 
 <style>
 canvas {		
@@ -18,28 +17,25 @@ canvas {
 <!--<script src="main.js"></script>-->
 <script>
 
+const canvas = document.querySelector('#canvas');
+const ctx = canvas.getContext('2d');
+const w = canvas.width = 600;
+const h = canvas.height = 400;
 
-	const canvas = document.querySelector('#canvas');
-	const ctx = canvas.getContext('2d');
-
-	const w = canvas.width = 600;
-	const h = canvas.height = 400;
-
-
+//这是方法(父类)
 class Ball {
-	
   constructor(x,y,r){
-	  
+	console.log(this) // SuperBall
 	this.x = x;
 	this.y = y;
-	this.r = r;  
+	this.r = r;
 	//this.color = 'rgb('+ ~~Ball.rpFn([10,255]) +',' + ~~Ball.rpFn([10,255])+','+ ~~Ball.rpFn([10,255])+')';
 	this.color = `rgb(${~~Ball.rpFn([10,255])},${~~Ball.rpFn([10,255])},${~~Ball.rpFn([10,255])})`
+	//这里调用方法必须用Ball.rpFn()，不能使用this.rpFn()
 	return this;
   }
   
   render(ctx){
-	  
 	ctx.save();
 	ctx.translate(this.x,this.y);
 	ctx.fillStyle = this.color;
@@ -51,82 +47,64 @@ class Ball {
   }
 	  
    static rpFn(arr){
-	  
-	let max = Math.max(...arr),
+	let max = Math.max(...arr), // ... 将一个数组转为用逗号分隔的参数序列，Math.max(10,255)
 	 min = Math.min(...arr);
 	return Math.random()*(max - min) + min;
    }	  
-	
-} 
+}
  	
+//SuperBall这是构造函数
 class SuperBall extends Ball {
 	
-  constructor(x,y,r){
-	  
-	  super(x,y,r)
-	  this.vy = SuperBall.rpFn([2,4]);  // this 必须出现在 super() 之后， 否则会报错
-	  this.g = SuperBall.rpFn([0.2,0.4]);
-	  	 this.a = 0;
-		 return this;	 // 构造函数必须返回 return this 
-  }
-  
-  move(ctx) {
-	  
-	 // super() // super() 只能在构造函数中去调用，不能 在方法中 执行
-	 
-	 this.y += this.vy;
-	 this.vy += this.g;
+	constructor(x,y,r){
+		super(x,y,r)
+		console.log('SuperBall子类:',this)
+		this.vy = SuperBall.rpFn([2,4]);  // this 必须出现在 super() 之后， 否则会报错
+		this.g = SuperBall.rpFn([0.2,0.4]);
+		this.a = 0;
+		return this;	 // 构造函数必须返回 return this 
+	}
 
-     let current = this.vy *-0.75;
-	 
-	 if(this.y + this.r >= ctx.canvas.height){
-		 
-		 this.y = ctx.canvas.height - this.r;
-		 
-		 if(Math.abs(current - this.a) <0.01) return false;
-		 
-		 this.a = this.vy*= -0.75;
-		 
-	 }
-	  
-	  ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
-	  
-	  super.render(ctx);
-	  
-	  return true;
-  }
-	
+	move(ctx) {
+		// super() // super() 只能在构造函数中去调用，不能 在方法中 执行
+		this.y += this.vy;
+		this.vy += this.g;
+
+		let current = this.vy *-0.75;
+
+		if(this.y + this.r >= ctx.canvas.height){
+			this.y = ctx.canvas.height - this.r;
+			if(Math.abs(current - this.a) <0.01) return false;
+			this.a = this.vy*= -0.75;
+		}
+			
+		ctx.clearRect(0,0,ctx.canvas.width,ctx.canvas.height);
+		super.render(ctx);
+		return true;
+	}
 }
-
 
 let ball, timer;
 	
-
-
-   canvas.onclick = function(ev){
-    
-    ev = ev || window.event;
-
-    let PageX = ev.clientX, PageY = ev.clientY;
-		
+canvas.onclick = function(ev){
+	ev = ev || window.event;
+	let PageX = ev.clientX, 
+	PageY = ev.clientY;
 	let r = ~~SuperBall.rpFn([15,35])
-	
+
 	ctx.clearRect(0,0,600,400)
 	ball = new SuperBall(PageX,PageY,r).render(ctx);
 
 	ballMove()
-    }
+}
 
-	 function ballMove(){
+function ballMove(){
+	timer = window.requestAnimationFrame(ballMove);
+	if(!ball.move(ctx)){
+		window.cancelAnimationFrame(timer);
+	}
+}
 
-    	timer = window.requestAnimationFrame(ballMove);
-
-    	if(!ball.move(ctx)){
-    		window.cancelAnimationFrame(timer);
-    	}
-    }
-
-	
 </script>
 </body>
 </html>
