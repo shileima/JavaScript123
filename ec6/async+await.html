@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>async+await异步代码优化</title>
+</head>
+<body>
+
+<script>
+    var b = 20;
+    async function fn(){
+        let a = 10;
+        let myName = await fn2('loading');
+        console.log(myName);   
+    }
+    function fn2(name) {
+        setTimeout(()=>{
+            return name; 
+        },2000)  
+    }
+    fn() //undefined
+</script>
+
+//特定时间后打印1
+<script>
+    var b = 20;
+    async function fn(val,ms){
+        let a = 10;
+        await fn2(ms);
+        console.log(val);   
+    }
+    function fn2(ms) {
+        return new Promise((resolve)=>{
+            setTimeout(resolve,ms)
+        })
+    }
+    fn('loading',2000) // loading
+</script>
+
+//特定时间后打印2
+<script>
+    let promise = function (val){
+        return new Promise(function (resolve, reject){
+            setTimeout(()=>{
+                console.log(val);
+                resolve(val);
+            },1000);
+        });
+    };
+
+    let gen = async function (){
+        let p1 = await promise('1');
+        let p2 = await promise('2');
+        let p3 = await promise('3');
+    };
+    gen() // 1...2...3
+</script>
+
+<script>
+//经过async修饰之后，自动变成promise对象
+async function f() {
+  return 'hello world';
+}
+
+f().then(v => console.log(v))  // "hello world" ,去掉 async后会报错
+</script>
+
+<script>
+//错误处理 
+async function f() {
+  throw new Error('出错了');
+}
+
+f().then(
+  v => console.log(v),
+  e => console.log(e)
+)
+// Error: 出错了
+</script>
+
+</body>
+</html>
