@@ -23,7 +23,48 @@
     fn() //undefined
 </script>
 
-//特定时间后打印1
+<!-- 将上述代码修改成以下就正常了 -->
+<script>
+    var b = 20;
+    async function fn(){
+        let a = 10;
+        let myName = await fn2('cooking'); //  await 是要等待 promise的. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
+        console.log(myName); 
+    }
+    function fn2(name) {  
+        return new Promise(resolve => {
+            setTimeout(() => {
+            resolve(name);
+            }, 2000);
+        });
+    }
+    fn() // cooking
+</script>
+
+<!-- //async修饰的函数总是返回一个Promise对象，是为了用异步的方式实现同步逻辑。
+//If a Promise is passed to an await expression, 
+//it waits for the Promise to be fulfilled and returns the fulfilled value. -->
+
+<script>
+var b = 20;
+    async function fn(){
+        let a = 10;
+        let myName = await fn2('loading');
+        console.log(myName); 
+    }
+
+    //这样会先输出111,再输入loading，如果不使用async，由于setTimeout是异步的，会先输出undefind再输出111
+    async function fn2(name) {  
+        return new Promise(resolve => {
+            setTimeout(() => {
+              console.log(111)
+              resolve(name);
+            }, 2000);
+          });
+    }
+    fn()
+</script>
+<!-- 特定时间后打印1 -->
 <script>
     var b = 20;
     async function fn(val,ms){
@@ -39,7 +80,7 @@
     fn('loading',2000) // loading
 </script>
 
-//特定时间后打印2
+<!-- 特定时间后打印2 -->
 <script>
     let promise = function (val){
         return new Promise(function (resolve, reject){
