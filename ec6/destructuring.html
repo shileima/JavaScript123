@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>解构 Destructuring</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <script>
+       let a = ['a', 'b', 'c', 'd' ];
+        // ES6 
+        for ( var val of a ) {
+            console.log( val );
+        } // "a" "b" "c" "d"
+        // ES6 之前
+        for ( var idx in a ) {
+            console.log( idx );
+        }  // 0 1 2 3
+    </script>
+</body>
+</html>
