@@ -1,0 +1,30 @@
+<script type="text/javascript">
+	function Person(name,age,job){
+		var o = new Object();
+		o.name = name;
+		o.age = age;
+		o.job = job;
+		o.sayName = function(){
+			alert(this.name);
+		};
+		return o;
+	}
+
+	var person1 = new Person('构造函数 name','23','manager'); // 构造函数
+
+	var person2 = Person('工厂模式 name','23','manager'); // 工厂模式
+
+	console.log(person1.name)
+	console.log(person2.name)
+
+	// person1.sayName()
+
+	// person2.sayName()
+
+	console.log(person1.constructor)
+	console.log(person2.constructor)
+
+
+
+	
+</script>

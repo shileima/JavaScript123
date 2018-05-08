@@ -1,0 +1,34 @@
+<script type="text/javascript">
+
+	// 原型的简写方法
+	function Person(){};
+		Person.prototype ={
+			name : "name",
+			age : 29,
+			job : "job",
+			sayName : function(){
+				return this.name;
+			}
+		};
+
+	// 原型语法的标准写法
+	function People(){};
+		People.prototype.name = "name";
+		People.prototype.age = 29;
+		People.prototype.job = "job";
+		People.prototype.sayName = function(){
+			return this.name;
+		}
+
+		
+	
+	//由于重写了原型，p1的构造函数已经不是 Person 了，而是 Object
+	var p1 = new Person();
+	console.log(p1.constructor) // Object
+
+	// 这里没有重写原型，所以 constructor 还是指向构造函数 People
+	var people = new People();
+	console.log(people.constructor) // People
+
+
+</script>

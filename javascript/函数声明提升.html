@@ -1,0 +1,14 @@
+<!-- <script>
+    alert(sum(12,13)); // 25； 执行正常，函数声明 function sum（）{} 将 sum 提升到顶部，所以不会报错
+    function sum(n1,n2){
+        return n1+n2;
+    }
+</script> -->
+
+<script>
+    alert(sum(12,13)); // sum is not a function，sum 刚开始被声明提升到了顶部，
+    //但是这个 sum 还没有被赋予函数 function，所以报错
+    var sum = function (n1,n2){
+        return n1+n2;
+    }
+</script>

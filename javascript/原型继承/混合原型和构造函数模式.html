@@ -1,0 +1,29 @@
+<script type="text/javascript">
+
+	function Person(name,age,job){
+		this.name = name,
+		this.age = age,
+		this.job = job,
+		this.friends = ["Frank","Jordan"]
+	};
+
+	Person.prototype = {
+		constructor: Person,
+		sayName : function(){
+			alert(this.name)
+		}
+	};
+
+	var person1 = new Person("Loading",32,"Computor");
+	var person2 = new Person("Francis",42,"factory");
+
+	person1.friends.push("Vam");
+
+	console.log(person1.friends)
+	console.log(person2.friends)
+
+	console.log(person1.sayName === person2.sayName) // true
+
+	person1.sayName()
+
+</script>

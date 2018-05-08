@@ -1,0 +1,24 @@
+<script type="text/javascript">
+	function Person(name,age,job){
+		this.name = name;
+		this.age = age;
+		this.job = job;
+		this.sayName = function(){
+			return this.name;
+		}
+	}
+
+	var person = new Person('Loading','23','manager')
+
+	alert(person.sayName()) // Loading
+
+	Person("windowsName","1980","windowsJob")
+
+	alert(job) // windowsName
+	alert(window.job) // windowsName
+
+	var o = new Object();
+	Person.call(o,"Jack","43","Shoper");
+
+	alert(o.age) // 43
+</script>

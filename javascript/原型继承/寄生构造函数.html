@@ -1,0 +1,38 @@
+<script type="text/javascript">
+	function specialArray(){
+		var arr = new Array();
+		
+		arr.push.apply(arr, arguments);
+		arr.toPipedString = function(){
+			return this.join("-");
+		};
+		return arr;
+	}
+
+	var person1 = new specialArray('构造函数 name','23','manager'); // 构造函数
+
+	var person2 = specialArray('工厂模式 name','23','manager'); // 工厂模式
+
+	console.log(person1.constructor)
+	console.log(person2.constructor)
+
+	console.log(person1.toPipedString())
+	console.log(person2.toPipedString())
+
+	// 总结： 寄生构造函数模式和工厂模式没有本质区别，通过new 操作符的就叫寄生构造函数模式，直接调用的就叫工厂模式
+
+	// 你要知道，通过new 来调用函数，会自动执行下面操作
+
+	// 	1，创建一个全新的对象
+
+	// 	2，这个对象会被执行[[prototype]]连接原型
+
+	// 	3，函数调用中的this会绑定到新对象
+
+	// 	4，如果函数没有返回其他对象，那么new 构造就会自动返回这个新对象
+
+	// 由于这里new调用和直接调用都返回values，所以a,b引用的数组对象是一样的
+
+
+	
+</script>

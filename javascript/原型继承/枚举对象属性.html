@@ -1,0 +1,14 @@
+<script type="text/javascript">
+	function Person(){};
+		Person.prototype.name = "name";
+		Person.prototype.age = 29;
+		Person.prototype.job = "job";
+		Person.prototype.sayName = function(){
+			return this.name;
+		}
+	
+	//列出可枚举属性的字符串数组
+	console.log(Object.keys(Person.prototype)) // ["name", "age", "job", "sayName"]
+	//无论是否可枚举，一律列出
+	console.log(Object.getOwnPropertyNames(Person.prototype)) // ["constructor", "name", "age", "job", "sayName"]
+</script>

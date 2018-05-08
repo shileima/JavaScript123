@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<!-- saved from url=(0115)file:///Users/shilei/Desktop/%E8%BD%AC%E5%9E%8B%E5%87%BD%E6%95%B0%E4%B8%8E%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>转型函数与构造函数</title>
+</head>
+<body>
+    <script>
+        var value = '25';
+        var number = Number(value);
+        alert(typeof number); // number   转型函数
+
+        var number2 = new Number(value);
+        alert(typeof number2); // object  构造函数 构造出来一个Number 函数的实例
+
+        var number3 = new Object('25');
+        alert(number3 instanceof String); // true
+
+        var number4 = new Object(25);
+        alert(number4 instanceof Number); // true
+
+        var s1 = "text";
+        s1.color = "red";
+        alert(s1.color); // undefined
+
+        var s2 = null;
+        s2.color = "red";
+        alert(s2.color);
+    </script>
+
+</body></html>
