@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#parent { height:305px; width:1000px; overflow:hidden;}
+#parent div { width:300px; height:300px; border:1px solid #000; margin-bottom:10px; }
+#parent ul { float:right;}
+</style>
+<script src="jquery-1.11.1.js"></script>
+<script src="angular.min.js"></script>
+<script>
+  
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope','$cacheFactory',function($scope,$cacheFactory){
+	
+	var cache = $cacheFactory('myCache',{capacity:2});
+	
+	cache.put('name','hello');
+	cache.put('age','22');
+	cache.put('sex','男');
+	
+	//console.log(cache.get('name'))
+	//console.log(cache.info());
+
+cache.remove('sex');
+	
+	console.log(cache.get('sex'))
+	
+}]);
+
+</script>
+</head>
+
+<body>
+<div id="parent" ng-controller="Aaa">
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+
+<script>
+ var a = {'name':'hello','age':20}
+ var result = [];
+ 
+ angular.forEach(a,function(value,i)
+  {
+	//console.log(i); 
+	//console.log(value);
+	this.push(i+ '-' +value);
+	
+	 
+  },result)
+  
+ console.log(result);
+</script>
+</head>
+
+<body>
+
+
+</body>
+</html>

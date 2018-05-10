@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+.active1 {background:#090}
+.active2 {background:#CC6}
+
+</style>
+<script src="angular.min.js"></script>
+
+<script>
+
+var app = angular.module('myApp',[]);
+app.controller('myCtr',['$scope','$filter',function($scope,$filter){
+	var dataList = [
+	 {color:'yellow',age:'23'},
+	 {color:'orange',age:'55'},
+	 {color:'blue',age:'78'},
+	 {color:'red',age:'98'},
+	 {color:'purple',age:'12'},
+	 {color:'green',age:'25'}
+	]
+	
+	$scope.newData = dataList;	// 把数据复制给一个新值保存，不影响再次搜索时候导致原数据不完整。
+	
+	$scope.fnSort = function(arg){
+	 
+	 arguments.callee['fnSort'+arg] = !arguments.callee['fnSort'+arg]; // arguments.callee['fnSort'+arg] 为false，取反，所以默认为真，点击后取反，为false，循环。
+	 
+	 $scope.newData = $filter('orderBy')(dataList,arg,arguments.callee['fnSort'+arg])	
+		
+	}
+	
+
+	
+	$scope.fnSearch = function(){
+	 
+	// $scope.newData = $scope.dataList;
+	 
+	 $scope.newData = $filter('filter')(dataList,$scope.val,false);
+	 	
+	 //$scope.dataList = $scope.allData;
+	}
+	
+	}]);
+
+</script>
+
+</head>
+
+<body ng-app='myApp' ng-controller='myCtr'>
+<input ng-model='val' type="text"><input type="button" ng-click="fnSearch()" value="搜索">
+<table border="1">
+<tr>
+ <th ng-click="fnSort('color')">color</th>
+ <th ng-click="fnSort('age')">age</th>
+</tr>
+
+<tr ng-repeat="data in newData" class="{{$even?'active1':'active2'}}">
+ <td>{{data.color}}</td>
+ <td>{{data.age}}</td>
+</tr>
+
+</table>
+</body>
+</html>

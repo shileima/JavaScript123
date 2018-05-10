@@ -1,0 +1,93 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+
+<title>Angular拖拽</title>
+
+<style>
+#div1 {width: 100px; height: 100px; position: absolute;background: red;}
+</style>
+
+<!-- <script src="angular.js"></script> -->
+<script src="jquery-1.11.1.js"></script>  <!-- 必须先引入jQuery文件，后引入AngularJS文件，否则出错 -->
+<script src="angular.min.js"></script>
+
+
+<script>
+
+var m1 = angular.module('myApp',[]);
+m1.directive('myDrag',function(){
+	return {
+		restrict: 'A',
+
+		link: function (scope, iElement, iAttrs) {
+
+			var disX=0;
+			var disY=0;
+
+			iAttrs.myDrag = angular.equals(iAttrs.myDrag, 'true')
+
+			console.log(iAttrs.myDrag)
+
+			iElement.on('mousedown',function(ev){
+
+				
+
+				var This = this;
+				disX = ev.pageX - $(this).offset().left;    //pageX 不能写成 PageX 必须驼峰写法；
+				disY = ev.pageY - $(this).offset().top;
+
+				
+
+				if(iAttrs.myDrag){
+					var $line = $('<div>');
+					$line.css({ width : $(this).outerWidth() , height : $(this).outerHeight() , position : 'absolute' , left : $(this).offset().left , top : $(this).offset().top , border : '1px gray dotted'});
+					$('body').append($line);
+				}
+
+				
+
+				$(document).on('mousemove',function(ev){
+					if(iAttrs.myDrag){
+						$line.css('left',ev.pageX - disX);
+						$line.css('top',ev.pageY - disY);
+					}
+					else{
+						$(This).css('left',ev.pageX - disX);
+						$(This).css('top',ev.pageY - disY);
+					}
+				});
+
+
+
+				$(document).on('mouseup',function(){
+					$(document).off();
+					if(iAttrs.myDrag){
+						$(This).css('left',$line.offset().left);
+						$(This).css('top',$line.offset().top);
+						$line.remove()
+
+
+					}
+                    
+				});
+
+			  //return true;
+
+			});
+			
+		}
+	};
+});
+
+</script>
+</head>
+
+<body>
+
+<div id="div1" my-drag='true'></div>
+
+
+</body>
+</html>

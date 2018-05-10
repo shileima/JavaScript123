@@ -1,0 +1,70 @@
+<!doctype html>
+<html ng-app="myApp1">
+<head>
+<meta charset="utf-8">
+
+<title>无标题文档</title>
+
+<style>
+#div1 { width: 300px; height: 300px; background:red; position:absolute;}
+</style>
+
+<!-- <script src="angular.js"></script> -->
+<script src="jquery-1.11.1.js"></script>  <!-- 必须先引入jQuery文件，后引入AngularJS文件，否则出错 -->
+<script src="angular.min.js"></script>
+
+
+<script>
+
+var app1 = angular.module('myApp1',[]);
+
+app1.directive('myDrag', function () {
+    return {
+        restrict : 'A',
+
+        link : function(scope,element,attr){
+                
+                
+                var disX = 0;
+                var disY = 0;
+                element.on('mousedown',function(ev){
+
+                var This = this;
+
+                disX = ev.pageX - $(This).offset().left;
+                disY = ev.pageY - $(This).offset().top;
+
+                $(document).on('mousemove',function(ev){
+
+                    $(This).css('left',ev.pageX - disX);
+                    $(This).css('top',ev.pageY - disY);
+
+                })
+
+                    
+
+                $(document).on('mouseup',function(){
+                    $(document).off();
+                });
+
+                return false;
+
+
+
+            });
+        }
+    };
+    
+})
+
+
+</script>
+</head>
+
+<body>
+
+<div id="div1" my-drag></div>
+
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>ng-click</title>
+<script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+<script type="text/javascript">
+  var app=angular.module('myApp',[]);
+  app.controller('myCtrl',function($scope){
+	  
+	  
+	  $scope.pages={
+		first: true,
+		second:false,
+		third: false,  
+		  
+	  };
+	  
+	  $scope.togglePage=function(thisPage){
+		  
+		  for( var i in $scope.pages)
+		    {
+			   $scope.pages[i]=false;	
+			}
+		   $scope.pages[thisPage]=true;
+		  
+		  };
+	});
+</script>
+</head>
+
+<body ng-app="myApp">
+
+<div class="main" ng-controller="myCtrl">
+<button ng-click="togglePage('first')">商品详情</button>
+<button ng-click="togglePage('second')">用户评论</button>
+<button ng-click="togglePage('third')">图片展示</button>
+
+<div ng-show="pages.first">商品展示的详情页面 </div>
+<div ng-show="pages.second">用户评论页面 </div>
+<div ng-show="pages.third">图片展示页面 </div>
+</div>
+
+</body>
+</html>

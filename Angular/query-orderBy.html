@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>搜索过滤和按规则排序</title>
+ <script src="http://apps.bdimg.com/libs/angular.js/1.2.16/angular.min.js"></script>
+ <script>
+   
+   var app=angular.module('myApp',[]);
+   app.controller('myCtrl',function($scope){
+	   
+	   $scope.persons=[
+	    {"name":"xingoo","age":25},
+		 {"name":"zhanghdan","age":22},
+		  {"name":"jordan","age":45},
+		   {"name":"Alice","age":34},
+		    {"name":"chrise","age":10},
+	   ]
+	    
+		$scope.order="name";
+		
+	   })
+   
+ 
+ </script>
+</head>
+
+<body ng-app="myApp">
+ <div ng-controller="myCtrl">
+ 搜索：<input ng-model="query"/>
+ <select ng-model="order">
+   <option value="name">Name</option>
+   <option value="age">Age</option>
+ 
+ </select>
+   <li ng-repeat="person in persons | filter:query | orderBy:order">
+   
+   {{person.name}} {{person.age}}
+   
+   </li>
+ </div>
+</body>
+</html>

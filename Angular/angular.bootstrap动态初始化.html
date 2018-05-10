@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+<script>
+
+var app1 = angular.module('myApp1',[]);
+app1.controller('Aaa',['$scope',function($scope){
+	$scope.name = 'hello';	
+}]);
+/*app1.controller('Baa',['$scope',function($scope){
+	$scope.name = '张思';	
+}]);*/
+
+var app2 = angular.module('myApp2',[]);
+app2.controller('Baa',['$scope',function($scope){
+	$scope.name = '张思';	
+}]);
+
+/*document.onclick = function()*/
+window.onload = function()
+{
+  var aDiv = document.getElementsByTagName('div');
+  
+  angular.bootstrap(aDiv[0],['myApp1']);
+  angular.bootstrap(aDiv[1],['myApp2']);
+	
+}
+
+</script>
+</head>
+
+<body>
+
+<div ng-controller="Aaa" >
+<p>{{name}}</p>
+</div>
+
+<div ng-controller="Baa">
+<p>{{name}}</p>
+</div>
+
+</body>
+</html>

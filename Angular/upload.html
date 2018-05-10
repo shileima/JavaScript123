@@ -1,0 +1,38 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+
+</style>
+<script src="jquery-1.11.1.js"></script>
+<script src="angular.min.js"></script>
+<script>
+var app = angular.module('app', ['angularFileUpload']);
+app.controller('AppController',['$scope', 'FileUploader', function($scope, FileUploader) {
+   
+   $scope.uploader = new FileUploader();
+   
+}])
+
+</script>
+</head>
+
+<body>
+<div id="parent" ng-controller="Aaa">
+<div ng-app="app">
+    <div ng-controller="AppController">
+        <input type="file" nv-file-select uploader="uploader"/><br/>
+        <ul>
+            <li ng-repeat="item in uploader.queue">
+                Name: <span ng-bind="item.file.name"></span><br/>
+                <button ng-click="item.upload()">upload</button>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>
+
+</body>
+</html>

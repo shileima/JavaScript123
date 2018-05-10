@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+
+<script>
+var app = angular.module('myApp',[]);
+app.controller('myCtr',['$scope','$interval',function($scope,$interval){
+	
+	var iNum = 5;
+	$scope.text = iNum + '秒';
+	$scope.isDisabled = true;
+	var timer=$interval(function(){
+		iNum--;
+		$scope.text = iNum + '秒';
+		if(iNum==0)
+		 {
+		   $interval.cancel(timer);
+		   $scope.text = '可以购买啦！'
+		   $scope.isDisabled = false;
+		 }
+		},1000)
+	
+	}]);
+</script>
+</head>
+
+<body ng-app="myApp" ng-controller="myCtr">
+
+<input type="button" value="{{text}}" ng-disabled="isDisabled">
+
+</body>
+</html>

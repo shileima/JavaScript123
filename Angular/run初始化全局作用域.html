@@ -1,0 +1,36 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<title>run</title>
+<script src="angular.js"></script>
+<script>
+ 
+ var app = angular.module('myApp',[])
+/* app.run(['$rootScope',function($rootScope){  //run 只能初始化全局变量，对局部变量无效
+	 
+	 $rootScope.name = 'hello';
+	 
+ }])*/
+ 
+ app.run(function($rootScope){  //run 只能初始化全局变量，对局部变量无效
+	 
+	 $rootScope.name = 'hello';
+	 
+ })
+ 
+ 
+</script>
+</head>
+
+
+<body>
+
+<div>
+ 
+<p>{{name}}</p>
+
+</div>
+
+</body>
+</html>

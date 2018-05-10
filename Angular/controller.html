@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="test">
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="http://code.angularjs.org/angular-1.0.1.min.js"></script>
+<script>
+ var app=angular.module('test',[]);
+ 
+ app.controller('cont1',function($scope){
+	 
+	 $scope.alert=function(s){
+		 
+		window.alert(s);
+	 };
+	 
+	 $scope.arr=[
+	 {name:'牧高笛帐篷铝杆户外野营登山帐篷双人',price:'298.3',time:1482936117852},
+	 {name:'Naturehike-NH户外露营帐篷2-3-4人',price:'124',time:1482626117852},
+	 {name:'京路发 户外双人旅游登山帐篷2-4人野',price:'3422',time:1482646117852},
+	 ]
+	 });
+
+</script>
+</head>
+
+<body ng-controller="cont1">
+<div>
+ <ul>
+   <li ng-repeat="item in arr"><h3>商品：{{item.name}}</h3><span style="padding-right:20px">价格：{{item.price|currency}}</span><i style="color:red">时间：{{item.time|date:"yyyy年MM月yy日  HH：mm：ss"}}</i></li>
+ </ul>
+
+<input type="text" ng-model="str"/>
+<input ng-click="alert(str)" value="弹出输入文字" type="button" />
+
+</div>
+</body>
+</html>

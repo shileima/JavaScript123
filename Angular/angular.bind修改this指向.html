@@ -1,0 +1,25 @@
+<!doctype html>
+<html ng-app>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+
+<script src="angular.js"></script>
+<script>
+  function Aaa(n1 , n2)
+   {
+	   alert(n1)
+	   alert(n2)
+	 alert(this)   
+   }
+   
+   angular.bind('body',Aaa)(2,3)
+   
+
+</script>
+
+</head>
+
+<body>
+</body>
+</html>

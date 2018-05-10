@@ -1,0 +1,58 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="jquery-1.11.1.js"></script>
+<script src="angular.min.js"></script>
+<script>
+  
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope','$http','$timeout',function($scope,$http,$timeout){
+	
+	var timer=null;
+	$scope.data=[];
+	$scope.change = function(word){
+		
+	  $timeout.cancel(timer);
+		
+	  timer=$timeout(function(){
+		
+		$http({                              //类似jQuery $ajax
+		method : 'JSONP',
+		url : 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+word+'&cb=JSON_CALLBACK'
+		
+		}).success(function(data){	
+		     //console.log(data) 
+			 $scope.data=data.s;
+			// alert($scope.data)
+		})	
+	  },1000);
+	}
+	
+/*	$timeout(function(word){
+		
+		$http({                              //类似jQuery $ajax
+		method : 'JSONP',
+		url : 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd='+word+'&cb=JSON_CALLBACK'
+		
+		}).success(function(data){	
+		     //console.log(data) 
+			 $scope.data=data.s;
+			// alert($scope.data)
+		});		
+	},500)*/
+	
+}]);
+
+</script>
+</head>
+
+<body>
+<div ng-controller="Aaa"><input type="text" ng-model='word' ng-keyup="change(word)" value=""><input type="button" ng-click="change(word)" value="搜索">
+<ul>
+<li ng-repeat="d in data">{{d}}</li>
+
+</ul></div>
+</body>
+</html>

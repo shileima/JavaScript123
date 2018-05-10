@@ -1,0 +1,67 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>无标题文档</title>
+
+<style>
+#div1 div,#div2 div{ width:200px; height:200px; border:1px red solid; display:none;}
+input.active{ background:red;}
+</style>
+
+<!-- <script src="angular.js"></script> -->
+<script src="jquery-1.11.1.js"></script>  <!-- 必须先引入jQuery文件，后引入AngularJS文件，否则出错 -->
+<script src="angular.min.js"></script>
+
+
+<script>
+
+var app1 = angular.module('myApp1',[]);
+
+app1.directive('myTab', function () {
+    return {
+        restrict : 'E',
+        replace : true,
+        scope : {
+            myId : '@',
+            myData : '='
+        },       
+
+        templateUrl : 'temp.html',
+        link : function(scope,element,attr){
+            element.delegate('input','click',function(){
+                $(this).attr('class','active').siblings('input').attr('class','');
+                $(this).siblings('div').eq( $(this).index() ).css('display','block').siblings('div').css('display','none');
+            });
+        }
+    };
+    
+})
+
+app1.controller('Aaa',['$scope',function($scope){
+    
+    $scope.data1 = [
+        {title:'数学',content:'111111111'},
+        {title:'语文',content:'222222222'},
+        {title:'英语',content:'333333333'}
+    ];
+    $scope.data2 = [
+        {title:'物理',content:'444444444'},
+        {title:'化学',content:'555555555'}
+    ];
+    
+}]);
+
+</script>
+</head>
+
+<body ng-app="myApp1">
+
+<div ng-controller="Aaa">
+<my-tab my-id="div1" my-data="data1"></my-tab>
+<my-tab my-id="div2" my-data="data2"></my-tab>
+</div>
+
+</body>
+</html>

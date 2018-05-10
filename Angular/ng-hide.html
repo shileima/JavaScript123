@@ -1,0 +1,15 @@
+<!doctype html>
+<html ng-app="">
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="angular.js"></script>
+</head>
+
+<body ng-init="a=true">
+
+<input type="button" ng-click="a=!a" value="显示/隐藏"/>
+<div  ng-hide="a" style="background:#999; width:300px; height:300px;"></div>
+
+</body>
+</html>

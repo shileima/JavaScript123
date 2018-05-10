@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app='myApp'>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<style>
+#parent { height:305px; width:1000px; overflow:hidden;}
+#parent div { width:300px; height:300px; border:1px solid #000; margin-bottom:10px; }
+#parent ul { float:right;}
+</style>
+<script src="jquery-1.11.1.js"></script>
+<script src="angular.min.js"></script>
+<script>
+  
+var m1 = angular.module('myApp',[]);
+m1.controller('Aaa',['$scope','$interpolate',function($scope,$interpolate){
+	
+	$scope.$watch('body',function(newBody){
+
+		if(newBody){
+
+			var temp = $interpolate(newBody)
+
+		   $scope.showText = temp({name:$scope.name})
+
+
+		}
+
+		
+	})
+	
+	
+}]);
+
+</script>
+</head>
+
+<body>
+<div id="parent" ng-controller="Aaa">
+<input type="text" ng-model="name">
+<textarea ng-model="body"></textarea>
+<p>{{showText}}</p>
+</div>
+
+</body>
+</html>

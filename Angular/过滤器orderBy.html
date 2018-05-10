@@ -1,0 +1,38 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<title>过滤器orderBy</title>
+<script src="angular.js"></script>
+<script>
+ 
+ var app = angular.module('myApp',[])
+
+ app.controller('myCtr',['$scope',function($scope)
+ {
+	$scope.name = [
+	
+	{color : "blue", age : "23"},
+	{color : "red", age : "21"},
+	{color : "yellow", age : "12"},
+	{color : "green", age : "5"},
+	
+	]
+ }]);
+ 
+ 
+</script>
+</head>
+
+
+<body>
+
+<div ng-controller = "myCtr">
+ 
+<span>排序 orderBy : "age" : true<p>{{name | orderBy : "age" : true}}</p></span>
+<span>模糊查询 filter : "l" <p>{{name | filter : "l" }}</p></span>
+
+</div>
+
+</body>
+</html>

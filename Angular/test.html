@@ -1,0 +1,71 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<title>$watch 监听</title>
+<script src="angular.min.js"></script>
+<script>
+ 
+ var app = angular.module('myApp',[])
+ app.controller('Aaa',['$scope',function($scope){
+	 
+	 $scope.iphone = {
+	 price : 5,	
+	 num : 1,
+	 fre : 10
+	};
+	
+	$scope.sum = function()
+	{
+	  return  $scope.iphone.price * $scope.iphone.num;	
+	}
+	// $scope.$watch('iphone',function(newVal , oldVal){
+	// 	$scope.iphone.fre = $scope.sum()>=100?0:10;
+	// },true) //带 true 的话，监听iphone下所有的输入，监听的不是函数的情况下要加 ' ';
+	$scope.$watch($scope.sum,function(newVal,oldVal){
+
+      $scope.iphone.fre = newVal>=100?0:10;
+
+	}) //如果监听的是函数，不用加 '
+	 
+ }])
+ 
+ /*function Aaa($scope)
+  {
+	$scope.iphone = {
+	 price : 5,	
+	 num : 1,
+	 fre : 10
+	};
+	
+	$scope.sum = function()
+	{
+	  return  $scope.iphone.price * $scope.iphone.num;	
+	}
+	// $scope.$watch('iphone',function(newVal , oldVal){
+	// 	$scope.iphone.fre = $scope.sum()>=100?0:10;
+	// },true) //带 true 的话，监听iphone下所有的输入，监听的不是函数的情况下要加 ' ';
+	$scope.$watch($scope.sum,function(newVal,oldVal){
+
+      $scope.iphone.fre = newVal>=100?0:10;
+
+	}) //如果监听的是函数，不用加 '';
+  }*/
+</script>
+</head>
+
+
+<body>
+
+<div ng-controller="Aaa">
+ 
+  <div><span>价格：</span><input type="text" ng-model="iphone.price"></div>
+  <div><span>个数：</span><input type="text" ng-model="iphone.num"></div>
+  
+  <div><span>产品费用：</span>{{sum() | currency : '￥'}}</div>
+  <p>运费：{{iphone.fre | currency : '￥'}}</p>
+  <p>总费用：<span>{{iphone.fre + sum() | currency : '￥'}}</span></p>
+  </div>
+
+</body>
+</html>

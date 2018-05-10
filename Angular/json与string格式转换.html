@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>无标题文档</title>
+<script src="angular.min.js"></script>
+
+<script>
+
+var str = '{"name":"张思","年龄": 22}';
+
+var json = angular.fromJson(str);
+
+console.log(json);
+
+
+var json2 = {name:"alice",age:23}
+
+var str2 = angular.toJson(json2)
+
+console.log(str2)
+
+alert(angular.isObject(str2)); // toJson() 将json转换成string 格式
+
+
+
+</script>
+</head>
+
+<body>
+
+
+</body>
+</html>

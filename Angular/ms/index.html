@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="gb2312" >
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>天意商城秒杀活动20170331</title>
+<script src="angular.min.js"></script>
+<script>
+ var m1 = angular.module('myApp',[]);
+ m1.controller('myCtr',['$scope','$interval',function($scope,$interval){
+    
+	 $scope.time= 1491465640000;
+	 //alert($scope.time)
+	 $interval(function(){
+
+	   var oDate = new Date();
+	   
+	 
+	 $scope.SYtime =$scope.time - oDate.getTimezoneOffset()-oDate.getTime();
+	 //alert($scope.SYtime)
+	 //alert($scope.SYtime)
+	 
+	 if($scope.SYtime<=-28800000)
+	  {
+		 
+		$scope.SYtime ='秒杀结束';  
+		$interval.cancel();
+	  }
+	 
+	 },1000);
+ }]);
+</script>
+<style>
+body{ margin:0; background:#eee;}
+a { text-decoration:none; color:#000; font-family:'微软雅黑'; font-size:18px;}
+p {font-size: 14px}
+img {border:0;}
+em { color:red; }
+.newlist {
+	margin: 0 auto;
+	min-width:320px;
+	max-width:450px;
+    width:100%;
+	text-align:center;
+	background: #fff;
+	height: 120px;
+}
+.newlist ul {max-width:400px; }
+.newlist ul li { width:100%; padding:20px 5px 20px 0; background:#fff;}
+.title { font-size:18px;}
+.sell-num { font-size:14px; color:#666; padding-left:10px;}
+
+.seckill {display: inline-block;
+    padding: 0 14px;
+    height: 24px;
+    border-radius: 20px;
+    background: #fa4e2a;
+    background-image: -webkit-linear-gradient(-35deg,#fa4e2a,#f92e32);
+    /* background-image: linear-gradient(-35deg,#fa4e2a,#f92e32); */
+    color: #fff;
+    vertical-align: middle;
+    font-style: normal;
+	font-size:16px;
+    line-height: 24px;}
+	
+.clearfix {
+ clear:both;
+ display:block;	
+}
+.leftImg { float:left; }
+.g-flex { float:right; padding: 10px 10px 0 0; }
+
+ul li {
+	list-style:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div ng-app = 'myApp' ng-controller="myCtr" style="position: fixed;top: 0;background: rgba(255, 191, 122, 0.9);width: 100%; height:50px;">
+<!--<pre>{{name | json}}</pre> // pre 标签 识别空格和换行-->
+   <!-- <p>{{name | date:'yyyy-MM-dd HH:mm:ss'}}</p>-->
+ <p style="color:#000; font-family:'微软雅黑'; text-align:center; font-size:18px; margin-top: 10px;"> 
+  <strong>距秒杀结束：</strong><span style="color:rgba(255, 33, 38, 1); font-weight:bold;">{{SYtime | date:'dd天 HH小时 mm分钟 ss秒' }}</span>
+ </p>
+ 
+</div>
+<div style="margin:0 auto;">
+
+<div id="list-item" class="clearfix newlist" style="margin-top:50px;">
+
+            <div class="g-box por">
+                    <div class="leftImg"><a href="http://shop.cacca.cn/Item/detail/id/4715836/sid/4025783.html"><img src="images/1.jpg" class="lazyload" height="120"></a></div>
+                    
+                    <div class="g-flex">
+                        <div class="goods-detail">
+                            <b class="title"><a href="http://shop.cacca.cn/Item/detail/id/4715836/sid/4025783.html"> 2017鸡年生肖纪念币</a></b>
+                               
+                          <p>秒杀价：<em>￥ 12.00</em> <span class="sell-num"> 已售: 405件</span> </p>                                     
+                                                         
+                             <p class="listsgoods-group"></p>
+                        </div>
+                        <div class="goods-detail">
+                        <a href="http://shop.cacca.cn/Item/detail/id/4715836/sid/4025783.html"><span class="seckill">立即秒杀</span></a>
+                        </div>
+                    </div></div>
+                    
+                    
+
+                    
+<div id="list-item" class="clearfix newlist">
+
+            <div class="g-box por">
+                    <div class="leftImg"><a href="http://shop.cacca.cn/Item/detail/id/4764914/sid/4025783.html"><img src="images/3.jpg" class="lazyload" height="120"></a></div>
+                    
+                    <div class="g-flex">
+                        <div class="goods-detail">
+                            <b class="title"><a href="http://shop.cacca.cn/Item/detail/id/4764914/sid/4025783.html">澳门生肖鸡年对钞</a></b>
+                               
+                            <p>秒杀价：<em>￥ 30.00</em> <span class="sell-num"> 已售: 89件</span> </p>                                     
+                                                         
+                             <p class="listsgoods-group"></p>
+                        </div>
+                        <div class="goods-detail">
+                        <a href="http://shop.cacca.cn/Item/detail/id/4764914/sid/4025783.html"><span class="seckill">立即秒杀</span></a>
+                        </div>
+                    </div></div>
+                    
+                    
+                    
+                    <div id="list-item" class="clearfix newlist">
+
+            <div class="g-box por">
+                    <div class="leftImg"><a href="http://shop.cacca.cn/Item/detail/id/4670584/sid/4025783.html"><img src="images/4.jpg" class="lazyload" height="120"></a></div>
+                    
+                    <div class="g-flex">
+                        <div class="goods-detail">
+                            <b class="title"><a href="http://shop.cacca.cn/Item/detail/id/4670584/sid/4025783.html">富贵吉祥字画 </a></b>
+                               
+                          <p>秒杀价：<em>￥ 488.00</em> <span class="sell-num"> 已售: 62件</span> </p>                                     
+                                                         
+                             <p class="listsgoods-group"></p>
+                        </div>
+                        <div class="goods-detail">
+                        <a href="http://shop.cacca.cn/Item/detail/id/4670584/sid/4025783.html"><span class="seckill">立即秒杀</span></a>
+                        </div>
+                    </div></div>
+                    
+                    
+                    
+                    
+                    <div id="list-item" class="clearfix newlist">
+
+            <div class="g-box por">
+                    <div class="leftImg"><a href="http://shop.cacca.cn/Item/detail/id/4770425/sid/4025783.html"><img src="images/5.jpg" class="lazyload" height="120"></a></div>
+                    
+                    <div class="g-flex">
+                        <div class="goods-detail">
+                            <b class="title"><a href="http://shop.cacca.cn/Item/detail/id/4770425/sid/4025783.html">五驴图 </a></b>
+                               
+                          <p>秒杀价：<em>￥ 680.00</em> <span class="sell-num"> 已售: 1件</span> </p>                                     
+                                                         
+                             <p class="listsgoods-group"></p>
+                        </div>
+                        <div class="goods-detail">
+                        <a href="http://shop.cacca.cn/Item/detail/id/4770425/sid/4025783.html"><span class="seckill">立即秒杀</span></a>
+                        </div>
+                    </div></div>
+                    
+                    
+                    
+                    <div id="list-item" class="clearfix newlist">
+
+            <div class="g-box por">
+                    <div class="leftImg"><a href="http://shop.cacca.cn/Item/detail/id/4770047/sid/4025783.html"><img src="images/6.jpg" class="lazyload" height="120"></a></div>
+                    
+                    <div class="g-flex">
+                        <div class="goods-detail">
+                            <b class="title"><a href="http://shop.cacca.cn/Item/detail/id/4770047/sid/4025783.html">牛气冲天画</a></b>
+                               
+                          <p>秒杀价：<em>￥ 820.00</em> <span class="sell-num"> 已售: 13件</span> </p>                                     
+                                                         
+                             <p class="listsgoods-group"></p>
+                        </div>
+                        <div class="goods-detail">
+                        <a href="http://shop.cacca.cn/Item/detail/id/4770047/sid/4025783.html"><span class="seckill">立即秒杀</span></a>
+                        </div>
+                    </div></div>
+                    
+                    
+                    <div id="list-item" class="clearfix newlist">
+
+            <div class="g-box por">
+                    <div class="leftImg"><a href="http://shop.cacca.cn/Item/detail/id/4667366/sid/4025783.html"><img src="images/7.jpg" class="lazyload" height="120"></a></div>
+                    
+                    <div class="g-flex">
+                        <div class="goods-detail">
+                            <b class="title"><a href="http://shop.cacca.cn/Item/detail/id/4667366/sid/4025783.html">航天纪念钞</a></b>
+                               
+                          <p>秒杀价：<em>￥ 108.00</em><span class="sell-num">已售: 89件</span> </p>                                     
+                                                         
+                             <p class="listsgoods-group"></p>
+                        </div>
+                        <div class="goods-detail">
+                        <a href="http://shop.cacca.cn/Item/detail/id/4667366/sid/4025783.html"><span class="seckill">立即秒杀</span></a>
+                        </div>
+                    </div></div>
+
+<div id="list-item" class="clearfix newlist">
+
+            <div class="g-box por">
+                    <div class="leftImg"><a href="http://shop.cacca.cn/Item/detail/id/4794754/sid/4025783.html"><img src="images/2.jpg" class="lazyload" height="120"></a></div>
+                    
+                   
+                    <div class="g-flex">
+                        <div class="goods-detail">
+                            <b class="title"><a href="http://shop.cacca.cn/Item/detail/id/4794754/sid/4025783.html">2015年一美元流通硬币</a></b>
+                               
+                          <p>秒杀价：<em>￥ 15.00</em> <span class="sell-num"> 已售: 451件</span> </p>                                     
+                                                         
+                             <p class="listsgoods-group"></p>
+                        </div>
+                        <div class="goods-detail">
+                        <a href="http://shop.cacca.cn/Item/detail/id/4794754/sid/4025783.html"><span class="seckill">立即秒杀</span></a>
+                        </div>
+                     </div>
+                    </div>
+
+  
+</div>
+
+</body>
+</html>

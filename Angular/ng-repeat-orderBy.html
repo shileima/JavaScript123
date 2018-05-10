@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<script src="angular.js"></script>
+
+<script>
+var app = angular.module('myApp',[]);
+app.controller('myCtr',['$scope','$filter',function($scope,$filter){
+	
+	$scope.name = [123,333,124,122,456];
+	
+	$scope.oSort=function(arg){
+	
+	 arguments.callee['o'] = !arguments.callee['o'];
+	 $scope.name=$filter('orderBy')($scope.name,arg,arguments.callee['o']);
+	}
+  }])
+
+</script>
+<title>ng-repeat 带排序</title>
+</head>
+
+<body ng-app='myApp'>
+
+<div ng-controller="myCtr">
+
+ <ul>
+  <li ng-repeat="item in name">{{item}}</li>
+ 
+ </ul>
+<input type="button" value="排序" ng-click="oSort()">
+</div>
+
+</body>
+</html>
