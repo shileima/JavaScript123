@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>删除数组中的特定值</title>
+</head>
+<body>
+
+<!--1,封装方法-->
+<script>
+    function removeByValue(arr, value){
+        for(var i=0,len=arr.length;i<len;i++){
+            if(arr[i]==value){
+                arr.splice(i,1)
+            }
+        }
+        return arr;
+    }
+
+    var arr1 = [2,3,5,7,8,9,99];
+
+    console.log(arr1)
+
+    removeByValue(arr1,7)
+
+    console.log(arr1) // [2,3,5,8,9,99]
+</script>
+
+<!--2,给原生数组对象增加方法-->
+<!--<script>
+    Array.prototype.removeByValue = function(value){
+        for(var i=0,len=this.length;i<len;i++){
+            if(this[i]==value){
+                this.splice(i,1)
+            }
+        }
+        return this;
+    }
+
+    var arr1 = [2,3,5,7,8,9,99];
+
+    arr1.removeByValue(7)
+
+    console.log(arr1) // [2,3,5,8,9,99]
+</script>-->
+
+<!--3,原型上增加方法remove,判断下标-->
+<!--<script>-->
+    <!--Array.prototype.remove = function(val){-->
+        <!--var index = this.indexOf(val);-->
+        <!--if(index>-1){-->
+            <!--this.splice(index,1)-->
+        <!--}-->
+        <!--return Array;-->
+        <!--console.log(this)-->
+    <!--}-->
+    <!--var arr1 = [2,3,5,7,8,9,99];-->
+    <!--arr1.remove(7)-->
+    <!--console.log(arr1)-->
+<!--</script>-->
+
+<!--判断索引值去除元素-->
+<!--<script>-->
+    <!--var arr1 = [2,3,5,7,8,9,99];-->
+
+    <!--Array.prototype.delete = function(val){-->
+
+            <!--var index = this.indexOf(val);-->
+            <!--if(this[index]==val){-->
+                <!--this.splice(index,1)-->
+            <!--};-->
+
+            <!--return this;-->
+    <!--}-->
+
+    <!--console.log(arr1.delete(7))-->
+
+<!--</script>-->
+
+
+<!--<script>
+    var arr1 = [2,3,5,7,8,9,99,0];
+
+    arr1.slice.apply(arguments[3],1)
+
+    console.log(arr1)
+</script>-->
+</body>
+</html>

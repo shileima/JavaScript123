@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>带length的对象转成数组</title>
+</head>
+<body>
+<script>
+    var a = {length:2,0:'hello',1:[1,2,3]}
+    var newArr=Array.prototype.slice.call(a)
+    console.log(a)
+    console.log(typeof newArr,newArr)
+</script>
+
+</body>
+</html>

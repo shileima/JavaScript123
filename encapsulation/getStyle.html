@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>封装获取样式</title>
+</head>
+<body>
+<script>
+
+	function getStyle(obj,attr)
+	{
+		return (obj.currentStyle)?obj.currentStyle[attr]:getComputedStyle(obj,false)[attr];
+	}
+
+</script>
+</body>
+</html>

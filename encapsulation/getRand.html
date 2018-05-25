@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+
+		//console.log(Math.max(...[2,3,4,67]))
+		//获取两个整数之间的随机数
+		   function rpFn(arr1){  
+			let max = Math.max(...arr1),
+			 min = Math.min(...arr1);
+			return Math.random()*(max - min) + min;
+		   }
+
+			console.log(~~rpFn([10,255])) // 10到255之间的整数，~~向下取整数
+	</script>
+</body>
+</html>

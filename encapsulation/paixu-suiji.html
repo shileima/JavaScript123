@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>随机数</title>
+
+</head>
+<body>
+  <button>生成不可以重复的随机数</button>
+  <span class="span"></span>
+<script>
+	function suiJi(startNum,endNum,item){
+
+		var btn = document.querySelector('button');
+		var span = document.getElementsByClassName('span')[0];
+		btn.onclick =function(){
+          var member =[];
+          while(member.length<item){
+            var a = ~~(Math.random()*(endNum-startNum+1) + startNum); //生成的随机数
+              if(member.indexOf(a) == -1){    // 排除重复数字
+                  member.push(a);
+              }
+            };
+
+            span.innerHTML = member.sort(compare).join(' | ');
+	    }
+	}
+
+    var compare = function(num1,num2){  //排序的方法
+        /*if(num1>num2){return 1;}
+        else if(num1<num2){return -1;}
+        else{return 0;}*/
+        return num1-num2;
+    }
+
+	suiJi(10,99,5);
+</script>
+</body>
+</html>
