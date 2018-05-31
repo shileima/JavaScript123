@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			#div1 {
+				width: 0px;
+				height: 20px;
+				background-color: red;
+				text-align: center;
+			}
+		</style>
+	</head>
+
+	<body>
+		<button onclick="down()">开始下载</button>
+		<br />
+		<div id="div1"></div>
+	</body>
+	<script>
+		var count = 0;
+		var tid;
+
+		function getCount() {
+			count++;
+			if (count > 100) {
+				f1()
+			} else {
+				var div = document.getElementById("div1")
+				div.innerText = count + "%"
+				div.style.width = 3 * count + "px"
+			}
+		}
+
+		function down() {
+			tid = setInterval("getCount()", 10)
+		}
+
+		function f1() {
+			clearInterval(tid)
+			alert("下载完成。。。。")
+		}
+	</script>
+
+</html>

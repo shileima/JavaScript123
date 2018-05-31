@@ -1,0 +1,27 @@
+<html>
+<title>js实现光标聚焦到文本框最后</title>
+<script type="text/javascript">
+    function myFocus(sel, start, end) {
+        if (sel.setSelectionRange) {
+        sel.focus();
+        sel.setSelectionRange(start,end);
+        } else if (sel.createTextRange) {
+        var range = sel.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character', end);
+        range.moveStart('character', start);
+        range.select();
+        }
+        }
+        function setFocus (sel) {
+        length=sel.value.length;
+        myFocus(sel, length, length);
+        }
+</script>
+<body>
+js实现光标聚焦到文本框最后： <input type="text" id="ifocus" value="聚焦到后面去">
+<script type="text/javascript">
+setFocus(document.getElementById("ifocus"));
+</script>
+</body>
+</html>
