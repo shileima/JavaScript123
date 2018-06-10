@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
+    <title>抽象出 conponent 父组件 - 40行代码实现 React.js</title>
+</head>
+<body>
+
+<div id='root'></div>
+
+<script>
+    /* 将将字符串转换成 html 节点对象，方便操作 */
+    const createDOMFromString = (domString) => {
+        const div = document.createElement('div')
+        div.innerHTML = domString
+        return div
+    }
+
+    /* 挂载函数 */
+    const mount = (wrapper, component) => {
+        wrapper.appendChild(component.renderDOM())
+        component.onStateChange = (oldEl, newEl) => {
+            wrapper.insertBefore(newEl, oldEl)
+            wrapper.removeChild(oldEl)
+        }
+    }
+
+    /* 构造函数一般要大写字母开头 */
+    class Component {
+        constructor(props = {}){
+            this.props = props
+            console.log('父组件props：',this.props) // { title : 'hello' }
+        }
+        setState(state){
+            const oldEl = this.el
+            this.state = state;
+            this.el = this.renderDOM();
+            console.log(oldEl,this.el)
+            if (this.onStateChange) this.onStateChange(oldEl, this.el)
+        }
+        renderDOM(){
+            this.el = createDOMFromString( this.render() )
+            if(this.onClick){
+                this.el.addEventListener('click',() => this.onClick())
+            }
+            return this.el;
+        }
+    }
+    class LikeButton extends Component {
+        constructor(props){
+            super(props)
+            this.state = { isLiked: false }
+            console.log('子组件props：',this.props) // { title : 'hello' }
+        }
+        onClick(){
+            this.setState({
+                isLiked: !this.state.isLiked
+            })
+            console.log(this.state)
+        }
+        render(){
+            /* 这里 return 必须紧接着模板字符，模板字符不能换行输出 */
+            return `
+                    <button class='like-btn'>
+                        <span class='like-text'>${this.props.title} ${this.state.isLiked?'取消':'点赞'}</span>
+                    </button>
+                `
+        }
+    }
+
+    const wrapper = document.querySelector('#root');
+    /* new 一个构造函数，创建了一个对象，传入的值就挂载在父组件中的 props下,子组件继承父组件，当然也有 */
+    const likeButton1 = new LikeButton({title: 'hello'}) 
+
+    mount(wrapper,likeButton1)
+
+</script>
+</body>
+</html>
