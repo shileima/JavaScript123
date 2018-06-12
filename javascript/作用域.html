@@ -163,15 +163,26 @@ function foo(a) {
 alert(foo( 2 )); // 函数里面有 return 的时候，可以弹出来该函数的输出值；否则就是 undefined
 */
 
-
-var count = 10;
+/* js中函数中的参数是局部变量 */
+/* var count = 10;
 function num(num1){
     num1 = 1;
     return num1;
 }
 var result = num(count);
-console.log(result); //1
-console.log(count);  //10
+console.log(result); // 1
+console.log(count);  // 10 */
+
+var a = 10;
+function num(a){
+	/* 这里相当于创建了一个局部变量 a 不影响外层全局变量 a = 10
+	var a = 10; */
+    a += 3;
+}
+
+num(a);
+
+console.log(a); // 10
 
 </script>
 
