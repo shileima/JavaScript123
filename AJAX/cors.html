@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>CORS Test</head>
+<body>
+<div id="img_Div"></div>
+<script type="text/javascript">
+    //XmlHttpRequest对象
+    function createXmlHttpRequest(){
+        if(window.ActiveXObject){ //如果是IE浏览器
+            return new ActiveXObject("Microsoft.XMLHTTP");
+        }else if(window.XMLHttpRequest){ //非IE浏览器
+            return new XMLHttpRequest();
+        }
+    }
+
+    function getFile() {
+        var img_Container = document.getElementById("img_Div");
+        var xhr = createXmlHttpRequest();
+        xhr.open('GET', 'http://www.nodejs8.com.cn/public/images/logo.png', true);
+        xhr.setRequestHeader('Content-Type', 'image/jpeg');
+        xhr.responseType = "blob";
+        xhr.onload = function() {
+            if (this.status == 200) {
+                var blob = this.response;
+                var img = document.createElement("img");
+                img.onload = function(e) {
+                    window.URL.revokeObjectURL(img.src);
+                };
+                img.src = window.URL.createObjectURL(blob);
+                img_Container.appendChild(img);
+            }
+        }
+        xhr.send(null);
+    }
+</script>
+<div class="row">
+    <input type="button" onclick="getFile()" value="Get" />
+</div>
+</body>
+</html>
