@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>promise、async和await之执行顺序的那点事</title>
+</head>
+<body>
+<script>
+    async function async1(){
+        console.log('async1 start')
+        await async2()
+        console.log('async1 end')
+    }
+    async function async2(){
+        console.log('async2')
+    }
+    console.log('script start')
+    setTimeout(function(){
+        console.log('setTimeout')
+    },0)
+    async1();
+    new Promise(function(resolve){
+        console.log('promise1')
+        resolve();
+    }).then(function(){
+        console.log('promise2')
+    })
+    console.log('script end')
+</script>
+<pre>
+<code><strong>async</strong> <strong>function</strong> <strong>async1</strong>(){
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;async1 start&#39;</span>)
+    <strong>await</strong> async2()
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;async1 end&#39;</span>)
+    }
+    <strong>async</strong> <strong>function</strong> <strong>async2</strong>(){
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;async2&#39;</span>)
+    }
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;script start&#39;</span>)
+    setTimeout(<strong>function</strong>(){
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;setTimeout&#39;</span>)
+    },<span style="color:rgb(0, 128, 128)">0</span>)
+    async1();
+    <strong>new</strong> <span style="color:rgb(0, 134, 179)">Promise</span>(<strong>function</strong>(resolve){
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;promise1&#39;</span>)
+    resolve();
+    }).then(<strong>function</strong>(){
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;promise2&#39;</span>)
+    })
+    <span style="color:rgb(0, 134, 179)">console</span>.log(<span style="color:rgb(221, 17, 68)">&#39;script end&#39;</span>)</code></pre>
+
+<p>求打印结果是什么？</p>
+
+<p>相信是个前端都知道啦，这道题目考的就是js里面的事件循环和回调队列咯～<br />
+    今天题主假设看客都已经了解了setTimeout是宏任务会在最后执行的前提（因为它不是今天要讨论的重点），我们主要来讲讲<strong>promise</strong>、<strong>async</strong>和<strong>await</strong>之间的关系。</p>
+
+<p>先上正确答案：</p>
+
+<pre>
+<code><strong>script</strong> start
+    async1 start
+    async2
+    promise1
+    <strong>script</strong> <strong>end</strong>
+    promise2
+    async1 <strong>end</strong>
+    setTimeout</code></pre>
+
+<p>事实上，没有在控制台执行打印之前，我觉得它应该是这样输出的：</p>
+
+<pre>
+<code><strong>script</strong> start
+    async1 start
+    async2
+    async1 <strong>end</strong>
+    promise1
+    <strong>script</strong> <strong>end</strong>
+    promise2
+    setTimeout</code></pre>
+
+<p>为什么这样认为呢？因为我们（粗浅地）知道await之后的语句会等await表达式中的函数执行完得到结果后，才会继续执行。</p>
+
+<p><strong>MDN</strong>是这样描述await的：</p>
+
+<p>async 函数中可能会有 await 表达式，这会使 async 函数暂停执行，等待表达式中的 Promise 解析完成后继续执行 async 函数并返回解决结果。</p>
+
+<p>会认为输出结果是以上的样子，是因为没有真正理解这句话的含义。</p>
+
+<p>阮一峰老师的解释我觉得更容易理解：</p>
+
+<p>async 函数返回一个 Promise 对象，当函数执行的时候，一旦遇到 await 就会先返回，等到触发的异步操作完成，再接着执行函数体内后面的语句。</p>
+
+<p>对啦就是这样，MDN描述的暂停执行，实际上是<strong>让出了线程（跳出async函数体）</strong>然后继续执行后面的脚本的。这样一来我们就明白了，所以我们再看看上面那道题，按照这样描述那么他的输出结果就应该是：</p>
+
+<pre>
+<code><strong>script</strong> start
+    async1 start
+    async2
+    promise1
+    <strong>script</strong> <strong>end</strong>
+    async1 <strong>end</strong>
+    promise2
+    setTimeout</code></pre>
+
+<p>好像哪里不太对？对比控制台输出的正确结果，咦～有两句输出是不一样的呀！！</p>
+
+<pre>
+<code>async1 <strong>end</strong>
+    promise2</code></pre>
+
+<p>为什么会这样呢？这也是这道题目最难理解的一个地方。要搞明白这个事情，我们需要先来回顾一些概念：</p>
+
+<p>async</p>
+
+<p>async function 声明将定义一个返回 AsyncFunction 对象的异步函数。</p>
+
+<p>当调用一个 async 函数时，会返回一个 Promise 对象。当这个 async 函数返回一个值时，Promise 的 resolve 方法会负责传递这个值；当 async 函数抛出异常时，Promise 的 reject 方法也会传递这个异常值。</p>
+
+<p>所以你现在知道咯，使用&nbsp;<strong>async</strong>&nbsp;定义的函数，当它被调用时，它返回的其实是一个Promise对象。<br />
+    <br />
+    我们再来看看&nbsp;<strong>await</strong>&nbsp;表达式执行会返回什么值。</p>
+
+<p>await</p>
+
+<p>语法：[return_value] = await expression;</p>
+
+<p>表达式（express）：一个 Promise 对象或者任何要等待的值。</p>
+
+<p>返回值（return_value）：返回 Promise 对象的<strong>处理结果</strong>。如果等待的不是 Promise 对象，则返回该值本身。</p>
+
+<p>所以，当await操作符后面的表达式是一个Promise的时候，它的返回值，实际上就是Promise的回调函数resolve的参数。</p>
+
+<p>明白了这两个事情后，我还要再啰嗦两句。我们都知道Promise是一个立即执行函数，但是他的成功（或失败：reject）的回调函数resolve却是一个异步执行的回调。<strong>当执行到resolve()时，这个任务会被放入到回调队列中，等待调用栈有空闲时事件循环再来取走它。</strong></p>
+
+<p>终于进入正文：解题</p>
+
+<p>好了铺垫完这些概念，我们回过头看上面那道题目困惑的那两句关键的地方（建议一边对着题目一边看解析我怕我讲的太快你跟不上啊哈哈😂）。</p>
+
+<p>执行到 async1 这个函数时，首先会打印出&ldquo;async1 start&rdquo;（这个不用多说了吧，async 表达式定义的函数也是立即执行的）；</p>
+
+<p>然后执行到 await async2()，发现 async2 也是个 async 定义的函数，所以直接执行了&ldquo;console.log(&#39;async2&#39;)&rdquo;，同时async2返回了一个Promise，<strong>划重点：此时返回的Promise会被放入到回调队列中等待，await会让出线程（js是单线程还用我介绍吗），接下来就会跳出 async1函数 继续往下执行。</strong></p>
+
+<p>然后执行到 new Promise，前面说过了promise是立即执行的，所以先打印出来&ldquo;promise1&rdquo;，然后执行到 resolve 的时候，resolve这个任务就被放到回调队列中（前面都讲过了上课要好好听啊喂）等待，然后跳出Promise继续往下执行，输出&ldquo;script end&rdquo;。</p>
+
+<p>接下来是重头戏。同步的事件都循环执行完了，调用栈现在已经空出来了，那么事件循环就会去回调队列里面取任务继续放到调用栈里面了。</p>
+
+<p>这时候取到的第一个任务，就是前面 async1 放进去的Promise，执行Promise时发现又遇到了他的真命天子resolve函数，<strong>划重点：这个resolve又会被放入任务队列继续等待，然后再次跳出 async1函数 继续下一个任务。</strong></p>
+
+<p>接下来取到的下一个任务，就是前面 new Promise 放进去的&nbsp;<strong>resolve回调</strong>&nbsp;啦 yohoo～这个resolve被放到调用栈执行，并输出&ldquo;promise2&rdquo;，然后继续取下一个任务。</p>
+
+<p>后面的事情相信你已经猜到了，没错调用栈再次空出来了，事件循环就取到了下一个任务：<strong>历经千辛万苦终于轮到的那个Promise的resolve回调！！！</strong>执行它（啥也不会打印的，因为 async2 并没有return东西，所以这个resolve的参数是undefined），此时 await 定义的这个 Promise 已经执行完并且返回了结果，所以可以继续往下执行 async1函数 后面的任务了，那就是&ldquo;console.log(&#39;async1 end&#39;)&rdquo;。</p>
+
+<p>谜之困惑的那两句执行结果（&ldquo;promise2&rdquo;、&ldquo;async1 end&rdquo;）就是这样来的～</p>
+
+<p>总结</p>
+
+<p>总结下来这道题目考的，其实是以下几个点：</p>
+
+<ol>
+    <li>调用栈</li>
+    <li>事件循环</li>
+    <li>任务队列</li>
+    <li>promise的回调函数执行</li>
+    <li>async表达式的返回值</li>
+    <li>await表达式的作用和返回值</li>
+</ol>
+
+<p>理解了这些，自然就明白了为什么答案是这样（答出笔试题还要分析给面试官原因哈哈哈）～</p>
+
+<p>关于<strong>调用栈、事件循环、任务队列</strong>可以<a href="https://github.com/xitu/gold-miner/blob/master/TODO/how-javascript-works-event-loop-and-the-rise-of-async-programming-5-ways-to-better-coding-with.md" rel="nofollow noreferrer" style="box-sizing: border-box; background: transparent; color: rgb(0, 154, 97); text-decoration-line: none; outline: 0px; border-bottom: 1px solid rgba(0, 154, 97, 0.25); padding-bottom: 1px;" target="_blank">点这里</a>了解更详细的描述。<br />
+    <br />
+    为了方便大家直接贴图:<br />
+    <img alt="tupian" src="https://segmentfault.com/img/remote/1460000015057283?w=800&amp;h=600" title="tupian" /></p>
+
+<p>关于async和await的执行顺序<a href="https://segmentfault.com/a/1190000011296839" rel="nofollow noreferrer" style="box-sizing: border-box; background: transparent; color: rgb(0, 154, 97); text-decoration-line: none; outline: 0px; border-bottom: 1px solid rgba(0, 154, 97, 0.25); padding-bottom: 1px;">这里</a>也有很详细的分析可以参考～</p>
+
+</body>
+</html>
