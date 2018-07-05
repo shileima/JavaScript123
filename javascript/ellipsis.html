@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js判断字母数字科学截取超出文本</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function Ellipsis(el,num){
+        $(el).each(function(){
+            var maxwidth=num;
+            var d = $(this).html().replace(/[^0-9]/ig,"");
+            var v = $(this).html().replace(/[^a-z]+/ig,"");
+            var dLen = d.length + v.length || 0;
+            var titleLen = $.trim($(this).text()).length - Math.ceil(dLen/2);
+            if(titleLen > maxwidth){
+                $(this).text($(this).text().substring(0,maxwidth + Math.ceil(dLen/2)));
+                console.log($(this).text().substring(0,maxwidth + Math.ceil(dLen/2)))
+                console.log($(this).html().substring(0,maxwidth + Math.ceil(dLen/2)))
+                $(this).html($(this).html()+'...');
+            }
+        });
+    }
+    window.onload = function(){
+        Ellipsis('.title',20)
+    }
+</script>
+<p class="title">1计算pa字符串中no非汉字的数量python，这里是数字98</p>
+</body>
+</html>
