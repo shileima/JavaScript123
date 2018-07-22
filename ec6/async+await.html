@@ -8,20 +8,32 @@
 </head>
 <body>
 
-<script>
+<!--<script>
     var b = 20;
     async function fn(){
         let a = 10;
-        let myName = await fn2('loading');
-        console.log(myName);   
+        let myName = await fn22('loading'); // await 后面必须是一个返回 promise 的函数 fn2
+        console.log(myName);
     }
-    function fn2(name) {
+    // 普通函数
+    function fn22(name) {
         setTimeout(()=>{
-            return name; 
+            console.log('name:',name)
+            return name;
         },2000);
     }
+
+    // fn2 必须是一个 Promise
+    function fn2(name){
+        return new Promise((resolve,reject) => {
+                    setTimeout(() => {
+                        resolve(name);
+                    },1000)
+                })
+    }
+
     fn() //undefined
-</script>
+</script>-->
 
 <!-- 将上述代码修改成以下就正常了 -->
 <script>
@@ -29,9 +41,9 @@
     async function fn(){
         let a = 10;
         let myName = await fn2('cooking'); //  await 是要等待 promise的. https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await
-        console.log(myName); 
+        console.log(myName);
     }
-    function fn2(name) {  
+    function fn2(name) {
         return new Promise(resolve => {
             setTimeout(() => {
             resolve(name);
@@ -45,12 +57,13 @@
 //If a Promise is passed to an await expression, 
 //it waits for the Promise to be fulfilled and returns the fulfilled value. -->
 
-<script>
+<!--<script>
 var b = 20;
     async function fn(){
         let a = 10;
-        let myName = await fn2('loading');
-        console.log(myName); 
+        let myName = '初始值';
+        myName = await fn2('loading');
+        console.log(myName);
     }
 
     //这样会先输出111,再输入loading，如果不使用async，由于setTimeout是异步的，会先输出undefind再输出111
@@ -63,9 +76,9 @@ var b = 20;
           });
     }
     fn()
-</script>
+</script>-->
 <!-- 特定时间后打印1 -->
-<script>
+<!--<script>
     var b = 20;
     async function fn(val,ms){
         let a = 10;
@@ -73,16 +86,27 @@ var b = 20;
         console.log(val);   
     }
     function fn2(ms) {
-        return new Promise((resolve)=>{
+        /*return new Promise((resolve)=>{
             setTimeout(resolve,ms)
-        })
+        })*/
+        return new Promise((resolve,reject)=>{
+                    setTimeout(() => {
+                        resolve()
+                    },ms)
+                })
     }
-    fn('loading',2000) // loading
-</script>
+    fn('loading',3000) // loading
+</script>-->
+<!--特定时间后打印2-->
+<!--<script>
 
-<!-- 特定时间后打印2 -->
-<script>
-    let promise = function (val){
+    async function gen(){
+        let p1 = await print('1');
+        let p2 = await print('2');
+        let p3 = await print('3');
+    };
+
+    function print(val){
         return new Promise(function (resolve, reject){
             setTimeout(()=>{
                 console.log(val);
@@ -91,25 +115,20 @@ var b = 20;
         });
     };
 
-    let gen = async function (){
-        let p1 = await promise('1');
-        let p2 = await promise('2');
-        let p3 = await promise('3');
-    };
     gen() // 1...2...3
-</script>
+</script>-->
 
-<script>
+<!--<script>
 //经过async修饰之后，自动变成promise对象
 async function f() {
   return 'hello world';
 }
 
 f().then(v => console.log(v))  // "hello world" ,去掉 async后会报错
-</script>
+</script>-->
 
-<script>
-//错误处理 
+<!--<script>
+//错误处理
 async function f() {
   throw new Error('出错了');
 }
@@ -119,6 +138,6 @@ f().then(
   e => console.log(e)
 )
 // Error: 出错了
-</script>
+</script>-->
 </body>
 </html>
