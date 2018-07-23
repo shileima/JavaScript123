@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BScrool下拉加载</title>
+    <style>
+        body {margin: 0}
+        ul {
+            margin: 0;
+            padding: 0;
+            list-style: none
+        }
+        .wrap {
+            width: 100vw;
+            height: 100vh
+        }
+        .list {
+            width: 200vw;
+            position: relative;
+        }
+        .list li {
+            font: 16px/30px '宋体';
+            border-bottom: 1px solid #000;
+        }
+        .pullUp:after {
+            content: "正在加载更多内容";
+        }
+        .pullDown:before {
+            content: "正在刷新";
+            position: absolute;
+            top: -50px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul class="list"></ul>
+</div>
+<script src="./bscroll.js"></script>
+<script src="./js/index4.js"></script>
+</body>
+</html>
