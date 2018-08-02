@@ -1,0 +1,6 @@
+.head {
+    width: 100px;
+    height: 100px;
+    background-color: purple;
+    display: inline-block;
+}

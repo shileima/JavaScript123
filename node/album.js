@@ -8,9 +8,8 @@ const server = http.createServer((req, res) => {
     res.writeHead(200,{'Content-Type':'text/html;charset=utf8'});
     let directory = [];
     fs.readdir('./test', {'encoding':'utf8'}, (err,files)=>{
-        (function literator(i){
+        (function iterator(i){
             if(i == files.length){
-                console.log('i == files.length')
                 console.log(directory)
                 return;
             };
@@ -18,7 +17,7 @@ const server = http.createServer((req, res) => {
                 if(stats.isDirectory()){
                     directory.push(files[i])
                 }
-                literator(i+1)
+                iterator(i+1)
             });
             // console.log(i)
             // literator(i+1) 
