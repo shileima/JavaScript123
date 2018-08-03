@@ -1,0 +1,11 @@
+{
+  "name": "myNodeTest",
+  "version": "1.0.0",
+  "description": "My Node.js API test",
+  "main": "index.js",
+  "author": "Loaing",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
+}

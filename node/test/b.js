@@ -1,17 +1,9 @@
-const http = require('http');
 const fs = require('fs');
 
-const server = http.createServer((req, res) => {
-    if(req.url == '/favicon.ico'){ return }
-    res.writeHead(200,{'Content-Type':'text/html;charset=utf8'});
-    fs.rmdir('www',()=>{
-        console.log('删除成功')
-    })
-    fs.stat('./test',(err,stats)=>{
-        console.log(stats)
-    });
-});
+let a = 100;
+console.log('这是从另一个js文件里require过来的a值：',a);
 
-server.listen('5003', 'localhost', ()=>{
-    console.log('server is running at 5003')
+fs.readFile(__dirname + '/2.txt',(err,data)=>{
+    if(err){throw err;}
+    console.log(data.toString());
 });
