@@ -1,1 +1,1 @@
-alert('123')
+console.log('require from js/index.js')

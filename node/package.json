@@ -1,0 +1,10 @@
+{
+  "name": "myNodeTest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "loading",
+  "license": "MIT",
+  "dependencies": {
+    "formidable": "^1.2.1"
+  }
+}
