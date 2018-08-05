@@ -1,0 +1,2 @@
+我是test/2.txt里的文字
+add one line

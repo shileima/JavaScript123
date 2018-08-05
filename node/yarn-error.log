@@ -1,0 +1,32 @@
+Arguments: 
+  C:\Users\Loading\node\node.exe C:\Users\Loading\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js init
+
+PATH: 
+  C:\Users\Loading\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\Loading\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\Users\Loading\node;C:\Users\Loading\node;C:\Program Files\Git\cmd;C:\WINDOWS\System32\WindowsPowerShell\v1.0;C:\WINDOWS\System32\OpenSSH;C:\Program Files\Microsoft VS Code\bin;C:\Users\Loading\AppData\Local\Programs\Python\Python37\Scripts;C:\Users\Loading\AppData\Local\Programs\Python\Python37;C:\Users\Loading\AppData\Local\Microsoft\WindowsApps;C:\Program Files\Microsoft VS Code\bin;C:\Users\Loading\node;C:\Users\Loading\AppData\Roaming\npm;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl
+
+Yarn version: 
+  1.9.2
+
+Node version: 
+  8.9.4
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: Can't answer a question unless a user TTY
+      at ConsoleReporter.question (C:\Users\Loading\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:88021:59)
+      at Object.<anonymous> (C:\Users\Loading\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:80787:38)
+      at Generator.next (<anonymous>)
+      at step (C:\Users\Loading\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:92:30)
+      at C:\Users\Loading\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:103:13
+      at <anonymous>
+
+npm manifest: 
+  No manifest
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
