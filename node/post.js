@@ -35,18 +35,22 @@ const server = http.createServer((req,res) => {
         form.uploadDir = "./static/images";
 
         form.parse(req,(err, fields, files) => {
+
+            // files.pic.path = static/images/upload_deb2702429adc76e55e9bf4de6403fdb
             if(err) {throw err}
             res.writeHead(200,{"Content-Type":"text/html;charset=utf-8"});
-            res.write("Received upload:\n\n");
-            console.log(files.pic.path)
-            res.end(util.inspect({fields: fields, files: files}));
 
-            /* fs.rename('.' + files.pic.path, '.' + files.pic.path + '.jpg', () => {
-                console.log(files.pic.path)
-            }); */ // static/images/upload_deb2702429adc76e55e9bf4de6403fdb
-            fs.rename('./' + files.pic.path, './' + files.pic.path + '.jpg', () => {
-                console.log('done')
+            /*let filenameArr = files.pic.name.split('.');
+            let extname = filenameArr[filenameArr.length-1];*/
+            let extname = path.extname(files.pic.name);
+            let oldPath = './' + files.pic.path;
+            let newPath = form.uploadDir + '/' + new Date().getTime().toString() + parseInt(Math.random()*89999 + 10000).toString() + extname;
+
+            fs.rename(oldPath, newPath, () => {
+                console.log('图片重命名成功！')
             });
+
+            res.end(util.inspect({fields: fields, files: files}));
         });
         
         /* 以下是原生实现数据 post 上传 */
