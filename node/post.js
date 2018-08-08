@@ -97,6 +97,6 @@ function getMime(extname){
     }
 };
 
-server.listen('80','localhost',()=>{
-    console.log('server is running at port 80')
+server.listen('8080','localhost',()=>{
+    console.log('server is running at port 8080')
 });
