@@ -37,6 +37,7 @@
                 type:'GET',
                 dataType:'jsonp',
                 success:function(data){
+                    console.log(data)
                     flag=false;
                     setTimeout(function(){//只是模拟一下需要有个时间过程表示正在调取数据
                         for(var i=0;i<data.result.length;i++){

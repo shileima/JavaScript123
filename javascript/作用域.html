@@ -173,16 +173,24 @@ var result = num(count);
 console.log(result); // 1
 console.log(count);  // 10 */
 
-var a = 10;
+/* var a = 10;
 function num(a){
-	/* 这里相当于创建了一个局部变量 a 不影响外层全局变量 a = 10
-	var a = 10; */
+	// 这里相当于创建了一个局部变量 a 不影响外层全局变量 var a = 10;
     a += 3;
 }
 
 num(a);
 
-console.log(a); // 10
+console.log(a); */ // 10
+
+/* 如果是引用类型,传参时候，局部变量 a 其实是外部数组 a 的一个指针，两个对象指向同一个内存地址 */
+var a = [1,2,3];
+function num(a){
+    a.push(4)
+}
+
+num(a);
+console.log(a); // [1,2,3,4]
 
 </script>
 
