@@ -31,4 +31,6 @@ app.use(async ctx => {
     ctx.body = "Koa 中间件执行顺序是：先进后出";
 });
 
-app.listen(3000);
+app.listen(3000, ()=> {
+    console.log('server running at port 3000')
+});
