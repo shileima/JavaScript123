@@ -7,13 +7,13 @@ Object.defineProperty(app.context, 'host', {
         return '0.0.0.0'
     },
     set: function(newValue) {
-        console.log('你要赋值给我')
+        console.log('你要赋值给我;')
     }
 });
-app.context.host = '120,120,120,120';
+app.context.host = '120,120,120,127';
 Object.defineProperty(app.context, 'db', {
     get: function(){
-        return '这里是通过app.context给ctx增加属性和方法'
+        return '这里是通过app.context给ctx增加属性和'
     },
 });
 // response

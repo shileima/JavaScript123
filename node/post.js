@@ -52,6 +52,9 @@ const server = http.createServer((req,res) => {
 
             res.end(util.inspect({fields: fields, files: files}));
         });
+
+        res.writeHead(200,{'Content-Type':'text/html;charset=utf8'})
+        res.end('提交成功！')
         
         /* 以下是原生实现数据 post 上传 */
         /* req.addListener('data',chunk => {
