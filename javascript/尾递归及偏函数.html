@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>尾递归</title>
+</head>
+<body>
+<script>
+
+    /* 非尾递归，内存比较占用 */
+    function factorialFn(n){
+        if(n<2) return n;
+        return n * factorialFn(n-1)
+    }
+
+    console.log('factorialFn',factorialFn(5))
+
+    /* 下面函数是尾递归，直接将函数 return 出去，释放内存，性能比较优化 */
+    function addFn(n){
+        return n < 2 ? n : addFn(n-1) + addFn(n-2);
+    }
+    console.log('addFn',addFn(10))
+
+    /* 将第一个非尾递归函数改造成尾递归操作 */
+    function factorialFn2(n,res){
+        res = res ? res : 1;
+        if(n == 1) {return res;}
+        return factorialFn2(n-1, n * res)
+    }
+
+    console.log('factorialFn2',factorialFn2(5))
+
+</script>
+</body>
+</html>
