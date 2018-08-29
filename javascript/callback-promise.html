@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回调函数处理异步及 Promise 实现</title>
+</head>
+<body>
+    <script>
+        /* 通过异步回调来处理异步获取数据问题 */
+        function getData(callback){
+            setTimeout(()=>{
+                var aa = 10;
+                callback(aa)
+            },1000)
+        }
+        
+        getData(data=>console.log(data))
+
+        /* Promise 来处理 */
+        var p = new Promise(function(resolve,reject){
+            setTimeout(function(){
+                var bb = 20;
+                resolve(bb)
+            },2000)
+        })
+        p.then(res => console.log(res))
+
+        /* async + await 来实现异步取数据 */
+
+        async function getAjaxData(){
+            var cc;
+            await setTimeout(()=>{
+                cc = 30;
+            },3000)
+            console.log(cc)
+        }
+        getAjaxData()
+    </script>
+</body>
+</html>
