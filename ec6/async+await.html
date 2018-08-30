@@ -139,5 +139,38 @@ f().then(
 )
 // Error: 出错了
 </script>-->
+
+<!--自定义函数 n秒后打印特定数据-->
+<script>
+    var testPromise = (name,time) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                resolve(name);
+                console.log(time/1000 + '秒后打印出：' + name)
+            },time)
+        })
+    }
+
+    testPromise('loading', 3000)
+</script>
+
+<!--每隔一秒打印出1到10-->
+<script>
+    var testPromise = (i,time) => {
+        i++;
+        time++;
+        if(i>10) {return};
+        return new Promise((resolve, reject) => {
+            setTimeout(()=>{
+                resolve(i);
+                console.log(time + '秒后打印出：' + i)
+            },time*1000)
+
+            return testPromise(i,time)
+        });
+    }
+
+    testPromise(0,0)
+</script>
 </body>
 </html>

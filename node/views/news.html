@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>news.html</title>
+</head>
+<body>
+<% include ./header.html %>
+<h1>koa-view and ejs index.html 首页</h1>
+<ul>
+    <%for(let i=0;i < list.length;i++){%>
+    <li><%=list[i]%></li>
+    <%}%>
+</ul>
+</body>
+</html>
