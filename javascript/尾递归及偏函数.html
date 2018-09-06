@@ -8,14 +8,13 @@
 </head>
 <body>
 <script>
-
     /* 非尾递归，内存比较占用 */
-    function factorialFn(n){
-        if(n<2) return n;
-        return n * factorialFn(n-1)
+    function factorial(n){
+        if(n==1) return n;
+        return n * factorial(n-1)
     }
 
-    console.log('factorialFn',factorialFn(5))
+    console.log('factorial',factorial(5,1))
 
     /* 下面函数是尾递归，直接将函数 return 出去，释放内存，性能比较优化 */
     function addFn(n){
@@ -31,6 +30,19 @@
     }
 
     console.log('factorialFn2',factorialFn2(5))
+
+    /* 偏函数 */
+    function partial(fn){
+        var args = Array.prototype.slice.call(arguments,1)
+        return function(){
+            var newArgs = [].slice.call(arguments).concat(args)
+            return fn.apply(this,newArgs) // 把新的 arguments 传递给偏函数里要执行的函数fn
+        }
+    }
+    factorial = partial(factorial,1)
+
+    console.log(factorial(5))
+
 
 </script>
 </body>

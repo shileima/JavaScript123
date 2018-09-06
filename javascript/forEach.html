@@ -1,7 +1,8 @@
 <html>
 <meta charset="UTF-8">
 <script charset="utf-8">
-    var sum;
+    var sum     = 0;
+    var counter = 0;
     var arr = [1,2,3,4];
 //    arr.forEach(alert); // 按顺序弹出 1,2,3,4
 
@@ -14,11 +15,15 @@
      */
 
     [1,2,3,4].forEach(function(value,index,array){
+        counter++;
  //       alert(array[index] == value); // true
         sum += value;
+        if(counter == array.length){
+            alert(sum)
+        }
     })
 
-    alert(sum) // forEach() 是异步函数，这里弹出 NaN
+    //alert(sum) // forEach() 是异步函数，这里弹出 NaN
 
 
     var arr2=[1,2,3,4,5,6];
