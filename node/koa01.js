@@ -1,5 +1,6 @@
 const Koa = require('koa');
 const app = new Koa();
+const logger = require('koa-logger');
 const KeyGrip = require("keygrip");
 
 Object.defineProperty(app.context, 'host', {
@@ -16,6 +17,8 @@ Object.defineProperty(app.context, 'db', {
         return '这里是通过app.context给ctx增加属性和'
     },
 });
+// koa-logger
+app.use(logger())
 // response
 app.use(async ctx => {
     if(ctx.request.url == '/favicon.ico'){
@@ -24,7 +27,7 @@ app.use(async ctx => {
 
     ctx.body = ctx;
     console.log('app.env:',app.env)
-    console.log('ctx:',ctx.host)   // 0,0,0,0
+    console.log('headers:',ctx.headers)   // 0,0,0,0
     console.log('ctx:',ctx.db)     // 这里是通过app.context给ctx增加属性和方法
     console.log('app:',app)
     console.log('app.callback:',app.callback)
