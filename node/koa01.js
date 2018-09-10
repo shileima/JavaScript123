@@ -17,6 +17,13 @@ Object.defineProperty(app.context, 'db', {
         return '这里是通过app.context给ctx增加属性和'
     },
 });
+app.use(async (ctx, next) => {
+    if(ctx.path === '/favicon.ico'){return;}
+    const start = Date.now();
+    await next();
+    const ms = Date.now() - start;
+    console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
+})
 // koa-logger
 app.use(logger())
 // response
@@ -24,7 +31,6 @@ app.use(async ctx => {
     if(ctx.request.url == '/favicon.ico'){
         return;
     }
-
     ctx.body = ctx;
     console.log('app.env:',app.env)
     console.log('headers:',ctx.headers)   // 0,0,0,0
