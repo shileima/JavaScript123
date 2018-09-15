@@ -141,7 +141,7 @@ const f= new Fn7(1,2) // 报错 。。。。
     Foo.call( { id: 40 } );
     // id: undefined
 </script> -->
-<!-- <script>
+ <!-- <script>
   {
     const foo = ()=>{return 2}
     console.log('foo() === 2', foo() === 2)
@@ -152,28 +152,9 @@ const f= new Fn7(1,2) // 报错 。。。。
     }
     console.log('foo() === 2', foo() === 2)
   }
-</script>
-<script>
-  var a=11
-function test1(){
-  this.a=22;
-  let b=function(){
-    console.log('ES5函数执行结果：',this.a);
-  };
-  b();
-}
-var x=new test1(); // 11 ES5中 this指向函数调用时的对象
-
-var a=11;
-function test2(){
-  this.a=22;
-  let b=()=>{console.log('箭头函数执行结果：',this.a)}
-  b();
-}
-var x=new test2(); // 22 ES6中 this指向函数定义时的对象
 </script> -->
 
-<script>
+<!-- <script>
   var name='window.name';
   var outerObj = {
     name:'outerObjName',
@@ -190,6 +171,32 @@ var x=new test2(); // 22 ES6中 this指向函数定义时的对象
   }
   outerObj.innerObj.commonFun() // 普通函数this指向调用对象的，这里是innerObj调用commonFun，所以 this 就是innerObj.name
   outerObj.innerObj.arrowFun() // window.name 箭头函数没有 this 指针，指向最外层 window
+</script> -->
+
+<script>
+  var a=11
+function test1(){
+  this.a=22;
+  let b=function(){
+    console.log('ES5函数执行结果：',this.a);
+  };
+  b();
+}
+var x=new test1(); // 11 
+// ES5中 this指向函数调用时的对象
+// 当new出现时候，就是把函数作为构造函数进行调用
+
+var a=11;
+function test2(){
+  this.a=22;
+  let b=()=>{console.log('箭头函数执行结果：',this.a)}
+  b();
+}
+var x=new test2(); // 22
+// ES6中 this指向函数定义时的对象
+// 由于没有this指向，所以指向了外层函数的this 就是 test2()
+
 </script>
+
 </body>
 </html>

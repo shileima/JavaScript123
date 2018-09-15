@@ -10,7 +10,7 @@
     alert(factorial(4));
 </script> -->
 
-<script>
+<!-- <script>
     function factorial(num){
         if(num<=1){
             return 1;
@@ -20,4 +20,11 @@
     }
 
     alert(factorial(4));
+</script> -->
+
+<script>
+    function factorialFn(n){
+        return n < 2 ? n : factorialFn(n-1) + factorialFn(n-2);
+    }
+    console.log(factorialFn(5))
 </script>

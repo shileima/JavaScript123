@@ -1,6 +1,8 @@
 <html>
 <meta charset="UTF-8">
 <script charset="utf-8">
+    var sum     = 0;
+    var counter = 0;
     var arr = [1,2,3,4];
 //    arr.forEach(alert); // 按顺序弹出 1,2,3,4
 
@@ -13,11 +15,27 @@
      */
 
     [1,2,3,4].forEach(function(value,index,array){
+        counter++;
  //       alert(array[index] == value); // true
         sum += value;
+        if(counter == array.length){
+            alert(sum)
+        }
     })
 
-    alert(sum)
+    //alert(sum) // forEach() 是异步函数，这里弹出 NaN
+
+
+    var arr2=[1,2,3,4,5,6];
+        arr2.forEach(function(x){
+            console.log(x);
+        });
+        
+        function Test(element,index,array){
+            console.log('要处理的数组为：'+array);
+            console.log('索引：'+index+"--值为："+element);
+        }
+        arr2.forEach(Test);
 </script>
 <h2>
     定义和用法:
@@ -38,6 +56,17 @@ button onclick="numbers.forEach(myFunction)">点我</button
         sum += item;
         demo.innerHTML = sum;
     }
+
+    var arr2=[1,2,3,4,5,6];
+        arr2.forEach(function(x){
+            console.log(x);
+        });
+        
+        function Test(element,index,array){
+            console.log('要处理的数组为：'+array);
+            console.log('索引：'+index+"--值为："+element);
+        }
+        arr2.forEach(Test);
 
 </p>
 </html>

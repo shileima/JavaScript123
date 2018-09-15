@@ -1,0 +1,32 @@
+{
+  "name": "myNodeTest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "loading",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon -w src --exec \"babel-node src --preset env\"",
+    "production": "node dist",
+    "build": "rimraf dist && babel src -d dist --presets env"
+  },
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "formidable": "^1.2.1",
+    "keygrip": "^1.0.2",
+    "koa": "^2.5.2",
+    "koa-logger": "^3.2.0",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.9.0",
+    "koa-views": "^6.1.4",
+    "node-fetch": "^2.2.0",
+    "nodemon": "^1.18.4",
+    "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-runtime": "^6.26.0",
+    "rimraf": "^2.6.2"
+  }
+}

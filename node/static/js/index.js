@@ -1,0 +1,1 @@
+console.log('require from js/index.js')
