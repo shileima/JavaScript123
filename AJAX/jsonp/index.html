@@ -6,9 +6,9 @@
     <title>jsonp 跨域请求数据</title>
 </head>
 <body>
-<h1>jsonp 跨域请求 json 数据</h1>
+<h1>jsonp 跨域请求 json 数据</h1><button id="js">jsonp</button>
 <script>
-    $.ajax({
+    /* $.ajax({
         // 请求另一个服务器的后端数据
         url: "http://s.chinahadoop.cn/js/jsonp/jsonp.php",
         type: "get",
@@ -21,7 +21,19 @@
         error:function(){
             alert('发生异常!')
         }
-    })
+    }) */
+
+    function getMessage(data){
+        console.log(data)
+    }
+
+    document.querySelector('#js').onclick = function(){
+        var url = "http://s.chinahadoop.cn/js/jsonp/jsonp.php?callback=getMessage";
+        var script = document.createElement('script');
+        script.setAttribute('src', url);
+        document.getElementsByTagName('body')[0].appendChild(script);
+    }
+
 
     //    $.ajax('./jsonp.php?callback=getMessage',function(res){
     //        console.log(res)
