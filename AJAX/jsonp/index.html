@@ -8,9 +8,26 @@
 <body>
 <h1>jsonp 跨域请求 json 数据</h1>
 <script>
-    $.getJSON('http://s.chinahadoop.cn/j/AJAX/jsonp/jsonp.php?callback=?',function(data){
-        console.log(data)
+    /*$.ajax({
+        url: "./jsonp.php",
+        type: "get",
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "getMessage",
+        success:function(data){
+            console.log(data)
+        },
+        error:function(){
+            alert('发生异常!')
+        }
+
+    })*/
+    $.get('./jsonp.php?callback=getMessage',function(res){
+        console.log(res)
     })
+    function getMessage(data){
+        console.log(data)
+    }
 </script>
 </body>
 </html>
