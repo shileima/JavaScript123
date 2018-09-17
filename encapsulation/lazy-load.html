@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>30行代码实现懒加载</title>
+</head>
+<body>
+<style>
+    body {
+        text-align: center;
+    }
+
+    img {
+        width: 100%;
+        max-width: 300px;
+        height: 200px;
+        margin-bottom: 100px;
+    }
+</style>
+<script>
+    class lazyLoad {
+        constructor(el){
+            this.imglist = Array.from(document.querySelectorAll(el));
+            this.init();
+        };
+
+        canILoad(){
+            let imglist = this.imglist;
+            for(let i = imglist.length; i--;){
+                this.getBound(imglist[i]) && this.loadImage(imglist[i],i);
+            }
+
+        };
+
+        loadImage(el,index){
+            let src = el.getAttribute('data-original');
+            el.src = src;
+            // 避免重复判断，已经确定加载的图片应当从imglist移除
+            this.imglist.splice(index, 1);
+            console.log('imglist:',this.imglist)
+        };
+
+        getBound(el){
+            let bound = el.getBoundingClientRect();
+            let clientHeight = window.innerHeight;
+            return bound.top <= clientHeight - 200;
+        };
+
+        bindEvent(){
+            window.addEventListener('scroll',() => {
+                this.canILoad();
+            });
+        };
+
+        init(){
+            this.canILoad();
+            this.bindEvent();
+        };
+
+    };
+    window.onload = function(){
+        const lazy = new lazyLoad('.lazyload');
+    };
+</script>
+<div class="img-warpper">
+    <img class="lazyload" data-original="//n.sinaimg.cn/sinacn21/160/w1600h960/20180723/6903-hftenhz2096387.jpg">
+</div>
+<div class="img-warpper">
+    <img class="lazyload" data-original="//n.sinaimg.cn/sinacn21/160/w1600h960/20180723/cf09-hftenhz2097064.jpg">
+</div>
+<div class="img-warpper">
+    <img class="lazyload" data-original="https://s3.pfp.sina.net/ea/ad/4/3/23175987d403f27fecd9715463ce0de0.jpeg">
+</div>
+<div class="img-warpper">
+    <img class="lazyload" data-original="//n.sinaimg.cn/sinacn21/160/w1600h960/20180723/c79c-hftenhz2096766.jpg">
+</div>
+<div class="img-warpper">
+    <img class="lazyload" data-original="//n.sinaimg.cn/sinacn21/160/w1600h960/20180723/a589-hftenhz2096852.jpg">
+</div>
+</body>
+</html>
