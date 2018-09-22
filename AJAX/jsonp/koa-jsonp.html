@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>jsonp 跨域</title>
+</head>
+
+<body>
+    <script>
+        function jsonp({
+            url,
+            params,
+            cb
+        }) {
+            return new Promise((resolve, reject) => {
+                params = {...params,
+                    cb
+                }
+                let queryString = []
+                let script = document.createElement('script')
+
+                for (let key in params) {
+                    queryString.push(`${key}=${params[key]}`)
+                }
+
+                window[cb] = function(data) {
+                    resolve(data)
+                    document.body.removeChild(script)
+                }
+
+                script.src = `${url}?${queryString.join('&')}`;
+                document.body.appendChild(script)
+            })
+        }
+
+        jsonp({
+            url: 'http://115.159.152.167:3030/api/jsonp',
+            params: {
+                wd: "我爱你，你爱我吗？"
+            },
+            cb: "show"
+        }).then(data => {
+            console.log(data)
+        })
+    </script>
+</body>
+
+</html>
