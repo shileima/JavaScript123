@@ -16,34 +16,32 @@
             cb
         }) {
             return new Promise((resolve, reject) => {
-                params = {...params,
+                let script = document.createElement('script')
+                let arrs = []
+                let paramString = {
+                    ...params,
                     cb
                 }
-                let queryString = []
-                let script = document.createElement('script')
-
-                for (let key in params) {
-                    queryString.push(`${key}=${params[key]}`)
-                }
-
                 window[cb] = function(data) {
                     resolve(data)
                     document.body.removeChild(script)
                 }
-
-                script.src = `${url}?${queryString.join('&')}`;
+                for (let key in paramString) {
+                    arrs.push(`${key}=${paramString[key]}`)
+                }
+                script.src = `${url}?${arrs.join('&')}`
                 document.body.appendChild(script)
             })
         }
 
         jsonp({
-            url: 'http://115.159.152.167:3030/api/jsonp',
+            url: 'http://localhost:4000',
             params: {
-                wd: "我爱你，你爱我吗？"
+                wd: 'I love you...'
             },
-            cb: "show"
+            cb: 'show'
         }).then(data => {
-            console.log(data)
+            alert(data)
         })
     </script>
 </body>
