@@ -7,14 +7,14 @@
 
 <body>
 <script>
-    let p1 = new Promise((resolve,reject) => {
+    let p4 = new Promise((resolve,reject) => {
                 setTimeout(() => {
                     console.log('这是p1')
                     resolve(10)
                 },1000)
             })
 
-    let p2 = new Promise((resolve,reject) => {
+    let p5 = new Promise((resolve,reject) => {
                 setTimeout(() => {
                     console.log('这是p2')
                     resolve(20)
@@ -22,8 +22,44 @@
             })
 
     //Promise.race([p1,p2]).then(res => { // 只要有一个获取到就执行 then
-    Promise.all([p1,p2]).then(res => { // 所有进程都执行完 再执行 then
+    Promise.all([p4,p5]).then(res => { // 所有进程都执行完 再执行 then
         console.log(res)
+    })
+
+    function fakeAjax(url, cb){
+        var response = {
+            'file1': '文件一',
+            'file2': '文件二',
+            'file3': '文件三'
+        }
+
+        var random = Math.random()*4000 + 1000
+        setTimeout(() => {
+            cb(response[url])
+        },random)
+    }
+
+    function getFile(file){
+        return new Promise((resolve, reject) => {
+            fakeAjax(file, resolve)
+        })
+    }
+    function output(text){
+        console.log(text)
+    }
+
+    let p1 = getFile('file1')
+    let p2 = getFile('file2')
+    let p3 = getFile('file3')
+
+    p1.then((text) => {
+        output(text)
+        return p2
+    }).then((text) => {
+        output(text)
+        return p3
+    }).then((text) => {
+        output(text)
     })
 
 </script>
