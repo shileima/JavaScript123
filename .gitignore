@@ -1,5 +1,5 @@
 *.sql
-/ec6/课程源码/*
+ec6/课程源码/*
 /node_modules/*
 node/node_modules
 node/.idea
