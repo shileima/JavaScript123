@@ -2,6 +2,7 @@ class Animal {
     constructor(type){
         this.type = type
     }
+    // a = 10  // ES6 还未支持的语法
     eat(){
         console.log('eating')
     }
@@ -25,4 +26,6 @@ const cat = new Cat('大猫');
 Cat.say() // static 关键字 可以被类继承，不能被实例继承
 console.log(cat.type)
 cat.eat()
+console.log(Cat.flag())
 console.log(cat.flag()) // cat.flag is not a function
+
