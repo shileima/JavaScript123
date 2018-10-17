@@ -1,6 +1,8 @@
 *.sql
 ec6/课程源码/*
+ec6//node_modules/*
 /node_modules/*
+ec6/node_modules/
 node/node_modules
 node/.idea
 .idea
