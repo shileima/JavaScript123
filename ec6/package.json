@@ -4,7 +4,8 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "dev": "babel class-es6.js -o class-es5.js -w"
+    "dev": "babel class-es6.js -o class-es5.js -w",
+    "decorator": "babel ./decorator/2.js -o ./decorator/2.1.js -w"
   },
   "author": "",
   "license": "ISC",
