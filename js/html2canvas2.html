@@ -1,64 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>利用html2canvas实现 html/div to picture 2</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <title>利用html2canvas实现 html/div to picture</title>
-</head>
-
-<body>
 
     <style>
-        * {
-            margin: 0;
-        }
-
         .test {
             width: 100px;
             height: 100px;
             text-align: center;
             line-height: 100px;
-            background-color: #87CEEB;
+            background-color: #87ceeb;
             display: inline-block;
-            vertical-align: top;
+            vertical-align: top
         }
-
 
         canvas {
-            margin-right: 5px;
+            margin-right: 5px
         }
-
 
         .down {
             float: left;
-            margin: 40px 10px;
+            margin: 40px 10px
         }
 
         .down2 {
             float: left;
-            margin: 40px 30px;
+            margin: 40px 30px
         }
     </style>
+</head>
 
-    <!-- <div id="capture" style="padding: 10px; background: #f5da55">
-      <h4 style="color: #000; ">Hello world!</h4>
-  </div>
-  <script>
-    document.onclick = function(){
-      html2canvas(document.querySelector("#capture")).then(canvas => {
-        document.body.appendChild(canvas)
-      })
-    }
-  </script> -->
-
-    <div class="test">测试</div>
-    <div><a class="down" href="" download="downImg">下载</a>
+<body>
+    <div class="test">div to picture</div>
+    <div><a class="down" href="" download="downImgName">下载</a>
     </div>
-    <div><a class="down2" href="" download="downImg">下载2</a></div>
+    <div><a class="down2" href="" download="downImgName">下载2</a></div>
     <script>
         //直接选择要截图的dom，就能截图，但是因为canvas的原因，生成的图片模糊
         //html2canvas(document.querySelector('div')).then(function(canvas) {
@@ -86,11 +66,7 @@
             //document.body.appendChild(canvas);
             //canvas转换成url，然后利用a标签的download属性，直接下载，绕过上传服务器再下载
             document.querySelector(".down").setAttribute('href', canvas.toDataURL());
-            var img = new Image()
-            img.src = canvas.toDataURL()
-            //document.body.appendChild(img)
-            document.body.innerHTML = `<img src=${canvas.toDataURL()} />`
-            //allDiv.parentNode.removeChild(allDiv);
+            document.querySelector(".down2").setAttribute('href', canvas.toDataURL());
         });
     </script>
 
@@ -102,7 +78,7 @@
                 html2canvas($(".test")).then(function (canvas) {
                     var imgUri = canvas.toDataURL("image/png").replace("image/png",
                         "image/octet-stream"); // 获取生成的图片的url
-                    window.location.href = imgUri; // 下载图片
+                    //window.location.href = imgUri; // 下载图片
                 });
 
 
@@ -116,7 +92,6 @@
             });
         });
     </script>
-
 </body>
 
 </html>
