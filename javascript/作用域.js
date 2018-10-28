@@ -68,3 +68,37 @@ function a(b){
     b()
 }
 a(3) // 3 [Function: b]
+
+function outPutNumbers(count){
+    for(var i=0; i<count; i++){
+        console.log(i)
+    }
+    var i;
+    console.log(i)
+}
+outPutNumbers(5) // 1,2,3,4,5
+
+function outPutNumbers(count){
+    (function(){
+        var i=0
+        for(; i<count; i++){
+            console.log(i)
+        }
+    })()
+    var i;
+    console.log(i)
+}
+outPutNumbers(5) // 1,2,3,4,undefined
+
+function t(){
+    var age = 20
+    return function(){
+        console.log(age) 
+        // 这里已经将 age 锁定在返回函数的闭包中，
+        //作用域是在函数定义的时候已经固定
+    }
+}
+
+var age = 100
+var tmp = t()
+tmp() // 20
