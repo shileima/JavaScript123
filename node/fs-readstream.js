@@ -17,19 +17,20 @@ readStream.on('data',chunk => {
 });
 
 readStream.on('end',() => {
-    //console.log(str)
-    console.log(count)
+    console.log(str)
+    console.log('count:',count)
 });
 
 readStream.on('error',(err) => {
     console.log(err)
 });
 
-// readStream.pipe(writeStream) // 通过管道方式将读取的readStream导入到writeStream
+// 通过管道方式将读取的readStream导入到writeStream
+// readStream.pipe(writeStream) 
 
-writeStream.write(writeStr)
-writeStream.write(writeStr)
-writeStream.write(writeStr)
+writeStream.write(writeStr + count++)
+writeStream.write(writeStr + count++)
+writeStream.write(writeStr + count++)
 
 writeStream.end();
 

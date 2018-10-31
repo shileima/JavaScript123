@@ -1,6 +1,9 @@
 const Koa     = require('koa');
+const fs      = require('fs');
 const views   = require('koa-views');
 const router  = require('koa-router')();
+const bodyParser = require('koa-bodyparser')
+const path   = require('path')
 
 const app = new Koa;
 
@@ -8,14 +11,14 @@ const app = new Koa;
 
 /*第一种配置方法*/
 /*用这种写法的话views/下的文件必须以html结尾*/
-app.use(views('views', {map: {html: 'ejs'}}))
+ app.use(views('node/views', {map: {html: 'ejs'}}))
 
 /*第二种配置方法 extension 是模板文件后缀,必须写ejs才能在模板里用ejs的语法*/
-/*app.use(views('views', {extension: 'ejs'}))*/
+// app.use(views('node/views', {extension: 'ejs'}))
 
 let title = "这是一个数据title",
     arr   = [111,222,333];
-
+app.use(bodyParser())
 app.use(async (ctx,next) => {
     ctx.state.userInfo = {
         name: 'Loading',
@@ -43,6 +46,21 @@ router.get('/news', async ctx => {
 
     /* 这里的render方法是异步渲染前面必须加 await */
     await ctx.render('news', { list : arr})
+})
+
+// 登录页面
+router.get('/login', async ctx => {
+    await ctx.render('form', {}, data => {
+        console.log('data:',data)
+    })
+})
+// 处理用户提交数据,
+// ctx.request.body 结合bodyParser 获取提交数据
+router.post('/dologin', async ctx => {
+    ctx.body = ctx.request.body
+    fs.appendFile('node/login.txt', JSON.stringify(ctx.request.body) + '\r\n', () => {
+        console.log('登录信息写入成功!')
+    })
 })
 
 app.use(router.routes());
