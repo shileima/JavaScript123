@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Touch Event</title>
+</head>
+<body>
+    <style>
+        body {
+            height:100%;
+            overflow: hidden;
+            position: relative;
+        }
+        #wrap {
+            width: 100%;
+            height:100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #scroll {
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <div id="wrap">
+        <div id="scroll">
+            移动端原生上线页面滑动实现 1<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 2<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 3<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 4<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 5<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 6<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 7<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 8<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 9<br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 <br />
+            移动端原生上线页面滑动实现 10<br />
+        </div>
+    </div>
+    <script>
+
+    // 1，手指按下去的时候，记录下手指坐标;
+    // 2，移动的时候，记录手指的坐标;
+    // 3，用移动后的坐标 - 移动前的坐标 = 手指移动的距离;
+    // 4，手指按下去的时候记录元素(scroll)的位置;
+    // 5，移动之后，用手指移动的距离 + 元素的初始位置 = 元素现在所要在的位置
+
+    window.onload = function() {
+        let wrap = document.querySelector('#wrap');
+        let scroll = document.querySelector('#scroll');
+        let maxdis = window.innerHeight - scroll.offsetHeight;
+        let startPoit = 0;
+        let startEI = 0;
+
+        wrap.addEventListener("touchstart", e => {
+            let touch = e.changedTouches[0];
+            startPoit = touch.pageY;
+            startEI = scroll.offsetTop;
+        })
+        wrap.addEventListener('touchmove', e => {
+            let touch = e.changedTouches[0];
+            let nowPoit = touch.pageY;
+            let scrolltop = startEI + nowPoit - startPoit;
+            scrolltop > 0 ? scrolltop = 0 : scrolltop = scrolltop;
+            scrolltop < maxdis ? scrolltop = maxdis - 10 : scrolltop = scrolltop;
+            scroll.style.top =scrolltop + "px";
+        })
+        // 如果天添加滑动超出后的回弹效果的话，需要在 touchend 事件里添加
+        // wrap.addEventListener('touchend', e => {
+        //     if(scroll.offsetTop >= 0){scroll.style.top = 0}
+        //     if(scroll.offsetTop <= maxdis){
+        //         scroll.style.top = maxdis - 10 + 'px';
+        //     }
+        // })
+    }
+    </script>
+</body>
+</html>

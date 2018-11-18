@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Touch Event</title>
+</head>
+<body>
+    <style>
+        #box {
+            width: 100px;
+            height:100px;
+            background: red;
+        }
+    </style>
+    <div id="box"></div>
+    <script>
+    // touches 当前屏幕上的手指列表
+    // targetTouches 当前元素上的手指列表
+    // changedTouches 触发当前事件的手指列表
+    window.onload = () => {
+        let box = document.querySelector('#box');
+        box.addEventListener('touchmove', (e) => {
+            console.log(e.targetTouches) 
+        })
+        box.addEventListener('touchend', (e) => {
+            console.log(e.changedTouches)
+        })
+    }
+    </script>
+</body>
+</html>
