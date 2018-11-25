@@ -9,22 +9,29 @@
 <body>
     <style>
         body {
-            height:100%;
+            width: 100%;
+            height:50%;
             overflow: hidden;
             position: relative;
+            margin: 0;
+            padding: 0;
         }
         #wrap {
             width: 100%;
-            height:100%;
+            height: 100%;
             position: absolute;
             left: 0;
             top: 0;
+            -webkit-overflow-scrolling : touch;
+            z-index: 1;
         }
         #scroll {
             width: 100%;
             position: absolute;
             left: 0;
             top: 0;
+            -webkit-overflow-scrolling : touch;
+            z-index: 2;
         }
     </style>
     <div id="wrap">
@@ -106,17 +113,22 @@
         let startEI = 0;
 
         wrap.addEventListener("touchstart", e => {
+            //e.preventDefault()
             let touch = e.changedTouches[0];
             startPoit = touch.pageY;
             startEI = scroll.offsetTop;
         })
         wrap.addEventListener('touchmove', e => {
+            //e.preventDefault()
             let touch = e.changedTouches[0];
             let nowPoit = touch.pageY;
             let scrolltop = startEI + nowPoit - startPoit;
             scrolltop > 0 ? scrolltop = 0 : scrolltop = scrolltop;
-            scrolltop < maxdis ? scrolltop = maxdis - 10 : scrolltop = scrolltop;
+            scrolltop < maxdis ? scrolltop = maxdis : scrolltop = scrolltop;
             scroll.style.top =scrolltop + "px";
+        })
+        wrap.addEventListener('touchend', e => {
+            wrap.removeEventListener('touchmove', e => {})
         })
         // 如果天添加滑动超出后的回弹效果的话，需要在 touchend 事件里添加
         // wrap.addEventListener('touchend', e => {

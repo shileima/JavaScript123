@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<style id="css">
+body, ul {
+    padding: 0;
+    margin:0;
+}
+#wrap {
+    position: relative;
+    overflow: hidden;
+}
+#list {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+#list li {
+    list-style: none;
+    float: left
+}
+#list img {
+    display: block;
+    width: 100vw;
+}
+nav {
+    position: absolute;
+    left: 10px;
+    bottom: 5px;
+    line-height: 10px;
+    width: 100%;
+    text-align: center;
+
+}
+nav span {
+    background-color: brown;
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+nav .active {background-color:chartreuse;}
+</style>
+<script>
+    document.addEventListener('touchstart',function(e){
+        e.preventDefault()
+    })
+    window.onload = () => {
+        let wrap = document.querySelector('#wrap');
+        let list = document.querySelector('#list');
+        let lis  = document.querySelectorAll('#list li');
+        let navs = document.querySelectorAll('nav span');
+        let css  = document.querySelector('#css');
+
+        let style = "#wrap{height:" + lis[0].offsetHeight + "px}";
+        style += "#list{width:" + lis.length + "00%}";
+        style += "#list li{width:" + 1/lis.length*100 + "%";
+
+        css.innerHTML += style;
+
+        var startPoint = 0,
+            startX = 0;
+
+        wrap.addEventListener('touchstart', e => {
+            startPoint = e.changedTouches[0].pageX;
+            startX = list.offsetLeft;
+        })
+        wrap.addEventListener('touchmove', e => {
+            var newPoint = e.changedTouches[0].pageX;
+            var dis = newPoint - startPoint;
+            list.style.left = startX + dis + "px";
+            console.log(list.offsetLeft)
+        })
+        wrap.addEventListener('touchend', e => {
+            // 不带动画版
+            var left = list.offsetLeft;
+            var now = Math.round(-left/wrap.offsetWidth);
+            now = Math.max(now,0)
+            now = Math.min(lis.length-1,now)
+            var offsetLeft = -now * lis[0].offsetWidth
+        
+            list.style.left = offsetLeft + "px";
+            
+            for(let i=0; i<navs.length; i++){
+                navs[i].className = "";
+            }
+            navs[now].className = "active"
+
+            // 带动画效果
+            // var left = list.offsetLeft;
+            // var now = Math.round(-left/wrap.offsetWidth);
+            // now = Math.max(now,0)
+            // now = Math.min(lis.length-1,now)
+            // var speed = 50;
+        
+            // var timer = setInterval(() => {
+            //     speed++;
+            //     list.style.left = left - speed + "px";
+                
+            //     if(list.offsetLeft + now * lis[0].offsetWidth == 0){
+            //         clearInterval(timer)
+            //     }
+            // },10)
+
+            
+        })
+        
+    }
+</script>
+<div id="wrap">
+    <ul id="list">
+        <li>
+            <a href="javascript:;">
+                <img src="https://gw.alicdn.com/imgextra/i2/33/O1CN01QkuKMg1C79Y4TIoUs_!!33-0-lubanu.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src="http://gw.alicdn.com/imgextra/i1/76/O1CN01HB3nqB1CQqa0vy6ll_!!76-0-lubanu.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src="http://gw.alicdn.com/imgextra/i1/146/O1CN01QOJZXB1CwuIxmbkD4_!!146-0-luban.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src="http://img.alicdn.com/imgextra/i2/190/O1CN01MWxq1J1DH3jMU7MmZ_!!190-0-luban.jpg" alt="">
+            </a>
+        </li>
+        <li>
+            <a href="javascript:;">
+                <img src="http://gw.alicdn.com/imgextra/i3/119/O1CN0187pCP61CkXbujrfxa_!!119-0-lubanu.jpg" alt="">
+            </a>
+        </li>
+    </ul>
+    <nav>
+        <span class="active"></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+    </nav>
+</div>
+</body>
+</html>
