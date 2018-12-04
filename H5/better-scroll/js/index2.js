@@ -7,7 +7,7 @@
         scrollY: false,
         momentum: false,
         snap : {
-            loop: true,
+            loop: false,
             threshold: .2
         }
     });
