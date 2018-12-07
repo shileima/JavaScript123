@@ -2,15 +2,6 @@ const Koa = require('koa');
 const app = new Koa();
 const logger = require('koa-logger');
 const KeyGrip = require("keygrip");
-
-Object.defineProperty(app.context, 'host', {
-    get: function() {
-        return '0.0.0.0'
-    },
-    set: function(newValue) {
-        console.log('你要赋值给我;')
-    }
-});
 // app.context.host = '120,120,120,127'; // 无效赋值
 // app.ctx.host = '111,111,111,111'; // 出错！无效赋值
 Object.defineProperty(app.context, 'db', {
@@ -35,8 +26,6 @@ app.use(async ctx => {
     ctx.body = ctx;
     console.log('app.env:',app.env)
     console.log('headers:',ctx.headers)   // 
-    console.log('app.context.host:',app.context.host)   // 0,0,0,0
-    console.log('app.ctx.host:',app.ctx.host)   // 
     console.log('ctx:',ctx.db)     // 这里是通过app.context给ctx增加属性和方法
     console.log('app:',app)
     console.log('app.callback:',app.callback)
@@ -45,6 +34,6 @@ app.use(async ctx => {
     console.log('app.keys:', app.keys)
 });
 
-app.listen(3000, () => {
-    console.log('server running at port 3000')
+app.listen(8888, () => {
+    console.log('server running at port 8888')
 });
