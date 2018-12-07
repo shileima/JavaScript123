@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>完整版 - 移动端图片左右滑动无缝滚动</title>
 </head>
 <body>
 <style id="css">
@@ -96,6 +96,7 @@ nav .active {background-color:chartreuse;}
     window.onload = () => {
         let wrap = document.querySelector('#wrap');
         let list = document.querySelector('#list');
+        list.innerHTML += list.innerHTML;
         let lis  = document.querySelectorAll('#list li');
         let navs = document.querySelectorAll('nav span');
         let css  = document.querySelector('#css');
@@ -103,16 +104,29 @@ nav .active {background-color:chartreuse;}
         let style = "#wrap{height:" + lis[0].offsetHeight + "px}";
         style += "#list{width:" + lis.length + "00%}";
         style += "#list li{width:" + 1/lis.length*100 + "%";
-
         css.innerHTML += style;
 
-        var startPoint = 0,
-            startX = 0;
+        cssTransform(list,"translateX",0)
 
+        var startPoint = 0,
+            startX = 0,
+            timer = null,
+            translateX = cssTransform(list,"translateX"),
+            now = Math.round(-translateX / wrap.offsetWidth);
+            
         wrap.addEventListener('touchstart', e => {
+            clearInterval(timer)
+            list.style.transition = 'none';
+            translateX = cssTransform(list,"translateX");
+            now = Math.round(-translateX / wrap.offsetWidth);
+            // 如果按下的是第一张，为了防止右滑空白页，将滑动定位到第二组的第一张;
+            now = now == 0 ? navs.length : now;
+            // 如果滑动的是第二组最后一张，为了防止左滑空白页，将滑动定位到第一组最后一张;
+            now = now == lis.length - 1 ? navs.length - 1 : now;
+            cssTransform(list,"translateX",-now * wrap.offsetWidth);
             startPoint = e.changedTouches[0].pageX;
             startX = cssTransform(list,'translateX');
-            list.style.transition = '0s';
+            
         })
         wrap.addEventListener('touchmove', e => {
             var newPoint = e.changedTouches[0].pageX;
@@ -120,21 +134,41 @@ nav .active {background-color:chartreuse;}
             cssTransform(list,'translateX',startX + dis);
         })
         wrap.addEventListener('touchend', e => {
-            var translateX = cssTransform(list,'translateX');
-            var now = Math.round(-translateX/wrap.offsetWidth);
-            list.style.transition = '.5s';
-            
+            translateX = cssTransform(list,'translateX');
+            now = Math.round(-translateX / wrap.offsetWidth);
             now = Math.max(now,0)
-            now = Math.min(lis.length-1,now) 
-            console.log(now)
+            now = Math.min(lis.length-1,now)
+            tabActive()   
+            autoplay()         
+        })
 
-            cssTransform(list,'translateX',-now * lis[0].offsetWidth);
-            
+        // 自动播放
+        function autoplay(){
+            clearInterval(timer)
+            timer = setInterval(() => {
+                list.style.transition = 'none';
+                if(now == lis.length - 1){
+                    now = navs.length - 1
+                }
+                list.style.transition = 'none';
+                cssTransform(list,"translateX",-now * wrap.offsetWidth);
+                // 延时任务，防止异步执行tabActive时候，把 list.style.transition 改成 .5s
+                setTimeout(function(){
+                    now++;
+                    tabActive()
+                },30)   
+            },2000)
+        }
+        autoplay()
+
+        function tabActive(){
+            list.style.transition = '.5s';
+            cssTransform(list,"translateX",-now * wrap.offsetWidth);
             for(let i=0; i<navs.length; i++){
                 navs[i].className = "";
             }
-            navs[now].className = "active"            
-        })
+            navs[now%navs.length].className = "active"
+        }
     }
 </script>
 <div id="wrap">
