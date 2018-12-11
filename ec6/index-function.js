@@ -1,4 +1,39 @@
+// 4,
+
+console.log("-------------------------");
+// 3、箭头函数this指向
+this.name = "window.name";
+let obj10 = {
+    name:"obj10 name",
+    age:10,
+    getName: () => {  // 箭头函数this指向外层的this，定义的时候就确定死了
+        console.log(this.name)
+    },
+    getAge(){  // 普通函数指向当前调用该方法的对象
+        console.log(this.age)
+    },
+    getInner: {
+        name:"inner name",
+        func:() => {
+            console.log(this.name)
+        }
+    }
+}
+
+
+let obj11 = {
+    name:"obj11 name",
+    age:11,
+    gN:obj10.getName,
+    gA:obj10.getAge,
+    gI:obj10.getInner.func
+}
+obj11.gN()
+obj11.gA()
+obj11.gI()
+
 // 2、assign 合并对象；深拷贝与浅拷贝；展开运算符,可以对字符串和数组展开;
+let str = 'string'
 let obj1 = [1,2,3]
 let obj2 = [4,5,6]
 let obj4 = {name:'loading'}
@@ -7,7 +42,7 @@ let obj6 = {name:"loading",home:{
         city:"Beijing"
     }};
 let obj7 = {}
-
+console.log(obj1.valueOf() === array);
 // 浅拷贝，和原来内存空间一致
 obj7 = Object.assign(obj7,obj6)
 
