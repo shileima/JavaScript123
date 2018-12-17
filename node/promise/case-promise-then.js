@@ -1,7 +1,7 @@
-const Case = require('./promise_all')
-//const Case = require('./promise_mini')
+const Promise = require('./promise-then')
+//const Promise = require('./promise')
 
-let p1 = new Case(function(resolve, reject){
+let p1 = new Promise(function(resolve, reject){
     setTimeout(function(){
         let num = Math.random();
         if(num > .5){

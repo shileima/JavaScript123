@@ -152,4 +152,55 @@ Promise.deferred = Promise.defer = function(){
     return defer;
 }
 
+// promise.all 实现方法一
+/* Promise.all = function(promises){
+    let result = [];
+    let index = 0;
+
+    return new Promise(function(resolve,reject){
+        function done(i,data){
+            result[i] = data
+            if(++index == promises.length){
+                resolve(result)
+            }
+        }
+        for (let i = 0; i < promises.length; i++) {
+            promises[i].then(function(data){
+                done(i,data)
+            })
+        }
+    })
+} */
+
+// promise.all 实现方法二
+function gen(times,cb){
+    let result = [],count = 0;
+    // 这里返回一个函数，在下面命名为done
+    return function(i,data){
+        result[i] = data
+        if(++count == times){
+            cb(result)
+        }
+    }
+}
+Promise.all = function(promises){
+    return new Promise(function(resolve,reject){
+        let done = gen(promises.length,resolve)
+        for (let i = 0; i < promises.length; i++) {
+            promises[i].then(function(data){
+                done(i,data)
+            },reject)
+        }
+    })
+}
+
+// promise.race 实现
+Promise.race = function(promises){
+    return new Promise(function(resolve,reject){
+        for (let i = 0; i < promises.length; i++) {
+            promises[i].then(resolve,reject)
+        }
+    })
+}
+
 module.exports = Promise;
