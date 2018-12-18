@@ -2,7 +2,19 @@
 let Promise = require('bluebird');
 const fs = require('fs');
 let readFile = fs.readFile;
-let readFileAsync = Promise.promisify(readFile);
+//let readFileAsync = Promise.promisify(readFile);
+let readFileAsync = Promisify(readFile);
+
+// promisify 如何实现？
+function Promisify(fn){
+    return function(...arg){
+        return new Promise(function(resolve,reject){
+            fn.apply(null,[...arg,function (err,data) {
+                err ? reject(err) : resolve('Promisify:'+data)
+            }])
+        })
+    }
+}
 
 console.time('bluebird cost')
 readFileAsync('1.txt','utf8').then(function (data) {
