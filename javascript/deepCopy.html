@@ -1,76 +1,52 @@
 <html>
 <meta charset="UTF-8">
-
 <script src="http://apps.bdimg.com/libs/jquery/2.0.3/jquery.min.js"></script>
-
 <script>
 
     //简单概括：函数的参数是值传递
-
     //对象类型作为参数的时候传递的是地址（指针）的值，而不是对象本身堆内存中的value
+    //所以在这种场景，函数内部用参数去修改对象，那么查找到的还是原对象，
+    //因为指向相同，所以修改的话原对象也受影响
+    //如果新实例化一个对象赋值给改指针，那么指针指向的就是一个全新的对象了，
+    //和原来指向的对象失去联系
 
-    //所以在这种场景，函数内部用参数去修改对象，那么查找到的还是原对象，因为指向相同，所以修改的话原对象也受影响
-
-    //如果新实例化一个对象赋值给改指针，那么指针指向的就是一个全新的对象了，和原来指向的对象失去联系
-
-/*
-    let obj = {x:1};
-    let o = obj;
-    o.x = 2;
-    console.log(obj.x);  //2  已经被改动了
-*/
-
-
-/*    //深拷贝
-    var person = {
-        name : "Tom"
-    };
-    function obj(peo){
-        peo = {
-            name : "Jerry"
-        };
-        return peo;
-    }
-    var result = obj(person);
-    console.log(result.name);// Jerry   result是一个新建的对象，存放在堆内存中，不影响原始的对象 person
-
-    console.log(person.name);// Tom*/
-
-/*    //构造深拷贝的函数方法
-    function deepCopy(obj) {
-        var result = {};
-
-        for(let key in obj){
-            result[key] = typeof obj[key] === 'object'? result[obj[key]] : obj[key] ;
+    //构造深拷贝的函数方法,
+    function deepCopy(child,parent){
+        child = child ? child : {};
+        for(let key in parent){
+            if(parent.hasOwnProperty(key)){
+                if(typeof parent[key] === 'object'){
+                    child[key] = Object.prototype.toString.call(parent[key]) 
+                    == '[object Object]' ? {} : [];
+                    deepCopy(child[key],parent[key])
+                } else { child[key] = parent[key]; }
+            }
         }
-        return result;
+        return child;
+    }
+    let obj = {
+        name : 1,
+        hobby: ['足球','排球'],
+        getName(){ console.log(this.name) },
+        home : { city : 'Beijing' }
     }
 
-    var obj = {
-        name : 1
-    }
-
-    var obj2 = deepCopy(obj)
-
+    let obj2 = {}
+    obj2 = deepCopy({},obj);
     obj2.name = 2 ;
+    obj2.hobby.push('篮球');
+    obj2.home.city = "Handan";
+    
+    // let obj2 = {}
+    // // true 代表深拷贝; null 是target对象，obj是源对象，返回值就是新对象
+    // obj2 = $.extend(true,null,obj) 
+    // obj2.name = 2 ;
+    // obj2.hobby.push('篮球');
+    // obj2.home.city = "Handan"
 
-    console.log(obj2.name)
-    console.log(obj.name)*/
-
-
-    var obj = {
-        name : 1
-    }
-
-    var obj2 = $.extend(true,null,obj)
-
-    obj2.name = 2 ;
-
-    console.log(obj2.name)
-    console.log(obj.name)
-
+    console.log(obj)
+    console.log(obj2)
 </script>
 <body>
-
 </body>
 </html>

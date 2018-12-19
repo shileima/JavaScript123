@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>JavaScript异步编程演变</title>
+    <title>Ball实例 - JavaScript异步编程演变</title>
     <style>
         .ball {
             position: absolute;
@@ -29,7 +28,6 @@
         }
     </style>
 </head>
-
 <body>
 <div>
     <div key="1" class="ball"></div>
@@ -37,31 +35,28 @@
     <div key="3" class="ball"></div>
 </div>
 <script>
-    // --------------------
-    // 4, 终极解决方案 async / await
     let balls = document.querySelectorAll('.ball');
-
-    function move(el,target){
-        return new Promise(function(resolve,reject){
-            let timer;
-            let speed = 5;
-            timer = setInterval(function(){
-                let dis = parseInt(el.offsetLeft);
-                if(dis < target){
-                    el.style.left = ( dis + speed ) + 'px';
-                } else {
-                    clearInterval(timer)
-                    resolve('第' + el.getAttribute('key') + '个运动完成！')
+    function moveSync(ele, distance) {
+        return new Promise((resolve, reject) => {
+            let movex = 0;
+            let interval = setInterval(() => {
+                movex++;
+                // ele.style.left = movex + 'px';
+                ele.style.transform = `translateX(${movex + 'px'})`;
+                if (movex >= distance) {
+                    resolve();
+                    clearInterval(interval);
                 }
-            },20)
+            }, 5)
         })
     }
+    // 4, 终极解决方案 async / await
     async function go(){
-        let a = await move(balls[0],200)
+        let a = await moveSync(balls[0],200)
         console.log(a);
-        let b = await move(balls[1],200)
+        let b = await moveSync(balls[1],200)
         console.log(b);
-        let c = await move(balls[2],200)
+        let c = await moveSync(balls[2],200)
         console.log(c);
         return 'All done!'
     }
@@ -69,92 +64,57 @@
         console.log(data);
     })
 
-    // --------------------------
     // 3.generator 方式，借助co库实现
-    // let balls = document.querySelectorAll('.ball');
-    // function move(ele, distance) {
-    //     return new Promise((resolve, reject) => {
-    //         let movex = 0;
-    //         let interval = setInterval(() => {
-    //             movex++;
-    //             ele.style.left = movex + 'px';
-    //             if (movex >= distance) {
-    //                 resolve();
-    //                 clearInterval(interval);
-    //             }
-    //         }, 6)
-    //     })
-    // }
-    // function* m() {
-    //     yield move(balls[0], 500);
-    //     yield move(balls[1], 400);
-    //     yield move(balls[2], 300)
-    // }
-    // function co(it) {
-    //     return new Promise((resolve, reject) => {
-    //         function next(data) {
-    //             let { value, done } = it.next(data);
-    //             if (!done) {
-    //                 value.then(data => {
-    //                     next(data);
-    //                 }, reject);
-    //             }else{
-    //                 resolve(value);
-    //             }
-    //         }
-    //         next();
-    //     })
-    // }
-    // co(m()).then(data => {
-    //     alert('done')
-    // })
 
-    // ------------------
-    // 2.Promise 实现
-    // let balls = document.querySelectorAll('.ball');
-    // function move(ele, distance) {
-    //     return new Promise((resolve, reject) => {
-    //         let movex = 0;
-    //         let interval = setInterval(() => {
-    //             movex++;
-    //             ele.style.left = movex + 'px';
-    //             if (movex >= distance) {
-    //                 resolve();
-    //                 clearInterval(interval);
-    //             }
-    //         }, 6)
-    //     })
-    // }
-    // move(balls[0],500).then(data=>{
-    //     return move(balls[1],400)
-    // }).then(data=>{
-    //     return move(balls[2],300)
-    // }).then(data=>{
-    //     alert('ok');
-    // })
+    function* m() {
+        yield moveSync(balls[0], 500);
+        yield moveSync(balls[1], 400);
+        yield moveSync(balls[2], 300)
+    }
+    function co(it) {
+        return new Promise((resolve, reject) => {
+            !function next(data) {
+                let { value, done } = it.next(data);
+                if (done) {
+                    resolve(value);
+                }else{
+                    value.then(next, reject);
+                }
+            }()
+        })
+    }
+    co(m()).then(data => {
+        alert('done')
+    })
 
-    // -------------------------------------
+    // 2.Promise 实现 
+    moveSync(balls[0],500).then(data=>{
+        return moveSync(balls[1],400)
+    }).then(data=>{
+        return moveSync(balls[2],300)
+    }).then(data=>{
+        alert('ok');
+    }) 
+
     // 1. 传统回调函数方式
-    // let balls = document.querySelectorAll('.ball');
-    // function move(ele, distance, cb) {
-    //     let movex = 0;
-    //     let interval = setInterval(()=>{
-    //         movex++;
-    //         ele.style.left = movex+'px';
-    //         if(movex >= distance){
-    //             cb();
-    //             clearInterval(interval);
-    //         }
-    //     },6)
-    // }
-    // move(balls[0], 500, function () {
-    //     move(balls[1], 400, function () {
-    //         move(balls[2], 300, function () {
-    //             alert('成功')
-    //         })
-    //     })
-    // })
+    function move(ele, distance, cb) {
+        let movex = 0;
+        let interval = setInterval(()=>{
+            movex++;
+            ele.style.left = movex+'px';
+            if(movex >= distance){
+                cb();
+                clearInterval(interval);
+            }
+        },6)
+    }
+    move(balls[0], 500, function () {
+        move(balls[1], 400, function () {
+            move(balls[2], 300, function () {
+                alert('成功')
+            })
+        })
+    })
 </script>
 </body>
-
 </html>
