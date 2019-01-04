@@ -30,3 +30,4 @@ function mkdirp(dir){
     }(1)
 }
 mkdirp('a/b/c');
+mkdirp('d/e/f');
