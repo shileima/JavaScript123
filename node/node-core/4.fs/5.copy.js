@@ -1,4 +1,5 @@
 // 节约内存的拷贝
+/* 原生copyFile 见 copyFile.js */
 let fs = require('fs')
 const BUFFER_ZISE = 3
 function copy(src,target) {

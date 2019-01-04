@@ -33,7 +33,7 @@ function rmPromise(dir){
                 //如果大括号内返回是递归函数，则函数前必须添加 return
                     {
                         Promise.all(files.map(file => rmPromise(path.join(dir,file)))).then(()=> fs.rmdir(dir,resolve))
-                        console.log(222)
+                        //console.log(222)
                     }
                 )
             }else{
@@ -42,7 +42,7 @@ function rmPromise(dir){
         })
     })
 }
-rmPromise(path.resolve(__dirname,'a1')).then(()=>{
+rmPromise(path.resolve(__dirname,'../5.stream/b')).then(()=>{
     console.log("删除成功！");
 }).catch((e)=>{console.log("删除失败！"+e);})
 
