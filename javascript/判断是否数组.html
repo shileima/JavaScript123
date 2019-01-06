@@ -7,14 +7,14 @@
 <script>
 
 //方法一 instanceof
- var arr1=[1,2];
+ var arr1 = [1,2];
  //alert(arr1 instanceof Array); // true
 
 //方法二 constructor
- //alert(arr1.constructor==Array); //true
+//alert(arr1.constructor == Array); //true
  
 //方法三
- alert(Array.prototype.toString.call(arr1) == '[object Array]'); 
+ alert(Object.prototype.toString.call(arr1) === '[object Array]'); 
 </script>
 <body>
 </body>
