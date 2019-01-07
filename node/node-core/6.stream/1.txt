@@ -1,4 +1,1 @@
-珠峰
-npm install -g create-react-app
-create-react-app demo-app
-cd demo-app
+珠峰 123

@@ -16,9 +16,25 @@ let ws = fs.createWriteStream('./2.txt',{
     start:0
 });
 // pipe() 可以讲一个文件数据按照指定大小逐步导入到另一个文件
+//rs.pipe(ws);
+
 rs.pipe(ws);
+console.log('1、start pipe');
+
 // unpipe() 可以清理掉已经 pipe 过去的数据流
-//rs.unpipe(ws)
+// setTimeout 3ms内执行unpipe会清理掉刚导入的数据
+// 超过3ms则不做倒流处理
+/*setTimeout(()=>{
+    console.log('3、setTimeout unpipe');
+    rs.unpipe(ws);
+},4)*/
+
+// nextTick unpipe会做倒流处理和同步执行一样
+process.nextTick(()=>{
+    console.log("2、nextTick pipe");
+    rs.unpipe(ws)
+})
+
 /*
 rs.on('data',data => {
     console.log(data.toString());
