@@ -15,7 +15,6 @@ function LineReader(path,encoding){
 
     this.on('newListener',(type,listener)=>{
         if(type === 'newLine'){
-
             let buffers = [];
             this._reader.on('readable',()=>{
                 let char; // 1个字节 buffer
@@ -40,11 +39,9 @@ function LineReader(path,encoding){
                 }
             })
             this._reader.on('end',()=>{
-                console.log("读取完成！");
+                this.emit('newLine',Buffer.from(buffers).toString(this.encoding));
                 this.emit('end')
             })
-
-
         }
     })
 }
