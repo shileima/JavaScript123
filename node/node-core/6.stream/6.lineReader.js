@@ -40,7 +40,7 @@ function LineReader(path,encoding){
                 }
             })
             this._reader.on('end',()=>{
-                console.log("读取完成！");
+                this.emit('newLine',Buffer.from(buffers).toString(this.encoding));
                 this.emit('end')
             })
         }
