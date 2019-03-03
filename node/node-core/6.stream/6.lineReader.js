@@ -5,8 +5,8 @@ let EventEmitter = require('events');
 
 util.inherits(LineReader,EventEmitter)
 
-const NEW_LINE = 0x0A
-const RETURN = 0X0D
+const NEW_LINE = 0x0A // \n
+const RETURN = 0X0D // \r
 
 function LineReader(path,encoding){
     EventEmitter.call(this)
@@ -15,7 +15,6 @@ function LineReader(path,encoding){
 
     this.on('newListener',(type,listener)=>{
         if(type === 'newLine'){
-
             let buffers = [];
             this._reader.on('readable',()=>{
                 let char; // 1个字节 buffer
@@ -23,6 +22,7 @@ function LineReader(path,encoding){
                     switch (char[0]) {
                         case NEW_LINE:
                             this.emit('newLine',Buffer.from(buffers).toString(this.encoding));
+                            buffers.length = 0;
                             break;
                         case RETURN:
                             this.emit('newLine',Buffer.from(buffers).toString(this.encoding));
@@ -43,8 +43,6 @@ function LineReader(path,encoding){
                 console.log("读取完成！");
                 this.emit('end')
             })
-
-
         }
     })
 }

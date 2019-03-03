@@ -2,7 +2,7 @@ let fs = require('fs');
 let path = require('path');
 let LineReader = require('./6.lineReader')
 
-let reader = new LineReader('./5.txt');
+let reader = new LineReader('./5.txt','utf8');
 
 reader.on('newLine',data=>{
     console.log(data);
