@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>watch com生命周期</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+
+<div id="demo">
+    common data: {{ fullname }}
+    <hr>
+    computed data: {{ computedFullname }}
+</div>
+
+<script>
+    let vm = new Vue({
+        el: '#demo',
+        data: {
+            fullname:'',
+            firstname: "石",
+            lastname: "磊"
+        },
+        /* computed 与 watch 区别：首先应该考虑用computed，
+            因为代码简洁； watch 可以支持异步 */
+        methods: {
+          getfullname(){
+            this.fullname = this.firstname + this.lastname;
+            //console.log('getfullname methods')
+          }  
+        },
+        watch: {
+            firstname: function(newVal,oldVal){
+                console.log('firstname');
+                console.log(newVal,oldVal)
+                setTimeout(()=>{
+                    this.getfullname()
+                },1000)
+            },
+            lastname: function(newVal,oldVal){
+                console.log('lastname');
+                console.log(newVal,oldVal)
+                setTimeout(()=>{
+                    this.getfullname()
+                },1000)
+            }
+        },
+        computed: {
+            computedFullname(){
+                return this.firstname + this.lastname;
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
