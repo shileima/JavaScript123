@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初识Vue.js</title>
+    <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
+</head>
+<body>
+
+<div id="demo" @dblclick ='showAge'>
+    <h1>{{ message }}</h1>
+    <hr/>
+    <!-- for循环 -->
+    <!--<div v-for="(fruit,index) in fruits" :key=index>
+        <div v-if="index%2">{{fruit}}</div>
+        <div v-else>{{index}}</div>
+    </div>-->
+    <template v-for="i in 3">
+        <div :key=`${i}_1` :a=`${i}_1`>{{i}}</div>
+        <div :key=`${i}_2` :a=`${i}_2`>{{i}}</div>
+    </template>
+    <!-- key的作用 -->
+    <hr/>
+    <div v-if='flag' :key=1>
+        <span>北京</span>
+        <input type="text" />
+    </div>
+    <div v-else :key=2>
+        <span>天津</span>
+        <input type="text" />
+    </div>
+    <!-- 双向绑定 -->
+    <hr/>
+    <input type="text" :value="message" @input='valChange($event,$event.target.tagName)' @change='fn'>
+    <span>{{message}}</span>
+    <!-- 双向绑定简写 -->
+    <hr/>
+    <input type="text" :value="age" @input='e=>age=e.target.value'>
+    <span>{{age}}</span>
+    <!-- 下拉菜单 v-model 其实就是 v-bind 和 v-on 的语法糖。
+    v-bind 产生的效果不含有双向绑定，而 v-model 的效果是使input和 data.body 建立双向绑定
+    我们可以使用 v-model 指令在 <input> (<input> 标签有多种类型，
+    如 button、select 等等)及 <textarea> 元素上进行双向数据绑定。
+    但 v-model 本质上不过是语法糖。它负责监听用户的输入事件以更新数据，
+    并对一些极端场景进行一些特殊处理。
+    v-model 会忽略所有表单元素的 value、checked、selected 
+    特性的初始值而总是将 Vue 实例的数据作为数据来源。
+    你应该通过 JavaScript 在组件的 data选项中声明初始值：
+    -->
+    <hr>
+    <select v-model="selectedVal">
+        <option value="0" disabled multiple>请选择...</option>
+        <option v-for="(list,key) in lists" :selected="list.selected" :value="list.id" :key="key">{{list.value}}</option>
+    </select> {{selectedVal}}
+    <!-- radio 通过v-model来进行分组-->
+    <hr>
+    男：<input type="radio" v-model="radioVal" value="男">
+    女：<input type="radio" v-model="radioVal" value="女">
+    <!-- checkbox --> <hr>
+    <input  type="checkbox" 
+            v-model="checkboxVals" 
+            v-for="(list,key) in lists" 
+            :key="key" 
+            :value="list.value"/>{{checkboxVals}}
+    <!--修饰符 .number .trim --><hr>
+    <input type="text" v-model.number.trim="val" /> {{typeof val}} : {{val}}
+    <!-- 键盘修饰符 enter esc left up --> <hr>
+    <input type="text" @keyup.left="fnKey" />
+    <!-- 行内class style 写法 --> <hr>
+    <!-- 动态绑定的样式比正常设置的优先级高 -->
+    <div class="btn" :class="['a','b',c]"  
+         :style="{background:grey,color:'black'}"
+         style="color:red"     
+    >这是行内style class写法</div>
+</div>
+
+<script>
+    let vm = new Vue({
+        el: '#demo',
+        data: {
+            grey:'#666666',
+            c:'d',
+            val:0,
+            message : 'hello MVC!',
+            age : 30,
+            fruits : ['bananer','apple','orange'],
+            lists: [{id:1,value:'Nike',selected:true},
+                    {id:2,value:'Adidas',selected:false},
+                    {id:3,value:'Xtep',selected:false}],
+            selectedVal: 0,
+            checkboxVals:[],
+            radioVal: '男',
+            flag : true,
+            fn:function(){
+                /* 方法最好不要定义在data内，因为这时this还是window，
+                还没有指向Vue实例 */
+                console.log('data fn this == window:',this == window);
+            }
+        },
+        methods: {
+            fnKey : function(e){
+                alert(e.target.value)
+            },
+            showAge : function(){
+                alert(this.age)
+            },
+            /* valChange : function(e){
+                this.message = e.target.value
+            } */
+            valChange: (e,a)=>{
+                /* 如果方法里使用箭头函数，this是指向window的，不能this.message来修改数据
+                所以这里最好不使用箭头函数 */
+                /* console.log(this); */
+                vm.message = e.target.value
+                /* 从dom传递过来的参数 a*/
+                console.log(a);
+                
+            }
+        }
+    })
+</script>
+
+</body>
+</html>
