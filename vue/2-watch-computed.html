@@ -2,24 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>watch com生命周期</title>
+    <title>watch and computed</title>
     <script src="https://cdn.bootcss.com/vue/2.4.2/vue.min.js"></script>
 </head>
 <body>
 
-<div id="demo">
+<div id="app">
     common data: {{ fullname }}
     <hr>
     computed data: {{ computedFullname }}
+    <hr>
+    computed checkbox：
+    <input type="checkbox" v-model="checkall" />:
+    <input type="checkbox" v-for="(check,key) in checks" v-model="check.value" :key="key" />
 </div>
 
 <script>
     let vm = new Vue({
-        el: '#demo',
+        el: '#app',
         data: {
             fullname:'',
             firstname: "石",
-            lastname: "磊"
+            lastname: "磊",
+            checks:[{value:true},{value:false},{value:true}]
         },
         /* computed 与 watch 区别：首先应该考虑用computed，
             因为代码简洁； watch 可以支持异步 */
@@ -27,7 +32,7 @@
           getfullname(){
             this.fullname = this.firstname + this.lastname;
             //console.log('getfullname methods')
-          }  
+          }
         },
         watch: {
             firstname: function(newVal,oldVal){
@@ -48,7 +53,23 @@
         computed: {
             computedFullname(){
                 return this.firstname + this.lastname;
+            },
+            computedFullname:{
+                get(){
+                return this.firstname + this.lastname;
             }
+            },
+            checkall:{
+                get(){
+                    return this.checks.every(check=>check.value);
+                },
+                set(value){
+                    this.checks.forEach(element => {
+                        element.value = value;
+                    });
+                }
+            }
+            
         }
     })
 </script>
