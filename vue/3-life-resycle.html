@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Life cycle</title>
+</head>
+<body>
+  <div id="app">{{ a }} {{ b }}</div>
+  <script src="https://cdn.bootcss.com/vue/2.6.6/vue.min.js"></script>
+  <script>
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        a:1,
+        b:2
+      },
+      beforeCreate () {
+        console.log('beforeCreate',this.$el,this.$data); //这里还没有生成vue实力，没有$data
+        console.log('beforeCreate this:',this); 
+      },
+      created() { // 调用ajax
+        console.log('created:',this.$data,this.$el) // 可以获取数据和调用方法
+      },
+      beforeMount() {
+        console.log('beforeMount',this.$el) // 挂载前, <div id="app">{{ a }}</div>
+      },
+      mounted() {
+        console.log('mounted',this.$el) // 挂载后, <div id="app">1</div>
+        this.b = 2
+      },
+      beforeUpdate () {
+        this.b = 4
+        console.log('beforeUpdate')
+      },
+      updated() { // 这里不要操作数据，因为数据更新后会去走 beforeUpdate 周期
+        console.log('updated');
+      },
+    })
+  </script>
+</body>
+</html>
