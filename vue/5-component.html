@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>componente 属性校验</title>
+</head>
+<body>
+  <div id="app">
+    <new-button :e = "e" f="1" :arr="[1,2]"></new-button>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>  <script>
+
+    let vm = new Vue({
+      el: "#app",
+      data:{
+        content:"点我啊",
+        e:3
+      },
+      components:{
+        'NewButton':{
+          data(){
+            return { n:"父组件中向子组件传值" }
+          },
+          props:{
+            msg:{
+              type:String,
+              default:"default button",
+              //required:true
+            },
+            e:{
+              type:Number,
+              validator(value){
+                return value > 3
+              }
+            },
+            f:{
+              type:Number
+            },
+            arr:{
+              type:Array,
+              // Props with type Object/Array must use a factory function to return the default value.
+              default:()=>([5]) 
+            }
+          },
+          mounted() {
+            console.log(this.$attrs) // props 不包含的属性放在 this.$attrs
+          },
+          inheritAttrs: true, // 对于没有用到的属性，不会显示在dom 结构上
+          // template must contain one root element
+          template:`<button>{{msg}} : {{e}} : {{f}} : {{arr}}</button>`
+        }
+      }
+    })
+  </script>
+</body>
+</html>

@@ -28,7 +28,10 @@
       },
       mounted() {
         console.log('mounted',this.$el) // 挂载后, <div id="app">1</div>
-        this.b = 2
+        this.b = 2;
+        this.timer = setInterval(()=>{
+          console.log(Date.now())
+        },5000)
       },
       beforeUpdate () {
         this.b = 4
@@ -37,6 +40,17 @@
       updated() { // 这里不要操作数据，因为数据更新后会去走 beforeUpdate 周期
         console.log('updated');
       },
+      beforeDestroy(){
+        // 当前实例还可以用
+        console.log('beforeDestroy');
+        clearInterval(this.timer)
+      },
+      destroyed(){
+        // 实例被移除掉
+        // 何时触发？
+        // 1，vm.$destroy() 2, 路由切换的时候
+        console.log('destroyed');
+      }
     })
   </script>
 </body>

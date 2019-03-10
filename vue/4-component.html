@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>componente 父传子传孙</title>
+</head>
+<body>
+  <div id="app">
+    <!-- <my-button a="点我 a"></my-button>
+    <my-button a="点我 b"></my-button>
+    <my-button a="点我 c"></my-button> -->
+    <hr>
+    <new-button :nbtn="content" e="e" f="f"></new-button>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>  <script>
+    // let msg = '点击';
+    // Vue.component('MyButton', {
+    //   data(){
+    //     return {msg:'点我呀'}
+    //   },
+    //   // template:`<button>${msg}</button>`
+    //   props:['a','b'],
+    //   template:`<button>{{a}}</button>`
+    // })
+    let vm = new Vue({
+      el: "#app",
+      data:{
+        content:"父组件data"
+      },
+      components:{
+        'NewButton':{
+          data(){
+            return { n:"父组件中向子组件传值" }
+          },
+          props:['nbtn'],
+          mounted() {
+            console.log(this.$attrs) // props 不包含的属性放在 this.$attrs
+          },
+          inheritAttrs: true, // 对于没有用到的属性，不会显示在dom 结构上
+          // template must contain one root element
+          template:`<button>{{ nbtn }}<child v-bind="$attrs" g="child-owned-property"></child></button>`,
+          components:{
+            'child':{
+              props:['e','f','g'],
+              template:`<div>123 {{e}} {{f}} {{g}}</div>`
+            }
+          }
+        }
+      }
+    })
+  </script>
+</body>
+</html>

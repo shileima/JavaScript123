@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>componente 自定义属性</title>
+</head>
+<body>
+  <div id="app">
+    <new-button :msg="content" @click.native="change"></new-button>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>  <script>
+
+    let vm = new Vue({
+      el: "#app",
+      data:{
+        content:"点我啊"
+      },
+      methods:{
+          change(){
+            alert(1)
+          }
+        },
+      components:{
+        'NewButton':{
+          props:{
+            msg:{
+              type:String
+            }
+          },
+          template:`<button>{{msg}}</button>`
+        }
+      }
+    })
+  </script>
+</body>
+</html>

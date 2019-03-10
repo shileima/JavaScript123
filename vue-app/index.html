@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>初识Vue.js</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/vue/2.0.0/vue.min.js"></script>
+<script>
+    window.onload = function(){
+        let obj = {
+            message : {
+                info:'Hello Vue!'
+            },
+            age : {
+                age : 5
+            },
+            arr: [1,2,3,4],
+            showName(){
+                alert('obj > showName function()')
+            }
+        }
+        //声明式渲染
+        var vm = new Vue({
+            el : '#demo',
+            data : obj,
+            methods:{
+                showAge(){
+                    alert('Vue > methods > showAge function()')
+                }
+            }
+        })
+
+        //vm.arr.length-- // 设置不更新视图
+        setTimeout(()=>{
+            //vm.$set(vm.message,'info','after 2 minutes changed to this')
+            //vm.arr.length-- // 此处更改
+            //console.log(vm.arr)
+        },2000)
+
+        // $set 会更新视图
+        vm.$set(vm.message,'info','after 2 minutes changed to this')
+        vm.arr.length-- // 此处更改
+        console.log(1,vm.$el.innerHTML)
+        console.log(2,vm.$options);
+
+        vm.arr = [6,7,8]
+        vm.arr = [9,10,11]
+        vm.$nextTick(()=>{
+            console.log(3,vm.$el.innerHTML)
+        })
+        //$watch
+        vm.$watch('message.info',(newVal,oldVal)=>{
+            console.log(4,'$watch');
+            console.log(5,newVal,oldVal)
+        })
+        vm.message.info = 'abc first'        
+        vm.message.info = 'abc second'        
+
+    }
+</script>
+
+<div id="demo" :click='showName' @mouseover="showAge">
+    {{ message.info }}
+</div>
+
+</body>
+</html>
