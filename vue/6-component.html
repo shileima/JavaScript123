@@ -4,11 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>componente 自定义属性</title>
+  <title>componente 自定义事件 3种写法 $listeners</title>
 </head>
 <body>
   <div id="app">
-    <new-button :msg="content" @click.native="change"></new-button>
+    <!-- <new-button :msg="content" @click.native="change"></new-button> // 第一种 加 native-->
+    <!-- <new-button :msg="content" @click="change"></new-button> // 第二种 -->
+    <new-button :msg="content" @click="change" @mouseup="up"></new-button>  <!-- 第三种 -->
   </div>
   <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>  <script>
 
@@ -19,7 +21,11 @@
       },
       methods:{
           change(){
-            alert(1)
+            console.log('click')
+          },
+          // mouseup 比 click 更早执行
+          up(){
+            console.log('up')
           }
         },
       components:{
@@ -29,7 +35,14 @@
               type:String
             }
           },
-          template:`<button>{{msg}}</button>`
+          mounted(){
+            console.log(this.$listeners);
+            
+          },
+          /* template:`<button>{{msg}}</button>` */ /* 第一种 */
+          /* template:`<div><button @click="$listeners.click">{{msg}}</button></div>` */ /* 第二种 $listeners*/
+          /* template:`<div><button @click="$emit('click')">{{msg}}</button></div>` */
+          template:`<div><button v-on="$listeners">{{msg}}</button></div>`
         }
       }
     })

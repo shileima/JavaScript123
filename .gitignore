@@ -4,6 +4,7 @@ ec6//node_modules/*
 /node_modules/*
 ec6/node_modules/
 node/node_modules
+vue-app/node_modules/
 node/.idea
 .idea
 .vscode

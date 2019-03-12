@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>componente平级通信1 $parent $children</title>
+</head>
+<body>
+  <style>
+    .title {
+      background-color: azure;
+      font-size: 18px
+    }
+    .body {
+      background-color: khaki;
+      font-size: 16px
+    }
+  </style>
+  <div id="app">
+    <collapse>
+      <collapse-item title="react">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+      <collapse-item title="vue">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+      <collapse-item title="angular">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+    </collapse>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>  <script>
+
+    Vue.component('Collapse',{
+      template:`<div class="wrap"><slot></slot></div>`
+    });
+    Vue.component('CollapseItem',{
+      props:['title'],
+      template:`<div>
+        <div class="title" @click="toggle">{{title}}</div>
+        <div class="body" v-show="show"><slot></slot></div>
+      </div>`,
+      data(){
+        return {show:false}
+      },
+      methods: {
+        toggle(){
+          this.show = !this.show;
+          //console.log($parent.$children)
+          //console.log(Array.isArray(this.$parent.$children))
+          this.$parent.$children.forEach(item=>{
+            if(item._uid !== this._uid){
+              item.show = false;
+            }
+          })
+          console.log(this._uid)
+        }
+      },
+    });
+    let vm = new Vue({
+      el: "#app",
+
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>componente平级通信2 $parent $children</title>
+</head>
+<body>
+  <style>
+    .title {
+      background-color: azure;
+      font-size: 18px
+    }
+    .body {
+      background-color: khaki;
+      font-size: 16px
+    }
+  </style>
+  <div id="app">
+    <collapse>
+      <collapse-item title="react">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+      <collapse-item title="vue">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+      <collapse-item title="angular">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+    </collapse>
+    <hr>
+    <collapse>
+      <collapse-item title="react">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+      <collapse-item title="vue">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+      <collapse-item title="angular">
+        <ul>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+            <li>深圳超市肉菜档遭抢</li>
+        </ul>
+      </collapse-item>
+    </collapse>
+
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>  <script>
+
+    Vue.component('Collapse',{
+      mounted () {
+        console.log(this.$parent._uid); // div#app 是第一个节点_uid : 0
+        console.log(this._uid); // Collapse _uid : 1
+      },
+      methods:{
+        cut(childId){
+          //console.log(childId);
+          this.$children.forEach(item=>{
+            if(item._uid !== childId){
+              item.show = false;
+            }
+          }) 
+        }
+      },
+      template:`<div class="wrap"><slot></slot></div>`
+    });
+    Vue.component('CollapseItem',{
+      props:['title'],
+      template:`<div>
+        <div class="title" @click="toggle">{{title}}</div>
+        <div class="body" v-show="show"><slot></slot></div>
+      </div>`,
+      data(){
+        return {show:false}
+      },
+      methods: {
+        toggle(){
+          this.$parent.cut(this._uid)
+          this.show = !this.show;
+          console.log('this.show:',this.show)
+        }
+      },
+    });
+    let vm = new Vue({
+      el: "#app",
+
+    })
+  </script>
+</body>
+</html>

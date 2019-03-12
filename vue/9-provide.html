@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>componente provide</title>
+</head>
+<body>
+  
+  <div id="app">
+      <collapse></collapse>
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.js"></script>  <script>
+
+    Vue.component('Collapse',{
+      inject:['a'],
+      template:`<div class="wrap">{{ a }}</div>`
+    });
+
+    let vm = new Vue({
+      el: "#app",
+      provide: {
+        a:100
+      }
+
+    })
+  </script>
+</body>
+</html>
