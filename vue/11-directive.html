@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>directive 自定义指令(全局或局部)</title>
+</head>
+<body>
+  <div id="app">
+    <label for="">利用 v-slice.5 最多只能输入5个字</label> <br>
+    <input type="text" v-model="msg" v-split.5="msg" />
+  </div>
+  <script src="https://cdn.bootcss.com/vue/2.6.6/vue.min.js"></script>
+  <script>
+    Vue.directive('split',function(el,bindings,vnode){
+      let number = bindings.rawName.split('.')[1];      
+      //console.log(el,bindings,vnode)
+      let newVal = el.value.slice(0,number);
+      //console.log(bindings.expression)
+      vnode.context[bindings.expression] = newVal;
+    })
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        msg:'a'
+      } 
+    })
+  </script>
+</body>
+</html>
