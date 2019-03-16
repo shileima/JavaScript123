@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>异步组件</title>
+</head>
+<body>
+  <div id="app">
+    <label for="">异步组件</label> <br>
+    <my-component></my-component>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0/vue.js"></script>  
+  <script>
+    Vue.component('myComponent',resolve=>{
+      setTimeout(()=>{
+        resolve({
+        template:'<h1>H</h1>'
+      })
+      },2000)
+    })
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        msg:'1',
+        name:"loading"
+      } 
+    })
+  </script>
+</body>
+</html>

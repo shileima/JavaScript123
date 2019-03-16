@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>filters 自定义过滤器</title>
+</head>
+<body>
+  <div id="app">
+    <label for="">自定义过滤器指令</label> <br>
+    <label for="">过滤器不改变原数据</label> <br>
+    {{name | capitalize(3)}}
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0/vue.js"></script>  
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.9/vue.js"></script>   -->
+  <script>
+    Vue.filter('capitalize',function(value,len){
+      return value.slice(0,len).toUpperCase() + value.slice(len);
+    });
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        msg:'1',
+        name:"loading"
+      } 
+    })
+  </script>
+</body>
+</html>

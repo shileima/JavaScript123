@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>directive 自定义指令(全局或局部)</title>
+</head>
+<body>
+  <div id="app">
+    <label for="">自定义指令-方法2</label> <br>
+    <input type="text" v-split="msg" v-model="msg" />
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0/vue.js"></script>  
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.9/vue.js"></script>   -->
+  <script>
+    Vue.directive('split', {
+      update(el,bindings,vnode){
+        console.log("update");
+        let ctx = vnode.context;
+        ctx[bindings.expression] = el.value.slice(0,3)
+      },
+      bind(el,bindings,vnode){
+        console.log("bind");
+        
+        let ctx = vnode.context;
+        ctx[bindings.expression] = el.value.slice(0,3)
+      }
+    });
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        msg:'1'
+      } 
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>directive 自定义指令(全局或局部)</title>
+</head>
+<body>
+  <div id="app">
+    <label for="">自定义指令-方法3</label> <br>
+    <input type="text" v-split.5="msg" v-focus />
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.0/vue.js"></script>  
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.9/vue.js"></script>   -->
+  <script>
+    Vue.directive('split', {
+      update(el,bindings,vnode) {
+        let ctx = vnode.context;
+        el.value = ctx[bindings.expression];
+      },
+      bind(el,bindings,vnode){
+        let ctx = vnode.context;        
+        let [,len] = bindings.rawName.split('.');  
+        
+        el.addEventListener('input',e => {
+          let val = e.target.value.slice(0,len);
+          ctx[bindings.expression] = val;
+          el.value = val;
+        })
+
+        el.value = ctx[bindings.expression];
+      }
+    });
+    // 方法一、Vue.nextTick
+    // 外层必须嵌套Vue.nextTick，因为指令刚挂载的时候，dom 结构还没有渲染完
+    // Vue.directive('focus', {
+    //   bind(el){
+    //     Vue.nextTick(()=>{
+    //       el.focus() 
+    //     })
+    //   }
+    // })
+
+    // 方法二、inserted
+    Vue.directive('focus', {
+      inserted(el){
+        el.focus()
+      }
+    })
+
+    let vm = new Vue({
+      el: "#app",
+      data: {
+        msg:'1'
+      } 
+    })
+  </script>
+</body>
+</html>
