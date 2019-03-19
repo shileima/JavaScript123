@@ -1,6 +1,6 @@
 <template>
   <SubMenu>
-    <template #title="title">
+    <template #title> <!-- #title 是传递模板中的slot name="title" -->
       {{data.title}}
     </template>
     <template v-for="child in data.children">
@@ -11,18 +11,24 @@
 </template>
 
 <script>
-import SubMenu from './SubMenu';
-import MenuItem from './MenuItem';
+import SubMenu from './SubMenu'
+import MenuItem from './MenuItem'
 export default {
-  name:'ReSub', // 递归组件 循环自己
-  props:{
-    data:{
-      type:Object,
-      default:()=>({})
+  name: 'ReSub', // 递归组件 循环自己
+  props: {
+    data: {
+      type: Object,
+      default: () => ({})
     }
   },
   components: {
-    SubMenu,MenuItem
+    SubMenu, MenuItem
   }
 }
 </script>
+<style>
+  div.title:after {
+    content: ">";
+    background-color: yellow;
+  }
+</style>
