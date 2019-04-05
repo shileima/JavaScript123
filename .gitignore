@@ -10,3 +10,4 @@ node/.idea
 .vscode
 vue/node_modules/
 vue/sell/node_modules/
+node_modules
