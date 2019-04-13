@@ -1,15 +1,20 @@
 <template>
   <div class="hello">
+    <myHeader>收藏</myHeader>
     <h1>this is collect page</h1>
    
   </div>
 </template>
 
 <script>
+import myHeader from '@/common/header.vue';
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  components:{
+    myHeader
   }
 }
 </script>

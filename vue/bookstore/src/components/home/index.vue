@@ -1,15 +1,32 @@
 <template>
-  <div class="hello">
-     <h1>this is home page</h1>
-   
+  <div class="padBT">
+    <myHeader>首页</myHeader>
+    <mySwiper :list='banner'/>
+    <list/>
   </div>
 </template>
 
 <script>
+import myHeader from '@/common/header.vue';
+import mySwiper from '@/common/swiper.vue';
+import list from '+/home/list.vue';
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+  data() {
+    return {
+      banner: []
+    }
+  },
+  components:{
+    myHeader,
+    mySwiper,
+    list
+  },
+  created(){
+    this.$store.dispatch('getBanner',data => {
+      this.banner = data.data;
+    })
   }
 }
 </script>

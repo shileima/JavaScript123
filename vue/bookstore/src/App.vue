@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="./assets/logo.png">
+    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <!-- <HelloWorld msg="Welcome to Home page"/> -->
     <router-view/>
   </div>
@@ -17,8 +17,8 @@ export default {
   }
 }
 </script> */
-<style lang="less">
-.home {text-align: center}
+<style scoped lang="less">
+  .home {text-align: center}
   #app {
   font-size: 0.5rem;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -26,15 +26,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
 }
 </style>
