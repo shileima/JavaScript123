@@ -1,29 +1,20 @@
 <template>
   <div class="hello">
-    <myHeader>收藏</myHeader>
-    <item v-for="(item,i) in collectList" :key="i" :data="item" />
+    <myHeader>添加</myHeader>
+    <h1>this is add page</h1>
+   
   </div>
 </template>
 
 <script>
 import myHeader from '@/common/header.vue';
-import item from '+/collect/item.vue';
 export default {
   name: 'HelloWorld',
   props: {
     msg: String
   },
   components:{
-    myHeader,
-    item
-  },
-  // created(){
-  //   this.$store.dispatch('getCollectList')
-  // },
-  computed:{
-    collectList(){
-      return this.$store.state.collectList;
-    }
+    myHeader
   }
 }
 </script>

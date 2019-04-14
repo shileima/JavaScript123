@@ -23,15 +23,22 @@ export default {
     item
   },
   data() {
-    return {
-      list:[]
-    }
+     return {
+    //   list:[]
+     }
   },
   created(){
-    this.$store.dispatch('getList',data => {
-      console.log(data)
-      this.list = data.data;
-    })
+    // this.$store.dispatch('getList',data => {
+    //   console.log(data)
+    //   this.list = data.data;
+    // })
+    
+    this.$store.dispatch('getList')
+  },
+  computed: {
+    list(){
+      return this.$store.state.list;
+    }
   }
 }
 </script>

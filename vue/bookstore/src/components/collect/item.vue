@@ -9,7 +9,6 @@
           <div class="price">{{data.bookPrice}}</div>
           <div class="btn_box">
               <button @click='del'>删除</button>
-              <button @click='add'>收藏</button>
           </div>
       </div>
   </div>
@@ -27,10 +26,7 @@
     },
     methods: {
         del(){
-            this.$store.commit('delList',this.data)
-        },
-        add(){
-            this.$store.commit('addCollect',this.data)
+            this.$store.commit('delCollect',this.data)
         }
     }
   }
