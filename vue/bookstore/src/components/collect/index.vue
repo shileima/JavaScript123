@@ -17,9 +17,12 @@ export default {
     myHeader,
     item
   },
-  // created(){
-  //   this.$store.dispatch('getCollectList')
-  // },
+  created(){
+    this.$store.dispatch('getCollectList')
+  },
+  updated(){
+    this.$store.dispatch('getCollectList')
+  },
   computed:{
     collectList(){
       return this.$store.state.collectList;
@@ -33,9 +36,9 @@ export default {
 h3 {
   margin: 40px 0 0;
 }
-ul {
+.hello {
   list-style-type: none;
-  padding: 0;
+  padding: 1.8rem 0;
 }
 li {
   display: inline-block;

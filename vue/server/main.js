@@ -8,6 +8,9 @@ app.use((req,res,next)=>{
 })
 
 const bodyParser = require('body-parser');
+// 返回的对象是一个键值对，当extended为false的时候，
+// 键值对中的值就为'String'或'Array'形式，为true的时候，则可为任何数据类型。
+// 但是往mongodb里面存数据时_id是ObjectId类型的,存不进去。设为true就能存进去了
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
@@ -58,7 +61,7 @@ app.post('/addCollect',(req,res)=>{
     fs.readFile('./collect.json','utf-8',(err,data)=>{
         if(!err){
             let ary = JSON.parse(data);
-            ary.push(obj);
+            ary.unshift(obj);
             fs.writeFile('./collect.json',JSON.stringify(ary),(err)=>{
                 if(!err){
                     res.send({
@@ -75,6 +78,39 @@ app.post('/addCollect',(req,res)=>{
         }
     })
 })
+
+/* 删除收藏项 */
+app.get('/delCollect',(req,res)=>{
+    let delBookId = req.query.bookId;
+    fs.readFile('./collect.json','utf-8',(err,data)=>{
+        if(err){
+            return console.error(err);
+        }else{
+            let ary = JSON.parse(data);
+            //console.log(1,ary)
+            for(var i=0;i<ary.length;i++){
+                if(ary[i].bookId == delBookId){
+                    ary.splice(i,1)
+                }
+            }
+            //console.log(ary)
+            fs.writeFile('./collect.json',JSON.stringify(ary),(err)=>{
+                if(!err){
+                    res.send({
+                        errorCode:0,
+                        msg:'删除成功'
+                    })
+                }else{
+                    res.send({
+                        errorCode:1,
+                        msg:'删除失败'
+                    })
+                }
+            })
+        }
+    })
+})
+
 app.post('/addList',(req,res)=>{
     // console.log(req)
     let obj = req.body;
@@ -82,7 +118,7 @@ app.post('/addList',(req,res)=>{
     fs.readFile('./list.json','utf-8',(err,data)=>{
         if(!err){
             let ary = JSON.parse(data);
-            ary.push(obj);
+            ary.unshift(obj);
             fs.writeFile('./list.json',JSON.stringify(ary),(err)=>{
                 if(!err){
                     res.send({

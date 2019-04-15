@@ -35,6 +35,9 @@ export default {
     
     this.$store.dispatch('getList')
   },
+  updated(){
+    this.$store.dispatch('getList')
+  },
   computed: {
     list(){
       return this.$store.state.list;
@@ -50,7 +53,7 @@ h3 {
 }
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 1.8rem 0;
 }
 li {
   display: inline-block;

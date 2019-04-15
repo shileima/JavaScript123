@@ -22,7 +22,7 @@ export const getList = ({ commit }, option) => {
 
 export const getCollectList = ({ commit }, option) => {
     axios.get('/collect').then(data => {
-        option && option(data.data)
+        //option && option(data.data)
         commit('getCollect', data.data.data)
     })
 }

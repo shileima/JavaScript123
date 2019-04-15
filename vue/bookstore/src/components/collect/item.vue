@@ -8,7 +8,7 @@
           <p class="desc">{{data.bookInfo}}</p>
           <div class="price">{{data.bookPrice}}</div>
           <div class="btn_box">
-              <button @click='del'>删除</button>
+              <button  @click='del(data.bookId)'>删除</button>
           </div>
       </div>
   </div>
@@ -25,8 +25,8 @@
         },
     },
     methods: {
-        del(){
-            this.$store.commit('delCollect',this.data)
+        del(id){
+            this.$store.commit('delCollect',id)
         }
     }
   }
