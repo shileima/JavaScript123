@@ -19,5 +19,6 @@
     line-height: 1.5rem;
     background-color: rgb(86,164,209);
     color:#fff;
+    max-width:640px;
   }
 </style>

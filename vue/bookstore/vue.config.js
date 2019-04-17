@@ -1,7 +1,7 @@
 let path = require('path');
 
 module.exports = {
-  publicPath:process.env.NODE_ENV === 'production' ? 'http://www.nodejs8.com.cn' : '/',
+  publicPath:process.env.NODE_ENV === 'production' ? 'http://test.nodejs8.com.cn/bookstore/' : '/',
   assetsDir:'assets',
   outputDir:'./dist',
 

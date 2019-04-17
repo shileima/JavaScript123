@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 app.use((req,res,next)=>{
-    res.header("Access-Control-Allow-Origin", 'http://localhost:8080');
+    res.header("Access-Control-Allow-Origin", 'http://test.nodejs8.com.cn');
     res.header('Access-Control-Allow-Headers','Content-Type,Content-Length,Authorization, Accept,X-Requested-With')
     req.method === 'OPTIONS' ? res.send('') : next();
 })

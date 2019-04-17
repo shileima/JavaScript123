@@ -18,7 +18,7 @@ export default {
 }
 </script> */
 <style scoped lang="less">
-  .home {text-align: center}
+  .home {text-align: center;max-width: 640px;margin: 0 auto;}
   #app {
   font-size: 0.5rem;
   font-family: 'Avenir', Helvetica, Arial, sans-serif;

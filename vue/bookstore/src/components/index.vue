@@ -34,6 +34,7 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  max-width:640px;
   a {
     font-weight: bold;
     color: #2c3e50;

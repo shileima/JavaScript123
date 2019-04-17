@@ -1,5 +1,5 @@
 import axios from 'axios';
-axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.baseURL = 'http://39.105.213.30:8000';
 
 export const getBanner = ({ commit }, option) => {
     axios.get('/api/banner').then(data => {
