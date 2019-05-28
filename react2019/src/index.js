@@ -1,20 +1,44 @@
-import React from './react';
-import ReactDOM from './react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './index.css';
-//import App from './App';
-import * as serviceWorker from './serviceWorker';
+import MessageBox from './components/MessageBox';
+import MessageInput from './components/MessageInput';
+
+import 'bootstrap/dist/css/bootstrap.css';
+import axios from './axios'
 
 // 类组件
-class Welcome extends React.Component {
+class App extends React.Component {
+    /* ES7 写法 */
+    state = {
+        messageList: []
+    }
+    async componentDidMount(){
+        /* axios.get('/user.json').then(res=>{
+            let userInfo = res.data;
+            console.log(userInfo)
+        },err=>{console.log(err)}) */
+        let messageList = await axios.get('/user.json');
+        this.setState({
+            messageList
+        })
+    }
     render() {
-        return ( <h1>hello {this.props.name}</h1> )
+        return (
+        <div className="container">
+            
+            <div className="panel panel-primary">
+                <div className="panel-heading">
+                    留言信息
+                </div>
+                <div className="panel-body">
+                    <MessageBox messageList={this.state.messageList}/>
+                </div>
+                <div className="panel-footer">
+                    <MessageInput/>
+                </div>
+            </div>
+        </div>)
     }
 }
-
-ReactDOM.render(<Welcome name="jack" />, document.getElementById('root'));
-
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(<App />, document.getElementById('root'));
