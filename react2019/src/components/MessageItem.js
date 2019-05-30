@@ -7,9 +7,6 @@ import {Consumer} from '../context';
 moment.locale('zh-cn');
 
 export default class MessageItem extends React.Component {
-    agreeClick = ()=>{
-      
-    }
     render() {
       let {avatar,message,time} = this.props;
       return (

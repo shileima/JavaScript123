@@ -38,7 +38,6 @@ class Parent extends React.Component{
         })
     }
     render(){
-
         return (
             <div onClick={this.handleClick}>
                     <p>Number of clicks: {this.state.clicks}</p>
@@ -65,4 +64,3 @@ function Button() {
 }
 
 ReactDOM.render(<Parent/>, appRoot);
-
