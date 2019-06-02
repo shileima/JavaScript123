@@ -1,31 +1,13 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from './react';
+import ReactDOM from './react-dom';
 import './index.css';
 
-import DerivedStateFromProps from './getDerivedStateFromProps';
+// These two containers are siblings in the DOM
+const appRoot = document.getElementById('app-root');
 
-// 类组件
-class App extends React.Component {
-    /* ES7 写法 */
-    state = {
-        a: ''
-    }
-    dateRef = React.createRef();
-    componentDidMount(){
-        this.timerID = setInterval(()=>{
-             this.setState({
-                 a:this.dateRef.current.props.a
-             })
-        },2000)
-    }
-    componentWillUnmount(){
-        clearInterval(this.timerID)
-    }
-    render(){
-        return (
-            <DerivedStateFromProps a={Date.now()} ref={this.dateRef} />
-        )
-    }
+function Button(props){
+    return <h1>hello {props.name} {props.age}</h1>
 }
 
-ReactDOM.render(<App/>, document.getElementById('app-root'));
+ReactDOM.render(<Button name="loading" age={19} />, appRoot);
+

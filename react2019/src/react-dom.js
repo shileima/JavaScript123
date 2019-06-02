@@ -1,9 +1,9 @@
 
 function render(element,parentNode){
-    if(typeof element == 'string'){
+    if(['string','number'].includes (typeof element)){
         return parentNode.appendChild(document.createTextNode(element));
     }
-    let type,props;  
+    let type,props;
     type = element.type;
     props = element.props;
     if(type.isComponent){
@@ -22,16 +22,21 @@ function render(element,parentNode){
             domElement.className = props[propName];
         }else if(propName === 'style'){
             let styleObj = props[propName];
-            for(let attr in styleObj){
-                domElement.style[attr] = styleObj[attr];
-            }
-            // let cssText = Object.keys(styleObj).map(attr => {
-            //     //这个方法需要单独处理小驼峰写法，例如 fontSize:50px
-            //     if(attr === 'fontSize') return `font-size:${styleObj[attr]}`
-            //     return `${attr}:${styleObj[attr]}`
-            // }).join(';');
-            // console.log(cssText)
-            // domElement.style.cssText = cssText;
+            
+            // 一、最简单写法
+            // for(let attr in styleObj){
+            //     domElement.style[attr] = styleObj[attr];
+            // }
+
+            // 二、字符串拼接法
+            let cssText = Object.keys(styleObj).map(attr => {
+                //这个方法需要单独处理小驼峰写法，例如 fontSize:50px
+                //if(attr === 'fontSize') return `font-size:${styleObj[attr]}`
+                return `${attr.replace(/([A-Z])/g,function(){return '-' + arguments[1].toLowerCase()})}:${styleObj[attr]}`;
+            }).join(';');
+            console.log(cssText)
+            domElement.style.cssText = cssText;
+
         }else if(propName === 'children'){
             let children = Array.isArray(props.children) ? props.children : [props.children];
             children.forEach(child => render(child,domElement))
