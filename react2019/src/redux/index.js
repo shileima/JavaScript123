@@ -1,5 +1,7 @@
 import createStore from './createStore';
+import bindActionCreators from './bindActionCreator';
 
 export {
-  createStore
+  createStore,
+  bindActionCreators
 }

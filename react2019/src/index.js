@@ -1,29 +1,5 @@
-import {createStore} from './redux';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Counter from './components/Counter';
 
-let initState = 0;
-const INCREMENT = Symbol.for('INCREMENT');
-const DECREMENT = Symbol.for('DECREMENT');
-
-function reducer(state=initState,action){
-    switch(action.type){
-        case INCREMENT:
-            return state + 1;
-        case DECREMENT:
-            return state - 1;
-        default:
-            return state;
-    }
-}
-
-let store = createStore(reducer);
-store.subscribe(render)
-render()
-document.querySelector('#increment-btn').onclick=function(){
-    store.dispatch({type:INCREMENT})
-}
-document.querySelector('#decrement-btn').onclick=function(){
-    store.dispatch({type:DECREMENT})
-}
-function render(){
-    document.querySelector('#counter-value').innerHTML = store.getState();
-}
+ReactDOM.render(<Counter />, document.querySelector('#counter'));
