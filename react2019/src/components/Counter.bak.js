@@ -1,10 +1,36 @@
 import React from 'react';
-import {bindActionCreators} from '../redux';
-import ActionTypes from '../redux/utils/actionTypes';
-import store from '../store';
-import actions from '../store/action';
 
+import {createStore,bindActionCreators} from '../redux';
+import ActionTypes from '../redux/utils/actionTypes';
+
+let initState = 0;
+const INCREMENT = Symbol.for('INCREMENT');
+const DECREMENT = Symbol.for('DECREMENT');
+
+let store = createStore(reducer,initState);
+
+let actions = {
+  increment(){
+    // return store.dispatch({type:INCREMENT})
+    return {type:INCREMENT}
+  },
+  decrement(){
+    return {type:DECREMENT}
+  }
+}
 let bindActions = bindActionCreators(actions,store.dispatch);
+console.log(bindActions)
+
+function reducer(state=initState,action){
+    switch(action.type){
+        case INCREMENT:
+            return state + 1;
+        case DECREMENT:
+            return state - 1;
+        default:
+            return state;
+    }
+}
 
 store.dispatch({type:ActionTypes.INIT})
 
