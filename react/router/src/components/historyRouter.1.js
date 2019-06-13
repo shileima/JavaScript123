@@ -2,19 +2,23 @@ import React from 'react';
 
 class HistoryRouter2 extends React.Component {
   componentDidMount(){
-
-    window.onpopstate = function(event){
-      console.log(event)
+    //重写 pushState 方法
+    let oldPushState = window.history.pushState;
+    window.history.pushState = (state,title,url)=>{
+      this.onpushstate(state,title,url)
+      oldPushState.call(window.history,state,title,url)
     }
-
-    window.innerContent.innerHTML=window.location.pathname
-    window.addEventListener('popstate',()=>{
-      window.innerContent.innerHTML=window.location.pathname
-    })
+    // 这是原生实现
+    window.onpopstate = function(event){
+      window.innerContent.innerHTML = event.state.value;
+    }
+  }
+  // 原生没有 onpushstate 方法，所以自己实现劫持
+  onpushstate = (state,title,url)=>{
+    window.innerContent.innerHTML = state.value;
   }
   go = (value)=>{
-    window.history.pushState({},null,value)
-    window.innerContent.innerHTML=value
+    window.history.pushState({value},null,value)
   }
   render() {
     return (<>
