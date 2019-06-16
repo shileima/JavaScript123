@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Route,Link} from '../react-router-dom';
+import {Route,Link,Switch,Redirect} from '../react-router-dom';
 import UserList from './UserList';
 import UserAdd from './UserAdd';
 
@@ -14,8 +14,11 @@ export default class User extends Component {
           </ul>
         </div>
         <div className="col-md-10">
-          <Route path="/user/list" component={UserList}/>
-          <Route path="/user/add" component={UserAdd}/>
+          <Switch>
+            <Route path="/user/list" component={UserList}/>
+            <Route path="/user/add" component={UserAdd}/>
+            <Redirect to="/user/list" />
+          </Switch>
         </div>
       </div>
     )

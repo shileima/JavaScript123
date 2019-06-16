@@ -1,20 +1,26 @@
 import React, { Component } from 'react';
 import RouterContext from './context';
+import pathToRegexp from 'path-to-regexp';
 
 export default class Route extends Component {
   static contextType = RouterContext;
   render() {
-    /* 获取当前页面的pathname */
-    //console.log(this.context.location)
     let {pathname} = this.context.location;
-    console.log(this.props)
-    /* component: class Profile
-       path: "/profile" */
     let {path='/',component:Component,exact=false} = this.props; 
-    //console.log(pathname,path)
-
-    if(pathname === path){
-      return <Component/>
+    let paramNames = [];
+    let regexp = pathToRegexp(path,paramNames,{end:exact})
+    let result = pathname.match(regexp);
+    if(result){console.log(result)
+      paramNames = paramNames.map(item=>item.name);
+      let [url,...values] = result;
+      let params = {};
+      for(let i=0;i<paramNames.length;i++){
+          params[paramNames[i]] = values[i];
+      }
+      console.log(params)
+      if(Component){
+        return <Component/>
+      }
     }
 
     return null;
