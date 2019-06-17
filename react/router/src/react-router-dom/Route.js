@@ -10,16 +10,25 @@ export default class Route extends Component {
     let paramNames = [];
     let regexp = pathToRegexp(path,paramNames,{end:exact})
     let result = pathname.match(regexp);
-    if(result){console.log(result)
+    let props = {
+      location:this.context.location,
+      history:this.context.history
+    }
+    if(result){
       paramNames = paramNames.map(item=>item.name);
       let [url,...values] = result;
       let params = {};
       for(let i=0;i<paramNames.length;i++){
           params[paramNames[i]] = values[i];
       }
-      console.log(params)
+      props.match = {
+        path,
+        url,
+        isExact:url === pathname,
+        params
+      }
       if(Component){
-        return <Component/>
+        return <Component {...props} />
       }
     }
 

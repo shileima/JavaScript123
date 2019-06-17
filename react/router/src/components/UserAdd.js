@@ -13,7 +13,7 @@ export default class UserAdd extends Component {
     let username = this.usernameRef.current.value;
     let email = this.emailRef.current.value;
     let user = {id:Date.now(),username,email};
-    console.log(user);
+    //console.log(user);
     local.add(user);
     console.log(this.props)
     this.props.history.push('/user/list');

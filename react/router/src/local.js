@@ -11,6 +11,11 @@ const local = {
         console.log(Array.isArray(oldUsers))
         oldUsers.push(user);
         localStorage.setItem('userlist',JSON.stringify(oldUsers))
+    },
+    get(id){
+        let oldUsers = local.getList();
+        let user = oldUsers.find(item=>item.id === id);
+        return user;
     }
 }
 

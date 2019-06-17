@@ -36,7 +36,7 @@ export default class HashRouter extends Component {
         }
       }
     }
-    console.log('value:',value)
+    //console.log('value:',value)
     return (
       <Context.Provider value={value}>
         {this.props.children}
