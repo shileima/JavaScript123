@@ -18,7 +18,7 @@ export default class User extends Component {
             <Route path="/user/list" component={UserList}/>
             <Route path="/user/add" component={UserAdd}/>
             <Redirect to="/user/list" />
-          </Switch>
+          </Switch> 
         </div>
       </div>
     )
