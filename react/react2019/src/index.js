@@ -8,8 +8,10 @@ import Types from './components/Types';
 let person = {
   name:'loading',
   age: '18',
+  gender:"中",
   hobby:['吃饭','睡觉'],
-  
+  salary:"100",
+  position:{x:100, y:100}
 }
 
 let element = (<>
@@ -19,17 +21,13 @@ let element = (<>
   <Types {...person} />
 </>);
 
-
-
-class A {
+/* class A {
   a(){
     console.log(this)
   }
 }
 let a = new A();
 let fn = a.a;
-fn()
-
-
+fn() */
 
 ReactDOM.render(element, document.querySelector('#counter'));
