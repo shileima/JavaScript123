@@ -40,6 +40,8 @@ function Counter2() {
 }  
 function Counter3() {
     const [number,setNumber] = useState(0);
+    const [text,setText] = useState('');
+
     function add(){
         //The setState function is used to update the state. 
         //It accepts a new state value and enqueues a re-render of the component.
@@ -47,17 +49,24 @@ function Counter3() {
     }
     // useEffect 会在第一次渲染后和更新完完成
     useEffect(()=>{
-        let $timer = setInterval(()=>{
+        // let $timer = setInterval(()=>{
+        //     console.log('use Effetct')
+        //     setNumber(number+1)
+        // },1000);
+        // return () => {
+        //     console.log('clear Effect')
+        //     clearInterval($timer)
+        // };
+        
+        setInterval(()=>{
             console.log('use Effetct')
-            setNumber(number+1)
-        },1000);
-        return () => {
-            console.log('clear Effect')
-            clearInterval($timer)
-        };
-    })
+            setNumber(number=>number+1)
+            // setNumber(number+1)
+        },1000)
+    },[text])
     return (
         <div>
+            <input type='text' onChange={event=>setText(event.target.value)} value={text}/>
             <p>{number}</p>
             <button> + </button>
         </div>
