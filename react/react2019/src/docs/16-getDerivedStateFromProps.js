@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import DerivedStateFromProps from './getDerivedStateFromProps';
+import DerivedStateFromProps from './16-getDerivedStateFromProps';
 
 // 类组件
 class App extends React.Component {

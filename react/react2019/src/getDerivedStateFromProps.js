@@ -17,7 +17,6 @@ class DerivedStateFromProps extends React.Component {
     render(){
       return ( <h4>getDerivedStateFromProps {this.state.num}</h4> )
     }
-    
 }
 
 export default DerivedStateFromProps;
