@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React,{useState,useEffect,useRef,createRef} from 'react';
 import ReactDOM from 'react-dom';
 
 import * as serviceWorker from './serviceWorker';
@@ -25,7 +25,7 @@ class Counter extends React.Component{
 function Counter2() {
     let [number,setNumber] = useState(0);
     function add(){
-        setNumber(number => number+1)
+        setNumber(number+1)
     }
     // useEffect 会在第一次渲染后和更新完完成
     useEffect(()=>{
@@ -49,6 +49,7 @@ function Counter3() {
     }
     // useEffect 会在第一次渲染后和更新完完成
     useEffect(()=>{
+        console.log('use Effetct')
         // let $timer = setInterval(()=>{
         //     console.log('use Effetct')
         //     setNumber(number+1)
@@ -59,21 +60,66 @@ function Counter3() {
         // };
         
         setInterval(()=>{
-            console.log('use Effetct')
+            // 异步函数里设置状态参数必须为函数，否则试图不更新
             setNumber(number=>number+1)
             // setNumber(number+1)
         },1000)
-    },[text])
+    },[text]) // []告诉 React 你的 effect 不依赖于 props 或 state 中的任何值,永远都不需要重复执行
     return (
         <div>
             <input type='text' onChange={event=>setText(event.target.value)} value={text}/>
             <p>{number}</p>
-            <button> + </button>
+            <button onClick={()=>{setNumber(number+1)}}> + </button>
         </div>
     )
-}  
+}
+// use nore State Hook or Effect Hook
+function Form(){
+    const [name,setName] = useState('Mary');
+    
+    useEffect(function persistForm(){
+        localStorage.setItem('formData',name);
+    });
 
-ReactDOM.render(<Counter3 />, document.getElementById('root'));
+    const [surname,setSurname] = useState('Poppins');
+
+    useEffect(()=>{document.title = name + ' ' + surname})
+
+    return (
+        <div>
+            <p>{localStorage.getItem('formData')}{' ' + surname}</p>
+        </div>
+    )
+}
+// createRef or useRef
+// useRef 性能更好 createRef会每次新建一个ref
+function Parent(){
+    let [number,setNumber] = useState(0);
+    return (
+        <>
+            <Child />
+            <button onClick={()=>{setNumber(number+1)}}>点击：{number}</button>
+        </>
+    )
+}
+let myInput;
+function Child(){
+    //const inputRef = createRef();
+    const inputRef = useRef();
+    // createRef 永远false ；useRef 第二次true
+    console.log('myInput===inputRef：', myInput === inputRef)
+    myInput = inputRef;
+    function focus(){
+        inputRef.current.focus();
+    }
+    return (
+        <div>
+            <input ref={inputRef} />
+            <button onClick={focus}>聚焦</button>
+        </div>
+    )
+}
+ReactDOM.render(<Parent />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
