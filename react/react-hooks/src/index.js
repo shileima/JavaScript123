@@ -1,6 +1,6 @@
-import React,{useState,useEffect,useRef,createRef} from 'react';
+import React,{useState,useEffect,useRef,createRef,forwardRef,useImperativeHandle} from 'react';
 import ReactDOM from 'react-dom';
-
+import './index.css';
 import * as serviceWorker from './serviceWorker';
 class Counter extends React.Component{
     state = {number:0}
@@ -119,7 +119,80 @@ function Child(){
         </div>
     )
 }
-ReactDOM.render(<Parent />, document.getElementById('root'));
+
+// forwardRef: Input
+function Son(props,ref){
+    return ( 
+        <div>
+            <input ref={ref} />
+        </div>
+    )
+}
+let ForwardSon = forwardRef(Son);
+function Father(){
+    const inputRef = useRef();
+    function focus(){
+        inputRef.current.focus();
+    }
+    return (
+        <>
+            <ForwardSon ref={inputRef}/>
+            <button onClick={focus}>聚焦</button>
+        </>
+    )
+}
+
+// forwardRef: Button
+// now,you can reuse the button component more times
+const FancyButton = forwardRef((props,ref) => (
+    <button ref={ref} className="fancy">
+        {props.children}
+    </button>
+))
+function ForwardButton(){
+    const buttonRef = useRef();
+    return (
+        <FancyButton ref={buttonRef}>Click me</FancyButton>
+    )
+}
+// useImperativeHandle
+const FancyInput = forwardRef((props,ref) => {
+    const inputRef = useRef();
+    useImperativeHandle(ref,() => {
+        return {
+            focus: ()=>inputRef.current.focus(),
+            changeText: text=>inputRef.current.value = text,
+            a:123
+        }
+        /* return {
+            focus(){
+                inputRef.current.focus()
+            }
+        } */
+    })
+    return (
+        <>
+            <input ref={inputRef} />
+        </>
+    )
+})
+function ForwardInput(){
+    const forwardInputRef = useRef();
+    const textInputRef = useRef();
+    function focus(){
+        forwardInputRef.current.focus();
+        textInputRef.current.changeText('<script>alert(1)</script>');
+        console.log(forwardInputRef.current) // {focus: ƒ, a: 123}
+    }
+    return (
+        <div>
+            <FancyInput ref={forwardInputRef} />
+            <FancyInput ref={textInputRef} />
+            <button onClick={focus}>focus</button>
+        </div>
+    )
+}
+ReactDOM.render(<ForwardInput />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
