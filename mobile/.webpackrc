@@ -6,6 +6,11 @@
         "/api": {
             "target": "http://localhost:3000",
             "changeOrigin": true
+        },
+        "/ajax": {
+            "target": "http://www.chinahadoop.cn",
+            "changeOrigin": true
         }
+        
     }
 }

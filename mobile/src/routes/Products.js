@@ -1,41 +1,26 @@
-import React, {useEffect} from 'react';
-import { connect } from 'dva';
+import React, {useEffect,useState} from 'react';
 import ProductList from '../components/ProductList';
+import {query} from '../services/products';
 
 const Products = (props) => {
-  console.log(props.products['userList'])
-  function handleDelete(id) {
-    props.dispatch({
-      type: 'products/delete',
-      payload: id,
-    });
-  }
-  function handleAdd(){
-      props.dispatch({
-          type:'count/add'
-      })
-  }
+  console.log(props)
+  const [products, setproducts] = useState([])
+  
   useEffect(() => {
-    props.dispatch({
-      type: 'products/fetch',
-      payload:{a:1}
+    console.log('effect')
+    query().then(res=>{
+      console.log(res.data)
+      setproducts(products.push(...res.data))
     })
-    return () => {
-      
-    };
-  }, [])
+    
+    return () => {};
+  },[])
   return (
     <div>
-      <h2>List of Products</h2>
-      <button onClick={handleAdd}>{props.count}</button>
-      <ProductList onDelete={handleDelete} products={props.products} />
+      <ProductList products={products} />
     </div>
   );
 };
 
-// export default Products;
-export default connect((state) => {
-  console.log(state)
-  return { products:state.products, count:state.count.count,number:state.counter.number }
-})(Products);
+export default Products;
 
