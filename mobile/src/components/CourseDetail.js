@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, WhiteSpace } from 'antd-mobile';
 import moment from 'moment';
 
-class ProductList extends React.Component {
+class ProductDetail extends React.Component {
   constructor(props){
     super(props)
     this.state = {
@@ -38,15 +38,16 @@ class ProductList extends React.Component {
         </Card>
       </li>
     ))
-    return (
-      <ul>{list}</ul>
-    )
+    return (<>
+      {/* <ul>{list}</ul> */}
+      <ul>123333</ul>
+    </>)
   }
 }
 
-ProductList.propTypes = {
+ProductDetail.propTypes = {
   //onDelete: PropTypes.func.isRequired,
-  products: PropTypes.array.isRequired,
+  product: PropTypes.array.isRequired,
 };
 
-export default ProductList;
+export default ProductDetail;

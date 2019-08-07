@@ -18,16 +18,17 @@ const Products = (props) => {
       scrollY: true,
       click: true
     }) */
+    let index = 2;
     document.onscroll = function(){
       
       let $windowHeight = window.innerHeight;
       let $scrollHeight = productListRef.current.scrollHeight;
       let $scrollTop = productListRef.current.scrollTop || window.pageYOffset || document.body.scrollTop;
-      console.log("$windowHeight:", $windowHeight)
+      /* console.log("$windowHeight:", $windowHeight)
       console.log('$scrollHeight:', $scrollHeight);
-      console.log('$scrollTop:', $scrollTop);
-      if($scrollHeight - $scrollTop - $windowHeight == 0){
-        query(2).then(res=>{
+      console.log('$scrollTop:', $scrollTop); */
+      if($scrollHeight - $scrollTop - $windowHeight === 0){
+        query(index++).then(res=>{
           console.log(res.data)
           setproducts(products.push(...res.data))
         });

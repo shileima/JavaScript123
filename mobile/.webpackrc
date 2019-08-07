@@ -10,6 +10,10 @@
         "/ajax": {
             "target": "http://www.chinahadoop.cn",
             "changeOrigin": true
+        },
+        "/mapi_v2": {
+            "target": "http://www.chinahadoop.cn",
+            "changeOrigin": true
         }
         
     }
