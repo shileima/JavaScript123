@@ -1,10 +1,10 @@
 import dva from 'dva';
 import createHistory from 'history/createBrowserHistory';
 import './index.css';
+import createLoading from 'dva-loading';
 import 'antd-mobile/dist/antd-mobile.css';
 
 // 1. Initialize
-// const app = dva();
 const app = dva({
     history: createHistory(),
     // initialState 里每一个键值必须对应 models 里的相应文件名
@@ -19,7 +19,7 @@ const app = dva({
 });
 
 // 2. Plugins
-// app.use({});
+app.use(createLoading())
 
 // 3. Model
 app.model(require('./models/counter').default);

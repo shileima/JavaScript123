@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'dva/router';
 import { Card, WhiteSpace } from 'antd-mobile';
 import moment from 'moment';
 
@@ -27,7 +28,8 @@ class ProductList extends React.Component {
   render(){
     console.log(this.state.products)
     const list = this.state.products.map(product=>(
-      <li list-item={product.id} key={product.id}>
+      <Link to={"/course/" + product.id} >
+        <li list-item={product.id} key={product.id}>
         <WhiteSpace size="lg" />
         <Card full>
           <img style={{height:'180px'}} src={this.changePicUrl(product.mobileLargePicture)} alt={product.title} />
@@ -37,6 +39,7 @@ class ProductList extends React.Component {
           <Card.Footer content={product.lessonNum + '课时'} extra={<div>{moment(product.startDate*1000).format("YYYY-MM-DD HH:mm:ss")}</div>} />
         </Card>
       </li>
+      </Link>
     ))
     return (
       <ul>{list}</ul>

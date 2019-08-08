@@ -1,6 +1,6 @@
-import React, {useEffect,useState, useRef} from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ProductList from '../components/ProductList';
-import {query} from '../services/products';
+import { query } from '../services/products';
 //import BScroll from 'better-scroll';
 
 const Products = (props) => {
@@ -9,8 +9,8 @@ const Products = (props) => {
   let productListRef = useRef();
   useEffect(() => {
     console.log('effect')
-    query().then(res=>{
-      console.log(res.data)
+    query().then(res => {
+      //console.log(res.data)
       setproducts(products.push(...res.data))
     });
 
@@ -19,26 +19,22 @@ const Products = (props) => {
       click: true
     }) */
     let index = 2;
-    document.onscroll = function(){
-      
+    document.onscroll = function () {
       let $windowHeight = window.innerHeight;
-      let $scrollHeight = productListRef.current.scrollHeight;
-      let $scrollTop = productListRef.current.scrollTop || window.pageYOffset || document.body.scrollTop;
-      /* console.log("$windowHeight:", $windowHeight)
-      console.log('$scrollHeight:', $scrollHeight);
-      console.log('$scrollTop:', $scrollTop); */
-      if($scrollHeight - $scrollTop - $windowHeight === 0){
-        query(index++).then(res=>{
-          console.log(res.data)
+      let $scrollHeight = productListRef.current?productListRef.current.scrollHeight:0;
+      let $scrollTop = productListRef.current?productListRef.current.scrollTop || window.pageYOffset || document.body.scrollTop:0;
+    
+      //console.log($scrollHeight - $scrollTop - $windowHeight)
+      if ($scrollHeight - $scrollTop - $windowHeight <= -16) {
+        query(index++).then(res => {
+          //console.log(res.data)
           setproducts(products.push(...res.data))
         });
       }
-
-
     }
 
-    return () => {};
-  },[])
+    return () => { };
+  }, [])
   return (
     <div ref={productListRef}>
       <ProductList products={products} />

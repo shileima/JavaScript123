@@ -1,6 +1,6 @@
 import request from '../utils/request';
 
-export function query(courseId) {alert('service')
+export function query(courseId) {
   console.log('query')
   if(courseId){
     return request(`/mapi_v2/Course/getBootcampCourseDetail?courseId=${courseId}`);

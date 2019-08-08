@@ -1,5 +1,5 @@
 import React, {useEffect,useState, useRef} from 'react';
-import Detail from '../components/CourseDetail';
+import CourseDetails from '../components/CourseDetails';
 import {query} from '../services/product';
 
 const CourseDetail = (props) => {
@@ -10,8 +10,7 @@ const CourseDetail = (props) => {
     console.log('effect')
     query(props.match.params.id).then(res=>{
       console.log(res)
-
-      //setproducts(products.push(...res.data))
+      setdetails(details.detail = res.data)
     });
 
     return () => {};
@@ -19,7 +18,7 @@ const CourseDetail = (props) => {
 
   return (
     <div>
-      hello world
+      <CourseDetails detail={details} />
     </div>
   );
 };
