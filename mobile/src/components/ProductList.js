@@ -9,10 +9,8 @@ class ProductList extends React.Component {
   constructor(props){
     super(props)
     this.state = {
-      props: {
-        products:[]
-      },
-      loading:props.loading
+      products:[],
+      loading:true
     }
   }
   componentDidMount(){
@@ -21,13 +19,14 @@ class ProductList extends React.Component {
   }
   static getDerivedStateFromProps(props,state){
     console.log(props.products)
-    return {...state, props}
+    return {products:[...state.products,...props.products]}
+    //return state.props.products.push(...props.products)
   }
 
   changePicUrl= (str)=> str ? 'http://cdn.chinahadoop.cn/files/' + str.slice(9) : 'http://cdn.chinahadoop.cn/files/default/2015/08-08/104441957e14483026.png'
   render(){
-    console.log(this.state.props.products)
-    const list = this.state.props.products.map(product=>(
+    console.log(this.state)
+    const list = this.state.products.map(product=>(
       <Link to={"/course/" + product.id} key={product.id} >
         <li list-item={product.id}>
         <Card full>
@@ -43,7 +42,7 @@ class ProductList extends React.Component {
     ))
     return (
       <div>
-        <Spinner loading={this.state.props.loading}/>
+        <Spinner loading={this.state.loading}/>
         {list}
       </div>
     )
