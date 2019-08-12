@@ -31,7 +31,6 @@ class CourseDetails extends React.Component {
     if(course){
       console.log(course.mobileLargePicture)
       return (<div>
-        <WhiteSpace size="lg" />
         <Card full>
           <img style={{height:'180px'}} src={course.mobileLargePicture} alt={course.title} />
           <Card.Body>
@@ -39,6 +38,7 @@ class CourseDetails extends React.Component {
           </Card.Body>
           <Card.Footer content={course.price} extra={<div>{course.lessonNum + '课时'}</div>} />
         </Card>
+        <WhiteSpace size="lg" />
       </div>)
     }else{
       return (

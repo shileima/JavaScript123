@@ -1,19 +1,34 @@
+import { query } from '../services/products';
 export default {
   namespace: 'products',
-  state: [],
+  state: {
+    list:[],
+    index:2
+  },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
+      dispatch({type:'scrollFetch'})
     },
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {  // eslint-disable-line
-      yield put({ type: 'getUser' });
+    *scrollFetch({ payload }, { call, put, select }) {  // eslint-disable-line
+      console.log('scrollFetch')
+      let index = yield select(state => state.index);
+      console.log('index:', index)
+      const list = yield query(index++).then(res => {
+        //console.log(res.data)
+        return res.data
+      })
+      console.log(list)
+      yield put({ type: 'fetch' , payload: list});
     },
   },
   reducers: {
-    'delete'(state, { payload: id }) {
-      return state.filter(item => item.id !== id);
+    'fetch'(state, { payload: list }) {
+      console.log(list)
+      
+      return {...state,list};
     }
   },
 };
