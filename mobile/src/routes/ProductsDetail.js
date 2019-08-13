@@ -1,10 +1,10 @@
-import React, {useEffect,useState, useRef} from 'react';
+import React, {useEffect,useState} from 'react';
 import CourseDetails from '../components/CourseDetails';
 import {query} from '../services/product';
 
 const CourseDetail = (props) => {
   const [details, setdetails] = useState([])
-  let detailstRef = useRef();
+  //let detailstRef = useRef();
   
   useEffect(() => {
     console.log('effect')

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Card, WhiteSpace } from 'antd-mobile';
+import Spinner from './Spinner';
 
 class CourseDetails extends React.Component {
   constructor(props){
@@ -26,7 +27,7 @@ class CourseDetails extends React.Component {
   //changePicUrl= (str)=> str ? 'http://cdn.chinahadoop.cn/files/' + str.slice(9) : 'http://cdn.chinahadoop.cn/files/default/2015/08-08/104441957e14483026.png'
   render(){
     console.log('render')
-    let {ismember, course} = this.state.detail;   
+    let {course} = this.state.detail;   
     
     if(course){
       console.log(course.mobileLargePicture)
@@ -42,7 +43,7 @@ class CourseDetails extends React.Component {
       </div>)
     }else{
       return (
-        <div>loading...</div>
+        <div><Spinner loading={true}/></div>
       )
     }
     

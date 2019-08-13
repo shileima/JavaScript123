@@ -1,8 +1,7 @@
-import { Router, Route, Switch, Link } from 'dva/router';
+import { Link } from 'dva/router';
 import styles from './index.less';
 
 const Layout = (props) => {
-  //console.log(props)
   return (
     <div className={styles.normal}>
       <div className={styles.header}>

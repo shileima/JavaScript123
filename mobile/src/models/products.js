@@ -3,36 +3,46 @@ export default {
   namespace: 'products',
   state: {
     list:[],
-    page:1
+    loading:true
   },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
-      dispatch({type:'scrollFetch'})
+      dispatch({type:'firstFetch'})
     },
   },
 
   effects: {
     *scrollFetch({ payload }, { put, call, select }) {  // eslint-disable-line
-      console.log('scrollFetch')
-      let page = yield select(state=>state.products.page)
-      //console.log('page:', page)
-      const list = yield query(page).then(res => {
-        //console.log(res.data)
+      const list = yield query(payload).then(res => {
         return res.data
       })
+
       //修改 page 的值 加 1
-      yield put({type:'changePage',payload:page+1})
+            
       yield put({ type: 'fetch' , payload: list});
+
+      //yield put({type:'changePage',payload:page+1})
+    },
+    *firstFetch({ payload }, { put, call, select }) {
+      
+      const list = yield query(1).then(res => {
+        return res.data
+      })
+     
+      yield put({ type: 'fetchHome' , payload: list});
     },
   },
   reducers: {
-    'fetch'(state, { payload: list }) {
-      //console.log(list)
+    'fetchHome'(state, { payload: list }) {
+ 
       return {...state,list};
     },
-    'changePage'(state,{payload}){
-      //console.log(payload)
+    'fetch'(state, { payload: list }) {
+
+      return {...state,list};
+    },
+    /* 'changePage'(state,{payload}){
       return {...state, ...{page:payload}}
-    }
+    } */
   },
 };
