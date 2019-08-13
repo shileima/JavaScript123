@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { connect } from 'dva';
 import ProductList from '../components/ProductList';
 //import BScroll from 'better-scroll';
@@ -7,6 +7,14 @@ let page = 1;
 const Products = (props) => {
 
   console.log(props)
+
+  useEffect(() => {
+    if(props.location.pathname === '/'){
+      props.dispatch({type:'products/firstFetch', payload:{page:1}})
+      //return false;
+    }
+  }, []);
+
   // 下拉加载下一页
   let productListRef = useRef();
   document.onscroll = function () {

@@ -7,7 +7,9 @@ export default {
   },
   subscriptions: {
     setup({ dispatch, history }) {  // eslint-disable-line
-      dispatch({type:'firstFetch'})
+      console.log('setup')
+      console.log(history)
+      //dispatch({type:'firstFetch'})
     },
   },
 
@@ -24,7 +26,8 @@ export default {
       //yield put({type:'changePage',payload:page+1})
     },
     *firstFetch({ payload }, { put, call, select }) {
-      
+      console.log('firstFetch')
+      //if(payload.page === 1){alert(1)}
       const list = yield query(1).then(res => {
         return res.data
       })
