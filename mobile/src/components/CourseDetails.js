@@ -37,7 +37,35 @@ class CourseDetails extends React.Component {
           <Card.Body>
             <div>{course.title}</div>
           </Card.Body>
-          <Card.Footer content={course.price} extra={<div>{course.lessonNum + '课时'}</div>} />
+          <Card.Footer content={'$'+course.price} extra={<div>{course.lessonNum + '课时'}</div>} />
+          <WhiteSpace size="lg" />
+          <div className="main_imgs">
+            {
+              course.courseDesc ?
+              <img src={course.courseDesc} alt="课程详情" /> :
+              ''
+            }
+            {
+              course.outline ?
+              <img src={course.outline} alt="课程大纲" /> :
+              ''
+            }
+            {
+              course.teachersTeam ?
+              <img src={course.teachersTeam} alt="教学团队" /> :
+              ''
+            }
+            {
+              course.actualCombatProject ?
+              <img src={course.actualCombatProject} alt="实战训练" /> :
+              ''
+            }
+            {
+              course.qa ?
+              <img src={course.qa} alt="在线问答" /> :
+              ''
+            }
+          </div>
         </Card>
         <WhiteSpace size="lg" />
       </div>)

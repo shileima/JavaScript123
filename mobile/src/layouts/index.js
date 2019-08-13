@@ -9,19 +9,16 @@ const Layout = (props) => {
             <nav>
             <ul>
                 <li>
-                <Link to="/">首页</Link>
+                <a href="/">首页</a>
                 </li>
                 <li>
-                <Link to="/my/courses">我的课程</Link>
+                <a href="/course/1336">课程详情</a>
                 </li>
                 <li>
                 <Link to="/my/orders">我的订单</Link>
                 </li> 
                 </ul>
             </nav>
-            <span className={styles.github}>
-                Built with <a rel="noopener noreferrer" href="https://github.com/umijs/umi" target="_blank">Umi</a> and <a rel="noopener noreferrer" href="https://github.com/dvajs/dva" target="_blank">Dva</a>
-            </span>
         </div>
       </div>
       <div className={styles.view}>

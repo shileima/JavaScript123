@@ -1,6 +1,6 @@
-
-.normal {
-
+body {
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .header {
@@ -8,8 +8,16 @@
   position: fixed;
   z-index: 999;
   bottom: 0;
-  left: 0;
+  left: 50%;
   right: 0;
+  max-width: 640px;
+  margin-left: -320px;
+}
+@media (max-width: 640px) {
+  .header {
+    max-width: 100%;
+    margin-left: -50%;
+  }
 }
 
 .inner {
@@ -37,17 +45,6 @@
     }
     &:nth-child(7) {
       margin-right: 0;
-    }
-  }
-
-  .github {
-    color: #fff;
-    font-size: .9em;
-    margin: 0;
-    float: right;
-
-    a {
-      margin: 0;
     }
   }
 }
@@ -82,8 +79,7 @@
     a {
       margin-right: 0.5em;
     }
-    .github {
-      display: none;
-    }
   }
 }
+
+img {max-width: 100%;}

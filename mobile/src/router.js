@@ -3,7 +3,7 @@ import { Router, Route, Switch } from 'dva/router';
 //import IndexPage from './routes/IndexPage';
 import Products from './routes/Products';
 import ProductsDetail from './routes/ProductsDetail';
-import Users from './routes/Users';
+import Orders from './routes/Orders';
 import Layouts from './layouts/index';
 
 function RouterConfig({ history }) {
@@ -15,7 +15,7 @@ function RouterConfig({ history }) {
           {/* <Route path="/" exact component={IndexPage} /> */}
           <Route path="/" exact component={Products} />
           <Route path="/course/:id" component={ProductsDetail} />
-          <Route path="/users" exact component={Users} />
+          <Route path="/my/orders" exact component={Orders} />
         </Switch>
       </div>    
     </Router>
