@@ -12,7 +12,8 @@ const Layout = (props) => {
                 <a href="/">首页</a>
                 </li>
                 <li>
-                <a href="/course/1336">课程详情</a>
+                {/* <a href="/course/1336">课程详情</a> */}
+                <Link to="/course/1336">课程详情</Link>
                 </li>
                 <li>
                 <Link to="/my/orders">我的订单</Link>

@@ -6,9 +6,9 @@ import ProductsDetail from './routes/ProductsDetail';
 import Orders from './routes/Orders';
 import Layouts from './layouts/index';
 
-function RouterConfig({ history }) {
+function RouterConfig({app,history}) {
   return (
-    <Router history={history}>
+    <Router history = {history}>
       <div>
         <Route path="/" component={Layouts} />
         <Switch>

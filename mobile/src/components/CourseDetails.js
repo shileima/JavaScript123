@@ -30,7 +30,7 @@ class CourseDetails extends React.Component {
     let {course} = this.state.detail;   
     
     if(course){
-      console.log(course.mobileLargePicture)
+      console.log(course.id)
       return (<div>
         <Card full>
           <img style={{height:'180px'}} src={course.mobileLargePicture} alt={course.title} />
@@ -80,7 +80,7 @@ class CourseDetails extends React.Component {
 
 CourseDetails.propTypes = {
   //onDelete: PropTypes.func.isRequired,
-  detail: PropTypes.object.isRequired,
+  //detail: PropTypes.object.isRequired,
 };
 
 export default CourseDetails;
