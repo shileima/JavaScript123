@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cors跨域</title>
+</head>
+<body>
+    <p>ajax</p>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.open('PUT','http://localhost:5000/user',true);
+        xhr.responseType = 'json';
+        //document.cookie = "age=29"
+        xhr.withCredentials = true; // 携带cookie请求
+        xhr.setRequestHeader('Authorization','fsd78fsd8fs7d8f7sd8')
+        xhr.onload = function(){
+            console.log(xhr.response)
+        }
+        xhr.send();
+    </script>
+</body>
+</html>
