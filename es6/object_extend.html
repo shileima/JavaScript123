@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<head>
+	<title>对象的扩展</title>
+</head>
+<body>
+	<script charset="UTF-8">
+		// 对象的简洁表示
+//		let a = 1;
+//		const obj = {
+//			a:a
+//		}
+//		// es6中规定,如果 key 和 value 相同,以上写法等价于
+//		const obj2 = {a}
+//		console.log(obj2)// {a:1}
+
+		//对象内函数的简洁写法
+//		const obj3 = {
+//			name:'小明',
+//			showName:function(){
+//				console.log(this.name)
+//			},
+//			showName2(){
+//			console.log(this.name)
+//			}
+//		}
+//		obj3.showName() // 小明
+//		obj3.showName2() // 小明
+
+		//Object.is() 判断两个对象是不是长得一样
+/*		console.log(NaN == NaN) // false NaN 和任何比较都不相等
+		console.log(Object.is(NaN,NaN)) // true
+
+		console.log(+0 == -0) // true
+		console.log(Object.is(+0,-0)) // false*/
+
+
+		//Obeject.assign() 如果相同,目标对象的键值会被覆盖
+		let obj1 = {a:1}
+		let obj2 = {a:2,b:3}
+		let obj3 = {c:'abcd'}
+
+		console.log(Object.assign(obj1,obj2,obj3)) // {a: 2, b: 3, c: "abcd"}
+
+
+	</script>
+
+</body>
+</html>
