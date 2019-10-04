@@ -1,22 +1,18 @@
-var name = 'window'
-
-function intro(){
-    console.log('My name is ' + this.name)
+function A(name) {
+    this.name = name
 }
-
-var dog = {
-    name: "癞皮狗"
+function B(name) {
+    A.apply(this, arguments)
 }
-
- dog.intro = intro;
-
-var cat = {
-    name: '加菲猫'
+B.prototype.getName = function () {
+    return this.name
 }
-// console.log(cat.intro())
+var b = new B('loading')
+console.log(b.getName());
 
-// dog.intro = cat.intro;
+var a = {};
+[].push.call(a, "loading")
+console.log(Array.isArray(a))
+console.log(a)
+console.log(Object.values(a));
 
-// console.log(dog.intro())
-
-(cat.intro=dog.intro)()

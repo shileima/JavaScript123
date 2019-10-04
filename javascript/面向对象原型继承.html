@@ -1,37 +1,93 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>面向对象原型继承</title>
+	<meta charset="utf-8">
+	<title>面向对象原型继承</title>
 </head>
 
 <script>
+	// 1、原始原型继承
+	// var a = {
+	// 	name: '小明'
+	// }
 
-var a = {
-	name : '小明' 
-}
+	// var b = cloneObj(a)
 
-var b = cloneObj(a)
+	// //b.name = '小强'
 
-//b.name = '小强'
+	// console.log(a.name) //小明
+	// console.log(b.name) //小明
 
-alert(a.name) //小明
-alert(b.name) //小明
+	// b.name = '小强'
 
-b.name = '小强'
+	// console.log(a.name) //小明
+	// console.log(b.name) //小强
 
-alert(a.name) //小明
-alert(b.name) //小强
+	// //function F(){};
+	// function cloneObj(obj) {
+	// 	var F = function () { };
+	// 	F.prototype = obj;
+	// 	return new F();
+	// }
+	// console.log(a, b);
 
-//function F(){};
-function cloneObj(obj)
- {
-    var F=function(){};
-	 F.prototype = obj;
-	 return new F();
- }
+	//  2、原型继承普通实现
+	// var A = function () { }
+	// A.prototype = { name: "loading" }
+	// var B = function () { }
+	// // B.prototype = A.prototype
+	// B.prototype = new A()
+	// //B.prototype.name = "BBBB"
+	// var b = new B()
+	// console.log(b.name)
+
+	// 3、Object.create 来实现原型继承
+	// var c = Object.create(A.prototype)
+	// console.log(c.name);
+
+	// 4、构造器返回数据类型影响 this 指向
+	// var MyClass = function () {
+	// 	this.name = "steven"
+	// 	return {  // 返回对象类型
+	// 		age: "loading"
+	// 	}
+	// }
+	// // 如果构造器显示返回一个对象，则 this 指向这个对象
+	// var c = new MyClass()
+	// console.log(c.name); // undefined
+
+	// // 如果构造器返回的不是一个对象类型数据，则 this.name 不受影响
+	// var MyClass2 = function () {
+	// 	this.name = "alice"
+	// 	return "coco"  // 返回 string 类型
+	// }
+	// var c2 = new MyClass2()
+	// console.log(c2.name);
+
+	// 5 getId(id) = document.geteElementById(id)
+
+
+	window.onload = function () {
+		var getId = document.getElementById
+		// alert(typeof getId)
+		console.log(getId.call(document, 'root').id);
+
+		// alert(document.getElementById('root'))
+		// document.getElementById = (function (func) {
+		// 	return function () {
+		// 		return func.apply(document, arguments)
+		// 	}
+		// })(document.getElementById);
+		// var getId = document.getElementById;
+		// var div = getId('root');
+		// console.log(div.id)
+	}
 
 </script>
+
 <body>
+	<div id="root">hello</div>
 </body>
+
 </html>
