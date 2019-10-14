@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>分时函数-timeChunk</title>
+</head>
+
+<body>
+    <h4>分时函数-timeChunk 优化dom渲染性能</h4>
+    <script>
+        /* 普通一个一个创建 */
+        /* let args = [];
+        for (let i = 0; i < 1000; i++) {
+            args.push(i)
+        }
+        let renderList = (data) => {
+            for (let i = 0, len = data.length; i < len; i++) {
+                let div = document.createElement('div');
+                div.innerHTML = i;
+                document.body.appendChild(div)
+            }
+        }
+        renderList(args) */
+
+        let args = [];
+        for (let i = 0; i < 1000; i++) {
+            args.push(i)
+        }
+        let render = n => {
+            let div = document.createElement('div');
+            div.innerHTML = n;
+            document.body.appendChild(div)
+        }
+        // renderList(args)
+
+        /* 优化版本 计划分批进行 每隔200ms创建8个div，分时创建节点， 分时函数不会瞬间占用大量内存*/
+        let timeChunk = (args, fn, count) => {
+            let obj,
+                t;
+
+            let start = () => {
+                for (let i = 0; i < Math.min(count || 1, args.length); i++) {
+                    let obj = args.shift();
+                    fn(obj)
+                }
+            };
+            return function () {
+                t = setInterval(() => {
+                    if (args.length === 0) {
+                        return clearInterval(t)
+                    };
+                    start();
+                }, 200);
+            }
+        };
+
+        let renderList = timeChunk(args, render, 8)
+        renderList()
+    </script>
+</body>
+
+</html>
