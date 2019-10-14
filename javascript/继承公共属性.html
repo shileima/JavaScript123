@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>继承公共属性3种方法</title>
+</head>
+<body>
+    <script>
+        /* 继承公共属性 */
+        function Animal(){
+
+        }
+        Animal.prototype.drink = function(){
+            console.log('drinking')
+        }
+        function Cat(){}
+        /* 方法一、1) */
+        // console.log(new Cat());
+        
+        setTimeout(()=>{
+            Cat.prototype= Animal.prototype; // new Animal(可能传参) 不推荐
+            console.log(new Cat);
+            let c1 = new Cat();
+            c1.drink() 
+        },5000)
+
+        let c = new Cat();
+        c.drink() 
+
+        /* 方法二、 */
+        Object.setPrototypeOf(Cat.prototype,Animal.prototype)
+        let c = new Cat()
+        console.log(Cat.prototype);
+        
+        c.drink()
+
+         /* 方法三、3) */
+        Cat.prototype = Object.create(Animal.prototype,{constructor:{value:Cat}})
+        let c = new Cat()
+        console.log(c.constructor)
+        c.drink() 
+        
+    </script>
+</body>
+</html>
