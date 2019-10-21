@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>惰性加载函数</title>
+</head>
+
+<body>
+    <h1>惰性加载函数，函数内部判断只执行第一次，节约性能</h1>
+    <p>重写addEvent函数</p>
+    <pre>
+        var addEvent = (ele, type, handler) => {
+        if (window.addEventListener) {
+        alert('addEventListener')
+        addEvent = (ele, type, handler) => {
+        ele.addEventListener(type, handler)
+        }
+        } else if (window.attachEvent) {
+        alert('attachEvent')
+        addEvent = (ele, type, handler) => {
+        ele.attachEvent('on' + type, handler)
+        }
+        }
+        addEvent(ele, type, handler)
+        };
+    </pre>
+    <button id="btn1">click one</button>
+    <button id="btn2">click two</button>
+    <script>
+        var addEvent = (ele, type, handler) => {
+            if (window.addEventListener) {
+                alert('addEventListener')
+                addEvent = (ele, type, handler) => {
+                    ele.addEventListener(type, handler)
+                }
+            } else if (window.attachEvent) {
+                alert('attachEvent')
+                addEvent = (ele, type, handler) => {
+                    ele.attachEvent('on' + type, handler)
+                }
+            }
+            addEvent(ele, type, handler)
+        };
+        let btn1 = document.getElementById('btn1');
+        let btn2 = document.getElementById('btn2');
+
+        addEvent(btn1, 'click', () => {
+            alert('button one')
+        });
+        addEvent(btn2, 'click', () => {
+            alert('button two')
+        });
+    </script>
+</body>
+
+</html>

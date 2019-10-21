@@ -14,14 +14,24 @@ for (var i = 0, type, ags = ['push', 'slice', 'forEach', 'shift', 'pop']; type =
   Array[type] = Array.prototype[type].uncurrying();
 } */
 
-Function.prototype.uncurrying = function () {
+/* Function.prototype.uncurrying = function () {
   let self = this;
   return function () {
     let obj = [].shift.call(arguments);
     self.apply(obj, arguments);
   }
-};
+}; */
+/* 反柯里化另一种实现 */ /* 不太明白？？？ */
+Function.prototype.uncurrying = function () {
+  let self = this;
+  return function () {
+    console.log(self)
+    console.log(arguments);
 
+    Function.prototype.call.apply(self, arguments);
+  }
+};
+// Array.prototype.push.call(this,arguments)
 for (let i = 0, types = ['push', 'forEach']; fn = types[i++];) {
   Array[fn] = Array.prototype[fn].uncurrying();
 }
@@ -37,3 +47,21 @@ Array.forEach(obj, (item, i) => {
   console.log(item, i)
 })
 console.log(obj);
+/* call apply uncurrying */
+var obj5 = {
+  name: "oooo"
+}
+var call = Function.prototype.call.uncurrying();
+var fn = function (name) {
+  console.log(this.name)
+  console.log(name)
+}
+call(fn, obj5, 'call name') // fn.call(obj5, 'sven')
+console.log('-------------------');
+var apply = Function.prototype.apply.uncurrying();
+var fn = function (name) {
+  console.log(this.name)
+  console.log(arguments)
+}
+apply(fn, obj5, ['apply name'])
+
