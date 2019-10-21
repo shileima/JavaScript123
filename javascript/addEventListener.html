@@ -1,0 +1,68 @@
+<!DOCTYPE html
+	PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>无标题文档</title>
+</head>
+<style>
+	#div1 {
+		width: 300px;
+		height: 300px;
+		background: green;
+	}
+
+	#div2 {
+		width: 200px;
+		height: 200px;
+		background: peru;
+	}
+
+	#div3 {
+		width: 100px;
+		height: 100px;
+		background: purple;
+	}
+</style>
+
+<body style="height:2000px;">
+	<div id="div1">
+		<div id="div2">
+			<div id="div3">
+				div3
+			</div>
+		</div>
+	</div>
+	<script>
+		let div3 = document.querySelector("#div3");
+		let div2 = document.querySelector("#div2");
+		let div1 = document.querySelector("#div1");
+		div1.addEventListener("click", function (e) {
+			//e.stopPropagation();
+			console.log(this.id);
+		}, false)
+		div2.addEventListener("click", function () {
+			console.log(this.id);
+		}, false)
+		div3.addEventListener("click", function () {
+			console.log(this.id);
+		}, false)
+		window.addEventListener("click", () => { console.log('-----------------') }, false)
+
+		div1.addEventListener("click", function (e) {
+			//e.stopPropagation();
+			//e.preventDefault()
+			console.log(this.id);
+		}, true)
+		div2.addEventListener("click", function () {
+			console.log(this.id);
+		}, true)
+		div3.addEventListener("click", function () {
+			console.log(this.id);
+		}, true)
+
+	</script>
+</body>
+
+</html>
