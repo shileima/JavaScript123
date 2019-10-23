@@ -92,3 +92,16 @@ var add = function () {
 }
 console.log(add(2, 3, 4));
 
+var test = function (a) {
+    this.a = a;
+    // console.log(this === window) 
+    //this指向函数调用者最外层 global 浏览器下== window
+    return function (b) {
+        // console.log(this === window) // 浏览器下== window
+        return this.a + b
+    }
+}(1);
+
+console.log(test(4));
+
+
