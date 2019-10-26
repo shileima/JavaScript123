@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>单例模式</title>
+</head>
+
+<body>
+    <button id="lazy_singleton">惰性单例</button>
+    <!--     <script src="./lazySingleton.js"></script>
+ -->
+    <script src="./createDiv.js"></script>
+</body>
+<script>
+    /* 创建div元素 */
+    var createDiv = function () {
+        console.log('create node...');
+        var node = document.createElement('div');
+        node.innerHTML = '我是登录框';
+        node.style.display = 'none';
+        console.log('node => ', node);
+        return node
+    }
+    /* 包装单例模式 */
+    var getSingle = function (fn) {
+        var result;
+        return function () {
+            return result || (result = fn.apply(this, arguments))
+        }
+    }
+
+    var createSingleFn = getSingle(createDiv)
+
+    var myBtn = document.getElementById('lazy_singleton');
+    myBtn.onclick = function () {
+        console.log(createSingleFn);
+        let layer = createSingleFn();
+
+        if (layer) layer.style.display = 'block'
+    }
+</script>
+
+</html>
