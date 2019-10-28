@@ -1,0 +1,9 @@
+(function () {
+	'use strict';
+
+	const a = 100;
+
+	console.log(a);
+
+}());
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYnVuZGxlX2lpZmUuanMiLCJzb3VyY2VzIjpbInNyYy9hLmpzIiwibWFpbi5qcyJdLCJzb3VyY2VzQ29udGVudCI6WyJleHBvcnQgY29uc3QgYSA9IDEwMDtcbmV4cG9ydCBjb25zdCBiID0gMzAwO1xuIiwiaW1wb3J0IHsgYSB9IGZyb20gJy4vc3JjL2EnXG5cbmNvbnNvbGUubG9nKGEpO1xuIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7OztDQUFPLE1BQU0sQ0FBQyxHQUFHLEdBQUcsQ0FBQzs7Q0NFckIsT0FBTyxDQUFDLEdBQUcsQ0FBQyxDQUFDLENBQUMsQ0FBQzs7OzsifQ==
