@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>webSocket跨域</title>
 </head>
+
 <body>
+  <div>
+    <input type="text" id="messageText" />
+    <button>发送信息</button>
+  </div>
   <script>
     let socket = new WebSocket('ws://localhost:3007')
-    socket.onopen = function(){
-      socket.send('我爱你')
-    }  
-    socket.onmessage = function(e){
+    socket.onopen = function () {
+      socket.send('客户端连接成功！')
+    }
+    socket.onmessage = function (e) {
       console.log(e.data)
-    } 
-
+    }
+    document.querySelector('button').onclick = function () {
+      let text = document.querySelector('#messageText').value;
+      socket.send(text)
+    }
   </script>
 </body>
+
 </html>

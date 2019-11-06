@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Socket.io</title>
+</head>
+<script src="/socket.io/socket.io.js"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+<body>
+    <div>
+        <input type="text" id="messageVal" />
+        <button id="btn">发送消息</button>
+    </div>
+</body>
+<script>
+    let socket = io();
+    socket.on('connect', () => {
+        console.log('连接成功！')
+    })
+    socket.send('服务器你好！')
+    socket.on('message', (message) => {
+        console.log(message)
+    })
+    $(function () {
+        $('#btn').click(() => {
+            let messageText = $('#messageVal').val();
+            socket.send(messageText)
+        })
+    })
+</script>
+
+</html>
