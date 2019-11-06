@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MutationObserver</title>
+</head>
+
+<body>
+    <div id="box"></div>
+    <script>
+        /* IE也兼容 */
+        setTimeout(function () {
+            console.log('setTimeout')
+        }, 0)
+        setImmediate(function () {
+            console.log('setImmediate')
+        }, 0)
+        let observer = new MutationObserver(function () {
+            console.log('MutationObserver callbacks');
+            console.log(box.children.length);
+        });
+        let box = document.getElementById('box');
+        observer.observe(box, {
+            childList: true
+        })
+        for (let i = 0; i < 100000; i++) {
+            let ele = document.createElement('p');
+            ele.innerHTML = i;
+            box.appendChild(ele)
+        }
+        setTimeout(function () {
+            for (let i = 0; i < 1000; i++) {
+                let ele = document.createElement('p');
+                ele.innerHTML = i;
+                box.appendChild(ele)
+            }
+        }, 2000)
+    </script>
+</body>
+
+</html>
