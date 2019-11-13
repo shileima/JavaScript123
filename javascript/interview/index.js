@@ -175,3 +175,75 @@ function titleCase(str) {
   return arr.join(' ')
 }
 console.log(titleCase(str2));
+
+// 10，深拷贝的几种方式
+let arr10 = [1, 2, 3]
+let a10 = []
+a10 = [...arr10] = arr10.slice(0) = a10.concat(arr10) = JSON.parse(JSON.stringify(arr10))
+console.log(JSON.parse(JSON.stringify([1, 2, 3])))
+
+// 11,空数组空对象
+if ([] == false) { console.log(1) };
+if ({} == false) { console.log(2) };
+if ([]) { console.log(3) }
+if ([1] == [1]) { console.log(4) }
+// 规范中提到， 要比较相等性之前，不能将 null 和 undefined 转换成其他任何值，并且规定null 和 undefined 是相等的。null 和 undefined都代表着无效的值。
+console.log(null == undefined)
+
+// 12 bind
+var value = 0;
+var obj = {
+  value: 1,
+}
+function show(name, age) {
+  console.log(value);
+  console.log(name + " " + age);
+}
+show.bind(obj, "abc", 18)
+var newShow = show.bind(obj, "abc", 18);
+newShow();  //返回 1  abc 18
+var newShow = show.bind(null, "abc", 18);
+newShow();   //返回 0 abc 18
+new newShow();  // 返回 undefined abc 18
+
+// 13，函数节流防抖实现
+var throttle = function (fn, interval) {
+  var _self = fn,
+    timer,
+    firstTime = true;
+  return function () {
+    var args = arguments,
+      _me = this;
+    if (firstTime) {
+      _self.apply(_me, args);
+      return firstTime = false;
+    }
+    if (timer) {
+      return false;
+    }
+    timer = setTimeout(function () {
+      clearTimeout(timer);
+      timer = null;
+      _self.apply(_me, args);
+    }, interval || 500)
+  }
+};
+/* es6简洁版 */
+/* 
+var throttle = (fn, ms) => {
+            let timer;
+            return () => {
+                if (timer) return false;
+                timer = setTimeout(() => {
+                    timer = null; // 循环初始化timer
+                    fn()
+                }, ms || 500)
+            }
+        }
+*/
+window.onresize = function () {
+  console.log(1)
+};
+window.onresize = throttle(function () {
+  console.log(1)
+}, 500)

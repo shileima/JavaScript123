@@ -11,6 +11,7 @@
 <body>
     <h1>变换浏览器窗口大小，看函数调用次数</h1>
     <script>
+        /* es5版 */
         var throttle = function (fn, interval) {
             var _self = fn,
                 timer,
@@ -32,11 +33,23 @@
                 }, interval || 500)
             }
         };
-        window.onresize = function () {
-            console.log(1)
-        };
+        /* es6版 */
+        var throttle = (fn, ms) => {
+            let timer;
+            return () => {
+                if (timer) return false;
+                timer = setTimeout(() => {
+                    // clearTimeout(timer)
+                    timer = null; // 循环初始化timer
+                    fn()
+                }, ms || 500)
+            }
+        }
+        /* window.onresize = function () {
+            console.log(window.innerWidth)
+        }; */
         window.onresize = throttle(function () {
-            console.log(1)
+            console.log(window.innerWidth)
         }, 500)
     </script>
 </body>
