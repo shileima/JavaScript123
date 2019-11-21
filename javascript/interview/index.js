@@ -187,7 +187,8 @@ if ([] == false) { console.log(1) };
 if ({} == false) { console.log(2) };
 if ([]) { console.log(3) }
 if ([1] == [1]) { console.log(4) }
-// 规范中提到， 要比较相等性之前，不能将 null 和 undefined 转换成其他任何值，并且规定null 和 undefined 是相等的。null 和 undefined都代表着无效的值。
+// 规范中提到， 要比较相等性之前，不能将 null 和 undefined 转换成其他任何值，
+// 并且规定null 和 undefined 是相等的。null 和 undefined都代表着无效的值。
 console.log(null == undefined)
 
 // 12 bind
@@ -248,17 +249,23 @@ window.onresize = throttle(function () {
   console.log(1)
 }, 500)
 
-// 12、回流和重绘
-/* 1. 当render tree中的一部分(或全部)因为元素的规模尺寸，布局，隐藏等改变而需要重新构建。这就称为回流(reflow)。每个页面至少需要一次回流，就是在页面第一次加载的时候。在回流的时候，浏览器会使渲染树中受到影响的部分失效，并重新构造这部分渲染树，完成回流后，浏览器会重新绘制受影响的部分到屏幕中，该过程成为重绘。
+// 14、回流和重绘
+/* 1. 当render tree中的一部分(或全部)因为元素的规模尺寸，布局，隐藏等改变而需要重新构建。这就称为回流(reflow)。
+每个页面至少需要一次回流，就是在页面第一次加载的时候。在回流的时候，浏览器会使渲染树中受到影响的部分失效，
+并重新构造这部分渲染树，完成回流后，浏览器会重新绘制受影响的部分到屏幕中，该过程成为重绘。
 
-2. 当render tree中的一些元素需要更新属性，而这些属性只是影响元素的外观，风格，而不会影响布局的，比如background-color。则就叫称为重绘。
+2. 当render tree中的一些元素需要更新属性，而这些属性只是影响元素的外观，风格，
+而不会影响布局的，比如background-color。则就叫称为重绘。
 
 注意：回流必将引起重绘，而重绘不一定会引起回流。
-
 
 减少回流操作：
 1、直接改变className，如果动态改变样式，则使用cssText;
 2、让要操作的元素进行”离线处理”，处理完后一起更新;
 3、
 */
-
+// 15、img 底部空隙。原因是img 是行内元素，基准线下面会有一定的间距
+// 解决办法: fontSize:0px ; 设置 img 改成 display:block
+// <div class="box" style="fontSize:0px">
+//   <img src="../../images/earth.jpg" style="display:block"/>
+// </div>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>BFC</title>
+  <style>
+    .container {
+      overflow: hidden;
+    }
+
+    .d1,
+    .d2 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+    }
+
+    .d1 {
+      margin-bottom: 10px;
+    }
+
+    .d2 {
+      margin-top: 20px;
+    }
+
+    .fl {
+      float: left
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="d1"></div>
+  </div>
+  <div class="d2"></div>
+  <p>BFC：块级格式化上下文</p>
+  <p>如何生成
+    CSS2.1中规定满足下列CSS声明之一的元素便会生成BFC。
+    1，根元素
+    2，float的值不为none
+    3，overflow的值不为visible
+    4，display的值为inline-block、table-cell、table-caption
+    5，position的值为absolute或fixed</p>
+  <b>2、浮动相关的问题</b>
+  <p>当一个子元素浮动之后，父元素如果没有设置高度，那么父元素会随着子元素的浮动而失去高度，
+    这个时候我们可以给父元素触发BFC，这样父元素就会重新的包裹子元素。因为在bfc中，浮动的元素也参与高度计算。</p>
+  <div style="background: lightcoral;">
+    <div class="fl">float item 1</div>
+    <div class="">float item 2</div>
+    <div style="display: inline-block;">float item 3</div>
+    <div style="display: inline-block;">float item 4</div>
+  </div>
+  <div class="f3">no float 3</div>
+
+  <style>
+    .parent {
+      background: blue;
+      width: 150px;
+      border: 5px solid red;
+    }
+
+    .child {
+      width: 100px;
+      height: 100px;
+      background: pink;
+    }
+  </style>
+  <p>假如子元素 float:left 会导致父级元素 height=0 此时应该增加 父级
+    overflow:hidden 设置具有 bfc 特性
+  </p>
+  <div class="parent">
+    <div class="child">子div</div>
+  </div>
+  <p>BFC的区域不会与float box重叠；</p>
+  <style>
+    .left {
+      width: 100px;
+      height: 400px;
+      background: green;
+      float: left;
+    }
+
+    .right {
+      overflow: hidden;
+      background: red;
+    }
+  </style>
+  <div class="left">左边</div>
+  <div class="right">右边</div>
+</body>
+
+</html>

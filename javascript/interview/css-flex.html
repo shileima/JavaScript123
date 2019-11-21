@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+  <style>
+    .content,
+    .content2 {
+      height: 500px;
+      width: 500px;
+      border: 1px solid blueviolet;
+      display: flex;
+
+      /* row | row-reverse | column | column-reverse; */
+      flex-direction: row;
+
+      /* flex-direction 和 flex-wrap 的简写形式 */
+      flex-flow: row nowrap;
+
+      /* nowrap | wrap | wrap-reverse; */
+      flex-wrap: nowrap;
+
+      /* flex-start | flex-end | center | space-between | space-around; */
+      justify-content: space-around;
+
+      /* 元素级别 flex-start | flex-end | center | baseline | stretch; */
+      align-items: flex-start;
+
+      /* 板块级别 flex-start | flex-end | center | space-between | space-around | stretch; */
+      align-content: center;
+    }
+
+    .content div {
+      background: chartreuse;
+      margin: 10px;
+      width: 50px;
+    }
+
+    .content2 div {
+      background: chocolate;
+      margin: 0;
+      width: 100px;
+      border: 1px solid white;
+    }
+  </style>
+  <div class="content">
+    <div class="box1" style="height: 100px; font-size: 20px;">one</div>
+    <div class="box2" style="height: 110px; order:1;flex-basis: 80px;">two</div>
+    <div class="box3" style="height: 120px; font-size: 22px;">three</div>
+    <div class="box1" style="height: 130px; order:-1">four</div>
+    <div class="box2" style="height: 140px; font-size: 26px;">five</div>
+    <div class="box3" style="height: 150px; order:5">six</div>
+  </div>
+  <p>flex-grow的意思已经很明显了，就是索取父容器的剩余空间，默认值是0</p>
+  <p>flex-basis (default:auto) 初次见flex-basis这个属性，还挺疑惑的，不知道它是用来干嘛的。
+    后来研究发发现，这个属性值的作用也就是width的替代品。 如果子容器设置了flex-basis或者width，
+    那么在分配空间之前，他们会先跟父容器预约这么多的空间，然后剩下的才是归入到剩余空间，
+    然后父容器再把剩余空间分配给设置了flex-grow的容器。 如果同时设置flex-basis和width，
+    那么<b>width属性会被覆盖</b>，也就是说flex-basis的优先级比width高。
+    有一点需要注意，如果flex-basis和width其中有一个是auto，那么另外一个非auto的属性优先级会更高。</p>
+  <p>flex-shrink，是定义一个子容器的压缩比例,当子元素超出父级框且不允许换行</p>
+  <p>align-self:flex-end;定义在子元素上，单独设置元素的垂直对齐方式</p>
+  <p>https://www.cnblogs.com/ghfjj/p/6529733.html</p>
+  <p>https://zhuanlan.zhihu.com/p/25303493</p>
+  <div class="content2">
+    <div class="box1" style="width:300px;height: 100px; font-size: 20px;flex-shrink: 1;">one</div>
+    <div class="box2" style="width:160px;height: 110px;flex-shrink: 1;">two</div>
+    <div class="box3" style="width:120px;height: 120px; font-size: 22px;flex-shrink: 1;">three</div>
+  </div>
+
+</body>
+
+</html>
