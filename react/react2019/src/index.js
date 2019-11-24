@@ -1,33 +1,25 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Counter1 from './components/Counter1';
-import Counter2 from './components/Counter2';
-import Counter3 from './components/Counter3';
-import Types from './components/Types';
+import React from './react3'
+import ReactDOM from './react-dom3'
 
-let person = {
-  name:'loading',
-  age: '18',
-  gender:"中",
-  hobby:['吃饭','睡觉'],
-  salary:"100",
-  position:{x:100, y:100}
+// 渲染函数组件
+function Welcome(props) {
+  return <h1>{props.name},{props.age}</h1>
 }
-
-let element = (<>
-  <Counter1 />
-  <Counter2 />
-  <Counter3 />
-  <Types {...person} />
-</>);
-
-/* class A {
-  a(){
-    console.log(this)
+class Tag extends React.Component {
+  render() {
+    return <h2>tag props number {this.props.number}</h2>
   }
 }
-let a = new A();
-let fn = a.a;
-fn() */
+let person = {
+  name: 'Sean Ma',
+  age: 24
+}
+let ele = (<>
+  <h1>h1</h1>
+  <Welcome {...person} />
+  <Welcome name="loading" age="12" />
+  <Tag number="10" />
+</>);
 
-ReactDOM.render(element, document.querySelector('#counter'));
+console.log(ele)
+ReactDOM.render(ele, window.root)
