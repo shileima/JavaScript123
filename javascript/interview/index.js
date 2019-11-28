@@ -269,3 +269,38 @@ window.onresize = throttle(function () {
 // <div class="box" style="fontSize:0px">
 //   <img src="../../images/earth.jpg" style="display:block"/>
 // </div>
+
+// 16, 出一个 32 位的有符号整数，你需要将这个整数中每位上的数字进行反转。
+// 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231,  231 − 1]。
+// 请根据这个假设，如果反转后整数溢出那么就返回 0。
+
+// 示例 1:
+// 输入: 123
+// 输出: 321
+// 示例 2:
+// 输入: -123
+// 输出: -321
+// 示例 3:
+// 输入: 120
+// 输出: 21
+var reverse = function (x) {
+  if (x < 0) {
+    rs = "-" + [...(x).toString().split('-')[1]].reverse().join('')
+    x = +rs
+  } else {
+    rs = x.toString().split('').reverse().join('')
+    x = +rs
+  }
+  if (rs >= Math.pow(2, 31) - 1 || rs <= Math.pow(-2, 31)) {
+    return 0
+  }
+  return x;
+};
+console.log(reverse(-10))
+
+// 17，数组排序（负数）
+var sortArray = function (nums) {
+  nums.sort((m, n) => m - n)
+  return nums
+};
+console.log(sortArray([-1, 2, -8, -10, -5]))
