@@ -304,3 +304,10 @@ var sortArray = function (nums) {
   return nums
 };
 console.log(sortArray([-1, 2, -8, -10, -5]))
+
+// 18，隐式转换
+// 两个引用类型比较，只需判断它们是不是引用了同一个对象，是返回true，否则为false。
+// undefined 和 null 两者互相比较或者与自身比较，结果是true。它俩与其他任何值比较的都为false。
+// NaN与任何值比较包括它自身结果都是false。
+// 引用类型和基本数据类型进行比较，两者最后都会转换成基本数据类型再进行比较。
+// String，Boolean，Number中的任意两个进行比较，最后都会转为Number类型再进行比较。
