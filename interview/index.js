@@ -44,7 +44,7 @@ console.log(proxy.location); //Property "$(property)" does not exist
 
 let obj = {
   //属性yu部署了getter读取函数
-  get yu() {
+  get yu () {
     //this返回的是Reflect.get的receiver参数对象
     return this.name + this.age
   }
@@ -58,7 +58,7 @@ console.log(result) //shen18
 
 // 3、作用域
 var inner = "window";
-function say() {
+function say () {
   console.log(inner);
   console.log(this.inner);
 }
@@ -111,12 +111,12 @@ arr.forEach(function (fn) {
 
 // 5、实现千分位
 var arr = [];
-function main(num) {
+function main (num) {
   if (num === null) return;
   var n = parseInt(num).toString();
   return s(n);
 }
-function s(str) {
+function s (str) {
   if (str.length <= 3) {
     arr.push(str)
   } else {
@@ -145,14 +145,14 @@ console.log(`出现次数最多的字符是 ${char},出现了 ${count} 次`)
 
 // 7、"123456789876543212345678987654321" 的第n位是什么？
 var s1 = "123456789876543212345678987654321";
-function getNum(n) {
+function getNum (n) {
   console.log(s1.charAt(n - 1) || undefined)
 }
 getNum(22)
 
 // 8、 请编写一个 JavaScript 凼数 parseQueryString，它的用途是把 URL 参数解析为一个对象
 let url = 'www.chinahadoop.cn/search?one=1&two=2&three=3';
-function parseQueryString(url) {
+function parseQueryString (url) {
   let obj = {};
   let search = url.split('?')[1];
   let arr = search.split('&')
@@ -167,7 +167,7 @@ console.log(parseQueryString(url));
 
 // 9、确保字符串的每个单词首字母都大写，其余部分小写
 let str2 = 'i am titlE Case';
-function titleCase(str) {
+function titleCase (str) {
   let arr = str.toLowerCase().split(" ");
   for (let i = 0; i < arr.length; i++) {
     arr[i] = arr[i][0].toUpperCase() + arr[i].slice(1);
@@ -196,7 +196,7 @@ var value = 0;
 var obj = {
   value: 1,
 }
-function show(name, age) {
+function show (name, age) {
   console.log(value);
   console.log(name + " " + age);
 }
@@ -316,7 +316,7 @@ console.log(sortArray([-1, 2, -8, -10, -5]))
 [] == true;  //false  []转换为字符串'',然后转换为数字0,true转换为数字1，所以为false
 
 // 2. 对象和字符串
-[1,2,3] == '1,2,3' // true  [1,2,3]转化为'1,2,3'，然后和'1,2,3'， 所以结果为true;
+[1, 2, 3] == '1,2,3' // true  [1,2,3]转化为'1,2,3'，然后和'1,2,3'， 所以结果为true;
 
 // 3, 对象和数字
 [1] == 1;  // true  `对象先转换为字符串再转换为数字，二者再比较 [1] => '1' => 1 所以结果为true
@@ -335,12 +335,59 @@ console.log(sortArray([-1, 2, -8, -10, -5]))
 ![] == true
 
 Number('') == Number(null) == Number([]) == 0
-1+'1' === '11'
+1 + '1' === '11'
 1 + null == 1
 1 + {} === "1[object Object]"
-1+[] === '1'
-1+[2] === '12'
-1+true = 2
-1+false == 1
-1+undefined == NaN
-1+NaN == NaN
+1 + [] === '1'
+1 + [2] === '12'
+1 + true = 2
+1 + false == 1
+1 + undefined == NaN
+1 + NaN == NaN
+
+// 19. call 、apply 实现
+Function.prototype.mycall = function (obj, ...args) {
+  let context = obj
+  let fn = Symbol()
+  context[fn] = this
+  let ret = context[fn](...args)
+  delete context[fn]
+  return ret
+}
+Function.prototype.myapply = function (obj, args) {
+  let context = obj
+  let fn = Symbol()
+  context[fn] = this
+  let ret = context[fn](...args)
+  delete context[fn]
+  return ret
+}
+function fn19 () {
+  console.log(this.value)
+}
+let obj19 = {
+  value: 19
+}
+fn19.mycall(obj19) // 19
+function fn1 () {
+  console.log(1);
+}
+function fn2 () {
+  console.log(2);
+}
+fn1.call(fn2);
+fn1.call.call(fn2);
+fn1.call.call.call(fn2);
+
+// 20. flat 函数
+let obj = { a: 1, b: { c: 2 }, d: [1, 2, 3], e: [{ f: [4, 5, 6] }] };
+let r1 = parse(obj, 'a');// = 1;
+let r2 = parse(obj, 'b.c');// = 2;
+let r3 = parse(obj, 'd[2]');// = 3;
+let r4 = parse(obj, 'e[0].f[0]');// = 4;
+
+function parse (obj, str) {
+  return new Function('obj', 'return obj.' + str.replace(/\.(\d+)/g, '\[$1\]'))(obj)
+}
+console.log(r1, r2, r3, r4)
+console.log(obj.e[0].f[0])

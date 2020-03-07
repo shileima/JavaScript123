@@ -5,22 +5,22 @@ let class2type = {}
 })
 //console.log(class2type);
 
-function type(obj){
+function type (obj) {
     return obj === null ? null : class2type[Object.prototype.toString.call(obj)];
 }
 console.log(type(null));
 
 //console.log(type({"name":"loading"}));
-console.log(type(()=>console.log(2)));
+console.log(type(() => console.log(2)));
 
-function isFunction(obj){
+function isFunction (obj) {
     return type(obj) === "function"
 }
 //console.log(isFunction(()=>console.log(2)));
 
-function isArray(obj){
+function isArray (obj) {
     return type(obj) === "array"
 }
-console.log(isArray({1:2}));
-console.log(isArray(["name",12]));
+console.log(isArray({ 1: 2 }));
+console.log(isArray(["name", 12]));
 
