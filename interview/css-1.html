@@ -43,3 +43,33 @@
         border: 1px solid red;
     }
 </style>
+<script>
+    function throttleVue(fn, limit = 500) {
+        let flag = true
+        return () => {
+            if (flag) {
+                fn.apply(this, arguments)
+                flag = false
+                setTimeout(() => { flag = true }, limit)
+            }
+        }
+    }
+    /* 
+    function throttleVue(fn, limit = 500) {
+        let timer
+        return () => {
+            if (!timer) {
+                fn()
+                timer = setTimeout(() => { timer = null }, limit)
+            }
+        }
+    }
+    */
+
+    window.onresize = function () {
+        console.log(1)
+    };
+    window.onresize = throttleVue(function () {
+        console.log(2)
+    }, 500)
+</script>

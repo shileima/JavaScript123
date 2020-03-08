@@ -229,19 +229,30 @@ var throttle = function (fn, interval) {
     }, interval || 500)
   }
 };
-/* es6简洁版 */
-/* 
+/* es6简洁版1 */
+
 var throttle = (fn, ms) => {
-            let timer;
-            return () => {
-                if (timer) return false;
-                timer = setTimeout(() => {
-                    timer = null; // 循环初始化timer
-                    fn()
-                }, ms || 500)
-            }
-        }
-*/
+  let timer
+  return () => {
+    if (timer) return false
+    timer = setTimeout(() => {
+      timer = null; // 循环初始化timer
+      fn()
+    }, ms || 500)
+  }
+}
+/* 简洁版2 */
+function throttleVue (fn, limit = 500) {
+  let flag = true
+  return () => {
+    if (flag) {
+      fn.apply(this, arguments)
+      flag = false
+      setTimeout(() => { flag = true }, limit)
+    }
+  }
+}
+
 window.onresize = function () {
   console.log(1)
 };
@@ -313,13 +324,13 @@ console.log(sortArray([-1, 2, -8, -10, -5]))
 // String，Boolean，Number中的任意两个进行比较，最后都会转为Number类型再进行比较。
 
 // 1.对象与布尔
-[] == true;  //false  []转换为字符串'',然后转换为数字0,true转换为数字1，所以为false
-
+console.log(['1'] == true == 1)  //false  []转换为字符串'',然后转换为数字0,true转换为数字1，所以为false
+console.log(['2'] == true)
 // 2. 对象和字符串
 [1, 2, 3] == '1,2,3' // true  [1,2,3]转化为'1,2,3'，然后和'1,2,3'， 所以结果为true;
 
-// 3, 对象和数字
-[1] == 1;  // true  `对象先转换为字符串再转换为数字，二者再比较 [1] => '1' => 1 所以结果为true
+  // 3, 对象和数字
+  [1] == 1;  // true  `对象先转换为字符串再转换为数字，二者再比较 [1] => '1' => 1 所以结果为true
 
 // 4，字符串和数字
 '1' == 1 // true  字符串和数字进行比较时，字符串转换成数字，二者再比较
@@ -331,8 +342,10 @@ console.log(sortArray([-1, 2, -8, -10, -5]))
 '1' == true; // true  布尔值和数字进行比较时，布尔转换为数字，二者比较
 
 !{} == true
-[] == false
+console.log([] == false)
 ![] == true
+console.log([] == ![]);
+
 
 Number('') == Number(null) == Number([]) == 0
 1 + '1' === '11'
@@ -340,7 +353,7 @@ Number('') == Number(null) == Number([]) == 0
 1 + {} === "1[object Object]"
 1 + [] === '1'
 1 + [2] === '12'
-1 + true = 2
+console.log(1 + true === 2)
 1 + false == 1
 1 + undefined == NaN
 1 + NaN == NaN

@@ -1,4 +1,5 @@
-function deepClone(obj, deep) {
+// 对象克隆一
+function deepClone (obj, deep) {
     if (obj == null) return null;
     if (obj instanceof Date) return new Date(obj);
     if (obj instanceof RegExp) return new RegExp(obj);
@@ -31,3 +32,24 @@ obj.a[1] = 22
 obj.obj.hobby.push('basketball')
 console.log(obj)
 console.log(newObj)
+
+// 对象克隆二
+let obj = {
+    name: 'zhufeng',
+    age: 10,
+    home: { name: '北京' },
+    hobbies: ['抽烟', '喝酒', '烫头']
+};
+function clone (source) {
+    if (typeof source === 'object') {
+        let target = Array.isArray(source) ? [] : {};
+        for (const key in source) {
+            target[key] = clone(source[key]);
+        }
+        return target;
+    }
+    return source;
+};
+const cloned = clone(obj)
+obj.age = 20
+console.log(cloned)
