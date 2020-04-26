@@ -58,4 +58,20 @@ if (a == 1 && a == 2 && a == 3) {
     console.log('成功');
 }
 
-
+// 23. 无重复字符的最长子串
+let arr23 = 'yyyuuuyyoppyyy'
+function lengthOfLongestSubstring (s) {
+    let max = 0; arr = [];
+    for (let i = 0; i < s.length; i++) {
+        let index = arr.indexOf(s[i]);
+        if (index !== -1) {
+            arr.splice(0, index + 1)
+        }
+        // console.log(s[i] === s.charAt(i))
+        arr.push(s[i])
+        max = Math.max(arr.length, max)
+    }
+    // console.log(max, 'result')
+    return max
+}
+console.log(lengthOfLongestSubstring(arr23))
