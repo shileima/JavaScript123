@@ -1,0 +1,21 @@
+/* 装饰器模式：增强某些函数的能力 */
+const myWrite = function () {
+    this.writeChinese = function () {
+        console.log('I can write Chinese')
+    }
+}
+
+const Decorator = function (fn) {
+    this.oldBility = fn.writeChinese
+    this.writeEnglish = function () {
+        console.log('I can write English')
+    }
+    this.newBility = function () {
+        this.oldBility()
+        this.writeEnglish()
+    }
+}
+
+const myBility = new myWrite()
+const decorator = new Decorator(myBility)
+decorator.newBility()

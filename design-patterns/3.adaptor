@@ -1,0 +1,28 @@
+/* 代理模式 */
+const A = function () {
+    this.jpLanguage = function () {
+        console.log('小 A 写日文')
+    }
+}
+const B = function () {
+    this.enLanguage = function () {
+        console.log('小 B 写英文')
+    }
+}
+/* 通过一个中间代理器把 B 代理 */
+const Adaptor = function (user) {
+    this.language = user.enLanguage
+}
+/* 通过原型继承将 A 上的方法也继承过来 */
+Adaptor.prototype = new A()
+/* Adaptor.prototype.jpLanguage = function (name) {
+    console.log(`通过适配器,${name}也可以读日文`)
+} */
+
+const b = new B()
+const adaptor = new Adaptor(b)
+
+// adaptor.jpLanguage('小b')
+adaptor.jpLanguage()
+
+adaptor.language()

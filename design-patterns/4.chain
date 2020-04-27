@@ -1,0 +1,28 @@
+const Chain = function (fn) {
+    this.fn = fn;
+
+    this.setNext = function () {
+        return this
+    }
+
+    this.run = function () { this.fn(); this.setNext() }
+}
+
+const applyDevice = function () {
+    console.log('applyDevice')
+}
+const chainApplyDevice = new Chain(applyDevice);
+
+const selectAddress = function () {
+    console.log('selectAddress')
+}
+const chainSelectAddress = new Chain(selectAddress);
+
+const selectChecker = function () {
+    console.log('selectChecker')
+}
+const chainSelectChecker = new Chain(selectChecker);
+
+// 运用责任链模式实现上边功能
+chainApplyDevice.setNext(chainSelectAddress).setNext(chainSelectChecker);
+chainApplyDevice.run();
