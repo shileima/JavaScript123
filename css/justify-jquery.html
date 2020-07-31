@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+    <style>
+        /*
+         * 表单描述项label
+         * .text-justify `width: ${label字数}em` 
+         * letter-spacing: 最大label字数 - 当前label字数 / 当前label字数 - 1 
+        */
+        body,p {margin:0;padding:0;}
+        .text-justify {white-space:nowrap;text-align:justify;}
+        
+        .data-list {margin:20px;padding:10px;border-radius:5px;border:1px solid #ccc;background-color:#f8f8f8;}
+        .data-list .item {padding:4px 0;overflow:hidden;line-height:1.3;font-size:14px;}
+        .data-list .flag {width:4em;float:left;color:#999;}
+        .data-list .text {margin-left:6em;display:block;color:#444;}
+        /** 
+        * .data-list .text-justify-w2 {letter-spacing:2em;} /* 4-2 / 2-1 = 2em
+        * .data-list .text-justify-w3 {letter-spacing:.5em;} /* 4-3 / 3-1 = 0.5em
+        */
+        </style>
+</head>
+<body>
+    <div class="data-list">
+        <p class="item">
+            <span class="flag text-justify text-justify-w2">姓名</span>
+            <span class="text">马世磊</span>
+        </p>
+        <p class="item">
+            <span class="flag text-justify">专利时间</span>
+            <span class="text">2020-05-16 13:52:23</span>
+        </p>
+        <p class="item">
+            <span class="flag text-justify">备注</span>
+            <span class="text">页面中比较多字段，字数也不确定，如果不去计算letter-spacing，可以用JS处理</span>
+        </p>
+        <p class="item">
+            <span class="flag text-justify text-justify-w3">关联人</span>
+            <span class="text">马艺筠</span>
+        </p>
+        <p class="item">
+            <span class="flag text-justify">联系电话</span>
+            <span class="text">18630663698</span>
+        </p>
+        <p class="item">
+            <span class="flag text-justify text-justify-w4">联系地址</span>
+            <span class="text">北京市 昌平区 回龙观东大街 创意电子科技园G7栋</span>
+        </p>
+        <p class="item">
+            <span class="flag text-justify text-justify-w4">其他信息</span>
+            <span class="text"></span>
+        </p>
+    </div>
+    
+    </body>
+    <script>
+        function textJustify(elem) {
+            const lengths = [];
+            elem.each(function () {
+                lengths.push($(this).text().length);
+                // debugger
+            });
+            if (!lengths.length) return;
+            let fontmax; // 最大字数
+            // 求出最大字数
+            for (let i = 0, len = lengths.length; i < len; i++) {
+                fontmax = lengths[0]
+                if (lengths[i] > fontmax) {
+                    fontmax = lengths[i];
+                }
+            }
+            for (let i = 0, len = lengths.length; i < len; i++) {
+                let curlen = lengths[i];
+                if (curlen == fontmax) {
+                    continue;
+                }
+                // letter-spacing: （最大label字数 - 当前label字数 / 当前label字数 - 1 ）+ "em"
+                elem.eq(i).css({"letter-spacing": ((fontmax - curlen) / (curlen - 1)) + "em"});
+            }
+        }
+
+        //调用
+        textJustify($(".text-justify"));
+    </script>
+</body>
+</html>
