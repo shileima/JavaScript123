@@ -6,5 +6,9 @@ fn1.call(fn2)
 fn1.call.call(fn2)
 fn2.call()
 
+console.log('---------------');
 console.log(fn1.call.call(fn2) === fn1.__proto__.call.call(fn2));
+console.log('---------------');
 console.log(fn1.__proto__.call.call(fn2) === fn2.call());
+console.log('---------------');
+console.log(fn1.call.call(fn2) === fn2.call());

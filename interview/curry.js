@@ -1,7 +1,7 @@
 // 柯里化函数实现一
 const add = (function (length) {
     let allArgs = [];
-    function _add (...args) {
+    function _add(...args) {
         allArgs = [...allArgs, ...args];
         if (allArgs.length >= length) {
             let sum = allArgs.reduce((acc, curr) => acc + curr, 0);
@@ -18,7 +18,7 @@ console.log(add(1, 2)(3, 4, 5))
 
 // 柯里化实现二，alert 会调用toString 方法
 // alert([1,2,3].reduce((p,c)=>p+c,0)) // 6
-function add2 (...args) {
+function add2(...args) {
     var _add = add2.bind(null, ...args);
     _add.toString = function () {
         return args.reduce((sum, item) => sum + item, 0)
@@ -27,13 +27,14 @@ function add2 (...args) {
 }
 // alert(add2(0, 2, 3, 4, 5)(10))
 // 最佳实现三
-function curry (fn, ...args) {
+function curry(fn, ...args) {
     return args.length < fn.length ? (...extraArgs) => curry(fn, ...args, ...extraArgs) : fn(...args)
 }
-function addFn (a, b, c, d, e) {
+function addFn(a, b, c, d, e) {
     return a + b + c + d + e;
 }
 let add3 = curry(addFn);
+console.log(add3);
 console.log(add3(1, 2, 3, 4, 5));//15
 console.log(add3(1)(2, 3)(4, 5));//15
 console.log(add3(1)(2)(3)(4)(5));//15
@@ -51,7 +52,7 @@ var add4 = function (m) {
 
 console.log((add4(3)(4)(5)(6)).toString()); // 18
 // 阶乘算法二
-function add (...arg) {
+function add(...arg) {
     var a = [...arg];
     _add = function (...innerArg) {
         if (innerArg.length === 0) {
@@ -68,7 +69,7 @@ function add (...arg) {
 
 console.log(add(1)(2)(3)(4)())   // 10
 
-function add (x) {
+function add(x) {
     var sum = x;
     var tmp = function (y) {
         sum = sum + y;

@@ -8,14 +8,14 @@ function factorial(n) {
 }
 
 // es6 优化后的尾递归
-function factorialBetter(n, p = 1) {
+function factorialBetter(n, res = 1) {
   if (n <= 1) {
-    return 1 * p
+    return n * res
   } else {
-    let result = n * p
+    let result = n * res
     return factorialBetter(n - 1, result)
   }
 }
 
-console.log(factorial(10)); // 9.33262154439441e+157
-console.log(factorialBetter(10)); // 9.33262154439441e+157
+console.log(factorial(5)); // 20
+console.log(factorialBetter(5)); // 20

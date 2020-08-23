@@ -14,19 +14,19 @@ let handler = {
     }
 }
 let handler2 = {
-    get (target, key) {
+    get(target, key) {
         console.log('reflect get')
         return Reflect.get(target, key)
     },
-    set (target, key, value) {
+    set(target, key, value) {
         console.log('reflect set');
         return Reflect.set(target, key, value)
     },
-    deleteProperty (target, key) {
+    deleteProperty(target, key) {
         console.log('deleteProperty')
         return Reflect.deleteProperty(target, key)
     },
-    has (target, key) {
+    has(target, key) {
         console.log('reflect has')
         return Reflect.has(target, key)
     }
@@ -50,7 +50,7 @@ console.log(Reflect.apply(Math.floor, undefined, [1.75]))
 // 22. 如何让 (a == 1 && a == 2 && a == 3) 的值为true?
 let a = new Proxy({}, {
     i: 1,
-    get () {
+    get() {
         return () => this.i++;
     }
 });
@@ -60,7 +60,7 @@ if (a == 1 && a == 2 && a == 3) {
 
 // 23. 无重复字符的最长子串
 let arr23 = 'yyyuuuyyoppyyy'
-function lengthOfLongestSubstring (s) {
+function lengthOfLongestSubstring(s) {
     let max = 0; arr = [];
     for (let i = 0; i < s.length; i++) {
         let index = arr.indexOf(s[i]);
@@ -75,3 +75,5 @@ function lengthOfLongestSubstring (s) {
     return max
 }
 console.log(lengthOfLongestSubstring(arr23))
+
+// 24. 

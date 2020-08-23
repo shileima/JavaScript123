@@ -5,11 +5,14 @@ var users = [{
   id: 2, name: "a"
 }, {
   id: 3, name: "b"
+},{
+  id: 4, name: "b"
 }, {
-  id: 4, name: "v"
+  id: 5, name: "v"
 }]
 Array.prototype.unique = function () {
   let newArr = this.map(item => item.name)
+  console.log(newArr)
   /* return [...new Set(newArr)] */
   return newArr.filter((ele, index, self) => {
     return self.indexOf(ele) === index
@@ -157,13 +160,14 @@ function parseQueryString (url) {
   let search = url.split('?')[1];
   let arr = search.split('&')
   arr.forEach((item) => {
-    let keyVal = {}
+    let keyVal = []
     keyVal = item.split('=')
+    console.log(keyVal);
     obj[keyVal[0]] = keyVal[1]
   })
   return obj;
 }
-console.log(parseQueryString(url));
+console.log(parseQueryString(url).three);
 
 // 9、确保字符串的每个单词首字母都大写，其余部分小写
 let str2 = 'i am titlE Case';
@@ -207,6 +211,17 @@ var newShow = show.bind(null, "abc", 18);
 newShow();   //返回 0 abc 18
 new newShow();  // 返回 undefined abc 18
 
+// call 
+Function.prototype.ownCall = function(context, ...args) {
+    context = (typeof context === 'object' ? context : window)
+    // 防止覆盖掉原有属性
+    const key = Symbol()
+    // 这里的this为需要执行的方法
+    context[key] = this
+    // 方法执行
+    context[key](...args)
+    delete context[key]
+}
 // 13，函数节流防抖实现
 var throttle = function (fn, interval) {
   var _self = fn,
@@ -231,7 +246,7 @@ var throttle = function (fn, interval) {
 };
 /* es6简洁版1 */
 
-var throttle = (fn, ms) => {
+var throttleme = (fn, ms) => {
   let timer
   return () => {
     if (timer) return false
@@ -256,7 +271,7 @@ function throttleVue (fn, limit = 500) {
 window.onresize = function () {
   console.log(1)
 };
-window.onresize = throttle(function () {
+window.onresize = throttleme(function () {
   console.log(1)
 }, 500)
 
@@ -382,6 +397,7 @@ let obj19 = {
   value: 19
 }
 fn19.mycall(obj19) // 19
+
 function fn1 () {
   console.log(1);
 }
@@ -389,6 +405,7 @@ function fn2 () {
   console.log(2);
 }
 fn1.call(fn2);
+console.log(fn1.call);
 fn1.call.call(fn2);
 fn1.call.call.call(fn2);
 
