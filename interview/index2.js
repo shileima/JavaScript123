@@ -76,4 +76,67 @@ function lengthOfLongestSubstring(s) {
 }
 console.log(lengthOfLongestSubstring(arr23))
 
-// 24. 
+// 24. 查找两个节点的最近的一个共同父节点，可以包括节点自身
+function commonParentNode(oNode1, oNode2) {
+
+    const arr1 = getParents(oNode1)
+    const arr2 = getParents(oNode2)
+    var i = arr1.length;
+    var j = arr2.length;
+    for (; i >= 0 && j >= 0 && arr1[i] === arr2[j]; i--, j--);
+    return arr1[i + 1]
+}
+function getParents(oNode) {
+    var parents = [];
+    var parent = oNode;
+    while (parent) {
+        parents.push(parent);
+        parent = parent.parentElement;
+    }
+    return parents;
+}
+
+// 25. 实现一个监听load事件的接口window.load(callback):多次调用时保证执行顺序，
+// 先绑定的回调先执行：如果load事件已触发，调用时会直接执行该回调。
+window.load = (function () {
+    var loaded = false,
+        func = new Array();
+
+    window.onload = function () {
+        console.log('loaded')
+        loaded = true;
+        for (var i = 0; i < func.length; i++) {
+            func[i]();
+        }
+    }
+    return function (callback) {
+        if (typeof callback != "function") return;
+        if (loaded) {
+            callback();
+        } else {
+            func.push(callback)
+        }
+
+    }
+}())
+
+load(() => console.log(1))
+load(() => console.log(2))
+load(() => console.log(3))
+
+// 26. 根据包名，在指定空间中创建对象
+
+function namespace(oNamespace, sPackage) {
+    let arr = sPackage.split('.')
+    var obj = oNamespace
+    for (let i = 0; i < arr.length; i++) {
+        let cur = arr[i]
+        if (typeof obj[cur] !== 'object') obj[cur] = {};
+        obj = obj[cur];
+    }
+    return oNamespace
+}
+
+console.log(namespace({ a: { test: 1, b: 2 } }, 'a.b.c.d'));
+
+// {a: {test: 1, b: {c: {d: {}}}}}
