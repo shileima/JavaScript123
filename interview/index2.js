@@ -140,3 +140,50 @@ function namespace(oNamespace, sPackage) {
 console.log(namespace({ a: { test: 1, b: 2 } }, 'a.b.c.d'));
 
 // {a: {test: 1, b: {c: {d: {}}}}}
+
+// 27. 重复元素查找
+function duplicates(arr) {
+    let rs = []
+    arr.forEach((item, i) => {
+        if (arr.indexOf(item) !== i) {
+            rs.push(item)
+        }
+    })
+    return [...new Set(rs)]
+}
+
+console.log(duplicates([1, 2, 4, 4, 3, 3, 1, 5, 3]))
+
+// 28. 在数组本身操作，删除执行元素
+function removeWithoutCopy(arr, item) {
+    // function removeWithoutCopy(arr, item) {
+    //     let reg = new RegExp(item, 'g')
+    //     return arr.join('').replace(reg, '').split('').map(item => Number(item))
+    // }
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] === item) {
+            arr.splice(i, 1)
+            i = i - 1
+        }
+    }
+    return arr
+}
+
+console.log(removeWithoutCopy([1, 2, 2, 3, 4, 2, 2], 2));
+
+let arr = [1, 2, 2, 3, 4, 2, 2]
+arr.splice(1, 1)
+console.log(arr);
+
+// 29. charCodeAt 应用
+function strLength(s) {
+    let num = 0;
+    for (let i = 0; i < s.length; i++) {
+        let curLen = s.charCodeAt(i) > 255 ? 2 : 1;
+        num += curLen
+    }
+    return num;
+}
+
+let str = 'hello world, 牛客';
+console.log(strLength(str));
