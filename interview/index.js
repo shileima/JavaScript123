@@ -373,13 +373,20 @@ console.log(1 + true === 2)
 1 + undefined == NaN
 1 + NaN == NaN
 
-// 19. call 、apply 实现
-Function.prototype.mycall = function (obj, ...args) {
-  let context = obj
-  let fn = Symbol()
-  context[fn] = this
-  let ret = context[fn](...args)
-  delete context[fn]
+// 19. call 、apply 及 bind实现
+// Function.prototype.mycall = function (obj, ...args) {
+//   let context = obj
+//   let fn = Symbol()
+//   context[fn] = this
+//   let ret = context[fn](...args)
+//   delete context[fn]
+//   return ret
+// }
+Function.prototype.myCall = function(context, ...arg){
+  let key = Symbol()
+  context[key] = this
+  let ret = context[key](...arg)
+  delete context[key]
   return ret
 }
 Function.prototype.myapply = function (obj, args) {
@@ -390,6 +397,15 @@ Function.prototype.myapply = function (obj, args) {
   delete context[fn]
   return ret
 }
+
+Function.prototype.myBind = function(context){
+  let that = this;
+  let args = Array.prototype.slice.call(arguments, 1)
+  return function () {
+    return that.apply(context, args.concat(Array.prototype.slice.call(arguments)))
+  }
+}
+
 function fn19 () {
   console.log(this.value)
 }
