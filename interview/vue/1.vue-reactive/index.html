@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>reactive</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        let state = {count:0}
+        let dep = []
+        let active;
+
+        const watcher = (fn) => {
+            active = fn
+            fn()
+            active = null
+        }
+
+        defineReactive(state)
+
+        watcher(() => {
+            app.innerHTML = state.count
+        })
+        watcher(() => {
+            console.log(state.count)
+        })
+
+        function defineReactive(obj){
+            for(let key in obj){
+                let value = obj[key]
+                Object.defineProperty(obj,key,{
+                    get(){
+                        console.log(active, 'active')
+                        if(active){
+                            dep.push(active)
+                        }
+                        console.log(dep,'dep get')
+                        return value
+                    },
+                    set(newValue){
+                        value = newValue
+                        console.log(dep,'dep set' )
+                        dep.forEach(fn => fn())
+                    }
+                })
+            }
+        }
+
+    </script>
+</body>
+</html>
