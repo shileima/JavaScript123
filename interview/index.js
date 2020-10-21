@@ -12,11 +12,8 @@ var users = [{
 }]
 Array.prototype.unique = function () {
   let newArr = this.map(item => item.name)
-  console.log(newArr)
   /* return [...new Set(newArr)] */
-  return newArr.filter((ele, index, self) => {
-    return self.indexOf(ele) === index
-  })
+  return newArr.filter((ele, index, self) => self.indexOf(ele) === index)
 }
 console.log(users.unique());
 
