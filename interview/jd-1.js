@@ -84,6 +84,7 @@ function instance_of(obj, proto) {
   while (L) {
     if (L === R) {
       return true;
+      
     }
     L = L.__proto__;
   }
