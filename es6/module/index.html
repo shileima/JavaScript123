@@ -1,0 +1,29 @@
+<!--
+ * @Description: 
+ * @Date: 2021-01-18 16:16:08
+ * @LastEditors: mashilei@meituan.com
+ * @LastEditTime: 2021-01-18 16:22:52
+ * @FilePath: /JavaScript123/es6/module/index.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>js module</title>
+</head>
+
+<body>
+    <h1>JS Module</h1>
+    <script>
+        (async () => {
+            const moduleSpecifier = './lib.mjs';
+            const { repeat, shout } = await import(moduleSpecifier);
+            console.log(repeat('hello'));;
+            console.log(shout('Dynamic import in action'));
+        })();
+    </script>
+</body>
+
+</html>
