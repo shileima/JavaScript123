@@ -22,6 +22,7 @@ function Rectangle() {
 
 // 这里继承了原型上的方法
 Rectangle.prototype = Object.create(Shape.prototype);
+// Rectangle.prototype = new Shape();
 // console.log(Rectangle.prototype.constructor)
 // 这里修复由于Object.create继承后 constructor 的指向
 Rectangle.prototype.constructor = Rectangle;
@@ -33,7 +34,3 @@ console.log('Is rect an instance of Rectangle?',
 console.log('Is rect an instance of Shape?',
     rect instanceof Shape); // true
 rect.move(1, 1); // Outputs, 'Shape moved.'
-
-setTimeout(() => {
-    console.log(123);
-}, 1000);

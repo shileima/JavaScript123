@@ -111,11 +111,7 @@ class Button extends Component {
         // react 批量处理 不保证同步执行
         this.setState({ num: this.state.num + 1 });
         this.setState({ num: this.state.num + 1 });
-        // 异步函数内更新state
-        setTimeout(() => {
-            this.setState({ num: this.state.num + 1 });
-            this.setState({ num: this.state.num + 1 });
-        },1000)
+        console.log(this.state.num);
         console.log('handleClick end')
     }
     

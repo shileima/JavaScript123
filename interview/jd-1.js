@@ -5,7 +5,7 @@ function findStr(s) {
   let char = "";
   let count = 0;
   const arr = [...new Set(s)];
-  console.log(arr);
+  // console.log(arr);
   arr.forEach((cur, index, self) => {
     let num = s.split(cur).length - 1;
     if (count < num) {
@@ -18,7 +18,7 @@ function findStr(s) {
 findStr(s);
 
 // 2、parsrQuery
-let url = "www.chinahadoop.cn/search?one=1&two=2&three=3";
+let url = "www.meituan.com/search?one=1&two=2&three=3";
 function parseQueryString(url) {
   const res = {};
   let search = url.split("?")[1].split("&");
@@ -61,7 +61,7 @@ function objectFlat(obj) {
   return result;
 }
 const obj = { a: 1, b: { c: [1], d: 3 }, e: { k: { g: { l: 18 } } } };
-console.log(objectFlat(obj));
+console.log(objectFlat(obj)); // { a: 1, 'b.c.0': 1, 'b.d': 3, 'e.k.g.l': 18 }
 
 // 5、curry
 const curry = (fn, ...args) =>
@@ -181,7 +181,72 @@ Array.prototype.myReduce = function (fn, prev) {
   return prev;
 };
 let sum = [1, 2, 3, 4].myReduce((prev, next, i, self) => {
-    console.log(i)
   return prev + next;
 });
 console.log(sum); // 6
+
+function print() {
+  for(var i = 1; i < 11; i++) {
+      (function(j) {
+          setTimeout(()=>{
+              console.log(j)
+          },j*1000)
+      })(i)
+  }
+}
+print()
+
+function objectFlat(obj) {
+  const ans = {}
+  const helper = (data,prev) => {
+      for (let key in data) {
+          const item = data[key]
+          if( typeof item !== 'object') ans[prev  ? (prev + '.' +key) : ''] = item
+          else helper(item, prev + '.' + key)
+      }
+  }
+  
+  helper(obj,'')
+  return ans
+}
+
+console.log(JSON.stringify(objectFlat({ a: 1, b: { c: [1], d: 3 }, e: { k: { g: { l: 18 } } } })))
+
+// 候选人实现
+console.log('Hello World!');
+
+function retry(cb, times) {
+    return new Promise(async (res, rej) => {
+        let _times = times
+        
+        while(_times-- > 0) {
+            const result = await cb()
+            if (!!result) {
+                res(result)
+                return
+            } else {
+                console.log(`还有${_times}次尝试`)
+            }
+        }
+    })
+}
+
+function cb() {
+     return new Promise(res => {
+        const T = setTimeout(() => {
+             const random = Math.random()
+    
+             if (random > 0.9) {
+                 res(random)
+             } else {
+                 console.log(random)
+                 res(false)
+             }
+            
+            clearTimeout(T)
+         }, 1000)
+     })
+}
+
+retry(cb, 5).then((res) => console.log(res)).catch(e => console.log(e))
+

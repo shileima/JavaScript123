@@ -1,3 +1,10 @@
+<!--
+ * @Description: 
+ * @Date: 2020-12-14 17:47:24
+ * @LastEditors: Please set LastEditors
+ * @LastEditTime: 2021-04-02 23:07:57
+ * @FilePath: /JavaScript123/interview/test.html
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,9 +13,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
+<style>
+    ul {
+        padding: 100px;
+        background-color: aqua;
+    }
+    ul li {
+        background-color: blueviolet;
+    }
+</style>
 <body>
-    <script src="./test.js"></script>
+    <ul id="todo-app">
+        <li class="item">Walk the dog</li>
+        <li class="item">Pay bills</li>
+        <li class="item">Make dinner</li>
+        <li class="item">Code for one hour</li>
+    </ul>
+
+    <script>
+        // document.getElementById('todo-app').addEventListener('click',(event) => {
+        //     console.log(event.currentTarget.innerHTML);
+        //     console.log(event.target.innerHTML)
+        // },false)
+        var oLi=document.getElementsByClassName("item");
+        console.log(oLi);
+        oLi[1].onclick=function(){[
+            // console.log(123)
+            console.log(this.innerHTML)
+        ]}
+    </script>
 </body>
 
 </html>

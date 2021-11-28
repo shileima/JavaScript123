@@ -28,7 +28,7 @@ function add2(...args) {
 // alert(add2(0, 2, 3, 4, 5)(10))
 // 最佳实现三
 function curry(fn, ...args) {
-    return args.length < fn.length ? (...extraArgs) => curry(fn, ...args, ...extraArgs) : fn(...args)
+    return args.length === fn.length ? fn(...args) : (...extraArgs) => curry(fn, ...args, ...extraArgs)
 }
 function addFn(a, b, c, d, e) {
     return a + b + c + d + e;
@@ -82,3 +82,56 @@ function add(x) {
 }
 console.log(add(1)(2)(3).toString());
 console.log(add(1)(2)(3)(4));
+
+
+function addFn(a, b, c, d, e) {
+    return a + b + c + d + e;
+}
+
+function curry(fn,...arg1){
+    return arg1.length === fn.length?fn(...arg1):
+    function(...arg2){
+        return curry(fn,...arg1,...arg2)
+    }
+}
+
+
+let add3 = curry(addFn);
+console.log(add3(1)(2, 3)(4, 5));//15
+
+//line=readline()
+//print(line)
+// console.log('Hello World!');
+function addFn(a, b, c, d, e) {
+    return a + b + c + d + e;
+}
+
+function curry(fn,...arg1){
+    return arg1.length === fn.length?fn(...arg1):
+    function(...arg2){
+        return curry(fn,...arg1.concat(arg2))
+    }
+}
+
+
+let add3 = curry(addFn);
+console.log(add3(1)(2, 3)(4, 5));//15
+
+
+function curry(Fn,...args){
+    const tempArr = [];
+    const len = args.length;
+    function adder(){
+        tempArr.push(...Array.from(arguments));
+        if(tempArr.length === len){
+            return tempArr.reduce(function(a,b){return a+b});
+        }
+        return adder;
+    }
+    return adder;
+}
+function addFn(a, b, c, d, e) {
+return a + b + c + d + e;
+}
+const add3 =  curry(addFn);
+console.log(add3(1)(2, 3)(4, 5));//15
