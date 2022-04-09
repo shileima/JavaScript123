@@ -14,7 +14,7 @@
     "dva-loading": "^3.0.12",
     "express": "^4.17.1",
     "history": "^4.9.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   },
