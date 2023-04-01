@@ -1,12 +1,13 @@
 // 1、作用域
-let name = "global";
+var name = "global name";
 const obj = {
   name: "obj",
   test: function () {
     let name = "scope";
-    console.log(this.name);
+    alert(this.name)
   },
 };
+alert(window.name)
 const test = obj.test;
 test(); //
 obj.test(); //

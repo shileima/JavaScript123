@@ -525,12 +525,12 @@ switch (c) {
 }
 
 for (let x = 102; x < 105; x++)
-//   let x = 200;
-console.log(x);
+    //   let x = 200;
+    console.log(x);
 
-for (let x = 102; x < 105; x++){
+for (let x = 102; x < 105; x++) {
     let x = 200;
-    console.log(x);    
+    console.log(x);
 }
 
 // if语句中的禁例
@@ -542,16 +542,32 @@ while (false) let x = 200;
 // with语句中的禁例
 with (0) let x = 300
 
-for (let i=1; i < 11; i++ )
-  setTimeout(()=>console.log(i), i * 1000);
+for (let i = 1; i < 11; i++)
+    setTimeout(() => console.log(i), i * 1000);
 
 
-  function f(x) {
+function f(x) {
     console.log(x);
     var x = 200;
-  }
-  // 由于“非惰性求值”，所以下面的代码在函数调用上完全等义于上例中`f(a = 100)`
-  f(100);
+}
+// 由于“非惰性求值”，所以下面的代码在函数调用上完全等义于上例中`f(a = 100)`
+f(100);
 
-  f = (x = x) => x;
-  console.log(f(10));
+f = (x = x) => x;
+console.log(f(10));
+
+//   排序
+const bubbleSort = function (arr) {
+    for (let i = 0; i < arr.length - 1; i++) {
+        for (let j = 0; j < arr.length -1 - i; j++) {
+            if (arr[j] > arr[j + 1]) {
+                [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+            }
+        }
+    }
+    return arr
+}
+
+const arr3 = [4, 8, 0, 1, 43, 53, 22, 11, 0];
+let res = bubbleSort(arr3);
+console.log(res);

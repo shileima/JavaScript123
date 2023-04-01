@@ -17,6 +17,29 @@ function findStr(s) {
 }
 findStr(s);
 
+function counter(str){
+  let set = new Set()
+  let obj = {}
+  let mostChar = ''
+  let mostTime = 0
+  for(let i=0;i<str.length;i++){
+       if(set.has(str[i])){
+           obj[str[i]]++
+       }else{
+           set.add(str[i]);
+           obj[str[i]] = 0
+       }
+      if(obj[str[i]]>mostTime){
+          mostTime = obj[str[i]]
+          mostChar = str[i]
+      }
+  }
+  return [mostChar,mostTime]
+}
+
+console.log(counter("aaaaaabbbbbbbssssssbbsasssssbbbbbbbbssscccccccccccccccccccccccaaaaaaa"))
+
+
 // 2、parsrQuery
 let url = "www.meituan.com/search?one=1&two=2&three=3";
 function parseQueryString(url) {
@@ -60,8 +83,36 @@ function objectFlat(obj) {
   const result = flat(obj);
   return result;
 }
+// const obj = { a: 1, b: { c: [1], d: 3 }, e: { k: { g: { l: 18 } } } };
+// console.log(objectFlat(obj)); // { a: 1, 'b.c.0': 1, 'b.d': 3, 'e.k.g.l': 18 }
+
 const obj = { a: 1, b: { c: [1], d: 3 }, e: { k: { g: { l: 18 } } } };
 console.log(objectFlat(obj)); // { a: 1, 'b.c.0': 1, 'b.d': 3, 'e.k.g.l': 18 }
+//document.getElementById('app').innerText = objectFlat(obj).toString()
+// eval(objectFlat(obj))
+
+function isObject(obj){
+    return (typeof obj === 'object' || typeof obj === 'Function') && obj !== null
+}
+function objectFlat(obj){
+    const res = {}
+    // 对象 之前的key拼接
+    function dep(val, keyStr) {
+        for(key in val){
+            let value = val[key]
+            let newKey = keyStr ? `${keyStr}.${key}`: `${key}`
+            if(isObject(value)){
+                dep(value, newKey)
+            }else{
+                res[newKey] = value
+            }
+        }
+    }
+    dep(obj, '')
+    return res
+}
+
+
 
 // 5、curry
 const curry = (fn, ...args) =>

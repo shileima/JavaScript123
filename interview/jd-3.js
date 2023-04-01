@@ -55,9 +55,13 @@ let path = require("path");
 let getName = fs.readFile(path.resolve(__dirname, "./name.txt"), "utf8");
 let getAge = fs.readFile(path.resolve(__dirname, "./age1.txt"), "utf8");
 
-Promise.allSettled([1, getName, getAge, 2]).then((data) => {
+// Promise.allSettled([1, getName, getAge, 2]).then((data) => {
+//   console.log(data); // [ 1, 'name', '11', 2 ]
+// });
+Promise.all([1, getName, getAge, 2]).then((data) => {
   console.log(data); // [ 1, 'name', '11', 2 ]
 });
+
 
 // Promise.finally
 Promise.finally = function(callback){
@@ -113,3 +117,6 @@ Promise.resolve(123)
       console.log(err, "err"); // rejected err
     }
   );
+
+  Promise.resolve(2).then(() => {}, () => {}).then(data => console.log(data))
+  Promise.resolve(2).finally(() => {}).then(data => console.log(data))
