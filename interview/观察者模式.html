@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+    </head>
+    <body>
+    	
+        <script type="text/javascript">
+            // 补全代码
+           class Observerd {
+            constructor(name) {
+                this.name = name
+                this.state = '走路'
+                this.observers = []
+            }
+            setObserver(observer) {
+                if (!this.observers.find(o => o === observer)) {
+                        console.log('添加观察者' + observer.name)
+                        this.observers.push(observer)
+                    }
+                // this.observers.push(observer)
+            }
+            setState(state) {
+                this.state = state
+                this.observers.forEach(observer => observer.update(this))
+            }
+        }
+        class Observer {
+            constructor(name) {
+                this.name = name
+            }
+            update(observerd) {
+                console.log(this.name + '你好，' + observerd.name + '正在' + observerd.state)
+            }
+        }
+
+        // 写一个case 测试上述代码
+        let observerd = new Observerd('小明')
+        let observer1 = new Observer('母亲')
+        let observer2 = new Observer('父亲')
+        let observer3 = new Observer('父亲')
+        observerd.setObserver(observer1)
+        observerd.setObserver(observer2)
+        observerd.setObserver(observer2)
+        observerd.setState('跑步')
+        observerd.setState('吃饭')
+
+        /**
+         * 输出结果：
+         * 母亲你好，小明正在跑步
+         * 父亲你好，小明正在跑步
+         * 母亲你好，小明正在吃饭
+         * 父亲你好，小明正在吃饭
+         */
+        </script>
+    </body>
+</html>
